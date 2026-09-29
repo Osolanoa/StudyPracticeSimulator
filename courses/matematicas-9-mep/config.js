@@ -55,7 +55,7 @@ window.COURSE_CONFIG = {
     "Settings": "Configuración",
     "Light theme": "Tema claro",
     "Dark theme": "Tema oscuro",
-    "Questions answered": "Preguntas respondidas",
+    "Questions Completed": "Preguntas completadas",
     "Correct answers": "Respuestas correctas",
     "Accuracy": "Porcentaje de aciertos",
     "Best exam score": "Mejor nota de examen",
