@@ -7,3 +7,18 @@
 .diagram-table{border-collapse:collapse;width:100%;font-size:.88rem;table-layout:fixed}.diagram-table caption{caption-side:bottom;padding-top:.7rem;color:var(--muted);text-align:left}.diagram-table th,.diagram-table td{border:1px solid var(--line);padding:.6rem;overflow-wrap:anywhere}.diagram-table th:first-child{width:35%}
 .feedback li{margin:.85rem 0}.feedback li b{display:inline-block;margin-bottom:.25rem}.option:disabled{opacity:1}
 @media(max-width:520px){.diagram-table th,.diagram-table td{padding:.35rem;font-size:.8rem}}
+
+/* Mathematical diagrams use the existing theme variables. */
+.math-svg{display:block;width:100%;max-width:560px;height:auto;margin:.4rem auto;color:var(--ink);overflow:visible}
+.math-axis,.math-shape{stroke:var(--ink);stroke-width:2;fill:none}
+.math-grid{stroke:var(--line);stroke-width:1;fill:none}
+.math-guide{stroke:var(--blue);stroke-width:2;stroke-dasharray:5 4;fill:none}
+.math-curve{stroke:var(--blue);stroke-width:3;fill:none}
+.math-point{fill:var(--blue);stroke:var(--ink);stroke-width:1}
+.math-label{fill:var(--ink);font:13px Segoe UI,Arial,sans-serif}
+.math-bar{fill:var(--blue);fill-opacity:.38;stroke:var(--ink);stroke-width:1.2}
+.math-items{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem}.math-items section{text-align:center}.math-token{color:var(--blue);font-size:2rem}
+.math-diagram .diagram-table-wrap{overflow-x:auto}
+.feedback p,.question{white-space:pre-line}
+:root[lang="es"] .brand small{display:block;margin-top:.35rem;font-weight:500}
+.landing{max-width:1040px;min-height:100vh;padding:clamp(2rem,8vw,6rem) 1.25rem;margin:auto}.landing-hero{max-width:680px;margin-bottom:2rem}.landing h1{font-size:clamp(2rem,5vw,3.4rem)}.course-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.course-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.5rem;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:flex-start}.course-card h2{font-size:1.35rem;margin-bottom:.45rem}.course-facts{display:flex;gap:.6rem;flex-wrap:wrap;margin:1rem 0 .7rem}.course-facts span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.28rem .55rem;font-size:.86rem}.course-progress{color:var(--muted);min-height:2.8rem;margin:.25rem 0 1.2rem}.course-card .btn{margin-top:auto}.settings-section{margin-bottom:1rem}.settings-section h2{font-size:1.15rem;margin-bottom:.35rem}.theme-choice{display:flex;gap:.7rem}.nav button:focus-visible,.btn:focus-visible,.option:focus-visible,.navq:focus-visible{outline:3px solid #8fcaff;outline-offset:2px}@media(max-width:700px){.course-grid{grid-template-columns:1fr}.landing{padding:2rem 1rem}}

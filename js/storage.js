@@ -12,6 +12,7 @@
     settings: 'settings'
   })[name]]));
   const THEME_KEY = prefix + 'theme';
+  const GLOBAL_THEME_KEY = 'study_theme';
   const defaults = { randomizeAnswers: true, showTips: true, keyboard: true, timer: true,
     practiceCount: (window.COURSE_CONFIG || {}).questionsPerPractice || 10 };
 
@@ -34,13 +35,16 @@
     localStorage.setItem(prefix + 'migration_v1', '1');
   }
   migrateAz900();
+  if (localStorage.getItem(GLOBAL_THEME_KEY) === null && localStorage.getItem(THEME_KEY) !== null) {
+    localStorage.setItem(GLOBAL_THEME_KEY, localStorage.getItem(THEME_KEY));
+  }
 
   window.StudyStorage = {
     get: (key, fallback) => read(KEYS[key], fallback),
     set: (key, value) => write(KEYS[key], value),
     settings: () => ({ ...defaults, ...read(KEYS.settings, {}) }),
-    theme: () => localStorage.getItem(THEME_KEY) || 'dark',
-    setTheme: theme => localStorage.setItem(THEME_KEY, theme),
+    theme: () => localStorage.getItem(GLOBAL_THEME_KEY) || localStorage.getItem(THEME_KEY) || 'dark',
+    setTheme: theme => { localStorage.setItem(GLOBAL_THEME_KEY, theme); localStorage.setItem(THEME_KEY, theme); },
     reset: () => Object.values(KEYS).forEach(key => localStorage.removeItem(key)),
     resetStats: () => ['stats', 'history', 'exams', 'practiceTests'].forEach(name => localStorage.removeItem(KEYS[name])),
     keys: KEYS,

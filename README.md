@@ -27,18 +27,21 @@ js/visuals.js      reusable visual renderer
 js/loader.js       static course loader and registry
 courses/az900/     audited Microsoft Azure Fundamentals course pack
 courses/example/   three-question authoring template
+courses/matematicas-9-mep/  Spanish ninth-year mathematics (60 questions)
 docs/              schema and course-authoring guides
 ```
 
 ## Local use
 
-Open `index.html` in a modern browser. The default course is AZ-900. To open the template course, use `index.html?course=example`.
+Open `index.html` in a modern browser. The root page is a course selector; choose one of the public courses to begin. The template course remains available for development with `index.html?course=example`.
+
+The Costa Rica mathematics course has six mixed practice tests of ten questions and a full 60-question, 180-minute examination. Its Spanish feedback teaches the solution steps, and its diagrams work offline in both themes.
 
 No installation is required. Course scripts load with relative classic script URLs, so the application normally also works from `file://`.
 
 ## GitHub Pages
 
-Commit the repository and configure GitHub Pages to deploy from the repository root. The app uses relative paths such as `./js/loader.js` and `./courses/az900/config.js`; it does not assume a domain-root deployment. This supports project URLs such as `https://username.github.io/repository-name/`.
+Commit the repository and configure GitHub Pages to deploy from the repository root. The app uses relative paths such as `./js/loader.js` and `./courses/az900/config.js`; it does not assume a domain-root deployment. This supports project URLs such as `https://username.github.io/repository-name/`. Course changes retain that clean root URL.
 
 Cloudflare Pages, Netlify, Vercel static deployment, and other ordinary static hosts work the same way.
 
@@ -55,3 +58,5 @@ On first AZ-900 load, existing legacy keys such as `az900_question_history` and 
 ## Disclaimer
 
 The AZ-900 questions are original study questions and are **not** real Microsoft certification exam questions. This project is independent and is not affiliated with, endorsed by, or provided by Microsoft.
+
+The mathematics course is an independent study aid using original exercises based on the stated ninth-year topics. It is not an official MEP examination, does not contain leaked questions, and does not predict the questions that will appear in an examination.

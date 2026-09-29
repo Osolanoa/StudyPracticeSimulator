@@ -9,9 +9,25 @@ A course pack is a folder under `courses/`. It supplies subject-specific configu
 3. Set the course name, short name, description, version, practice group size, passing score, reference label, and domains.
 4. Replace sample records in `questions.js` with your questions.
 5. Add the folder ID to the `registry` array in `js/loader.js`.
-6. Open `index.html?course=linux-fundamentals`.
+6. Open the root page and select the course. The legacy `index.html?course=linux-fundamentals` form remains compatible and cleans itself to the root URL after loading.
 
 Classic relative scripts are used intentionally. This supports static hosts and normally direct `file://` opening without a fetch request.
+
+## Optional course-specific settings
+
+Existing courses keep their defaults when these fields are omitted:
+
+```js
+language: 'es',
+examQuestionCounts: [60],
+defaultExamCount: 60,
+examTimeMinutes: 180,
+referenceLabel: 'Tema',
+disclaimer: 'Independent practice material; not an official examination.',
+uiTranslations: { 'Dashboard': 'Inicio', 'Correct': 'Correcta' }
+```
+
+`uiTranslations` supplies exact English-to-local-language UI phrases. Translation changes visible text, not control values, option IDs, scoring, or stored records. Use the mathematics configuration as a complete Spanish example. Subject content and diagram labels must also be written in the course language. Exam domain weights, when supplied through `examDomainWeights`, use domain IDs as keys and should add up to 1.
 
 ## Complete question example
 
@@ -54,4 +70,3 @@ Classic relative scripts are used intentionally. This supports static hosts and 
 - `domainName`, `visual`, `tags`, and subject-specific metadata are optional. The configured domain name takes precedence in the UI.
 - A visual is optional. Existing visual types are examples; unsupported types simply do not render.
 - Keep content files as classic JavaScript assigning `window.COURSE_QUESTIONS`.
-
