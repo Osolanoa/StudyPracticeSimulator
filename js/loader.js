@@ -1,6 +1,6 @@
 (function () {
   const registry = [
-    { id: 'az900', visible: true, name: 'Microsoft Azure Fundamentals', shortName: 'AZ-900', description: 'Practice simulator for Microsoft Azure Fundamentals.', questionCount: 150, questionsPerPractice: 10 },
+    { id: 'az900', visible: true, name: 'Microsoft Azure Fundamentals', shortName: 'AZ-900', description: 'Practice simulator for Microsoft Azure Fundamentals.', questionCount: 200, questionsPerPractice: 10 },
     { id: 'matematicas-9-mep', visible: true, name: 'Matemáticas 9.º Año — MEP', shortName: 'Matemáticas 9.º', description: 'Práctica para la segunda convocatoria de Matemáticas de noveno año del MEP de Costa Rica.', questionCount: 60, questionsPerPractice: 10 },
     { id: 'example', visible: false, name: 'Example', shortName: 'Example', description: 'A minimal template course that demonstrates the generic study simulator.', questionCount: 3, questionsPerPractice: 10 }
   ];
@@ -52,6 +52,7 @@
     try {
       await load('./courses/' + id + '/config.js', token);
       await load('./courses/' + id + '/questions.js', token);
+      if (id === 'az900') await load('./courses/az900/questions-extra.js', token);
       await load('./js/visuals.js', token);
       await load('./js/storage.js', token);
       await load('./js/app.js', token);
