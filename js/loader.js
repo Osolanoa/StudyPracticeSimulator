@@ -8,12 +8,7 @@
   let request = 0;
   window.STUDY_COURSE_REGISTRY = registry.map(course => ({ ...course }));
 
-  function theme() {
-    try {
-      return localStorage.getItem('study_theme') || localStorage.getItem('study_az900_theme') ||
-        localStorage.getItem('study_matematicas-9-mep_theme') || 'dark';
-    } catch (_) { return 'dark'; }
-  }
+  function theme() { return 'dark'; }
   function applyTheme() { document.documentElement.dataset.theme = theme(); }
   function practiceSummary(course) {
     try {
@@ -46,15 +41,8 @@
     const totalCompleted = summaries.reduce((sum, item) => sum + item.progress.done, 0);
     const totalTests = summaries.reduce((sum, item) => sum + item.progress.total, 0);
     const overview = `<section class="cosmic-overview" aria-label="Study progress"><div class="cosmic-overview-head"><span class="cosmic-overview-eyebrow">Your learning journey</span><strong>${totalCompleted} / ${totalTests} practices</strong><small>Completed across all courses</small></div><div class="cosmic-overview-tracks">${summaries.map(({ course, progress }) => { const percentage = progress.total ? Math.round(progress.done / progress.total * 100) : 0; return `<div class="cosmic-progress-row"><div class="cosmic-track-head"><span>${esc(course.shortName)}</span><strong>${percentage}%</strong></div><div class="cosmic-track" role="progressbar" aria-label="${esc(course.shortName)} completed" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100"><div class="cosmic-track-fill" style="width:${percentage}%"></div></div></div>`; }).join('')}</div></section>`;
-    app.innerHTML = `<main id="main" class="landing"><header class="cosmic-header"><span class="cosmic-brand"><span class="cosmic-brand-symbol" aria-hidden="true">✦</span> Study Practice Simulator</span><button type="button" class="cosmic-theme-switch" data-cosmic-theme aria-label="Toggle color theme">${theme() === 'light' ? '✦ Cosmic dark mode' : '☀ Light mode'}</button></header><section class="landing-hero"><p class="eyebrow">Study Practice Simulator</p><h1>Learn smarter.<em>Achieve more.</em></h1><p class="sub">Practice, track your progress, and master every topic.</p></section><section class="course-grid" aria-label="Available courses">${cards}</section>${overview}</main>`;
+    app.innerHTML = `<main id="main" class="landing"><header class="cosmic-header"><span class="cosmic-brand"><span class="cosmic-brand-symbol" aria-hidden="true">✦</span> Study Practice Simulator</span></header><section class="landing-hero"><p class="eyebrow">Study Practice Simulator</p><h1>Learn smarter.<em>Achieve more.</em></h1><p class="sub">Practice, track your progress, and master every topic.</p></section><section class="course-grid" aria-label="Available courses">${cards}</section>${overview}</main>`;
     app.querySelectorAll('[data-course-id]').forEach(button => button.addEventListener('click', () => loadCourse(button.dataset.courseId)));
-    app.querySelector('[data-cosmic-theme]')?.addEventListener('click', () => {
-      const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
-      try { localStorage.setItem('study_theme', nextTheme); } catch (_) {}
-      document.documentElement.dataset.theme = nextTheme;
-      const control = app.querySelector('[data-cosmic-theme]');
-      if (control) control.textContent = nextTheme === 'light' ? '✦ Cosmic dark mode' : '☀ Light mode';
-    });
     applyTheme();
   }
   function load(src, token) {
