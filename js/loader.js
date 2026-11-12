@@ -21,6 +21,7 @@
   }
   function esc(value) { return String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]); }
   function landing() {
+    document.body.dataset.cosmicView = 'landing';
     request++;
     window.StudyApp?.destroy?.();
     window.STUDY_COURSE_ID = null;
@@ -31,7 +32,7 @@
       const status = continued ? `<p class="course-progress">${progress.done} of ${progress.total} practice tests completed${progress.best === null ? '' : ` · Best average: ${progress.best}%`}</p>` : '<p class="course-progress">Ready when you are.</p>';
       return `<article class="course-card"><p class="eyebrow">${esc(course.shortName)}</p><h2>${esc(course.name)}</h2><p class="sub">${esc(course.description)}</p><div class="course-facts"><span>${course.questionCount} questions</span><span>${progress.total} practice tests</span></div>${status}<button class="btn" data-course-id="${esc(course.id)}">${continued ? 'Continue studying' : 'Start studying'}</button></article>`;
     }).join('');
-    app.innerHTML = `<main id="main" class="landing"><section class="landing-hero"><p class="eyebrow">Study Practice Simulator</p><h1>Choose a subject to continue studying.</h1><p class="sub">Select a course to practice, review progress, or take a timed exam.</p></section><section class="course-grid" aria-label="Available courses">${cards}</section></main>`;
+    app.innerHTML = `<main id="main" class="landing"><header class="cosmic-header"><span class="cosmic-brand"><span class="cosmic-brand-symbol" aria-hidden="true">✦</span> Study Practice Simulator</span><span class="cosmic-brand-sub">YOUR LEARNING UNIVERSE</span></header><section class="landing-hero"><p class="eyebrow">Study Practice Simulator</p><h1>Learn smarter.<em>Achieve more.</em></h1><p class="sub">Practice, track your progress, and master every topic.</p></section><section class="course-grid" aria-label="Available courses">${cards}</section></main>`;
     app.querySelectorAll('[data-course-id]').forEach(button => button.addEventListener('click', () => loadCourse(button.dataset.courseId)));
     applyTheme();
   }
