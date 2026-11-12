@@ -5,6 +5,8 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
   'use strict';
   const container=document.getElementById('cosmic-scene');
   if(!container||!window.WebGLRenderingContext||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  // High-density 3D remains optional on narrow/low-memory devices.
+  if(window.innerWidth<740 || (navigator.deviceMemory && navigator.deviceMemory<4))return;
   if(document.body.dataset.cosmicEffect!=='high'||document.documentElement.dataset.theme==='light')return;
   let renderer,raf=0,visible=true,elapsed=0,last=0,px=0,py=0,aimX=0,aimY=0,disposed=false;
   const scene=new THREE.Scene(),camera=new THREE.OrthographicCamera(-7,7,5,-5,.1,100);
@@ -26,7 +28,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
   scene.add(moon);
   const vertex=String.raw`varying vec3 vNormal3;varying vec3 vLocal;void main(){vNormal3=normalize(normalMatrix*normal);vLocal=position;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`;
   const plasma=String.raw`
-    uniform float uTime;varying vec3 vNormal3;varying vec3 vLocal;
+    uniform float uTime; uniform sampler2D uSolarPhoto; uniform float uPhotoMix; varying vec3 vNormal3;varying vec3 vLocal;
     float hash(vec3 p){p=fract(p*.3183099+.1);p*=17.;return fract(p.x*p.y*p.z*(p.x+p.y+p.z));}
     float noise(vec3 p){vec3 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
       return mix(mix(mix(hash(i),hash(i+vec3(1,0,0)),f.x),
@@ -48,20 +50,28 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
       color+=vec3(1.,.45,.1)*pow(max(0.,activity-.85),2.)*2.5;
       float rim=pow(1.-max(dot(normalize(vNormal3),vec3(0.,0.,1.)),0.),2.);
       color+=vec3(.85,.28,.025)*rim*.7;
+      // SDO 171 A full-disc photography adds real magnetic filaments and active regions.
+      vec3 n=normalize(vNormal3);
+      vec2 uv=.5+n.xy*.425;
+      uv+=.0025*vec2(sin(n.y*22.+t*.65),cos(n.x*24.-t*.42));
+      vec3 photo=texture2D(uSolarPhoto,uv).rgb;
+      float photographicMask=smoothstep(.045,.21,max(photo.r,max(photo.g,photo.b)));
+      vec3 photographicColor=photo*vec3(1.6,1.02,.53);
+      color=mix(color,photographicColor,clamp(uPhotoMix*photographicMask*.80,0.,.8));
       gl_FragColor=vec4(color,1.);
     }`;
-  const sunMaterial=new THREE.ShaderMaterial({uniforms:{uTime:{value:0}},vertexShader:vertex,fragmentShader:plasma});
+  const sunMaterial=new THREE.ShaderMaterial({uniforms:{uTime:{value:0},uSolarPhoto:{value:null},uPhotoMix:{value:0}},vertexShader:vertex,fragmentShader:plasma});
   const sun=new THREE.Mesh(new THREE.SphereGeometry(1,96,64),sunMaterial);scene.add(sun);
   const corona=new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({
     uniforms:{uTime:{value:0}},
     vertexShader:String.raw`varying vec2 vUv2;void main(){vUv2=uv;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.);}`,
     fragmentShader:String.raw`uniform float uTime;varying vec2 vUv2;
       void main(){vec2 p=(vUv2-.5)*2.;float r=length(p);float a=atan(p.y,p.x);
-        float modulation=.04*sin(14.*a+uTime*.14)+.027*sin(29.*a-uTime*.31)+.02*sin(43.*a+uTime*.18);
-        float flame=exp(-pow((r-.36-modulation)/.075,2.));
+        float modulation=.035*sin(11.*a+uTime*.11)+.023*sin(24.*a-uTime*.23)+.021*sin(41.*a+uTime*.16);
+        float flame=exp(-pow((r-.61-modulation)/.075,2.));
         float glow=exp(-r*r*9.)*.68 + exp(-r*r*2.8)*.16;
-        float ray=pow(abs(sin(a*13.+uTime*.085)),20.)*exp(-abs(r-.55)*6.)*.11;
-        float alpha=clamp(glow+flame*.24+ray,0.,.58);
+        float ray=pow(abs(sin(a*11.+uTime*.085)),18.)*exp(-abs(r-.72)*7.)*.21;
+        float alpha=clamp(glow*.78+flame*.35+ray,0.,.68);
         gl_FragColor=vec4(vec3(1.,.42+.16*sin(a*5.),.08),alpha);
       }`,
     transparent:true,depthWrite:false,blending:THREE.AdditiveBlending
@@ -83,7 +93,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
     sun.position.set(camera.right-sunRadius*(small?.24:.67),camera.bottom+sunRadius*(small?.40:.61),0);
     sun.scale.setScalar(sunRadius);
     corona.position.copy(sun.position);corona.position.z=-.2;
-    corona.scale.setScalar(sunRadius*5.0);
+    corona.scale.setScalar(sunRadius*3.2);
   }
   layout();window.addEventListener('resize',layout,{passive:true});
   window.addEventListener('pointermove',e=>{aimX=(e.clientX/window.innerWidth-.5)*2;aimY=(e.clientY/window.innerHeight-.5)*2},{passive:true});
@@ -115,6 +125,12 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
   }
   const loader=new THREE.TextureLoader();
   loader.setCrossOrigin('anonymous');
+  // The solar photograph is a static surface source, not a video.
+  // Its slight UV drift and independent plasma shader do not reset at a loop boundary.
+  loader.load('https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia26/pia26681/PIA26681.jpg',
+    texture=>{texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+      sunMaterial.uniforms.uSolarPhoto.value=texture;sunMaterial.uniforms.uPhotoMix.value=1;},
+    undefined,()=>{/* Procedural plasma remains available without this optional texture. */});
   // NASA 2025 globe color map. If CORS is not allowed, retain CSS-photography mode.
   loader.load('https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg',
     texture=>{
