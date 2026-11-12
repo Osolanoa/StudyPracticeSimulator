@@ -1,0 +1,66 @@
+name: Cinematic design visual smoke
+on:
+  push:
+    branches:
+      - design/cosmic-sun-moon-preview
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install headless Chromium
+        run: |
+          npm install --no-save playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Capture desktop and mobile previews
+        run: |
+          mkdir -p visual-previews
+          cat > /tmp/cosmic-visual.cjs <<'NODE'
+          const { chromium } = require(process.cwd() + '/node_modules/playwright');
+          const path = require('node:path');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            for (const [label, width, height] of [['desktop', 1792, 912], ['mobile', 390, 844]]) {
+              const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
+              const errors = [];
+              page.on('pageerror', error => errors.push(String(error)));
+              await page.goto('file://' + path.resolve('index.html'), { waitUntil: 'domcontentloaded' });
+              await page.waitForTimeout(5000);
+              const metadata = await page.evaluate(() => ({
+                heading: document.querySelector('.cosmos-hero h1')?.textContent || '',
+                cards: document.querySelectorAll('.cosmos-course').length,
+                quickActions: document.querySelectorAll('.cosmos-shortcut').length,
+                atmosphereLoaded: !!document.querySelector('.cosmic-atmosphere')?.naturalWidth,
+                prominencesLoaded: !!document.querySelector('.cosmic-solar-loops')?.naturalWidth,
+                moonLoaded: !!document.querySelector('.cosmic-moon img')?.naturalWidth,
+                sunLoaded: !!document.querySelector('.cosmic-sun img')?.naturalWidth,
+                heroHeight: Math.round(document.querySelector('.cosmos-hero')?.getBoundingClientRect().height || 0),
+                cardsTop: Math.round(document.querySelector('.cosmos-courses')?.getBoundingClientRect().top || 0),
+                shortcutsTop: Math.round(document.querySelector('.cosmos-quick')?.getBoundingClientRect().top || 0),
+                pageScrollWidth: document.documentElement.scrollWidth,
+                viewportWidth: window.innerWidth
+              }));
+              await page.screenshot({ path: 'visual-previews/' + label + '.png', fullPage: true });
+              console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
+              if (metadata.cards !== 2 || metadata.quickActions !== 5 || errors.length) {
+                process.exitCode = 1;
+              }
+              await page.close();
+            }
+            await browser.close();
+          })().catch(err => { console.error(err); process.exitCode = 1; });
+          NODE
+          node /tmp/cosmic-visual.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cosmic-visual-previews
+          path: visual-previews/*.png
+          if-no-files-found: warn
