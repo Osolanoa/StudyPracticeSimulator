@@ -108,7 +108,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
     sunMaterial.uniforms.uTime.value=t;corona.material.uniforms.uTime.value=t;
     sun.rotation.y=t*.012;sun.rotation.z=Math.sin(t*.022)*.06;
     const driftX=Math.sin(t*.065)*.08,driftY=Math.cos(t*.055)*.07;
-    sun.position.x+=driftX*.01;sun.position.y+=driftY*.01;
+    sun.rotation.x=driftX;sun.rotation.z=driftY;
     scene.rotation.y=px*.011;scene.rotation.x=-py*.008;
     renderer.render(scene,camera);
     raf=requestAnimationFrame(render);
@@ -121,5 +121,5 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
       texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
       moon.material.map=texture;moon.material.color.set(0xd8e7fb);moon.material.needsUpdate=true;
       layer.style.opacity='1';document.body.classList.add('cosmic-3d-ready');start();
-    },undefined,()=>{layer.remove();disposed=true;renderer.dispose();});
+    },undefined,()=>loader.load('https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/textures/planets/moon_1024.jpg', texture=>{texture.colorSpace=THREE.SRGBColorSpace;moon.material.map=texture;moon.material.needsUpdate=true;layer.style.opacity='1';document.body.classList.add('cosmic-3d-ready');start();},undefined,()=>{layer.remove();disposed=true;renderer.dispose();}));
 })();
