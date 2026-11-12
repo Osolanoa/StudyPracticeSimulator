@@ -6,6 +6,7 @@ if(!app||document.getElementById('cosmic-scene'))return;
 const scene=document.createElement('div');scene.id='cosmic-scene';scene.setAttribute('aria-hidden','true');
 scene.innerHTML='<div class="cosmic-mist"></div><canvas></canvas><div class="cosmic-body cosmic-moon"><img alt="" decoding="async" src="https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/06/edu_distance_to_the_moon.png"></div><div class="cosmic-body cosmic-sun"><img alt="" decoding="async" src="https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia26/pia26681/PIA26681.jpg?fit=clip&amp;w=1600"></div><div class="cosmic-vignette"></div>';
 app.parentNode.insertBefore(scene,app);
+scene.querySelectorAll('.cosmic-body img').forEach(img=>img.addEventListener('error',()=>img.remove()));
 const canvas=scene.querySelector('canvas'),ctx=canvas.getContext('2d',{alpha:true});
 const moon=scene.querySelector('.cosmic-moon'),sun=scene.querySelector('.cosmic-sun');
 const toggle=document.createElement('button');toggle.type='button';toggle.className='cosmic-effects-toggle';document.body.appendChild(toggle);
