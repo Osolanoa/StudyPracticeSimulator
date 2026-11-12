@@ -120,3 +120,15 @@
  :root[data-theme="dark"] body[data-cosmic-view] .option,
  :root[data-theme="dark"] body[data-cosmic-view] .nav button{transition:none!important}
 }
+
+:root[data-theme="dark"] body[data-cosmic-view] .cosmos-side-icon{
+ display:inline-block;flex:none;width:19px;height:19px;margin-right:11px;color:#a5cff2;
+ vertical-align:middle;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .nav button.active .cosmos-side-icon{color:#f0f8ff}
+:root[data-theme="dark"] body[data-cosmic-view] .cosmos-side-brand{
+ display:inline-block;margin-right:9px;font-size:1.35rem;line-height:1;color:#8accff;text-shadow:0 0 14px #57b2fa86;
+}
+@media(max-width:780px){
+ :root[data-theme="dark"] body[data-cosmic-view] .cosmos-side-icon{width:16px;height:16px;margin-right:7px}
+}
