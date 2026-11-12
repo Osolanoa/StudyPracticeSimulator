@@ -306,3 +306,9 @@ body[data-cosmic-view="landing"] .landing{color:#edf4fc}
 body.cosmic-3d-ready #cosmic-scene .cosmic-moon,body.cosmic-3d-ready #cosmic-scene .cosmic-sun{opacity:0;transition:opacity:1.1s ease}
 body[data-cosmic-effect="reduced"] #cosmic-scene .cosmic-webgl-layer,body[data-cosmic-effect="off"] #cosmic-scene .cosmic-webgl-layer{display:none}
 :root[data-theme="light"] #cosmic-scene .cosmic-webgl-layer{display:none}
+
+.cosmic-theme-switch{border:1px solid #789fcb77;background:#ffffff0a;color:#e8f5ff;border-radius:99px;padding:8px 14px;font:600 .78rem/1.3 system-ui;cursor:pointer;transition:background .2s,border-color .2s}
+.cosmic-theme-switch:hover{background:#8cbcff26;border-color:#aad6ff}
+.cosmic-theme-switch:focus-visible{outline:3px solid #87d4ff;outline-offset:3px}
+:root[data-theme="light"] .cosmic-theme-switch{color:#1b3c66;background:#ebf3fb}
+@media(max-width:700px){.cosmic-theme-switch{font-size:.69rem;padding:8px 10px;white-space:nowrap}}
