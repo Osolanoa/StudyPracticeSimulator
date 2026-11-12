@@ -4,10 +4,10 @@
 #cosmic-scene .cosmic-mist{position:absolute;inset:-15%;background:radial-gradient(ellipse at 27% 33%,#1664b53d,transparent 38%),radial-gradient(ellipse at 72% 57%,#732e9a28,transparent 34%),radial-gradient(ellipse at 91% 77%,#e46c1520,transparent 30%);filter:blur(52px)}
 #cosmic-scene .cosmic-body{position:absolute;will-change:transform;transform:translate3d(0,0,0);border-radius:50%;aspect-ratio:1;overflow:visible}
 #cosmic-scene .cosmic-body::before{content:'';position:absolute;inset:-26%;border-radius:50%;z-index:-1}
-#cosmic-scene .cosmic-body img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;filter:contrast(1.07);opacity:.94}
-#cosmic-scene .cosmic-moon{left:clamp(-195px,-11vw,-65px);top:clamp(-125px,-10vw,-55px);width:clamp(350px,36vw,640px);filter:drop-shadow(0 0 25px #8bc7ff48)}
+#cosmic-scene .cosmic-body img{border-radius:50%;display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;filter:contrast(1.07);opacity:.94}
+#cosmic-scene .cosmic-moon{background:radial-gradient(circle at 38% 35%,#ccdbe8 0%,#7486a0 45%,#233b59 76%,#0a1630 100%);left:clamp(-195px,-11vw,-65px);top:clamp(-125px,-10vw,-55px);width:clamp(350px,36vw,640px);filter:drop-shadow(0 0 25px #8bc7ff48)}
 #cosmic-scene .cosmic-moon::before{background:radial-gradient(circle,#81b7fa37 34%,#4285d41e 51%,transparent 73%);filter:blur(22px)}
-#cosmic-scene .cosmic-sun{right:clamp(-210px,-13vw,-75px);bottom:clamp(-260px,-21vw,-100px);width:clamp(440px,44vw,760px);filter:drop-shadow(0 0 28px #ff9b3855)}
+#cosmic-scene .cosmic-sun{background:radial-gradient(circle at 38% 36%,#fff0ac,#ffd36b 36%,#ff922c 66%,#a62f12 93%);right:clamp(-210px,-13vw,-75px);bottom:clamp(-260px,-21vw,-100px);width:clamp(440px,44vw,760px);filter:drop-shadow(0 0 28px #ff9b3855)}
 #cosmic-scene .cosmic-sun::before{background:radial-gradient(circle,#ffba5c70 15%,#f77b2240 40%,transparent 74%);filter:blur(38px)}
 #cosmic-scene .cosmic-sun img{filter:contrast(1.16) saturate(1.2);opacity:.94}
 #cosmic-scene .cosmic-vignette{position:absolute;inset:0;background:linear-gradient(90deg,#050b1a1c,transparent 40%,#050b1a1e),radial-gradient(ellipse at 50% 46%,#040918cb 0%,#0409188a 28%,transparent 69%)}
