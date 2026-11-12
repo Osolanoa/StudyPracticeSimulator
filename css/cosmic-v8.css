@@ -1,0 +1,94 @@
+/* V8: Earth and Sun use actual space photography, without artificial storm/rings.
+   Deliberately overrides experimental V4-V7 layers, preserving real course UI. */
+#cosmic-scene .cosmic-earth-globe {
+  position:absolute;
+  z-index:2;
+  inset:auto 0 -86px 0!important;
+  width:100%!important;
+  height:clamp(350px,48vh,525px)!important;
+  aspect-ratio:auto!important;
+  border:0!important;
+  border-radius:0!important;
+  overflow:hidden!important;
+  box-shadow:none!important;
+  background:transparent!important;
+  filter:none!important;
+  transform:none!important;
+  opacity:1!important;
+  pointer-events:none;
+}
+#cosmic-scene .cosmic-earth-globe img {
+  display:block;
+  position:absolute;inset:0;
+  width:100%!important;height:100%!important;
+  object-fit:cover!important;
+  object-position:center 34%!important;
+  transform:none!important;
+  mix-blend-mode:normal!important;
+  border-radius:0!important;
+  opacity:1!important;
+  filter:brightness(.67) contrast(1.18) saturate(1.06)!important;
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 88%,transparent 100%)!important;
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 88%,transparent 100%)!important;
+}
+#cosmic-scene .cosmic-earth-globe::before,
+#cosmic-scene .cosmic-earth-globe::after {
+  display:none!important;
+  content:none!important;
+}
+#cosmic-scene .cosmic-earth-night,
+#cosmic-scene .cosmic-earth-photo,
+#cosmic-scene .cosmic-horizon {display:none!important}
+#cosmic-scene > canvas {
+  opacity:.50;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 37%,transparent 55%)!important;
+  mask-image:linear-gradient(to bottom,#000 0%,#000 37%,transparent 55%)!important;
+}
+/* The Sun is one actual SDO photographic disc, without synthetic flames. */
+#cosmic-scene .cosmic-solar-corona,
+#cosmic-scene .cosmic-solar-surface,
+#cosmic-scene .cosmic-solar-loops {
+  display:none!important;
+}
+#cosmic-scene .cosmic-sun::before {
+  background:radial-gradient(circle,#ffac4b2d 12%,#fa632113 47%,transparent 68%)!important;
+  filter:blur(18px)!important;
+}
+#cosmic-scene .cosmic-solar-disc {
+  background:#8c2b0f!important;
+  box-shadow:0 0 8px #ffad638c,0 0 24px #e96f2870,0 0 48px #de6d2d31!important;
+}
+#cosmic-scene .cosmic-solar-disc img {
+  display:block!important;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  filter:brightness(.98) contrast(1.31) saturate(1.23) hue-rotate(-4deg)!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+  animation:solar-photo-v5 480s linear infinite!important;
+}
+@media(max-width:1120px) {
+  #cosmic-scene .cosmic-earth-globe {
+    inset:auto 0 -65px 0!important;
+    width:100%!important;
+    height:clamp(310px,43vh,440px)!important;
+  }
+}
+@media(max-width:700px) {
+  #cosmic-scene .cosmic-earth-globe {
+    inset:auto 0 -48px 0!important;
+    width:100%!important;height:clamp(250px,37vh,390px)!important;
+    opacity:.83!important;
+  }
+  #cosmic-scene .cosmic-earth-globe img {
+    object-position:50% 27%!important;
+    filter:brightness(.59) contrast(1.22) saturate(1.02)!important;
+  }
+  #cosmic-scene > canvas {
+    -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 25%,transparent 48%)!important;
+    mask-image:linear-gradient(to bottom,#000 0%,#000 25%,transparent 48%)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  #cosmic-scene .cosmic-solar-disc img {animation:none!important}
+}
