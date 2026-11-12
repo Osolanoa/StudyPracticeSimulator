@@ -60,7 +60,7 @@ body[data-cosmic-view="landing"] .cosmos-hero{display:none!important}
   inset:0;
   width:100%;height:100%;
   object-fit:contain;object-position:50% 50%;
-  transform:none!important;
+  transform:none;
   mix-blend-mode:screen!important;
   opacity:.98!important;
   filter:brightness(1.13) contrast(1.25) saturate(1.14);

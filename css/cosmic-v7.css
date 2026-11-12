@@ -130,7 +130,7 @@
   width:100%!important;height:100%!important;
   object-fit:cover!important;
   object-position:50% 77%!important;
-  transform:scale(1.09)!important;
+  transform:scale(1.09);
   border-radius:0!important;
   mix-blend-mode:normal!important;
   -webkit-mask-image:none!important;

@@ -2,7 +2,7 @@ name: Cinematic design visual smoke
 on:
   push:
     branches:
-      - design/premium-reflective-title-graphite-menus
+      - design/distant-sun-earth-rotation-v10
   workflow_dispatch:
 permissions:
   contents: read
@@ -43,6 +43,10 @@ jobs:
                 premiumTitleLines: document.querySelectorAll('.cosmos-title-area .premium-title-line').length,
                 titleMetallicGradient: getComputedStyle(document.querySelector('.premium-title-line--top')).backgroundImage.includes('linear-gradient'),
                 titleReflection: getComputedStyle(document.querySelector('.premium-title-line--bottom'),'::after').content,
+                earthRotation: getComputedStyle(document.querySelector('.cosmic-earth-globe img')).animationName,
+                earthRotationDuration: getComputedStyle(document.querySelector('.cosmic-earth-globe img')).animationDuration,
+                earthStack: Number(getComputedStyle(document.querySelector('.cosmic-earth-globe')).zIndex),
+                sunStack: Number(getComputedStyle(document.querySelector('.cosmic-sun')).zIndex),
                 titleFontFamily: getComputedStyle(document.querySelector('.cosmos-title-area h1')).fontFamily,
                 cardBackground: getComputedStyle(document.querySelector('.cosmos-course')).backgroundImage,
                 firstTitleLineRect: (()=>{const r=document.querySelector('.premium-title-line--top').getBoundingClientRect();return {left:Math.round(r.left),right:Math.round(r.right)}})(),
@@ -82,14 +86,40 @@ jobs:
                 pageScrollWidth: document.documentElement.scrollWidth,
                 viewportWidth: window.innerWidth
               }));
+              if (label === 'desktop') {
+                const earthMotion = await page.evaluate(()=>{
+                  const el=document.querySelector('.cosmic-earth-globe img');
+                  const motion=el.getAnimations().find(a=>a.animationName==='earth-night-axial-drift');
+                  if(!motion)return {found:false};
+                  const initial=window.getComputedStyle(el).transform;
+                  motion.pause();motion.currentTime=1;
+                  const start=window.getComputedStyle(el).transform;
+                  motion.currentTime=479999;
+                  const end=window.getComputedStyle(el).transform;
+                  motion.currentTime=100;
+                  motion.play();
+                  return {found:true,initial,start,end,moved:start!==end};
+                });
+                console.log('earth-rotation-motion',JSON.stringify(earthMotion));
+                if(!earthMotion.found||!earthMotion.moved)process.exitCode=1;
+              }
               await page.screenshot({ path: 'visual-previews/' + label + '.png', fullPage: true });
               console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
               if (metadata.cards !== 2 || !metadata.sunBox || !metadata.moonBox ||
-                  (label==='desktop' && (metadata.sunBox.left>=metadata.moonBox.left || metadata.moonBox.width<500)) ||
+                  (label==='desktop' && (
+                    metadata.sunBox.left>=metadata.moonBox.left ||
+                    metadata.moonBox.width<500 ||
+                    metadata.sunBox.width>=240 ||
+                    metadata.sunBox.top<=360 ||
+                    metadata.sunBox.top>=metadata.earthBox.top ||
+                    metadata.sunBox.top+metadata.sunBox.width<=metadata.earthBox.top
+                  )) ||
                   metadata.quickActions !== 0 || metadata.topMenuButtons !== 0 ||
                   metadata.themeButtons !== 0 || metadata.oldHeroExists || metadata.oldLogoExists || metadata.oldFakeLightsExist ||
                   !metadata.heading.includes('Study Practice') || !metadata.heading.includes('Simulator') ||
                   metadata.premiumTitleLines !== 2 || !metadata.titleMetallicGradient ||
+                  metadata.earthRotation !== 'earth-night-axial-drift' ||
+                  metadata.earthStack <= metadata.sunStack ||
                   !metadata.titleReflection.includes('Simulator') ||
                   metadata.firstTitleLineRect.left < -1 || metadata.firstTitleLineRect.right > width+1 ||
                   metadata.solarSurfaceCanvas || metadata.solarCoronaCanvas || metadata.activeSolarPhysicsScript || !metadata.earthLoaded ||
