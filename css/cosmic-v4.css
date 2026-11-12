@@ -183,3 +183,27 @@ body[data-cosmic-effect="reduced"] #cosmic-scene .cosmic-sun img {
   }
 }
 body[data-cosmic-view="session"] .cosmic-effects-toggle {display:none}
+
+/* NASA Black Marble earth-at-night projection: true city-light distribution. */
+#cosmic-scene .cosmic-earth-photo {
+  position:absolute;
+  z-index:3;
+  display:block;
+  width:min(86vw,1650px);
+  aspect-ratio:1;
+  height:auto;
+  left:50%;
+  bottom:calc(165px - min(86vw,1650px));
+  object-fit:contain;
+  transform:translateX(-50%);
+  pointer-events:none;
+  opacity:.69;
+  mix-blend-mode:screen;
+  filter:brightness(.84) contrast(1.38) saturate(1.05);
+  -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 2%,#000 21%,transparent 42%);
+  mask-image:linear-gradient(to bottom,transparent 0%,#000 2%,#000 21%,transparent 42%);
+}
+body[data-cosmic-view="session"] #cosmic-scene .cosmic-earth-photo{opacity:.18}
+@media(max-width:700px){
+  #cosmic-scene .cosmic-earth-photo{display:none}
+}
