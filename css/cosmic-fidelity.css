@@ -268,3 +268,51 @@ body[data-cosmic-view="landing"] .cosmos-landing{max-width:1595px;
 @media(prefers-reduced-motion:reduce){
  #cosmic-scene .cosmic-cliffs{will-change:auto}
 }
+
+
+/* Detailed visual calibration from Chromium capture (desktop 1792x912). */
+#cosmic-scene .cosmic-moon{
+ background:radial-gradient(circle at 36% 28%,#a9c5e4 0%,#627ca7 40%,#263b62 69%,#05122b 100%);
+ box-shadow:0 0 15px #9ccafa7c,0 0 70px #469ce845,inset -28px -25px 55px #0a1b3bd1;
+}
+#cosmic-scene .cosmic-moon img{
+ mix-blend-mode:normal;
+ filter:brightness(.75) contrast(1.35) saturate(.38) sepia(.035);
+ opacity:.98;transform:scale(1.12);
+}
+#cosmic-scene .cosmic-moon::after{opacity:.48}
+#cosmic-scene .cosmic-cliffs--left{
+ opacity:1;top:30%;height:30%;filter:hue-rotate(165deg) brightness(1.25) contrast(1.4) saturate(2);
+}
+#cosmic-scene .cosmic-cliffs--right{
+ opacity:.92;top:32%;height:30%;filter:hue-rotate(-9deg) brightness(1.1) contrast(1.4) saturate(1.6);
+}
+#cosmic-scene .cosmic-cliffs--floor{
+ opacity:.77;bottom:-1%;height:27%;filter:hue-rotate(166deg) brightness(.88) contrast(1.35) saturate(1.9);
+}
+#cosmic-scene .cosmic-atmosphere{opacity:1}
+#cosmic-scene .cosmic-nebula-photo{
+ opacity:.49;filter:brightness(.85) contrast(1.35) saturate(1.8) hue-rotate(9deg);
+}
+#cosmic-scene .cosmic-galaxy-photo{
+ opacity:.89;top:7%;left:65%;filter:contrast(1.35) saturate(1.6) hue-rotate(20deg) brightness(1.1) drop-shadow(0 0 26px #705bd8ae);
+}
+#cosmic-scene .cosmic-vignette{
+ background:radial-gradient(ellipse at 52% 29%,#020915b7 0%,#0209188e 27%,#02091627 52%,transparent 83%);
+}
+.cosmos-landing .cosmos-hero h1{text-shadow:0 3px 22px #000e,0 0 6px #0009}
+.cosmos-landing .cosmos-course{box-shadow:inset 0 1px #d9eeff6a,0 17px 45px #000a,0 0 21px #328fe543}
+.cosmos-landing .cosmos-course::after{
+ opacity:.95!important;filter:drop-shadow(0 0 16px #328ce48d);
+ background-position:center bottom;background-size:105% auto;
+}
+.cosmos-landing .cosmos-course--math::after{
+ filter:drop-shadow(0 0 18px #417ae49b) hue-rotate(25deg);
+}
+.cosmos-landing .cosmos-shortcut{background:linear-gradient(145deg,#193b60df,#06172be9);box-shadow:inset 0 1px #ddf6ff75,0 8px 28px #0009,0 0 13px #3b95d558}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-cliffs--left{opacity:.47;filter:hue-rotate(168deg) brightness(.9) saturate(1.55)}
+ #cosmic-scene .cosmic-cliffs--right{opacity:.46;filter:hue-rotate(-8deg) brightness(.85) saturate(1.3)}
+ #cosmic-scene .cosmic-cliffs--floor{opacity:.40}
+ #cosmic-scene .cosmic-vignette{background:radial-gradient(ellipse at 50% 33%,#020918e4 0%,#020918c9 40%,#0209186a 70%,transparent 97%)}
+}
