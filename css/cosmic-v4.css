@@ -141,3 +141,31 @@ body[data-cosmic-effect="reduced"] #cosmic-scene .cosmic-sun img {
 @media(prefers-reduced-motion:reduce) {
   #cosmic-scene .cosmic-moon img,#cosmic-scene .cosmic-sun img{animation:none!important;will-change:auto}
 }
+
+/* Surface fidelity: oversized luminous Moon and fine independent prominence filaments. */
+@media (min-width:941px) {
+  #cosmic-scene .cosmic-moon {
+    width:clamp(525px,35vw,610px);
+    top:clamp(-170px,-10vw,-116px);
+    left:clamp(-143px,-8.1vw,-97px);
+  }
+}
+#cosmic-scene .cosmic-moon::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  z-index:1;
+  pointer-events:none;
+  background:
+   url("../assets/cosmic-moon-lights.svg") center / 100% 100% no-repeat,
+   linear-gradient(125deg,#f8ffff12,transparent 36%,#04132b63 95%);
+  mix-blend-mode:screen;
+  opacity:.68;
+  filter:drop-shadow(0 0 8px #9ad7ff88);
+}
+#cosmic-scene .cosmic-solar-loops{
+  mix-blend-mode:screen;
+  filter:drop-shadow(0 0 11px #fdb04e80);
+  opacity:.83;
+}
