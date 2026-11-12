@@ -88,8 +88,9 @@ jobs:
                 process.exitCode = 1;
               }
               if (label === 'desktop') {
-                await page.locator('button[data-cosmic-action="practice"]').first().click();
+                await page.locator('button[data-cosmic-action="start"]').first().click();
                 await page.waitForSelector('.shell', {timeout: 12000});
+                await page.locator('[data-view="practiceTests"]').first().click();
                 const courseHeading = await page.locator('#main h1').first().textContent();
                 console.log('course-navigation', JSON.stringify({ courseHeading }));
                 await page.screenshot({ path:'visual-previews/course-practice.png',fullPage:true });
