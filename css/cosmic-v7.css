@@ -293,3 +293,20 @@ body[data-cosmic-view="landing"] .cosmos-footer {
     text-shadow:0 3px 20px #01040df5,0 0 13px #5b9bdc37;
   }
 }
+
+/* Filmic solar grading: preserve dark fibrils and bright active regions
+   instead of flattening the entire photosphere to one orange value. */
+#cosmic-scene .cosmic-solar-disc img {
+  mix-blend-mode:normal!important;
+  opacity:1!important;
+  filter:brightness(.87) contrast(1.77) saturate(1.58) hue-rotate(-6deg)!important;
+}
+#cosmic-scene .cosmic-solar-surface {
+  z-index:2;
+  opacity:.20!important;
+  mix-blend-mode:screen!important;
+}
+#cosmic-scene .cosmic-solar-disc {
+  box-shadow:0 0 9px #ffc04bd5,0 0 33px #f87f29a8,0 0 84px #d35a273d,
+    inset -12px -9px 27px #4413086a;
+}
