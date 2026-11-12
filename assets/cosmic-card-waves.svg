@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530 240" width="530" height="240">
+<defs>
+ <linearGradient id="g" x1="0" x2="1" y1="1" y2="0"><stop stop-color="#063b7b" stop-opacity="0"/><stop offset=".4" stop-color="#2586dc" stop-opacity=".55"/><stop offset=".75" stop-color="#70cdff" stop-opacity=".85"/><stop offset="1" stop-color="#d4f6ff" stop-opacity=".20"/></linearGradient>
+ <radialGradient id="halo"><stop stop-color="#3a9af1" stop-opacity=".34"/><stop offset="1" stop-color="#257de9" stop-opacity="0"/></radialGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<ellipse cx="365" cy="191" rx="205" ry="95" fill="url(#halo)"/>
+<g stroke="url(#g)" stroke-width="1" fill="none">
+<path d="M0 225C96 216 134 180 191 207S306 195 368 129S478 105 540 88"/>
+<path d="M0 216C96 207 134 170 191 197S306 185 368 119S478 95 540 78"/>
+<path d="M0 207C96 198 134 160 191 187S306 175 368 109S478 85 540 68"/>
+<path d="M0 198C96 189 134 150 191 177S306 165 368 99S478 75 540 58"/>
+<path d="M0 189C96 180 134 140 191 167S306 155 368 89S478 65 540 48"/>
+<path d="M0 180C96 171 134 130 191 157S306 145 368 79S478 55 540 38"/>
+<path d="M0 171C96 162 134 120 191 147S306 135 368 69S478 45 540 28"/>
+<path d="M0 162C96 153 134 110 191 137S306 125 368 59S478 35 540 18"/>
+<path d="M0 153C96 144 134 100 191 127S306 115 368 49S478 25 540 8"/>
+<path d="M48 242C87 189 119 144 153 107S215 94 252 112S307 178 334 184"/>
+<path d="M83 242C120 186 151 143 182 107S245 93 281 110S335 178 362 184"/>
+<path d="M119 242C153 183 179 140 210 106S275 91 311 108S367 174 392 180"/>
+<path d="M154 242C187 184 210 141 238 106S302 90 339 106S393 173 418 178"/>
+<path d="M191 242C219 184 244 142 265 104S331 90 365 105S420 170 445 175"/>
+<path d="M224 242C255 183 275 143 297 103S359 89 391 104S449 168 475 172"/>
+</g>
+<path d="M80 208 C178 171 229 227 330 137 S453 99 530 50" fill="none" stroke="#8edcff" stroke-width="2.2" opacity=".8" filter="url(#glow)"/>
+</svg>
