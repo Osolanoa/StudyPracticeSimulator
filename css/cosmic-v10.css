@@ -1,0 +1,74 @@
+/* Cinematic V10 — distant Sun behind night-Earth horizon, subtle apparent axial drift.
+   The Earth remains a genuine nighttime NASA photograph. The masked photo moves
+   under a stationary horizon: an intentional realistic rotation illusion rather
+   than rotating a flat panoramic image through 360 degrees. */
+#cosmic-scene .cosmic-sun{
+  left:clamp(22px,4.2vw,75px)!important;
+  right:auto!important;
+  top:clamp(385px,51vh,510px)!important;
+  bottom:auto!important;
+  width:clamp(165px,12vw,215px)!important;
+  height:auto!important;
+  aspect-ratio:1;
+  opacity:.88!important;
+  z-index:2!important; /* Earth intentionally occludes the solar disc. */
+  filter:none!important;
+}
+#cosmic-scene .cosmic-sun::before{
+  opacity:.55!important;
+  filter:blur(21px)!important;
+}
+#cosmic-scene .cosmic-solar-disc{
+  box-shadow:0 0 7px #ffc8748a,0 0 22px #f17c3670,0 0 42px #e1682a38!important;
+}
+#cosmic-scene .cosmic-earth-globe{
+  z-index:4!important;
+  /* Keep the horizon and blue atmosphere stationary while the image turns. */
+  transform:none!important;
+  isolation:isolate;
+}
+#cosmic-scene .cosmic-earth-globe img{
+  transform-origin:50% 50%!important;
+  animation:earth-night-axial-drift 480s ease-in-out infinite alternate!important;
+  will-change:transform;
+}
+@keyframes earth-night-axial-drift{
+  from{transform:translate3d(-2.6%,0,0) scale(1.085)}
+  to{transform:translate3d(2.6%,0,0) scale(1.085)}
+}
+/* The atmospheric edge stays fixed. The Sun progressively disappears
+   behind the actual photographed night side as it approaches the horizon. */
+#cosmic-scene .cosmic-earth-globe::before,
+#cosmic-scene .cosmic-earth-globe::after{
+  display:none!important;
+}
+/* Do not make the solar layer compete with live quizzes. */
+body[data-cosmic-view="session"] #cosmic-scene .cosmic-sun{opacity:.14!important}
+body[data-cosmic-view="session"] #cosmic-scene .cosmic-earth-globe img{
+  animation-play-state:paused!important;
+}
+/* Narrow layouts use an upper-sky Sun so it remains visible, rather than
+   placing it behind the nearly full-width course cards. */
+@media(max-width:700px){
+  #cosmic-scene .cosmic-sun{
+    left:-34px!important;
+    right:auto!important;
+    top:96px!important;
+    width:clamp(112px,31vw,145px)!important;
+    opacity:.73!important;
+    z-index:2!important;
+  }
+  #cosmic-scene .cosmic-solar-disc{
+    box-shadow:0 0 7px #ffd07a7a,0 0 20px #f47b3555!important;
+  }
+  #cosmic-scene .cosmic-earth-globe img{
+    animation-duration:600s!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #cosmic-scene .cosmic-earth-globe img{
+    animation:none!important;
+    transform:scale(1.085)!important;
+    will-change:auto;
+  }
+}
