@@ -86,8 +86,8 @@ jobs:
                   metadata.themeButtons !== 0 || !metadata.solarSurfaceCanvas || !metadata.solarCoronaCanvas || !metadata.earthLoaded ||
                   !metadata.moonLoaded || !metadata.sunLoaded || metadata.pageScrollWidth > width ||
                   metadata.moonSpin !== 'cosmic-moon-axial-spin' ||
-                  metadata.sunSpin !== 'cosmic-sun-axial-spin' ||
-                  metadata.moonSpinDuration !== '720s' ||
+                  metadata.sunSpin !== 'solar-surface-rotation' ||
+                  metadata.moonSpinDuration !== '720s' || !metadata.globeImageLoaded ||
                   metadata.sunSpinDuration !== '480s' || errors.length) {
                 process.exitCode = 1;
               }
