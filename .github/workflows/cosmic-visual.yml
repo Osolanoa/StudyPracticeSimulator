@@ -41,6 +41,11 @@ jobs:
                 prominencesLoaded: !!document.querySelector('.cosmic-solar-loops')?.naturalWidth,
                 moonLoaded: !!document.querySelector('.cosmic-moon img')?.naturalWidth,
                 sunLoaded: !!document.querySelector('.cosmic-sun img')?.naturalWidth,
+                earthLoaded: !!document.querySelector('.cosmic-earth-night')?.naturalWidth,
+                moonSpin: getComputedStyle(document.querySelector('.cosmic-moon img')).animationName,
+                moonSpinDuration: getComputedStyle(document.querySelector('.cosmic-moon img')).animationDuration,
+                sunSpin: getComputedStyle(document.querySelector('.cosmic-sun img')).animationName,
+                sunSpinDuration: getComputedStyle(document.querySelector('.cosmic-sun img')).animationDuration,
                 cloudLayers: [...document.querySelectorAll('.cosmic-cliffs')].map(i=>!!i.naturalWidth),
                 galaxyLoaded: !!document.querySelector('.cosmic-galaxy-photo')?.naturalWidth,
                 nebulaLoaded: !!document.querySelector('.cosmic-nebula-photo')?.naturalWidth,
@@ -52,7 +57,12 @@ jobs:
               }));
               await page.screenshot({ path: 'visual-previews/' + label + '.png', fullPage: true });
               console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
-              if (metadata.cards !== 2 || metadata.quickActions !== 5 || errors.length) {
+              if (metadata.cards !== 2 || metadata.quickActions !== 5 || !metadata.earthLoaded ||
+                  !metadata.moonLoaded || !metadata.sunLoaded || metadata.pageScrollWidth > width ||
+                  metadata.moonSpin !== 'cosmic-moon-axial-spin' ||
+                  metadata.sunSpin !== 'cosmic-sun-axial-spin' ||
+                  metadata.moonSpinDuration !== '720s' ||
+                  metadata.sunSpinDuration !== '480s' || errors.length) {
                 process.exitCode = 1;
               }
               if (label === 'desktop') {
