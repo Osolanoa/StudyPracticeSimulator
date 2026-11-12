@@ -1,6 +1,6 @@
 (function(){
 window.StudyApp?.destroy?.();
-const CFG=window.COURSE_CONFIG||{},Q=window.COURSE_QUESTIONS||[],S=window.StudyStorage,app=document.getElementById('app'); let state={view:'dashboard',session:null,modal:null};
+const CFG=window.COURSE_CONFIG||{},Q=window.COURSE_QUESTIONS||[],S=window.StudyStorage,app=document.getElementById('app'); const startViews=['dashboard','practiceTests','examSetup','mistakes','bookmarks','settings'];let startView=startViews.includes(window.STUDY_START_VIEW)?window.STUDY_START_VIEW:'dashboard';window.STUDY_START_VIEW=null;let state={view:startView,session:null,modal:null};
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); const domains=Array.isArray(CFG.domains)?CFG.domains.map(d=>d.id):[],domainInfo=id=>CFG.domains?.find(d=>d.id===id)||{id,name:id}; const practiceSize=Number(CFG.questionsPerPractice)||10,passingScore=Number(CFG.passingScore)||70; document.title=`${CFG.shortName||CFG.name||'Study'} Practice Simulator`;
 const examCounts=CFG.examQuestionCounts||[30,40,50],defaultExamCount=CFG.defaultExamCount||50,examMinutes=CFG.examTimeMinutes||60;
 const ui=CFG.uiTranslations||{},uiKeys=Object.keys(ui).sort((a,b)=>b.length-a.length),uiPattern=uiKeys.length?new RegExp('(?<![\\p{L}\\p{N}_])(?:'+uiKeys.map(key=>key.replace(/[.*+?^$()|[\]\\{}]/g,char=>'\\'+char)).join('|')+')(?![\\p{L}\\p{N}_])','gu'):null;
