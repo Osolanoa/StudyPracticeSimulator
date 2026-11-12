@@ -86,6 +86,28 @@
         (.06+rand(j+206)*.18).toFixed(3)+')';
       outer.lineWidth=.7+rand(j+208)*.8;outer.stroke();
     }
+    // Magnetic fan jets: countless drifting strands rise from visible limb.
+    // Non-identical phases avoid a repeatable ring or video-loop appearance.
+    for(let j=0;j<92;j++){
+      const angle=Math.PI*.52+(j/92)*Math.PI*.95+(rand(j+1003)-.5)*.12;
+      const wave=Math.sin(t*(.17+rand(j+1007)*.13)+j*2.1);
+      const length=(9+rand(j+1012)*62)*(.84+.16*wave);
+      const a2=angle+(rand(j+1014)-.5)*.095;
+      const x=C+Math.cos(angle)*(R-2),y=C+Math.sin(angle)*(R-2);
+      const ex=C+Math.cos(a2)*(R+length),ey=C+Math.sin(a2)*(R+length);
+      const tangent=9+rand(j+1016)*27;
+      outer.save();
+      outer.shadowColor='#fa7620';outer.shadowBlur=3+rand(j+1017)*9;
+      outer.beginPath();outer.moveTo(x,y);
+      outer.bezierCurveTo(x+Math.cos(angle)*(length*.42)-Math.sin(angle)*tangent,
+        y+Math.sin(angle)*(length*.42)+Math.cos(angle)*tangent,
+        ex-Math.sin(angle)*tangent*.43,ey+Math.cos(angle)*tangent*.43,ex,ey);
+      outer.strokeStyle='rgba(255,'+(106+Math.floor(rand(j+1024)*109))+','+
+        (19+Math.floor(rand(j+1026)*52))+','+
+        (.09+rand(j+1028)*.18).toFixed(3)+')';
+      outer.lineWidth=.55+rand(j+1030)*1.05;outer.stroke();
+      outer.restore();
+    }
     // Active prominence arches. Footpoints stay connected to the single Sun.
     for(const arch of arches){
       const a=arch.angle,delta=arch.span;
