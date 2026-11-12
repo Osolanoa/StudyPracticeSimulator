@@ -8,7 +8,13 @@
   let request = 0;
   window.STUDY_COURSE_REGISTRY = registry.map(course => ({ ...course }));
 
-  function theme() { return localStorage.getItem('study_theme') || localStorage.getItem('study_az900_theme') || localStorage.getItem('study_matematicas-9-mep_theme') || 'dark'; }
+  function theme() { 
+    try {
+      const courseId = window.STUDY_COURSE_ID;
+      const courseTheme = courseId && localStorage.getItem('study_' + courseId + '_theme');
+      return courseTheme || localStorage.getItem('study_theme') || localStorage.getItem('study_az900_theme') || localStorage.getItem('study_matematicas-9-mep_theme') || 'dark';
+    } catch (_) { return 'dark'; }
+  }
   function applyTheme() { document.documentElement.dataset.theme = theme(); }
   function practiceSummary(course) {
     try {
