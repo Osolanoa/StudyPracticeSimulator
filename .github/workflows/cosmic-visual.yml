@@ -2,7 +2,7 @@ name: Cinematic design visual smoke
 on:
   push:
     branches:
-      - design/cosmic-sun-moon-preview
+      - design/cinematic-earth-title-no-parallax
   workflow_dispatch:
 permissions:
   contents: read
@@ -36,9 +36,13 @@ jobs:
               const errors = [];
               page.on('pageerror', error => errors.push(String(error)));
               await page.goto('file://' + path.resolve('index.html'), { waitUntil: 'domcontentloaded' });
-              await page.waitForTimeout(5000);
+              await page.waitForTimeout(2200);
+              await page.waitForFunction(() => !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth, {timeout:22000}).catch(()=>{});
               const metadata = await page.evaluate(() => ({
-                heading: document.querySelector('.cosmos-hero h1')?.textContent || '',
+                heading: document.querySelector('.cosmos-title-area h1')?.textContent || '',
+                oldHeroExists: !!document.querySelector('.cosmos-hero'),
+                oldLogoExists: !!document.querySelector('.cosmos-topnav'),
+                oldFakeLightsExist: !!document.querySelector('.cosmic-earth-night'),
                 cards: document.querySelectorAll('.cosmos-course').length,
                 quickActions: document.querySelectorAll('.cosmos-shortcut').length,
                 topMenuButtons: document.querySelectorAll('.cosmos-nav-link').length,
@@ -50,7 +54,7 @@ jobs:
                 prominencesLoaded: !!document.querySelector('.cosmic-solar-loops')?.naturalWidth,
                 moonLoaded: !!document.querySelector('.cosmic-moon img')?.naturalWidth,
                 sunLoaded: !!document.querySelector('.cosmic-sun img')?.naturalWidth,
-                earthLoaded: !!document.querySelector('.cosmic-earth-night')?.naturalWidth,
+                earthLoaded: !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth,
                 moonSpin: getComputedStyle(document.querySelector('.cosmic-moon img')).animationName,
                 moonSpinDuration: getComputedStyle(document.querySelector('.cosmic-moon img')).animationDuration,
                 sunSpin: getComputedStyle(document.querySelector('.cosmic-sun img')).animationName,
@@ -58,16 +62,16 @@ jobs:
                 cloudLayers: [...document.querySelectorAll('.cosmic-cliffs')].map(i=>!!i.naturalWidth),
                 galaxyLoaded: !!document.querySelector('.cosmic-galaxy-photo')?.naturalWidth,
                 nebulaLoaded: !!document.querySelector('.cosmic-nebula-photo')?.naturalWidth,
-                heroHeight: Math.round(document.querySelector('.cosmos-hero')?.getBoundingClientRect().height || 0),
+                titleHeight: Math.round(document.querySelector('.cosmos-title-area')?.getBoundingClientRect().height || 0),
                 cardsTop: Math.round(document.querySelector('.cosmos-courses')?.getBoundingClientRect().top || 0),
-                shortcutsTop: Math.round(document.querySelector('.cosmos-quick')?.getBoundingClientRect().top || 0),
+                titleFontSize: getComputedStyle(document.querySelector('.cosmos-title-area h1')).fontSize,
                 pageScrollWidth: document.documentElement.scrollWidth,
                 viewportWidth: window.innerWidth
               }));
               if (label === 'desktop') {
                 const sources = [
-                  'https://cdn.eso.org/images/large/ann20012a.jpg',
-                  'https://cdn.eso.org/images/screen/ann20012a.jpg',
+                  'https://d2pn8kiwq2w21t.cloudfront.net/original_images/1_-_city_lights_namerica_8k.jpg',
+                  'https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/content-feature/nightlights/images/media/BlackMarble_2016_Americas_composite.png?fit=clip&w=1600',
                   'https://eoimages.gsfc.nasa.gov/images/imagerecords/79000/79765/BlackMarble_2012_Americas_composite.jpg',
                   'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg'
                 ];
@@ -83,7 +87,9 @@ jobs:
               await page.screenshot({ path: 'visual-previews/' + label + '.png', fullPage: true });
               console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
               if (metadata.cards !== 2 || metadata.quickActions !== 0 || metadata.topMenuButtons !== 0 ||
-                  metadata.themeButtons !== 0 || !metadata.solarSurfaceCanvas || !metadata.solarCoronaCanvas || !metadata.earthLoaded ||
+                  metadata.themeButtons !== 0 || metadata.oldHeroExists || metadata.oldLogoExists || metadata.oldFakeLightsExist ||
+                  !metadata.heading.includes('Study Practice') || !metadata.heading.includes('Simulator') ||
+                  !metadata.solarSurfaceCanvas || !metadata.solarCoronaCanvas || !metadata.earthLoaded ||
                   !metadata.moonLoaded || !metadata.sunLoaded || metadata.pageScrollWidth > width ||
                   metadata.moonSpin !== 'cosmic-moon-axial-spin' ||
                   metadata.sunSpin !== 'solar-photo-v5' ||
@@ -92,7 +98,7 @@ jobs:
                 process.exitCode = 1;
               }
               if (label === 'desktop') {
-                await page.locator('button[data-cosmic-action="start"]').first().click();
+                await page.locator('[data-cosmic-course]').first().click();
                 await page.waitForSelector('.shell', {timeout: 12000});
                 await page.locator('[data-view="practiceTests"]').first().click();
                 const courseHeading = await page.locator('#main h1').first().textContent();
