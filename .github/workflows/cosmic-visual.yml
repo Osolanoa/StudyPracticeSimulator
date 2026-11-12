@@ -2,7 +2,7 @@ name: Cinematic design visual smoke
 on:
   push:
     branches:
-      - design/celestial-reference-v7
+      - design/night-earth-real-sun-v8
   workflow_dispatch:
 permissions:
   contents: read
@@ -36,13 +36,15 @@ jobs:
               const errors = [];
               page.on('pageerror', error => errors.push(String(error)));
               await page.goto('file://' + path.resolve('index.html'), { waitUntil: 'domcontentloaded' });
-              await page.waitForTimeout(2200);
+              await page.waitForTimeout(1800);
               await page.waitForFunction(() => !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth, {timeout:22000}).catch(()=>{});
               const metadata = await page.evaluate(() => ({
                 heading: document.querySelector('.cosmos-title-area h1')?.textContent || '',
                 oldHeroExists: !!document.querySelector('.cosmos-hero'),
                 oldLogoExists: !!document.querySelector('.cosmos-topnav'),
                 oldFakeLightsExist: !!document.querySelector('.cosmic-earth-night'),
+                activeSolarPhysicsScript: [...document.scripts].some(x=>x.src.includes('solar-physics.js')),
+                earthSrc: document.querySelector('.cosmic-earth-globe img')?.currentSrc || '',
                 cards: document.querySelectorAll('.cosmos-course').length,
                 quickActions: document.querySelectorAll('.cosmos-shortcut').length,
                 topMenuButtons: document.querySelectorAll('.cosmos-nav-link').length,
@@ -74,22 +76,6 @@ jobs:
                 pageScrollWidth: document.documentElement.scrollWidth,
                 viewportWidth: window.innerWidth
               }));
-              if (label === 'desktop') {
-                const sources = [
-                  'https://d2pn8kiwq2w21t.cloudfront.net/original_images/1_-_city_lights_namerica_8k.jpg',
-                  'https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/content-feature/nightlights/images/media/BlackMarble_2016_Americas_composite.png?fit=clip&w=1600',
-                  'https://eoimages.gsfc.nasa.gov/images/imagerecords/79000/79765/BlackMarble_2012_Americas_composite.jpg',
-                  'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg'
-                ];
-                const probeResults = await page.evaluate(async (urls) =>
-                  Promise.all(urls.map(src => new Promise(resolve=>{
-                    const im = new Image(); const timeout=setTimeout(()=>resolve({src,ok:false,reason:'timeout'}),8500);
-                    im.onload=()=>{clearTimeout(timeout);resolve({src,ok:true,w:im.naturalWidth,h:im.naturalHeight});};
-                    im.onerror=()=>{clearTimeout(timeout);resolve({src,ok:false,reason:'error'});};
-                    im.src=src;
-                  }))),sources);
-                console.log('source-probes',JSON.stringify(probeResults));
-              }
               await page.screenshot({ path: 'visual-previews/' + label + '.png', fullPage: true });
               console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
               if (metadata.cards !== 2 || !metadata.sunBox || !metadata.moonBox ||
@@ -97,7 +83,7 @@ jobs:
                   metadata.quickActions !== 0 || metadata.topMenuButtons !== 0 ||
                   metadata.themeButtons !== 0 || metadata.oldHeroExists || metadata.oldLogoExists || metadata.oldFakeLightsExist ||
                   !metadata.heading.includes('Study Practice') || !metadata.heading.includes('Simulator') ||
-                  !metadata.solarSurfaceCanvas || !metadata.solarCoronaCanvas || !metadata.earthLoaded ||
+                  metadata.solarSurfaceCanvas || metadata.solarCoronaCanvas || metadata.activeSolarPhysicsScript || !metadata.earthLoaded ||
                   !metadata.moonLoaded || !metadata.sunLoaded || metadata.pageScrollWidth > width ||
                   metadata.moonSpin !== 'cosmic-moon-axial-spin' ||
                   metadata.sunSpin !== 'solar-photo-v5' ||
