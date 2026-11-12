@@ -102,12 +102,12 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
     if(document.body.dataset.cosmicEffect!=='high'||document.documentElement.dataset.theme==='light'){
       layer.style.opacity='0';document.body.classList.remove('cosmic-3d-ready');stop();
     }else{
-      layer.style.opacity='1';document.body.classList.add('cosmic-3d-ready');start();
+      layer.style.opacity='1';document.body.classList.add('cosmic-3d-ready');if(document.body.dataset.cosmicView==='session')stop();else start();
     }
-  });observer.observe(document.body,{attributes:true,attributeFilter:['data-cosmic-effect']});
+  });observer.observe(document.body,{attributes:true,attributeFilter:['data-cosmic-effect','data-cosmic-view']});
   observer.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
   function stop(){if(raf){cancelAnimationFrame(raf);raf=0;}last=0}
-  function start(){if(raf||!visible||document.body.dataset.cosmicEffect!=='high'||document.documentElement.dataset.theme==='light'||disposed)return;last=0;raf=requestAnimationFrame(render)}
+  function start(){if(raf||!visible||document.body.dataset.cosmicEffect!=='high'||document.body.dataset.cosmicView==='session'||document.documentElement.dataset.theme==='light'||disposed)return;last=0;raf=requestAnimationFrame(render)}
   function render(now){
     raf=0;if(!visible||disposed)return;
     if(last)elapsed+=Math.min((now-last)/1000,.05);last=now;
