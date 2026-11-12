@@ -23,7 +23,7 @@
   width:100%!important;height:100%!important;
   object-fit:cover!important;
   object-position:center 34%!important;
-  transform:none!important;
+  transform:none;
   mix-blend-mode:normal!important;
   border-radius:0!important;
   opacity:1!important;
