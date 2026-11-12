@@ -67,3 +67,235 @@ body[data-cosmic-effect="reduced"] #cosmic-scene .cosmic-body{will-change:auto}
 :root[data-theme="light"] body[data-cosmic-view="course"] .content,:root[data-theme="light"] body[data-cosmic-view="session"] .content{color:#13233b}
 @media(max-width:780px){body[data-cosmic-view="landing"] .landing{padding:15px 16px 80px}body[data-cosmic-view="landing"] .landing-hero{margin:78px auto 30px}body[data-cosmic-view="landing"] .course-card{min-height:0;padding:24px}#cosmic-scene .cosmic-moon{left:-155px;top:-110px;width:355px;opacity:.63}#cosmic-scene .cosmic-sun{right:-165px;bottom:-120px;width:440px;opacity:.55}.cosmic-header{padding:13px 17px!important}.cosmic-brand-sub{display:none}}
 @media(prefers-reduced-motion:reduce){body[data-cosmic-view="landing"] .course-card,body[data-cosmic-view="landing"] .course-card .btn{transition:none!important}body[data-cosmic-view="landing"] .course-card:hover{transform:none}}
+
+/* CINEMATIC V3 — photographic celestial discs, restrained premium UI. */
+#cosmic-scene{
+ background:
+ radial-gradient(ellipse at 13% 28%,#163968 0%,transparent 35%),
+ radial-gradient(ellipse at 80% 85%,#4c2430 0%,transparent 37%),
+ radial-gradient(ellipse at 64% 12%,#121b4b 0%,transparent 46%),
+ #030813;
+}
+#cosmic-scene .cosmic-mist{background:
+ radial-gradient(ellipse at 16% 31%,#0c72b138,transparent 38%),
+ radial-gradient(ellipse at 68% 26%,#532f9a35,transparent 37%),
+ radial-gradient(ellipse at 95% 85%,#ff8e311e,transparent 41%);
+ filter:blur(44px);}
+#cosmic-scene .cosmic-moon{
+ left:clamp(-220px,-12vw,-95px);top:clamp(-205px,-11vw,-65px);
+ width:clamp(420px,42vw,780px);height:auto;aspect-ratio:1;
+ background:radial-gradient(circle at 38% 34%,#d2dbe6,#7a93af 44%,#304e72 76%,#07152d);
+ box-shadow:inset -32px -18px 55px #061c46a8,0 0 90px #46a4ff45;
+ filter:drop-shadow(0 0 46px #6cabec4a);
+}
+#cosmic-scene .cosmic-moon::before{
+ inset:-36%;background:radial-gradient(circle,#8cb9f22e 19%,#3b87e421 43%,transparent 69%);filter:blur(25px);
+}
+#cosmic-scene .cosmic-moon img{
+ width:100%;height:100%;border-radius:50%;object-fit:cover;
+ transform:scale(1.16);
+ opacity:0;transition:opacity 1.4s ease;
+ mix-blend-mode:luminosity;
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 59%,transparent 71%);
+ mask-image:radial-gradient(circle,#000 0%,#000 59%,transparent 71%);
+ filter:contrast(1.15) brightness(.95) saturate(.6);
+}
+#cosmic-scene .cosmic-moon.is-loaded img{opacity:.96}
+#cosmic-scene .cosmic-moon::after{
+ content:'';position:absolute;inset:0;border-radius:50%;
+ background:radial-gradient(circle at 29% 26%,#f7f9ff2e,transparent 40%),
+ linear-gradient(120deg,transparent 41%,#07152d20 62%,#020a1d97 90%);
+ pointer-events:none;
+}
+#cosmic-scene .cosmic-sun{
+ right:clamp(-290px,-17vw,-110px);bottom:clamp(-310px,-21vw,-110px);
+ width:clamp(500px,48vw,880px);height:auto;aspect-ratio:1;
+ background:radial-gradient(circle at 34% 29%,#fff0b2 0%,#ffd56a 32%,#ef861c 60%,#9a2812 95%);
+ filter:drop-shadow(0 0 60px #ff8c3184);
+ box-shadow:0 0 35px #ffa9437a,0 0 110px #f2763270,inset -30px -34px 50px #9b2a12a8;
+}
+#cosmic-scene .cosmic-sun::before{
+ inset:-54%;background:radial-gradient(circle,#ffd78070 8%,#ff923a36 29%,#bc5b201a 44%,transparent 66%);
+ filter:blur(45px);
+}
+#cosmic-scene .cosmic-sun img{
+ width:100%;height:100%;object-fit:cover;border-radius:50%;
+ opacity:0;transition:opacity 1.5s ease;transform:scale(1.18);
+ mix-blend-mode:screen;
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 53%,transparent 69%);
+ mask-image:radial-gradient(circle,#000 0%,#000 53%,transparent 69%);
+ filter:contrast(1.25) saturate(1.4) brightness(.87);
+}
+#cosmic-scene .cosmic-sun.is-loaded img{opacity:.97}
+#cosmic-scene .cosmic-sun::after{
+ content:'';position:absolute;inset:-8%;border-radius:50%;
+ background:conic-gradient(from 30deg,#ff8b1700 0deg,#fdd47508 27deg,#ff7b0d21 44deg,#ffac1a03 65deg,#fbd67a18 107deg,#ff8b1700 139deg,#fdd47512 175deg,#ff8b1700 210deg,#ffed8e0b 267deg,#ff8b1700 360deg);
+ filter:blur(15px);mix-blend-mode:screen;pointer-events:none;
+}
+#cosmic-scene .cosmic-vignette{
+ background:
+ linear-gradient(90deg,#050c1a24,transparent 27%,#05081627),
+ radial-gradient(ellipse at 50% 36%,#020612ea 0%,#020612bf 23%,#02061285 40%,transparent 77%);
+ pointer-events:none;
+}
+body[data-cosmic-view="landing"] .landing{
+ padding:26px clamp(20px,5vw,70px) 48px;max-width:1490px;min-height:100vh;
+ gap:0;isolation:isolate;justify-content:flex-start;
+}
+body[data-cosmic-view="landing"] .cosmic-header{
+ width:100%;max-width:1340px;margin:0 auto;min-height:70px;
+ padding:17px 26px;background:linear-gradient(115deg,#152847e0,#0e142de2 65%,#17182cdb);
+ border:1px solid #8db4db69;border-radius:19px;
+ box-shadow:0 16px 48px #0008,inset 0 1px #ffffff35;
+}
+body[data-cosmic-view="landing"] .cosmic-header .cosmic-brand{font-size:1.12rem;letter-spacing:-.025em}
+body[data-cosmic-view="landing"] .cosmic-header .cosmic-brand-symbol{color:#88daff;font-size:1.7rem;text-shadow:0 0 18px #64c8fc9b}
+body[data-cosmic-view="landing"] .cosmic-header .cosmic-brand-sub{
+ font-size:.69rem;letter-spacing:.15em;color:#d3dcf3;text-transform:uppercase;
+ border:1px solid #6c95bf75;border-radius:99px;padding:7px 12px;background:#ffffff09;
+}
+body[data-cosmic-view="landing"] .landing-hero{
+ margin:clamp(70px,9vh,110px) auto 39px;max-width:1000px;
+}
+body[data-cosmic-view="landing"] .landing-hero .eyebrow{
+ color:#76d7fe;font-size:.78rem;letter-spacing:.27em;text-transform:uppercase;
+ text-shadow:0 0 18px #239fe782;margin-bottom:10px;
+}
+body[data-cosmic-view="landing"] .landing-hero h1{
+ font-weight:850;letter-spacing:-.065em;
+ font-size:clamp(3.15rem,6.4vw,6.1rem);line-height:1.03;margin-bottom:18px;
+ text-shadow:0 5px 36px #01040d9c;
+}
+body[data-cosmic-view="landing"] .landing-hero h1 em{
+ font-style:normal;background:linear-gradient(97deg,#d4a7ff 8%,#afa5ff 31%,#89b1ff 56%,#4bc8fc 100%);
+ -webkit-background-clip:text;background-clip:text;
+ color:transparent;filter:drop-shadow(0 0 18px #576cff3a);
+}
+body[data-cosmic-view="landing"] .landing-hero .sub{
+ font-size:clamp(1.05rem,1.6vw,1.22rem);color:#d2daec;text-shadow:0 2px 20px #030716;
+}
+body[data-cosmic-view="landing"] .course-grid{width:100%;max-width:1160px;margin:0 auto;gap:26px;grid-template-columns:repeat(2,minmax(0,1fr))}
+body[data-cosmic-view="landing"] .course-card{
+ min-height:258px;position:relative;overflow:hidden;
+ border-radius:24px;padding:28px 30px 24px;gap:0;
+ background:linear-gradient(115deg,#18345deb 0%,#101a37e9 57%,#16234ee8 100%);
+ border:1px solid #58bce0b8;box-shadow:inset 0 1px #c7effe45,0 19px 45px #0009,0 0 28px #217db42a;
+ transition:transform .45s cubic-bezier(.2,.8,.1,1),box-shadow .45s,border-color .45s;
+}
+body[data-cosmic-view="landing"] .course-card:nth-child(2){
+ background:linear-gradient(120deg,#25284fe7,#211b3ee8 60%,#422340e5);
+ border-color:#a992e5af;box-shadow:inset 0 1px #d4bfff38,0 19px 45px #0009,0 0 29px #8e66d12b;
+}
+body[data-cosmic-view="landing"] .course-card:hover{
+ transform:translate3d(0,-7px,0);border-color:#87e1ff;
+ box-shadow:inset 0 1px #efffff5c,0 25px 60px #000b,0 0 44px #55bbec44;
+}
+body[data-cosmic-view="landing"] .course-card:nth-child(2):hover{
+ border-color:#d9b8ff;box-shadow:inset 0 1px #fff8ff61,0 25px 60px #000b,0 0 44px #ac7af34a;
+}
+body[data-cosmic-view="landing"] .course-card::before{
+ content:'';position:absolute;inset:0;background:
+ radial-gradient(ellipse at 100% 100%,#3e9ef336,transparent 46%),
+ linear-gradient(145deg,#ffffff0d 0%,transparent 48%);
+ pointer-events:none;
+}
+body[data-cosmic-view="landing"] .course-card:nth-child(2)::before{
+ background:radial-gradient(ellipse at 100% 100%,#ab6beb36,transparent 48%),linear-gradient(145deg,#ffffff10 0%,transparent 49%);
+}
+body[data-cosmic-view="landing"] .course-card::after{
+ height:140px;inset:auto -10% -66px 30%;
+ background:radial-gradient(ellipse,#39b2ff23,transparent 70%);
+ filter:blur(13px);
+}
+body[data-cosmic-view="landing"] .course-card:nth-child(2)::after{
+ background:radial-gradient(ellipse,#bd73ff29,transparent 70%);
+}
+body[data-cosmic-view="landing"] .course-icon{
+ display:grid;place-items:center;width:56px;height:56px;border:1px solid #4fb4eab8;
+ border-radius:17px;box-shadow:inset 0 1px #c2f0ff56,0 0 21px #308cde4e;
+ background:linear-gradient(145deg,#20537a,#10223e);margin-bottom:17px;
+ color:#75d8ff;font-size:1.75rem;font-weight:900;font-family:system-ui;
+}
+body[data-cosmic-view="landing"] .course-card:nth-child(2) .course-icon{
+ color:#d0b9ff;background:linear-gradient(145deg,#4f3985,#251943);
+ border-color:#b492e5a8;box-shadow:inset 0 1px #f0dfff54,0 0 21px #a071e948;
+}
+body[data-cosmic-view="landing"] .course-card .eyebrow{font-size:.7rem;letter-spacing:.14em;color:#8ce1ff}
+body[data-cosmic-view="landing"] .course-card h2{font-size:1.57rem;margin:4px 0 5px;letter-spacing:-.025em}
+body[data-cosmic-view="landing"] .course-card .sub{
+ font-size:.91rem;line-height:1.45;margin-bottom:4px;color:#c9d6e7;
+}
+body[data-cosmic-view="landing"] .course-facts{margin:13px 0 7px;gap:8px}
+body[data-cosmic-view="landing"] .course-facts span{
+ font-size:.76rem;padding:5px 10px;background:#dff5ff0c;border-color:#bce6ff2d;
+}
+body[data-cosmic-view="landing"] .course-card .course-progress{font-size:.83rem;color:#b9cde8;margin:3px 0 15px;min-height:0}
+body[data-cosmic-view="landing"] .course-card .btn{
+ width:fit-content;padding:10px 18px;border-radius:11px;
+ font-size:.88rem;box-shadow:0 8px 25px #4483ff3d;
+}
+body[data-cosmic-view="landing"] .course-card:nth-child(2) .btn{
+ box-shadow:0 8px 25px #a474e63e;
+}
+body[data-cosmic-view="landing"] .cosmic-overview{
+ max-width:1160px;width:100%;margin:31px auto 0;
+ padding:23px 30px;display:grid;grid-template-columns:1fr 2.2fr;gap:30px;align-items:center;
+ background:linear-gradient(115deg,#12213add,#16182ede,#302338a8);
+ border:1px solid #a4b7d36b;border-radius:22px;
+ backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+ box-shadow:0 17px 44px #0008,inset 0 1px #ffffff24;
+}
+.cosmic-overview .cosmic-overview-head{
+ display:flex;flex-direction:column;gap:4px;min-width:0;
+}
+.cosmic-overview .cosmic-overview-eyebrow{
+ color:#92b6d7;font-size:.7rem;text-transform:uppercase;letter-spacing:.16em;font-weight:750;
+}
+.cosmic-overview .cosmic-overview-head strong{
+ color:#f5f8ff;font-size:1.75rem;line-height:1.2;font-weight:800;letter-spacing:-.035em;
+}
+.cosmic-overview .cosmic-overview-head small{color:#afc4dc;font-size:.8rem}
+.cosmic-overview .cosmic-overview-tracks{display:grid;gap:11px}
+.cosmic-overview .cosmic-track-head{display:flex;justify-content:space-between;gap:12px;color:#e3efff;font-size:.86rem}
+.cosmic-overview .cosmic-track-head strong{color:#b3dcff;font-size:.82rem}
+.cosmic-overview .cosmic-track{height:9px;margin-top:5px;border-radius:12px;overflow:hidden;background:#051121c2;border:1px solid #95b9e12a}
+.cosmic-overview .cosmic-track-fill{height:100%;background:linear-gradient(90deg,#237ecc,#71d8ff);border-radius:inherit;box-shadow:0 0 13px #54bbff99;min-width:0}
+.cosmic-overview .cosmic-progress-row:nth-child(2) .cosmic-track-fill{background:linear-gradient(90deg,#7255d5,#c78bff);box-shadow:0 0 13px #b68aff8b}
+body[data-cosmic-view="course"] .content{padding:2.2rem}
+body[data-cosmic-view="course"] .card{box-shadow:0 16px 36px #0008,inset 0 1px #ffffff12}
+body[data-cosmic-view="course"] .side{border-right:1px solid #93b8de25}
+body[data-cosmic-view="course"] .stat strong{color:#f6f9ff}
+body[data-cosmic-view="session"] #cosmic-scene{filter:brightness(.34) saturate(.55)}
+body[data-cosmic-view="session"] .question-card{background:#101928f5}
+body[data-cosmic-view="landing"] .landing{color:#edf4fc}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .landing{color:#13233b}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .cosmic-overview{background:#fff;border-color:#d8e3ef;box-shadow:var(--shadow)}
+:root[data-theme="light"] .cosmic-overview .cosmic-overview-head strong,:root[data-theme="light"] .cosmic-overview .cosmic-track-head{color:#13233b}
+:root[data-theme="light"] .cosmic-overview .cosmic-overview-eyebrow,:root[data-theme="light"] .cosmic-overview .cosmic-overview-head small{color:#5c6b82}
+:root[data-theme="light"] .cosmic-overview .cosmic-track{background:#e9eef5}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .course-icon{background:#e5f5ff}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .course-card:nth-child(2) .course-icon{background:#f0e9ff}
+@media(min-width:1600px){#cosmic-scene .cosmic-moon{left:-150px;top:-150px}#cosmic-scene .cosmic-sun{right:-180px;bottom:-240px}}
+@media(max-width:960px){
+ #cosmic-scene .cosmic-moon{left:-185px;top:-100px;width:min(580px,65vw)}
+ #cosmic-scene .cosmic-sun{right:-195px;bottom:-185px;width:min(590px,68vw)}
+ body[data-cosmic-view="landing"] .landing-hero{margin:90px auto 45px}
+ body[data-cosmic-view="landing"] .course-grid{gap:16px}
+ body[data-cosmic-view="landing"] .course-card{padding:25px}
+}
+@media(max-width:700px){
+ body[data-cosmic-view="landing"] .landing{padding:14px 15px 90px}
+ body[data-cosmic-view="landing"] .cosmic-header{min-height:58px;padding:12px 17px}
+ body[data-cosmic-view="landing"] .cosmic-header .cosmic-brand{font-size:.89rem}
+ body[data-cosmic-view="landing"] .cosmic-header .cosmic-brand-sub{display:none}
+ body[data-cosmic-view="landing"] .landing-hero{margin:74px auto 32px;max-width:530px}
+ body[data-cosmic-view="landing"] .landing-hero h1{font-size:clamp(2.6rem,10vw,4.2rem)}
+ body[data-cosmic-view="landing"] .course-grid{grid-template-columns:1fr}
+ body[data-cosmic-view="landing"] .course-card{padding:21px 24px;min-height:0}
+ body[data-cosmic-view="landing"] .course-icon{width:49px;height:49px;margin-bottom:10px}
+ body[data-cosmic-view="landing"] .course-card h2{font-size:1.3rem}
+ body[data-cosmic-view="landing"] .cosmic-overview{grid-template-columns:1fr;margin-top:18px;gap:18px;padding:21px 23px}
+ #cosmic-scene .cosmic-moon{width:390px;left:-210px;top:-140px;opacity:.7}
+ #cosmic-scene .cosmic-sun{width:460px;right:-250px;bottom:-130px;opacity:.7}
+ #cosmic-scene .cosmic-vignette{background:radial-gradient(ellipse at 50% 32%,#020612db 0%,#020612be 43%,transparent 82%)}
+}
