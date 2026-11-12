@@ -4,18 +4,23 @@
 const app=document.getElementById('app');
 if(!app||document.getElementById('cosmic-scene'))return;
 const scene=document.createElement('div');scene.id='cosmic-scene';scene.setAttribute('aria-hidden','true');
-scene.innerHTML='<div class="cosmic-mist"></div><img class="cosmic-nebula-photo" alt="" decoding="async" src="https://cdn.eso.org/images/wallpaper3/eso1208db.jpg"><canvas></canvas><img class="cosmic-galaxy-photo" alt="" decoding="async" src="https://science.nasa.gov/wp-content/uploads/2023/04/hubble_the_whirlpool_galaxy_and_companion_galaxy_m51_apr_2005.png?w=900"><img class="cosmic-atmosphere" alt="" decoding="async" src="./assets/cosmic-atmosphere.svg"><img class="cosmic-cliffs cosmic-cliffs--left" alt="" decoding="async" src="https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg"><img class="cosmic-cliffs cosmic-cliffs--right" alt="" decoding="async" src="https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg"><img class="cosmic-cliffs cosmic-cliffs--floor" alt="" decoding="async" src="https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg"><div class="cosmic-body cosmic-moon"><img alt="" decoding="async" src="https://assets.science.nasa.gov/dynamicimage/assets/science/cds/general/images/2024/05/christmas2015fullmoon.jpg?crop=faces%2Cfocalpoint&amp;fit=clip&amp;h=1600&amp;w=1600"></div><div class="cosmic-body cosmic-sun"><img alt="" decoding="async" src="https://assets.science.nasa.gov/dynamicimage/assets/science/cds/creative/calendars/2025/nasa-july-2025-web-banner.jpg?crop=faces%2Cfocalpoint&amp;fit=crop&amp;h=1280&amp;w=1280"></div><img class="cosmic-earth-night" src="./assets/cosmic-earth-night.svg" alt="" decoding="async"><img class="cosmic-earth-photo" src="https://assets.science.nasa.gov/dynamicimage/assets/science/esd/eo/content-feature/nightlights/images/media/BlackMarble_2016_Americas_composite.png?fit=clip&amp;w=1600&amp;h=1600" alt="" decoding="async"><div class="cosmic-horizon"></div><img class="cosmic-solar-loops" alt="" decoding="async" src="./assets/cosmic-solar-prominences.svg"><div class="cosmic-vignette"></div>';
+scene.innerHTML='<div class="cosmic-mist"></div><img class="cosmic-nebula-photo" alt="" decoding="async" src="https://cdn.eso.org/images/wallpaper3/eso1208db.jpg"><canvas></canvas><img class="cosmic-galaxy-photo" alt="" decoding="async" src="https://science.nasa.gov/wp-content/uploads/2023/04/hubble_the_whirlpool_galaxy_and_companion_galaxy_m51_apr_2005.png?w=900"><img class="cosmic-atmosphere" alt="" decoding="async" src="./assets/cosmic-atmosphere.svg"><img class="cosmic-cliffs cosmic-cliffs--left" alt="" decoding="async" src="https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg"><img class="cosmic-cliffs cosmic-cliffs--right" alt="" decoding="async" src="https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg"><img class="cosmic-cliffs cosmic-cliffs--floor" alt="" decoding="async" src="https://cdn.esawebb.org/archives/images/screen/weic2205a.jpg"><div class="cosmic-body cosmic-moon"><img alt="" decoding="async" src="https://assets.science.nasa.gov/dynamicimage/assets/science/cds/general/images/2024/05/christmas2015fullmoon.jpg?crop=faces%2Cfocalpoint&amp;fit=clip&amp;h=1600&amp;w=1600"></div><div class="cosmic-body cosmic-sun"><div class="cosmic-solar-disc"><canvas class="cosmic-solar-surface"></canvas><img alt="" decoding="async" src="https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg"></div><canvas class="cosmic-solar-corona"></canvas></div><div class="cosmic-earth-globe"><img src="https://cdn.eso.org/images/large/ann20012a.jpg" alt="" decoding="async"></div><img class="cosmic-earth-night" src="./assets/cosmic-earth-night.svg" alt="" decoding="async"><div class="cosmic-horizon"></div><img class="cosmic-solar-loops" alt="" decoding="async" src="./assets/cosmic-solar-prominences.svg"><div class="cosmic-vignette"></div>';
 app.parentNode.insertBefore(scene,app);
-scene.querySelectorAll('.cosmic-body img').forEach(img=>{img.addEventListener('load',()=>img.parentElement.classList.add('is-loaded'));img.addEventListener('error',()=>{img.parentElement.classList.add('image-failed');img.remove();});});
+scene.querySelectorAll('.cosmic-body img').forEach(img=>{
+  img.addEventListener('load',()=>img.parentElement.classList.add('is-loaded'));
+  img.addEventListener('error',()=>{
+    if(img.closest('.cosmic-sun')&&!img.dataset.fallback){
+      img.dataset.fallback='1';
+      img.src='https://assets.science.nasa.gov/dynamicimage/assets/science/cds/creative/calendars/2025/nasa-july-2025-web-banner.jpg?fit=clip&w=1280';
+    }else{img.parentElement.classList.add('image-failed');img.remove();}
+  });
+});
 const canvas=scene.querySelector('canvas'),ctx=canvas.getContext('2d',{alpha:true});
-const moon=scene.querySelector('.cosmic-moon'),sun=scene.querySelector('.cosmic-sun');const atmosphere=scene.querySelector('.cosmic-atmosphere'),solarLoops=scene.querySelector('.cosmic-solar-loops'),earth=scene.querySelector('.cosmic-earth-night');const clouds=Array.from(scene.querySelectorAll('.cosmic-cliffs'));
+const moon=scene.querySelector('.cosmic-moon'),sun=scene.querySelector('.cosmic-sun');const atmosphere=scene.querySelector('.cosmic-atmosphere'),solarLoops=scene.querySelector('.cosmic-solar-loops'),earth=scene.querySelector('.cosmic-earth-night'),earthGlobe=scene.querySelector('.cosmic-earth-globe');const clouds=Array.from(scene.querySelectorAll('.cosmic-cliffs'));
 
-const toggle=document.createElement('button');toggle.type='button';toggle.className='cosmic-effects-toggle';document.body.appendChild(toggle);
 const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
-const allowed=['high','reduced','off'];let saved;try{saved=localStorage.getItem('study_cosmic_effects')}catch(e){}
-let mode=allowed.includes(saved)?saved:(motionQuery.matches?'reduced':'high');
-function applyMode(){document.body.dataset.cosmicEffect=mode;toggle.textContent=mode==='high'?'✦ Effects: High':mode==='reduced'?'✦ Effects: Reduced':'✦ Effects: Off';toggle.setAttribute('aria-label','Visual effects: '+mode+'. Click to change');if(mode==='off'||mode==='reduced'){moon.style.transform='';sun.style.transform='';atmosphere.style.transform='';solarLoops.style.transform='';earth.style.transform='';solarLoops.style.opacity='.52';clouds.forEach(c=>c.style.transform='');}if(mode==='high')start();else if(mode==='reduced')drawStatic();else stop();}
-toggle.addEventListener('click',()=>{mode=allowed[(allowed.indexOf(mode)+1)%allowed.length];try{localStorage.setItem('study_cosmic_effects',mode)}catch(e){}applyMode()});
+const mode=motionQuery.matches?'reduced':'high';
+document.body.dataset.cosmicEffect=mode;
 let width=0,height=0,dpr=1,last=0,elapsed=0,raf=0;
 let aimX=0,aimY=0,px=0,py=0;
 function rand(n,s){const v=Math.sin(n*127.13+s*311.71)*43758.5453;return v-Math.floor(v)}
@@ -65,7 +70,7 @@ sun.style.transform='translate3d('+sx.toFixed(2)+'px,'+sy.toFixed(2)+'px,0) scal
 atmosphere.style.transform='translate3d('+(px*6+Math.sin(elapsed*.031)*10).toFixed(2)+'px,'+(py*4+Math.sin(elapsed*.023)*6).toFixed(2)+'px,0) scale(1.025)';
 solarLoops.style.transform='translate3d('+(sx*.48).toFixed(2)+'px,'+(sy*.45).toFixed(2)+'px,0) rotate('+(Math.sin(elapsed*.10)*1.4).toFixed(2)+'deg)';
 solarLoops.style.opacity=String(.50+.055*Math.sin(elapsed*.19)+.025*Math.sin(elapsed*.31));
-earth.style.transform='translate3d('+(px*3+Math.sin(elapsed*.018)*3.5).toFixed(2)+'px,'+(py*1.5+Math.cos(elapsed*.013)*2).toFixed(2)+'px,0)';
+earth.style.transform='translate3d('+(px*3+Math.sin(elapsed*.018)*3.5).toFixed(2)+'px,'+(py*1.5+Math.cos(elapsed*.013)*2).toFixed(2)+'px,0)';earthGlobe.style.transform='translateX(-50%) translate3d('+(px*2).toFixed(2)+'px,'+(py*1.5).toFixed(2)+'px,0)';
 clouds.forEach((cloud,i)=>{const rate=.018+i*.006;cloud.style.transform='translate3d('+(px*(5+i*2)+Math.sin(elapsed*rate+i)*11).toFixed(1)+'px,'+(py*(3+i)+Math.cos(elapsed*(rate*.73)+i)*7).toFixed(1)+'px,0) scale(1.04)';});
 raf=requestAnimationFrame(render)}
 function start(){if(raf||document.hidden||mode!=='high'||document.body.dataset.cosmicView==='session'||document.documentElement.dataset.theme==='light')return;last=0;raf=requestAnimationFrame(render)}
@@ -77,5 +82,5 @@ const viewObserver=new MutationObserver(()=>{
  else if(mode==='high')start();
 });
 viewObserver.observe(document.body,{attributes:true,attributeFilter:['data-cosmic-view']});
-measure();applyMode();
+measure();if(mode==='high')start();
 })();
