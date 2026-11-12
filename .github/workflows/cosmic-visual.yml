@@ -2,7 +2,7 @@ name: Cinematic design visual smoke
 on:
   push:
     branches:
-      - design/cinematic-earth-title-no-parallax
+      - design/celestial-reference-v7
   workflow_dispatch:
 permissions:
   contents: read
@@ -54,6 +54,7 @@ jobs:
                 prominencesLoaded: !!document.querySelector('.cosmic-solar-loops')?.naturalWidth,
                 moonLoaded: !!document.querySelector('.cosmic-moon img')?.naturalWidth,
                 sunLoaded: !!document.querySelector('.cosmic-sun img')?.naturalWidth,
+                sunSrc: document.querySelector('.cosmic-sun img')?.currentSrc || '',
                 earthLoaded: !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth,
                 moonSpin: getComputedStyle(document.querySelector('.cosmic-moon img')).animationName,
                 moonSpinDuration: getComputedStyle(document.querySelector('.cosmic-moon img')).animationDuration,
@@ -65,6 +66,11 @@ jobs:
                 titleHeight: Math.round(document.querySelector('.cosmos-title-area')?.getBoundingClientRect().height || 0),
                 cardsTop: Math.round(document.querySelector('.cosmos-courses')?.getBoundingClientRect().top || 0),
                 titleFontSize: getComputedStyle(document.querySelector('.cosmos-title-area h1')).fontSize,
+                titleColor: getComputedStyle(document.querySelector('.cosmos-title-area h1 span')).color,
+                sunBox: (()=>{const r=document.querySelector('.cosmic-sun')?.getBoundingClientRect();return r&&{left:Math.round(r.left),right:Math.round(r.right),top:Math.round(r.top),width:Math.round(r.width)}})(),
+                moonBox: (()=>{const r=document.querySelector('.cosmic-moon')?.getBoundingClientRect();return r&&{left:Math.round(r.left),right:Math.round(r.right),top:Math.round(r.top),width:Math.round(r.width)}})(),
+                earthBox: (()=>{const r=document.querySelector('.cosmic-earth-globe')?.getBoundingClientRect();return r&&{left:Math.round(r.left),top:Math.round(r.top),height:Math.round(r.height)}})(),
+                titleBox: (()=>{const r=document.querySelector('.cosmos-title-area')?.getBoundingClientRect();return r&&{top:Math.round(r.top),height:Math.round(r.height)}})(),
                 pageScrollWidth: document.documentElement.scrollWidth,
                 viewportWidth: window.innerWidth
               }));
@@ -86,7 +92,9 @@ jobs:
               }
               await page.screenshot({ path: 'visual-previews/' + label + '.png', fullPage: true });
               console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
-              if (metadata.cards !== 2 || metadata.quickActions !== 0 || metadata.topMenuButtons !== 0 ||
+              if (metadata.cards !== 2 || !metadata.sunBox || !metadata.moonBox ||
+                  (label==='desktop' && (metadata.sunBox.left>=metadata.moonBox.left || metadata.moonBox.width<500)) ||
+                  metadata.quickActions !== 0 || metadata.topMenuButtons !== 0 ||
                   metadata.themeButtons !== 0 || metadata.oldHeroExists || metadata.oldLogoExists || metadata.oldFakeLightsExist ||
                   !metadata.heading.includes('Study Practice') || !metadata.heading.includes('Simulator') ||
                   !metadata.solarSurfaceCanvas || !metadata.solarCoronaCanvas || !metadata.earthLoaded ||
