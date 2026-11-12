@@ -251,3 +251,45 @@ body[data-cosmic-view="landing"] .cosmos-footer {
 @media(prefers-reduced-motion:reduce){
  #cosmic-scene .cosmic-moon img,#cosmic-scene .cosmic-solar-disc img{animation:none!important}
 }
+
+/* NASA 304 Å full-disc textural calibration and high-contrast type. */
+#cosmic-scene .cosmic-solar-disc img {
+  transform:scale(1.32);
+  object-fit:cover;
+  mix-blend-mode:screen!important;
+  filter:brightness(1.11) contrast(1.62) saturate(1.88) hue-rotate(-5deg)!important;
+  opacity:1!important;
+}
+#cosmic-scene .cosmic-solar-surface {
+  opacity:.19!important;
+  mix-blend-mode:screen;
+}
+#cosmic-scene .cosmic-solar-corona {
+  filter:drop-shadow(0 0 13px #ff9126bd) drop-shadow(0 0 22px #f9681c86);
+}
+.cosmos-landing .cosmos-title-area h1 span {
+  background:none!important;
+  -webkit-text-fill-color:#bfdefd!important;
+  color:#bfdefd!important;
+  filter:none!important;
+  text-shadow:0 3px 24px #01040be3,0 0 21px #7cbeff66;
+}
+@media (max-width:700px) {
+  #cosmic-scene .cosmic-sun {
+    top:66px!important;
+    left:-58px!important;
+    width:182px!important;
+  }
+  #cosmic-scene .cosmic-moon {
+    top:-142px!important;
+    right:-195px!important;
+    width:399px!important;
+  }
+  .cosmos-landing .cosmos-title-area {
+    margin-top:275px!important;
+  }
+  .cosmos-landing .cosmos-title-area h1 {
+    font-size:clamp(2.12rem,9.5vw,3.2rem)!important;
+    text-shadow:0 3px 20px #01040df5,0 0 13px #5b9bdc37;
+  }
+}
