@@ -316,3 +316,48 @@ body[data-cosmic-view="landing"] .cosmos-landing{max-width:1595px;
  #cosmic-scene .cosmic-cliffs--floor{opacity:.40}
  #cosmic-scene .cosmic-vignette{background:radial-gradient(ellipse at 50% 33%,#020918e4 0%,#020918c9 40%,#0209186a 70%,transparent 97%)}
 }
+
+
+/* Approved-look finishing: blue lunar relief, deep blue clouds, glass detail. */
+#cosmic-scene .cosmic-moon img{
+ filter:grayscale(1) sepia(.42) hue-rotate(163deg) saturate(1.48) brightness(.94) contrast(1.18);
+}
+#cosmic-scene .cosmic-moon{
+ box-shadow:0 0 3px #effaffb8,0 0 27px #86c2f88c,0 0 85px #3f91ec48,inset -22px -28px 59px #0a1c3d94;
+}
+#cosmic-scene .cosmic-cliffs--left{
+ filter:hue-rotate(209deg) brightness(.87) contrast(1.45) saturate(1.65);
+ opacity:.95;
+}
+#cosmic-scene .cosmic-cliffs--floor{
+ filter:hue-rotate(201deg) brightness(.67) contrast(1.48) saturate(1.7);
+ opacity:.67;
+}
+#cosmic-scene .cosmic-nebula-photo{opacity:.40;filter:brightness(.79) contrast(1.34) saturate(1.6) hue-rotate(15deg)}
+#cosmic-scene .cosmic-cliffs--right{opacity:.81;filter:hue-rotate(-7deg) brightness(.86) contrast(1.5) saturate(1.55)}
+#cosmic-scene .cosmic-galaxy-photo{opacity:.90}
+#cosmic-scene .cosmic-solar-loops{opacity:.43}
+.cosmos-landing .cosmos-course--azure::before{
+ background:
+ radial-gradient(circle at 84% 83%,transparent 0 35px,#63c0ffb5 39px,#4c9df22b 42px,transparent 51px),
+ radial-gradient(circle at 81% 91%,#54a6ff23,transparent 86px),
+ linear-gradient(125deg,#4eaeef16,transparent 40%,#0f5bb924 100%);
+}
+.cosmos-landing .cosmos-course--math::before{
+ background:
+ radial-gradient(ellipse at 82% 90%,#6785e12e,transparent 40%),
+ linear-gradient(125deg,#608dff0f,transparent 35%,#22478b21);
+}
+.cosmos-landing .cosmos-btn--primary,.cosmos-landing .cosmos-btn--secondary{
+ box-shadow:inset 0 1px #d3f3ff86,0 7px 24px #000a,0 0 13px #286dab48;
+}
+.cosmos-landing .cosmos-btn--primary{box-shadow:inset 0 1px #f3fbffd9,0 0 13px #63b5fd8c,0 9px 25px #0009}
+body[data-cosmic-view="landing"] .cosmic-effects-toggle{opacity:.57;transform:scale(.82);transform-origin:bottom right}
+body[data-cosmic-view="landing"] .cosmic-effects-toggle:hover,
+body[data-cosmic-view="landing"] .cosmic-effects-toggle:focus-visible{opacity:1}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-moon img{filter:grayscale(1) sepia(.4) hue-rotate(163deg) saturate(1.35) brightness(.87) contrast(1.21)}
+ #cosmic-scene .cosmic-cliffs--left{opacity:.53;filter:hue-rotate(209deg) brightness(.75) saturate(1.35)}
+ #cosmic-scene .cosmic-cliffs--floor{opacity:.30}
+ body[data-cosmic-view="landing"] .cosmic-effects-toggle{opacity:.38;transform:scale(.72)}
+}
