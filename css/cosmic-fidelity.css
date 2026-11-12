@@ -210,3 +210,28 @@ body[data-cosmic-view="landing"] .cosmos-landing{max-width:1595px;
  }
  .cosmos-landing .cosmos-hero h1 em{color:#d0e7ff!important;-webkit-text-fill-color:#d0e7ff!important}
 }
+
+
+/* Photographic Moon / spiral galaxy refinement. */
+#cosmic-scene .cosmic-galaxy-photo{
+ position:absolute;z-index:1;top:7.5%;left:65.5%;width:clamp(150px,15vw,245px);height:auto;aspect-ratio:1.1;
+ object-fit:cover;object-position:29% 52%;opacity:.53;mix-blend-mode:screen;pointer-events:none;
+ filter:contrast(1.4) saturate(1.4) hue-rotate(25deg) brightness(.78) drop-shadow(0 0 19px #5253b4a3);
+ -webkit-mask-image:radial-gradient(ellipse at 46% 50%,#000 0%,#000 19%,#0008 43%,transparent 71%);
+ mask-image:radial-gradient(ellipse at 46% 50%,#000 0%,#000 19%,#0008 43%,transparent 71%);
+ transform:rotate(-21deg);
+}
+#cosmic-scene .cosmic-moon{
+ background:radial-gradient(circle at 35% 25%,#a4b9d7,#506c9c 40%,#152d55 80%,#05112a);
+}
+#cosmic-scene .cosmic-moon img{
+ opacity:.96;transform:scale(1.18);mix-blend-mode:screen;
+ filter:brightness(1.01) contrast(1.14) saturate(.35);
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 57%,transparent 71%);
+ mask-image:radial-gradient(circle,#000 0%,#000 57%,transparent 71%);
+}
+#cosmic-scene .cosmic-solar-loops{opacity:.51;filter:drop-shadow(0 0 10px #e96b2a7a)}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-galaxy-photo{width:142px;left:60%;top:6%;opacity:.26}
+ #cosmic-scene .cosmic-moon img{filter:brightness(.95) contrast(1.16)}
+}
