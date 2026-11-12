@@ -299,3 +299,10 @@ body[data-cosmic-view="landing"] .landing{color:#edf4fc}
  #cosmic-scene .cosmic-sun{width:460px;right:-250px;bottom:-130px;opacity:.7}
  #cosmic-scene .cosmic-vignette{background:radial-gradient(ellipse at 50% 32%,#020612db 0%,#020612be 43%,transparent 82%)}
 }
+
+/* WebGL mounts only after the NASA lunar texture or its alternate finishes loading. */
+#cosmic-scene .cosmic-webgl-layer{position:absolute;inset:0;width:100%;height:100%;z-index:3;opacity:0;pointer-events:none;transition:opacity:1.1s ease;display:block}
+#cosmic-scene .cosmic-vignette{z-index:1}
+body.cosmic-3d-ready #cosmic-scene .cosmic-moon,body.cosmic-3d-ready #cosmic-scene .cosmic-sun{opacity:0;transition:opacity:1.1s ease}
+body[data-cosmic-effect="reduced"] #cosmic-scene .cosmic-webgl-layer,body[data-cosmic-effect="off"] #cosmic-scene .cosmic-webgl-layer{display:none}
+:root[data-theme="light"] #cosmic-scene .cosmic-webgl-layer{display:none}
