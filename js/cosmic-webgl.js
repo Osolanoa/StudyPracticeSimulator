@@ -90,7 +90,7 @@ import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
     const small=w<700;
     moon.position.set(camera.left+moonRadius*(small?.35:.57),camera.top-moonRadius*(small?.28:.62),0);
     moon.scale.setScalar(moonRadius);
-    sun.position.set(camera.right-sunRadius*(small?.24:.67),camera.bottom+sunRadius*(small?.40:.61),0);
+    sun.position.set(camera.right-sunRadius*(small?.24:.32),camera.bottom+sunRadius*(small?.40:.61),0);
     sun.scale.setScalar(sunRadius);
     corona.position.copy(sun.position);corona.position.z=-.2;
     corona.scale.setScalar(sunRadius*3.2);
