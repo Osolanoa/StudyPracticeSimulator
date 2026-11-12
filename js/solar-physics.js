@@ -21,12 +21,12 @@
     strength:.17+rand(i+6)*.45
   }));
   const arches=Array.from({length:21},(_,i)=>({
-    angle:(.41+i*2.399+rand(i+37)*.3)*Math.PI,
+    angle:Math.PI*.49+(i/21)*Math.PI*.99+(rand(i+37)-.5)*.24,
     span:.12+rand(i+39)*.40,
-    height:14+rand(i+41)*54,
+    height:19+rand(i+41)*81,
     phase:rand(i+43)*6.28,
     speed:.17+rand(i+45)*.18,
-    strength:.23+rand(i+47)*.4
+    strength:.33+rand(i+47)*.51
   }));
   let raf=0,lastPaint=-1;
   const sizeSurface=384,sizeCorona=640;
@@ -38,11 +38,11 @@
     ctx.clearRect(0,0,sizeSurface,sizeSurface);
     ctx.save();ctx.beginPath();ctx.arc(C,C,R,0,Math.PI*2);ctx.clip();
     let g=ctx.createRadialGradient(C-R*.31,C-R*.24,R*.07,C,C,R*1.1);
-    g.addColorStop(0,'#fff09c');
-    g.addColorStop(.27,'#ffb630');
-    g.addColorStop(.59,'#f97615');
-    g.addColorStop(.82,'#de4c0b');
-    g.addColorStop(1,'#772106');
+    g.addColorStop(0,'#fcb44d');
+    g.addColorStop(.27,'#d9691d');
+    g.addColorStop(.59,'#b54110');
+    g.addColorStop(.82,'#8f250b');
+    g.addColorStop(1,'#531007');
     ctx.fillStyle=g;ctx.fillRect(0,0,sizeSurface,sizeSurface);
     // Slowly advect active regions across the entire visible disc.
     ctx.globalCompositeOperation='screen';
@@ -101,12 +101,12 @@
       for(let k=0;k<3;k++){
         const off=(k-1)*2.5;
         outer.save();
-        outer.shadowColor=k===1?'#ffba4b':'#f26819';outer.shadowBlur=k===1?9:4;
+        outer.shadowColor=k===1?'#ffba4b':'#f26819';outer.shadowBlur=k===1?13:7;
         outer.beginPath();outer.moveTo(x1+off*.16,y1+off*.15);
         outer.bezierCurveTo(c1+off,c2+off*.4,d1-off,d2-off*.3,x2,y2);
         outer.strokeStyle=k===1?'rgba(255,223,130,'+(bri*.66).toFixed(3)+')':
           'rgba(255,113,28,'+(bri*.3).toFixed(3)+')';
-        outer.lineWidth=k===1?1.35:.8;outer.stroke();
+        outer.lineWidth=k===1?1.55:.95;outer.stroke();
         outer.restore();
       }
       // A slight, unstable glow near each magnetic loop footpoint.
