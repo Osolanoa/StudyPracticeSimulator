@@ -13,12 +13,12 @@ const toggle=document.createElement('button');toggle.type='button';toggle.classN
 const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
 const allowed=['high','reduced','off'];let saved;try{saved=localStorage.getItem('study_cosmic_effects')}catch(e){}
 let mode=allowed.includes(saved)?saved:(motionQuery.matches?'reduced':'high');
-function applyMode(){document.body.dataset.cosmicEffect=mode;toggle.textContent=mode==='high'?'✦ Effects: High':mode==='reduced'?'✦ Effects: Reduced':'✦ Effects: Off';toggle.setAttribute('aria-label','Visual effects: '+mode+'. Click to change');if(mode==='off'||mode==='reduced'){moon.style.transform='';sun.style.transform='';}if(mode==='high')start();else if(mode==='reduced')drawStatic();else stop();}
+function applyMode(){document.body.dataset.cosmicEffect=mode;toggle.textContent=mode==='high'?'✦ Effects: High':mode==='reduced'?'✦ Effects: Reduced':'✦ Effects: Off';toggle.setAttribute('aria-label','Visual effects: '+mode+'. Click to change');if(mode==='off'||mode==='reduced'){moon.style.transform='';sun.style.transform='';atmosphere.style.transform='';solarLoops.style.transform='';solarLoops.style.opacity='.82';}if(mode==='high')start();else if(mode==='reduced')drawStatic();else stop();}
 toggle.addEventListener('click',()=>{mode=allowed[(allowed.indexOf(mode)+1)%allowed.length];try{localStorage.setItem('study_cosmic_effects',mode)}catch(e){}applyMode()});
 let width=0,height=0,dpr=1,last=0,elapsed=0,raf=0;
 let aimX=0,aimY=0,px=0,py=0;
 function rand(n,s){const v=Math.sin(n*127.13+s*311.71)*43758.5453;return v-Math.floor(v)}
-const stars=Array.from({length:215},(_,i)=>({x:rand(i,2),y:rand(i,3),radius:.35+rand(i,4)*1.4,phase:rand(i,5)*6.28,depth:rand(i,6),speed:.13+rand(i,7)*.28}));
+const stars=Array.from({length:350},(_,i)=>({x:rand(i,2),y:rand(i,3),radius:.35+rand(i,4)*1.4,phase:rand(i,5)*6.28,depth:rand(i,6),speed:.13+rand(i,7)*.28}));
 const motes=Array.from({length:50},(_,i)=>({phase:rand(i,10)*Math.PI*2,radius:.2+rand(i,11)*.8,rate:.012+rand(i,12)*.045,brightness:.2+rand(i,13)*.7}));
 function measure(){width=window.innerWidth;height=window.innerHeight;dpr=Math.min(window.devicePixelRatio||1,1.65);if(!ctx)return;canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);drawStatic()}
 function drawStatic(){if(!ctx)return;ctx.clearRect(0,0,width,height);drawNebula(false);drawStars(false);drawOrbits(false)}
