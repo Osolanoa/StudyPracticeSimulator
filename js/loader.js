@@ -27,6 +27,10 @@
     window.STUDY_COURSE_ID = null;
     document.documentElement.lang = 'en';
     document.title = 'Study Practice Simulator';
+    if (window.CosmicLanding?.render) {
+      window.CosmicLanding.render({ registry, practiceSummary, loadCourse, applyTheme });
+      return;
+    }
     const cards = registry.filter(course => course.visible).map(course => {
       const progress = practiceSummary(course), continued = progress.done > 0;
       const status = continued ? `<p class="course-progress">${progress.done} of ${progress.total} practice tests completed${progress.best === null ? '' : ` · Best average: ${progress.best}%`}</p>` : '<p class="course-progress">Ready when you are.</p>';
@@ -56,11 +60,13 @@
       document.body.appendChild(script);
     });
   }
-  async function loadCourse(id) {
+  async function loadCourse(id, startView = 'dashboard') {
     if (!registry.some(course => course.id === id)) return landing();
     const token = ++request;
     window.StudyApp?.destroy?.();
     window.STUDY_COURSE_ID = id;
+    window.STUDY_START_VIEW = startView;
+    try { localStorage.setItem('study_last_course', id); } catch (_) {}
     app.innerHTML = '<main id="main" class="load-error"><p>Loading course…</p></main>';
     try {
       await load('./courses/' + id + '/config.js', token);
