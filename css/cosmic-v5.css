@@ -198,3 +198,12 @@ body[data-cosmic-view="landing"] .cosmic-effects-toggle{display:none!important}
 @media(max-width:700px){
   #cosmic-scene .cosmic-earth-globe img{height:68%;object-position:52% 44%}
 }
+
+/* SDO 304 nm is false-colour deep red; shift toward photographic copper-orange. */
+#cosmic-scene .cosmic-solar-disc img{
+  filter:brightness(1.08) contrast(1.30) saturate(1.23) hue-rotate(27deg)!important;
+}
+#cosmic-scene .cosmic-solar-surface{opacity:.31}
+#cosmic-scene .cosmic-solar-corona{
+  filter:drop-shadow(0 0 12px #ff923dc0) drop-shadow(0 0 20px #ec5d1a6c);
+}
