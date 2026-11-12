@@ -1,24 +1,25 @@
-# Cosmic Sun & Moon preview
+# Cinematic Sun & Moon — preview build
 
-Experimental design branch for Study Practice Simulator. Not published to GitHub Pages until explicitly merged.
+A dedicated visual branch for the Study Practice Simulator. **Main remains unchanged.** Preview in a browser via:
+https://raw.githack.com/Osolanoa/StudyPracticeSimulator/design/cosmic-sun-moon-preview/index.html
 
-## Design
-- Cinematic dark-theme landing with a Moon in the upper-left and a Sun in the lower-right.
-- NASA image URLs for realistic celestial textures, with CSS fallback gradients if unavailable.
-- Continuously evolving Canvas starfield and orbital particles, and sine-composed positional drift and cursor parallax (no GIF/video or hard-loop reset).
-- Glass-style course cards, restrained course/dashboard background, dimmed exam screen.
-- Click the floating **Effects** control to cycle **High → Reduced → Off**, saved in localStorage.
-- Honors the system reduced-motion preference by default; suspends animation when hidden.
-- Existing course pack, scoring and storage code are unchanged aside from one UI-view marker.
+## Implemented
+- Cinematic dark-mode landing, responsive course cards and real per-course progress from the existing localStorage practice records.
+- NASA full-disk Moon mosaic and NASA SDO Sun photograph, softened with atmospheric glow and vignettes (CSS fallback).
+- Optional 3D: Three.js textured Moon sphere with directional lighting; procedural GLSL Sun material and glowing corona. The 3D layer is activated only once a lunar texture loads. NASA 2K globe is preferred; an alternative Three.js Moon map is used if needed.
+- Independent continuous Canvas starfield, particles, nebula diffusion, orbital strokes, and cursor-responsive parallax. No MP4, GIF or visibly restarting timeline.
+- High / Reduced / Off visual controls, persisted in localStorage. Reduced-motion prefers the lower-motion setting automatically.
+- The exam session background is substantially dimmed so questions remain easy to read.
+- The course-specific question engine and data remain unchanged.
 
-## Assets and credits
-- Moon: NASA, [full Moon image](https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/06/edu_distance_to_the_moon.png).
-- Sun: NASA/GSFC/Solar Dynamics Observatory, [PIA26681](https://science.nasa.gov/photojournal/image-of-sun-from-nasas-solar-dynamics-observatory/).
-- This prototype **hotlinks** NASA source images. For a release candidate, download and optimize approved local WebP/AVIF assets, check NASA media-use guidance and verify loading in target browsers.
+## Sources and acknowledgements
+- Moon full-disc photographic mosaic: NASA SVS, https://science.nasa.gov/resource/moon-mosaic/
+- Moon 2K globe texture: NASA SVS CGI Moon Kit, https://svs.gsfc.nasa.gov/4720/
+- Sun full-disc SDO image: NASA/GSFC/SDO, https://science.nasa.gov/photojournal/image-of-sun-from-nasas-solar-dynamics-observatory/
+- Fallback Three.js texture: three.js examples from mrdoob/three.js.
 
-## Validation and remaining work
-- JavaScript syntax checked locally.
-- Isolated 1440×900 visual fixture rendered without page errors; two cards and the effect toggle were checked.
-- Image hosting was blocked in the local fixture; image display at full resolution still needs verification.
-- Full application navigation, responsiveness, exam mode and performance have **not** yet received end-to-end testing.
-- The current implementation uses photographic CSS layers and Canvas 2D parallax, **not** a full 3D globe or shader-based solar plasma. A Three.js upgrade can follow after visual acceptance.
+## Verification and limitations
+- All classic JavaScript files and the optional module were syntax checked.
+- Landing renderer was exercised in a DOM stub: two interactive course cards generated, progress section present, no NaN values; all 0% values represent fresh localStorage, not fictitious student data.
+- A full browser GPU/rendering and cross-browser E2E check has not been completed in this environment. Third-party hosting of photos/Three.js and client support for WebGL are variable.
+- Published GitHub Pages remains on main until approved to merge.
