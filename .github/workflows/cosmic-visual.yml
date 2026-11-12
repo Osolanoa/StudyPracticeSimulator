@@ -41,6 +41,9 @@ jobs:
                 prominencesLoaded: !!document.querySelector('.cosmic-solar-loops')?.naturalWidth,
                 moonLoaded: !!document.querySelector('.cosmic-moon img')?.naturalWidth,
                 sunLoaded: !!document.querySelector('.cosmic-sun img')?.naturalWidth,
+                cloudLayers: [...document.querySelectorAll('.cosmic-cliffs')].map(i=>!!i.naturalWidth),
+                galaxyLoaded: !!document.querySelector('.cosmic-galaxy-photo')?.naturalWidth,
+                nebulaLoaded: !!document.querySelector('.cosmic-nebula-photo')?.naturalWidth,
                 heroHeight: Math.round(document.querySelector('.cosmos-hero')?.getBoundingClientRect().height || 0),
                 cardsTop: Math.round(document.querySelector('.cosmos-courses')?.getBoundingClientRect().top || 0),
                 shortcutsTop: Math.round(document.querySelector('.cosmos-quick')?.getBoundingClientRect().top || 0),
@@ -51,6 +54,14 @@ jobs:
               console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
               if (metadata.cards !== 2 || metadata.quickActions !== 5 || errors.length) {
                 process.exitCode = 1;
+              }
+              if (label === 'desktop') {
+                await page.locator('button[data-cosmic-action="practice"]').first().click();
+                await page.waitForSelector('.shell', {timeout: 12000});
+                const courseHeading = await page.locator('#main h1').first().textContent();
+                console.log('course-navigation', JSON.stringify({ courseHeading }));
+                await page.screenshot({ path:'visual-previews/course-practice.png',fullPage:true });
+                if (!/practice/i.test(courseHeading || '')) process.exitCode = 1;
               }
               await page.close();
             }
