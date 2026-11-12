@@ -1,0 +1,115 @@
+/* Cinematic V6 — simplified home, photographic night Earth, no cursor parallax. */
+
+body[data-cosmic-view="landing"] .cosmos-landing{
+  max-width:1580px;
+  padding:clamp(18px,3vh,30px) clamp(18px,4vw,64px) 35px;
+  min-height:100vh;
+}
+.cosmos-landing .cosmos-title-area{
+  max-width:1180px;
+  margin:clamp(40px,7vh,80px) auto clamp(47px,7vh,80px);
+  text-align:center;
+}
+.cosmos-landing .cosmos-title-area h1{
+  font-size:clamp(3.5rem,6.5vw,6.4rem);
+  font-weight:840;
+  letter-spacing:-.055em;
+  line-height:.98;
+  color:#f4f9ff;
+  text-wrap:balance;
+  text-shadow:0 8px 28px #000b,0 0 38px #5698da26;
+}
+.cosmos-landing .cosmos-title-area h1 span{
+  display:block;
+  margin-top:.08em;
+  color:#a9d7ff;
+  background:linear-gradient(100deg,#dcecff 3%,#a6c9f5 50%,#8bcfff 100%);
+  background-clip:text;-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 4px 16px #021b3c77);
+}
+body[data-cosmic-view="landing"] .cosmos-courses{max-width:1240px;margin:0 auto}
+body[data-cosmic-view="landing"] .cosmos-section-head{margin-bottom:18px}
+body[data-cosmic-view="landing"] .cosmos-course{min-height:240px}
+body[data-cosmic-view="landing"] .cosmos-footer{margin-top:40px}
+body[data-cosmic-view="landing"] .cosmos-topnav,
+body[data-cosmic-view="landing"] .cosmos-hero{display:none!important}
+
+/* Unlike flat nightlight maps, this asset is a rendered NASA/JPL
+   nighttime view of the globe with recognizable landforms and city lights. */
+#cosmic-scene .cosmic-earth-globe{
+  position:absolute;
+  left:50%;
+  width:min(119vw,1850px);
+  height:auto;
+  aspect-ratio:1;
+  top:auto;
+  bottom:calc(620px - min(119vw,1850px));
+  transform:translateX(-50%);
+  border-radius:0;
+  overflow:visible;
+  background:none!important;
+  box-shadow:none!important;
+  opacity:.98;
+  z-index:3;
+  filter:drop-shadow(0 -9px 22px #117bd54a);
+  will-change:auto;
+}
+#cosmic-scene .cosmic-earth-globe img{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  object-fit:contain;object-position:50% 50%;
+  transform:none!important;
+  mix-blend-mode:screen!important;
+  opacity:.98!important;
+  filter:brightness(1.13) contrast(1.25) saturate(1.14);
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 0%,#000 41%,#000e 46%,transparent 56%);
+  mask-image:radial-gradient(circle at 50% 50%,#000 0%,#000 41%,#000e 46%,transparent 56%);
+}
+#cosmic-scene .cosmic-earth-globe::before,
+#cosmic-scene .cosmic-earth-globe::after{
+  display:none!important;
+}
+#cosmic-scene .cosmic-earth-night{display:none!important}
+#cosmic-scene .cosmic-horizon{display:none!important}
+#cosmic-scene .cosmic-cliffs--floor{opacity:.42;z-index:4}
+
+/* No parallax or pointer-controlled transforms anywhere in this scene.
+   The Sun, Moon and sky retain only their slow independent animation. */
+body[data-cosmic-view="session"] #cosmic-scene .cosmic-earth-globe{opacity:.13}
+@media (min-width:1500px) and (max-height:850px){
+ .cosmos-landing .cosmos-title-area{margin-top:32px;margin-bottom:38px}
+ .cosmos-landing .cosmos-title-area h1{font-size:clamp(3.5rem,5.1vw,5.3rem)}
+ #cosmic-scene .cosmic-earth-globe{bottom:calc(575px - min(119vw,1850px))}
+}
+@media (max-width:940px){
+ .cosmos-landing .cosmos-title-area{margin:50px auto 44px}
+ .cosmos-landing .cosmos-title-area h1{font-size:clamp(3rem,7.5vw,5rem)}
+ #cosmic-scene .cosmic-earth-globe{
+   width:150vw;
+   bottom:calc(400px - 150vw);
+   opacity:.82;
+ }
+}
+@media (max-width:700px){
+ body[data-cosmic-view="landing"] .cosmos-landing{padding:23px 16px 32px}
+ .cosmos-landing .cosmos-title-area{margin:58px auto 45px}
+ .cosmos-landing .cosmos-title-area h1{
+   font-size:clamp(2.65rem,11.3vw,4.2rem);
+   line-height:1.02;
+ }
+ .cosmos-landing .cosmos-title-area h1 span{margin-top:.13em}
+ #cosmic-scene .cosmic-earth-globe{
+   width:230vw;
+   bottom:calc(315px - 230vw);
+   opacity:.65;
+ }
+ #cosmic-scene .cosmic-earth-globe img{
+   filter:brightness(.89) contrast(1.35) saturate(1.12);
+ }
+ #cosmic-scene .cosmic-cliffs--floor{opacity:.25}
+}
+@media(prefers-reduced-motion:reduce){
+ #cosmic-scene .cosmic-earth-globe{will-change:auto}
+}
