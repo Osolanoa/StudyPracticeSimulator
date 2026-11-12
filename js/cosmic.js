@@ -4,11 +4,11 @@
 const app=document.getElementById('app');
 if(!app||document.getElementById('cosmic-scene'))return;
 const scene=document.createElement('div');scene.id='cosmic-scene';scene.setAttribute('aria-hidden','true');
-scene.innerHTML='<div class="cosmic-mist"></div><canvas></canvas><div class="cosmic-body cosmic-moon"><img alt="" decoding="async" src="https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005001/moon_mosaic_print.jpg"></div><div class="cosmic-body cosmic-sun"><img alt="" decoding="async" src="https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia26/pia26681/PIA26681.jpg"></div><div class="cosmic-horizon"></div><div class="cosmic-vignette"></div>';
+scene.innerHTML='<div class="cosmic-mist"></div><canvas></canvas><img class="cosmic-atmosphere" alt="" decoding="async" src="./assets/cosmic-atmosphere.svg"><div class="cosmic-body cosmic-moon"><img alt="" decoding="async" src="https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005001/moon_mosaic_print.jpg"></div><div class="cosmic-body cosmic-sun"><img alt="" decoding="async" src="https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia26/pia26681/PIA26681.jpg"></div><div class="cosmic-horizon"></div><img class="cosmic-solar-loops" alt="" decoding="async" src="./assets/cosmic-solar-prominences.svg"><div class="cosmic-vignette"></div>';
 app.parentNode.insertBefore(scene,app);
 scene.querySelectorAll('.cosmic-body img').forEach(img=>{img.addEventListener('load',()=>img.parentElement.classList.add('is-loaded'));img.addEventListener('error',()=>{img.parentElement.classList.add('image-failed');img.remove();});});
 const canvas=scene.querySelector('canvas'),ctx=canvas.getContext('2d',{alpha:true});
-const moon=scene.querySelector('.cosmic-moon'),sun=scene.querySelector('.cosmic-sun');
+const moon=scene.querySelector('.cosmic-moon'),sun=scene.querySelector('.cosmic-sun');const atmosphere=scene.querySelector('.cosmic-atmosphere'),solarLoops=scene.querySelector('.cosmic-solar-loops');
 const toggle=document.createElement('button');toggle.type='button';toggle.className='cosmic-effects-toggle';document.body.appendChild(toggle);
 const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
 const allowed=['high','reduced','off'];let saved;try{saved=localStorage.getItem('study_cosmic_effects')}catch(e){}
@@ -61,6 +61,9 @@ const mx=px*13+Math.sin(elapsed*.16)*9+Math.sin(elapsed*.073)*3,my=py*9+Math.cos
 const sx=px*8+Math.sin(elapsed*.09+1.7)*9,sy=py*6+Math.sin(elapsed*.14+.8)*7;
 moon.style.transform='translate3d('+mx.toFixed(2)+'px,'+my.toFixed(2)+'px,0) rotate('+(Math.sin(elapsed*.035)*.9).toFixed(3)+'deg)';
 sun.style.transform='translate3d('+sx.toFixed(2)+'px,'+sy.toFixed(2)+'px,0) scale('+(1+.012*Math.sin(elapsed*.19)+.004*Math.sin(elapsed*.089)).toFixed(4)+')';
+atmosphere.style.transform='translate3d('+(px*6+Math.sin(elapsed*.031)*10).toFixed(2)+'px,'+(py*4+Math.sin(elapsed*.023)*6).toFixed(2)+'px,0) scale(1.025)';
+solarLoops.style.transform='translate3d('+(sx*.48).toFixed(2)+'px,'+(sy*.45).toFixed(2)+'px,0) rotate('+(Math.sin(elapsed*.10)*1.4).toFixed(2)+'deg)';
+solarLoops.style.opacity=String(.73+.12*Math.sin(elapsed*.19)+.05*Math.sin(elapsed*.31));
 raf=requestAnimationFrame(render)}
 function start(){if(raf||document.hidden||mode!=='high'||document.body.dataset.cosmicView==='session'||document.documentElement.dataset.theme==='light')return;last=0;raf=requestAnimationFrame(render)}
 function stop(){if(raf){cancelAnimationFrame(raf);raf=0}}
