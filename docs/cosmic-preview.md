@@ -24,13 +24,16 @@ No build, backend, npm install or framework migration is required.
 
 ## Asset acknowledgements
 
-The static backgrounds use NASA source imagery at runtime:
-- Moon: [NASA Scientific Visualization Studio Moon Mosaic](https://svs.gsfc.nasa.gov/5001/) (\`moon_mosaic_print.jpg\`), Ernie Wright and collaborators / NASA SVS.
-- 3D Moon: [NASA SVS CGI Moon Kit](https://svs.gsfc.nasa.gov/4720/) (\`lroc_color_2k.jpg\`), Ernie Wright (USRA), Noah Petro (NASA/GSFC).
-- Sun: [NASA/GSFC/SDO PIA26681](https://science.nasa.gov/photojournal/image-of-sun-from-nasas-solar-dynamics-observatory/), captured September 10, 2025.
-- Three.js JavaScript module is loaded from jsDelivr; no framework conversion.
+The cosmic images are third-party public photographic sources and are hotlinked at runtime:
 
-NASA images may be used for educational pages when credited and without implying NASA endorsement; see [NASA media-use guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/).
+- **Moon**: NASA full Moon from December 2015, used as a textured circular disc ([NASA image](https://science.nasa.gov/moon/)).
+- **Sun**: NASA solar photo/creative image from its 2025 image collection. The bright prominences are supplemented by original SVG/CSS layers.
+- **Nebula**: [ESO — Carina Nebula](https://www.eso.org/public/images/eso1208db/).
+- **Interstellar cloud cliffs**: [ESA/Webb, NASA, CSA, STScI — Cosmic Cliffs of NGC 3324](https://esawebb.org/images/weic2205a/). The same image is color-treated and masked into cool left-side and warm right-side cloud strata.
+- **Spiral galaxy**: NASA/ESA Hubble [Whirlpool Galaxy M51](https://science.nasa.gov/mission/hubble/science/explore-the-night-sky/hubble-messier-catalog/messier-51/).
+- **Atmospheric art, energy loops, technical waves and interactive stars** are original SVG/CSS/Canvas procedural elements within this branch.
+
+A draft experiment `js/cosmic-webgl.js` remains in the repository but is intentionally **not loaded** because photographic composition proved closer to the approved design. In the active version, the Sun and Moon use photographic discs with procedural motion and layers (2.5D), not true 3D sphere shading. NASA media-use guidelines and ESA/ESO image credits must be reviewed before release; imagery should ultimately be stored locally and optimized to avoid unreliable hotlinks.
 
 ## Functional smoke review (2026-11-11)
 
@@ -42,7 +45,7 @@ NASA images may be used for educational pages when credited and without implying
 - CSS file delimiters balanced; every stylesheet/script referenced by \`index.html\` exists in branch.
 - Existing course content, questions, grading, localStorage progress, and the live \`main\` branch were not modified.
 
-**Not yet verified:** a full Chromium/WebGL screenshot of the deployed branch, real-world NASA asset CORS/loading on all browsers, mobile layout screenshots, end-to-end quiz completion, and GPU performance benchmarking. This PR intentionally stays **draft** until visual review and those checks are performed. The cosmetic WebGL path has a fallback; do not call it production verified yet.
+**Verified by GitHub Actions:** Chromium screenshots at 1792×912 and 390×844, no page exceptions, original two courses and five shortcuts rendered. **Still pending:** cross-browser visual acceptance, robust remote image loading on other networks, longer-run animation profiling, responsive layouts beyond the two tested sizes, and complete quiz/grading regression tests. This PR intentionally stays **draft** until visual review and those checks are performed. The cosmetic WebGL path has a fallback; do not call it production verified yet.
 
 
 ## Fidelity correction after screenshot comparison — November 11, 2026
@@ -60,3 +63,7 @@ The first live preview was visibly different from the approved mock (Moon/Sun di
 A feature-branch-only GitHub Actions workflow, \`.github/workflows/cosmic-visual.yml\`, captures desktop (1792×912) and mobile (390×844) Chromium screenshots, checks page errors, layout metrics and image loading. It does not publish to main.
 
 **Do not consider the design visually verified until the screenshots have been inspected.** External NASA photos are runtime dependencies and may fail over time. A later release should cache or host optimized, properly attributed copies.
+
+## Final visual calibration — 2026-11-11
+
+The approved screenshot comparison was used to adjust Moon/Sun scale, first-screen layout, navy glass button styling, photographic clouds, blue lunar grading, and wireframe course ornaments. A branch-only Playwright workflow captures screenshot artifacts and tests routing from the landing into the practice view. **Do not merge until the user accepts the latest browser capture.** Exact pixel identity with a generated composition is not guaranteed, particularly because responsive content uses real course titles and live progress values.
