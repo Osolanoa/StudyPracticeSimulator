@@ -30,7 +30,7 @@
     const percent=progress=>progress.total ? Math.min(100,Math.round(progress.done/progress.total*100)):0;
     const cards=overview.map(({course,progress},i)=>{
       const p=percent(progress),math=course.id.includes('matematicas');
-      return '<article class="cosmos-course '+(math?'cosmos-course--math':'cosmos-course--azure')+'">'+
+      return '<article data-cosmic-card="'+esc(course.id)+'" class="cosmos-course '+(math?'cosmos-course--math':'cosmos-course--azure')+'">'+
         '<div class="cosmos-course-visual" aria-hidden="true"><span class="cosmos-course-symbol">'+(math?icons.math:icons.cloud)+'</span><span class="cosmos-course-orb"></span></div>'+
         '<div class="cosmos-course-copy"><span class="cosmos-label">'+esc(course.shortName)+'</span><h3>'+esc(course.name)+'</h3><p>'+esc(course.description)+'</p>'+
         '<div class="cosmos-facts"><span>'+course.questionCount+' questions</span><span>'+progress.total+' practice tests</span></div>'+
@@ -56,11 +56,15 @@
       '<p class="cosmos-hero-sub">Study, practice, and track your progress in a smarter, more engaging way.</p>'+
       '<div class="cosmos-hero-actions"><button type="button" class="cosmos-btn cosmos-btn--primary" data-cosmic-action="start">'+icons.play+'<span>Start studying</span>'+icons.arrow+'</button>'+
       '<button type="button" class="cosmos-btn cosmos-btn--secondary" data-cosmic-action="progress">'+icons.progress+'<span>View progress</span>'+icons.arrow+'</button></div></section>'+
-      '<section class="cosmos-courses" id="cosmos-courses" aria-labelledby="cosmos-courses-title"><div class="cosmos-section-head"><h2 id="cosmos-courses-title">Your courses</h2><span>'+completed+' of '+total+' practice tests completed</span></div><div class="cosmos-course-grid">'+cards+'</div></section>'+
+      '<section class="cosmos-courses" id="cosmos-courses" aria-labelledby="cosmos-courses-title"><div class="cosmos-section-head"><h2 id="cosmos-courses-title">Your courses</h2><button type="button" class="cosmos-see-all" data-cosmic-action="courses">See all courses →</button></div><div class="cosmos-course-grid">'+cards+'</div></section>'+
       '<nav class="cosmos-quick" aria-label="Quick actions">'+quickNav+'</nav>'+
       '<footer class="cosmos-footer"><span>Illustrations and celestial imagery: NASA/GSFC · Study Practice Simulator</span><span>Made for focused learning</span></footer></main>';
     const buttons=app.querySelectorAll('[data-cosmic-course]');
     buttons.forEach(b=>b.addEventListener('click',()=>loadCourse(b.dataset.cosmicCourse,'dashboard')));
+    app.querySelectorAll('[data-cosmic-card]').forEach(card=>card.addEventListener('click',event=>{
+      if(event.target.closest('button'))return;
+      loadCourse(card.dataset.cosmicCard,'dashboard');
+    }));
     function updateActive(action) {
       app.querySelectorAll('.cosmos-nav-link').forEach(b=>{
         const active=b.dataset.cosmicAction===action;b.classList.toggle('is-active',active);
