@@ -43,8 +43,8 @@
     get: (key, fallback) => read(KEYS[key], fallback),
     set: (key, value) => write(KEYS[key], value),
     settings: () => ({ ...defaults, ...read(KEYS.settings, {}) }),
-    theme: () => localStorage.getItem(GLOBAL_THEME_KEY) || localStorage.getItem(THEME_KEY) || 'dark',
-    setTheme: theme => { localStorage.setItem(GLOBAL_THEME_KEY, theme); localStorage.setItem(THEME_KEY, theme); },
+    theme: () => 'dark',
+    setTheme: () => {}, // Legacy API preserved; the visual design is now fixed.
     reset: () => Object.values(KEYS).forEach(key => localStorage.removeItem(key)),
     resetStats: () => ['stats', 'history', 'exams', 'practiceTests'].forEach(name => localStorage.removeItem(KEYS[name])),
     keys: KEYS,

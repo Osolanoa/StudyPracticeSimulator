@@ -8,7 +8,7 @@
   let request = 0;
   window.STUDY_COURSE_REGISTRY = registry.map(course => ({ ...course }));
 
-  function theme() { return localStorage.getItem('study_theme') || localStorage.getItem('study_az900_theme') || localStorage.getItem('study_matematicas-9-mep_theme') || 'dark'; }
+  function theme() { return 'dark'; }
   function applyTheme() { document.documentElement.dataset.theme = theme(); }
   function practiceSummary(course) {
     try {
@@ -21,17 +21,27 @@
   }
   function esc(value) { return String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]); }
   function landing() {
+    document.body.dataset.cosmicView = 'landing';
     request++;
     window.StudyApp?.destroy?.();
     window.STUDY_COURSE_ID = null;
     document.documentElement.lang = 'en';
     document.title = 'Study Practice Simulator';
+    if (window.CosmicLanding?.render) {
+      window.CosmicLanding.render({ registry, practiceSummary, loadCourse, applyTheme });
+      return;
+    }
     const cards = registry.filter(course => course.visible).map(course => {
       const progress = practiceSummary(course), continued = progress.done > 0;
       const status = continued ? `<p class="course-progress">${progress.done} of ${progress.total} practice tests completed${progress.best === null ? '' : ` · Best average: ${progress.best}%`}</p>` : '<p class="course-progress">Ready when you are.</p>';
-      return `<article class="course-card"><p class="eyebrow">${esc(course.shortName)}</p><h2>${esc(course.name)}</h2><p class="sub">${esc(course.description)}</p><div class="course-facts"><span>${course.questionCount} questions</span><span>${progress.total} practice tests</span></div>${status}<button class="btn" data-course-id="${esc(course.id)}">${continued ? 'Continue studying' : 'Start studying'}</button></article>`;
+      return `<article class="course-card"><span class="course-icon" aria-hidden="true">${course.id === 'az900' ? 'A' : '∑'}</span><p class="eyebrow">${esc(course.shortName)}</p><h2>${esc(course.name)}</h2><p class="sub">${esc(course.description)}</p><div class="course-facts"><span>${course.questionCount} questions</span><span>${progress.total} practice tests</span></div>${status}<button class="btn" data-course-id="${esc(course.id)}">${continued ? 'Continue studying' : 'Start studying'} →</button></article>`;
     }).join('');
-    app.innerHTML = `<main id="main" class="landing"><section class="landing-hero"><p class="eyebrow">Study Practice Simulator</p><h1>Choose a subject to continue studying.</h1><p class="sub">Select a course to practice, review progress, or take a timed exam.</p></section><section class="course-grid" aria-label="Available courses">${cards}</section></main>`;
+    const publicCourses = registry.filter(course => course.visible);
+    const summaries = publicCourses.map(course => ({ course, progress: practiceSummary(course) }));
+    const totalCompleted = summaries.reduce((sum, item) => sum + item.progress.done, 0);
+    const totalTests = summaries.reduce((sum, item) => sum + item.progress.total, 0);
+    const overview = `<section class="cosmic-overview" aria-label="Study progress"><div class="cosmic-overview-head"><span class="cosmic-overview-eyebrow">Your learning journey</span><strong>${totalCompleted} / ${totalTests} practices</strong><small>Completed across all courses</small></div><div class="cosmic-overview-tracks">${summaries.map(({ course, progress }) => { const percentage = progress.total ? Math.round(progress.done / progress.total * 100) : 0; return `<div class="cosmic-progress-row"><div class="cosmic-track-head"><span>${esc(course.shortName)}</span><strong>${percentage}%</strong></div><div class="cosmic-track" role="progressbar" aria-label="${esc(course.shortName)} completed" aria-valuenow="${percentage}" aria-valuemin="0" aria-valuemax="100"><div class="cosmic-track-fill" style="width:${percentage}%"></div></div></div>`; }).join('')}</div></section>`;
+    app.innerHTML = `<main id="main" class="landing"><header class="cosmic-header"><span class="cosmic-brand"><span class="cosmic-brand-symbol" aria-hidden="true">✦</span> Study Practice Simulator</span></header><section class="landing-hero"><p class="eyebrow">Study Practice Simulator</p><h1>Learn smarter.<em>Achieve more.</em></h1><p class="sub">Practice, track your progress, and master every topic.</p></section><section class="course-grid" aria-label="Available courses">${cards}</section>${overview}</main>`;
     app.querySelectorAll('[data-course-id]').forEach(button => button.addEventListener('click', () => loadCourse(button.dataset.courseId)));
     applyTheme();
   }
@@ -43,11 +53,13 @@
       document.body.appendChild(script);
     });
   }
-  async function loadCourse(id) {
+  async function loadCourse(id, startView = 'dashboard') {
     if (!registry.some(course => course.id === id)) return landing();
     const token = ++request;
     window.StudyApp?.destroy?.();
     window.STUDY_COURSE_ID = id;
+    window.STUDY_START_VIEW = startView;
+    try { localStorage.setItem('study_last_course', id); } catch (_) {}
     app.innerHTML = '<main id="main" class="load-error"><p>Loading course…</p></main>';
     try {
       await load('./courses/' + id + '/config.js', token);

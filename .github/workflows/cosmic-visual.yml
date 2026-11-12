@@ -1,0 +1,118 @@
+name: Cinematic design visual smoke
+on:
+  push:
+    branches:
+      - design/cosmic-sun-moon-preview
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cosmic-visual-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install headless Chromium
+        run: |
+          npm install --no-save playwright@1.56.0
+          npx playwright install --with-deps chromium
+      - name: Capture desktop and mobile previews
+        run: |
+          mkdir -p visual-previews
+          cat > /tmp/cosmic-visual.cjs <<'NODE'
+          const { chromium } = require(process.cwd() + '/node_modules/playwright');
+          const path = require('node:path');
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            for (const [label, width, height] of [['desktop', 1792, 912], ['mobile', 390, 844]]) {
+              const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
+              page.setDefaultTimeout(12000);
+              const errors = [];
+              page.on('pageerror', error => errors.push(String(error)));
+              await page.goto('file://' + path.resolve('index.html'), { waitUntil: 'domcontentloaded' });
+              await page.waitForTimeout(5000);
+              const metadata = await page.evaluate(() => ({
+                heading: document.querySelector('.cosmos-hero h1')?.textContent || '',
+                cards: document.querySelectorAll('.cosmos-course').length,
+                quickActions: document.querySelectorAll('.cosmos-shortcut').length,
+                topMenuButtons: document.querySelectorAll('.cosmos-nav-link').length,
+                themeButtons: document.querySelectorAll('[data-cosmic-action="theme"],[data-action="setTheme"],.cosmic-effects-toggle').length,
+                solarSurfaceCanvas: !!document.querySelector('.cosmic-solar-surface'),
+                solarCoronaCanvas: !!document.querySelector('.cosmic-solar-corona'),
+                globeImageLoaded: !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth,
+                atmosphereLoaded: !!document.querySelector('.cosmic-atmosphere')?.naturalWidth,
+                prominencesLoaded: !!document.querySelector('.cosmic-solar-loops')?.naturalWidth,
+                moonLoaded: !!document.querySelector('.cosmic-moon img')?.naturalWidth,
+                sunLoaded: !!document.querySelector('.cosmic-sun img')?.naturalWidth,
+                earthLoaded: !!document.querySelector('.cosmic-earth-night')?.naturalWidth,
+                moonSpin: getComputedStyle(document.querySelector('.cosmic-moon img')).animationName,
+                moonSpinDuration: getComputedStyle(document.querySelector('.cosmic-moon img')).animationDuration,
+                sunSpin: getComputedStyle(document.querySelector('.cosmic-sun img')).animationName,
+                sunSpinDuration: getComputedStyle(document.querySelector('.cosmic-sun img')).animationDuration,
+                cloudLayers: [...document.querySelectorAll('.cosmic-cliffs')].map(i=>!!i.naturalWidth),
+                galaxyLoaded: !!document.querySelector('.cosmic-galaxy-photo')?.naturalWidth,
+                nebulaLoaded: !!document.querySelector('.cosmic-nebula-photo')?.naturalWidth,
+                heroHeight: Math.round(document.querySelector('.cosmos-hero')?.getBoundingClientRect().height || 0),
+                cardsTop: Math.round(document.querySelector('.cosmos-courses')?.getBoundingClientRect().top || 0),
+                shortcutsTop: Math.round(document.querySelector('.cosmos-quick')?.getBoundingClientRect().top || 0),
+                pageScrollWidth: document.documentElement.scrollWidth,
+                viewportWidth: window.innerWidth
+              }));
+              if (label === 'desktop') {
+                const sources = [
+                  'https://cdn.eso.org/images/large/ann20012a.jpg',
+                  'https://cdn.eso.org/images/screen/ann20012a.jpg',
+                  'https://eoimages.gsfc.nasa.gov/images/imagerecords/79000/79765/BlackMarble_2012_Americas_composite.jpg',
+                  'https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg'
+                ];
+                const probeResults = await page.evaluate(async (urls) =>
+                  Promise.all(urls.map(src => new Promise(resolve=>{
+                    const im = new Image(); const timeout=setTimeout(()=>resolve({src,ok:false,reason:'timeout'}),8500);
+                    im.onload=()=>{clearTimeout(timeout);resolve({src,ok:true,w:im.naturalWidth,h:im.naturalHeight});};
+                    im.onerror=()=>{clearTimeout(timeout);resolve({src,ok:false,reason:'error'});};
+                    im.src=src;
+                  }))),sources);
+                console.log('source-probes',JSON.stringify(probeResults));
+              }
+              await page.screenshot({ path: 'visual-previews/' + label + '.png', fullPage: true });
+              console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
+              if (metadata.cards !== 2 || metadata.quickActions !== 0 || metadata.topMenuButtons !== 0 ||
+                  metadata.themeButtons !== 0 || !metadata.solarSurfaceCanvas || !metadata.solarCoronaCanvas || !metadata.earthLoaded ||
+                  !metadata.moonLoaded || !metadata.sunLoaded || metadata.pageScrollWidth > width ||
+                  metadata.moonSpin !== 'cosmic-moon-axial-spin' ||
+                  metadata.sunSpin !== 'solar-photo-v5' ||
+                  metadata.moonSpinDuration !== '720s' || !metadata.globeImageLoaded ||
+                  metadata.sunSpinDuration !== '480s' || errors.length) {
+                process.exitCode = 1;
+              }
+              if (label === 'desktop') {
+                await page.locator('button[data-cosmic-action="start"]').first().click();
+                await page.waitForSelector('.shell', {timeout: 12000});
+                await page.locator('[data-view="practiceTests"]').first().click();
+                const courseHeading = await page.locator('#main h1').first().textContent();
+                console.log('course-navigation', JSON.stringify({ courseHeading }));
+                await page.screenshot({ path:'visual-previews/course-practice.png',fullPage:true });
+                if (!/practice/i.test(courseHeading || '')) process.exitCode = 1;
+                await page.locator('[data-view="settings"]').first().click();
+                const themeControls = await page.locator('[data-action="setTheme"]').count();
+                console.log('course-settings-theme-controls',themeControls);
+                if(themeControls!==0)process.exitCode=1;
+              }
+              await page.close();
+            }
+            await browser.close();
+          })().catch(err => { console.error(err); process.exitCode = 1; });
+          NODE
+          node /tmp/cosmic-visual.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cosmic-visual-previews
+          path: visual-previews/*.png
+          if-no-files-found: warn

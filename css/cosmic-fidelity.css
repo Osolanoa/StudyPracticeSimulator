@@ -1,0 +1,363 @@
+/* Fidelity pass: matches the approved cinematic reference rather than an enlarged photo layout. */
+#cosmic-scene{background:radial-gradient(ellipse at 52% 33%,#0b1d3e 0%,#020919 61%,#010613 100%)!important}
+#cosmic-scene .cosmic-mist{opacity:.44;filter:blur(65px);
+ background:radial-gradient(ellipse at 18% 40%,#0e4a9d63,transparent 38%),radial-gradient(ellipse at 74% 52%,#4b24984a,transparent 37%),radial-gradient(ellipse at 92% 36%,#c3521e35,transparent 38%)}
+#cosmic-scene .cosmic-atmosphere{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+ pointer-events:none;z-index:0;opacity:.99;mix-blend-mode:screen;will-change:transform}
+#cosmic-scene .cosmic-horizon{display:none}
+#cosmic-scene .cosmic-vignette{z-index:1;background:
+ radial-gradient(ellipse at 53% 35%,#020918dd 0%,#020916b3 28%,#02091a45 53%,transparent 79%);
+ pointer-events:none}
+#cosmic-scene .cosmic-moon{z-index:2;top:clamp(-140px,-9.8vw,-70px);left:clamp(-160px,-8.5vw,-85px);
+ width:clamp(455px,34vw,600px);height:auto;aspect-ratio:1;
+ background:radial-gradient(circle at 27% 25%,#e5f2ff,#9caecc 35%,#46699c 69%,#0a1c3e 97%);
+ box-shadow:0 0 21px #b9dbff9c,0 0 90px #56a8f35d,inset -25px -35px 68px #081a3f9c;
+ filter:drop-shadow(0 0 36px #5bb0f45c)}
+#cosmic-scene .cosmic-moon::before{inset:-18%;filter:blur(35px);
+ background:radial-gradient(circle,#b8daff35 20%,#4c9fef23 43%,transparent 68%)}
+#cosmic-scene .cosmic-moon img{opacity:1;transform:scale(1.09);mix-blend-mode:luminosity;
+ filter:brightness(1.50) contrast(1.37) saturate(.38);
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 58%,transparent 71%);
+ mask-image:radial-gradient(circle,#000 0%,#000 58%,transparent 71%)}
+#cosmic-scene .cosmic-moon::after{inset:0;opacity:.82;
+ background:
+ radial-gradient(circle at 34% 26%,#fff 0 1px,#d5eeff 2px,transparent 9px),
+ radial-gradient(circle at 49% 16%,#fff 0 1px,#b3dcff 2px,transparent 8px),
+ radial-gradient(circle at 43% 52%,#fff 0 1px,#d9f3ff 2px,transparent 9px),
+ radial-gradient(circle at 59% 65%,#fff 0 1px,#d6efff 2px,transparent 10px),
+ radial-gradient(circle at 69% 35%,#fff 0 1px,#d8f4ff 2px,transparent 8px),
+ linear-gradient(128deg,#d9efff2a,transparent 45%,#07132e59 90%);
+ mix-blend-mode:screen;pointer-events:none}
+#cosmic-scene .cosmic-sun{z-index:2;top:clamp(85px,11vh,125px);bottom:auto;
+ right:clamp(-340px,-18vw,-195px);width:clamp(620px,38vw,745px);height:auto;aspect-ratio:1;
+ background:radial-gradient(circle at 32% 39%,#fff5b2 0%,#ffba31 27%,#ff7107 56%,#7c2008 92%);
+ filter:drop-shadow(0 0 48px #ff8a2d91);
+ box-shadow:0 0 19px #ffda7fbd,0 0 82px #ff851a6b,0 0 155px #ff6f2327,inset -26px -15px 59px #ac2c0b83}
+#cosmic-scene .cosmic-sun::before{inset:-31%;filter:blur(44px);
+ background:radial-gradient(circle,#ff9b4957 12%,#fa822e30 31%,#ff9b1a12 49%,transparent 71%)}
+#cosmic-scene .cosmic-sun img{opacity:.93;transform:scale(1.08);mix-blend-mode:screen;
+ filter:brightness(1.50) contrast(1.38) saturate(1.65);
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 55%,transparent 72%);
+ mask-image:radial-gradient(circle,#000 0%,#000 55%,transparent 72%)}
+#cosmic-scene .cosmic-sun::after{inset:-3%;opacity:.68;filter:blur(8px);
+ background:conic-gradient(from 22deg,#ff8e2100,#ffe37b22 16deg,#ffa63a00 35deg,#ffef8f25 58deg,#ff982900 82deg,#ffdf8034 115deg,#ffa72700 141deg,#ffe98c2b 207deg,#ff7b1700 242deg,#ffe68026 301deg,#ff8e2100 360deg)}
+#cosmic-scene .cosmic-solar-loops{position:absolute;z-index:3;right:clamp(-165px,-9vw,-80px);
+ top:clamp(45px,6vh,83px);width:clamp(570px,40vw,740px);height:auto;opacity:.82;
+ mix-blend-mode:screen;pointer-events:none;filter:drop-shadow(0 0 14px #f99d296b)}
+/* Reference layout: compact hero, course cards visible and shortcuts above the fold. */
+body[data-cosmic-view="landing"] .cosmos-landing{max-width:1595px;
+ padding:clamp(12px,1.6vh,22px) clamp(16px,4vw,74px) 20px}
+.cosmos-landing .cosmos-topnav{max-width:1410px;margin:auto;min-height:68px;
+ padding:9px clamp(14px,2vw,30px);border-radius:24px;
+ border-color:#91b7d77d;background:linear-gradient(100deg,#0e2746eb,#07172eea 62%,#0b1831e8);
+ box-shadow:inset 0 1px #dcf4ff38,0 8px 28px #0008,0 0 14px #3d89c51f}
+.cosmos-landing .cosmos-brand{font-size:1.02rem;min-width:210px;line-height:1.1}
+.cosmos-landing .cosmos-brand svg{width:40px;height:40px;stroke:#a0d8ff}
+.cosmos-landing .cosmos-nav-link{font-size:.90rem;padding:10px 15px;gap:10px}
+.cosmos-landing .cosmos-nav-link.is-active{background:linear-gradient(145deg,#1b5687,#10345d);
+ border-color:#60b5f5;box-shadow:inset 0 1px #daf6ff80,0 0 19px #308bc37b}
+.cosmos-landing .cosmos-theme{background:#102844d9;border:1px solid #789fbf8f}
+.cosmos-landing .cosmos-hero{max-width:1080px;margin:clamp(35px,5.3vh,65px) auto clamp(29px,4.8vh,48px)}
+.cosmos-landing .cosmos-kicker{font-size:.72rem;letter-spacing:.34em;margin-bottom:15px;color:#cde6f8;gap:19px}
+.cosmos-landing .cosmos-hero h1{font-size:clamp(2.8rem,3.72vw,4.25rem);line-height:1.075;letter-spacing:-.046em;
+ max-width:1000px;margin:0 auto 15px;color:#f8fbff;font-weight:800;
+ text-shadow:0 4px 32px #000c}
+.cosmos-landing .cosmos-hero h1 em{background:linear-gradient(100deg,#deebff 6%,#a9cef9 49%,#79baff 100%);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cosmos-landing .cosmos-hero-sub{font-size:clamp(.99rem,1.24vw,1.17rem);line-height:1.45;color:#e4efff;margin:0}
+.cosmos-landing .cosmos-hero-actions{gap:26px;margin-top:26px}
+.cosmos-landing .cosmos-btn{min-width:250px;min-height:57px;padding:11px 26px;gap:16px;
+ font-size:.99rem;border-radius:99px}
+.cosmos-landing .cosmos-btn--primary{background:linear-gradient(150deg,#194d7b,#0e2d51 70%,#0c2c54);
+ border-color:#8bd3ff;box-shadow:inset 0 1px #e6f6ffc7,0 0 6px #67bcffba,0 0 23px #287ec670,0 8px 22px #0009}
+.cosmos-landing .cosmos-btn--secondary{background:linear-gradient(150deg,#14263eea,#07172df2);
+ border-color:#a9c2dcb0;box-shadow:inset 0 1px #edf8ff30,0 6px 21px #0009}
+.cosmos-landing .cosmos-btn:hover{box-shadow:inset 0 1px #fff7,0 0 9px #8cd6ffbe,0 0 26px #448fc885,0 9px 30px #0009;
+ transform:translateY(-3px)}
+.cosmos-landing .cosmos-courses{max-width:1260px}
+.cosmos-landing .cosmos-section-head{margin-bottom:15px}
+.cosmos-landing .cosmos-section-head h2{font-size:1.53rem;gap:12px;text-shadow:0 4px 15px #000}
+.cosmos-landing .cosmos-section-head h2::before{width:4px;height:30px;box-shadow:0 0 14px #79caff}
+.cosmos-landing .cosmos-see-all{border:0;background:transparent;color:#9cd9ff;
+ font-size:.86rem;font-weight:650;letter-spacing:.01em;cursor:pointer;text-shadow:0 0 14px #2e9dca70}
+.cosmos-landing .cosmos-see-all:hover{text-decoration:underline;text-underline-offset:4px}
+.cosmos-landing .cosmos-course-grid{gap:22px}
+.cosmos-landing .cosmos-course{min-height:214px;border-radius:22px;cursor:pointer;
+ border:1px solid #93c8f3b8;
+ background:linear-gradient(112deg,#092443ed,#06182ce9 67%,#0b2b4fdc);
+ box-shadow:inset 0 1px #d9eeff63,0 13px 39px #0009,0 0 14px #3587bd31}
+.cosmos-landing .cosmos-course--math{background:linear-gradient(120deg,#112b4cec,#09172fea 67%,#122b49d7)}
+.cosmos-landing .cosmos-course::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:linear-gradient(125deg,#4eaeef17,transparent 37%,#0f5bb927 100%)}
+.cosmos-landing .cosmos-course::after{content:'';position:absolute;z-index:0;inset:18% -10% -15% 42%;
+ pointer-events:none;opacity:.63;background:url("./../assets/cosmic-card-waves.svg") center bottom / contain no-repeat;
+ filter:drop-shadow(0 0 7px #2076c385)}
+.cosmos-landing .cosmos-course--math::after{opacity:.58;transform:scaleX(-1);
+ filter:hue-rotate(19deg) drop-shadow(0 0 9px #326dba7f)}
+.cosmos-landing .cosmos-course-visual{z-index:1;flex-basis:105px;padding:21px 15px 18px 24px}
+.cosmos-landing .cosmos-course-symbol{width:60px;height:60px;border-radius:15px;
+ border-color:#6ab1eebd;background:linear-gradient(142deg,#134471,#08213f);
+ box-shadow:inset 0 1px #d7efff73,0 0 24px #258be476}
+.cosmos-landing .cosmos-course-symbol svg{width:34px;height:34px}
+.cosmos-landing .cosmos-course-copy{z-index:1;padding:20px 23px 18px 0;gap:0}
+.cosmos-landing .cosmos-label{font-size:.69rem;letter-spacing:.15em;color:#93daff}
+.cosmos-landing .cosmos-course h3{font-size:clamp(1.02rem,1.38vw,1.33rem);margin:3px 0 6px;font-weight:760;color:#f4f9ff}
+.cosmos-landing .cosmos-course-copy>p{font-size:.77rem;line-height:1.45;color:#d7e5f4;max-width:35ch;margin:0 0 7px}
+.cosmos-landing .cosmos-facts{gap:10px;padding:3px 0 10px;margin-top:auto}
+.cosmos-landing .cosmos-facts span{font-size:.7rem;border:1px solid #8bc2e83d;background:#1639578c;padding:4px 10px}
+.cosmos-landing .cosmos-track-label{font-size:.72rem;margin:0 0 5px;color:#c8dff1}
+.cosmos-landing .cosmos-track-label strong{font-size:.80rem}
+.cosmos-landing .cosmos-track{height:6px;background:#09213be3}
+.cosmos-landing .cosmos-track>span{background:linear-gradient(90deg,#3285c5,#86d1ff)}
+.cosmos-landing .cosmos-course-go{position:absolute;top:17px;right:19px;z-index:2;
+ margin:0;width:29px;height:29px;display:grid;place-items:center;border-radius:50%;
+ color:#b8dbfa;font-size:0;background:#132e495e;border:1px solid #92c4e35b}
+.cosmos-landing .cosmos-course-go svg{width:15px;height:15px}
+.cosmos-landing .cosmos-course-go:hover{background:#24577c;color:#fff}
+.cosmos-landing .cosmos-quick{max-width:1260px;gap:17px;margin:clamp(18px,2.4vh,26px) auto 0}
+.cosmos-landing .cosmos-shortcut{min-height:90px;border-radius:21px;gap:8px;padding:12px;
+ font-size:.85rem;border-color:#9ac9f2a0;background:linear-gradient(145deg,#122d4ac9,#071628e9);
+ box-shadow:inset 0 1px #edfaff6a,0 8px 25px #0009,0 0 12px #3c9dd52d}
+.cosmos-landing .cosmos-shortcut svg{width:26px;height:26px;color:#b1ddff}
+.cosmos-landing .cosmos-shortcut:hover{border-color:#c3e7ff;background:linear-gradient(140deg,#1c4971,#122c4c);
+ box-shadow:inset 0 1px #eafaff99,0 0 20px #4689bf5e,0 10px 31px #0009}
+.cosmos-landing .cosmos-footer{margin:15px auto 0;opacity:.7;font-size:.61rem}
+/* Keep whole visual first screen fitting without squeezing controls on desktop. */
+@media(min-width:1120px) and (max-height:910px){
+ .cosmos-landing .cosmos-hero{margin-top:clamp(27px,4.5vh,45px);margin-bottom:clamp(20px,3vh,31px)}
+ .cosmos-landing .cosmos-hero h1{font-size:clamp(2.75rem,3.45vw,3.9rem)}
+ .cosmos-landing .cosmos-hero-actions{margin-top:19px}
+ .cosmos-landing .cosmos-course{min-height:196px}
+ .cosmos-landing .cosmos-course-visual{padding-top:18px}
+ .cosmos-landing .cosmos-course-copy{padding-top:18px;padding-bottom:15px}
+ .cosmos-landing .cosmos-shortcut{min-height:79px}
+ .cosmos-landing .cosmos-quick{margin-top:17px}
+}
+@media(max-width:950px){
+ #cosmic-scene .cosmic-moon{width:clamp(360px,50vw,510px);left:-145px;top:-95px}
+ #cosmic-scene .cosmic-sun{width:clamp(470px,56vw,660px);right:-270px;top:120px}
+ #cosmic-scene .cosmic-solar-loops{width:560px;right:-150px;top:90px}
+ .cosmos-landing .cosmos-hero{margin-top:62px}
+ .cosmos-landing .cosmos-course-grid{grid-template-columns:1fr;max-width:660px;margin:auto}
+ .cosmos-landing .cosmos-course{min-height:196px}
+}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-atmosphere{object-fit:cover;object-position:50% 50%;opacity:.85}
+ #cosmic-scene .cosmic-moon{width:390px;left:-195px;top:-135px;opacity:.72}
+ #cosmic-scene .cosmic-sun{width:480px;right:-335px;top:150px;opacity:.73}
+ #cosmic-scene .cosmic-solar-loops{width:380px;right:-205px;top:110px;opacity:.55}
+ #cosmic-scene .cosmic-vignette{background:radial-gradient(ellipse at 53% 32%,#020918e5 0%,#020918ca 44%,transparent 80%)}
+ .cosmos-landing .cosmos-hero{margin-top:70px;margin-bottom:36px}
+ .cosmos-landing .cosmos-hero h1{font-size:clamp(2.15rem,8.7vw,3.5rem)}
+ .cosmos-landing .cosmos-hero-actions{margin-top:26px}
+ .cosmos-landing .cosmos-btn{min-height:55px}
+ .cosmos-landing .cosmos-course{min-height:195px}
+ .cosmos-landing .cosmos-course::after{background-size:340px auto}
+ .cosmos-landing .cosmos-shortcut{min-height:83px}
+ .cosmos-landing .cosmos-footer{margin-top:19px}
+}
+@media(prefers-reduced-motion:reduce){
+ #cosmic-scene .cosmic-atmosphere,#cosmic-scene .cosmic-solar-loops{will-change:auto}
+}
+
+
+/* Visual QA pass: NASA photos retain detail without clipped whites or yellow overexposure. */
+#cosmic-scene .cosmic-nebula-photo{
+ position:absolute;inset:0;z-index:0;width:100%;height:100%;object-fit:cover;object-position:center;
+ opacity:.31;mix-blend-mode:screen;filter:brightness(.68) contrast(1.23) saturate(1.5) hue-rotate(11deg);
+ pointer-events:none;transform:scale(1.03);
+}
+#cosmic-scene .cosmic-moon{
+ background:radial-gradient(circle at 33% 27%,#a8bfda,#536c92 46%,#162d4d 80%,#041128);
+ box-shadow:0 0 15px #9ccafa73,0 0 70px #469ce847,inset -28px -25px 65px #0b1b43a2;
+ filter:drop-shadow(0 0 27px #3d9af454);
+}
+#cosmic-scene .cosmic-moon img{
+ opacity:.93;transform:scale(1.035);mix-blend-mode:luminosity;
+ filter:brightness(.78) contrast(1.18) saturate(.55);
+}
+#cosmic-scene .cosmic-moon::after{opacity:.42}
+#cosmic-scene .cosmic-sun{
+ background:radial-gradient(circle at 41% 43%,#a93f0e 0%,#852a0a 50%,#46130a 73%,#12070a 100%);
+ box-shadow:0 0 19px #ff9c3a9f,0 0 65px #f3762877,0 0 135px #dd5d2e33,inset -25px -12px 57px #531407aa;
+ filter:drop-shadow(0 0 30px #e8762873);
+}
+#cosmic-scene .cosmic-sun img{
+ opacity:1;transform:scale(1.07);mix-blend-mode:screen;
+ filter:brightness(.93) contrast(1.31) saturate(1.48);
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 56%,transparent 73%);
+ mask-image:radial-gradient(circle,#000 0%,#000 56%,transparent 73%);
+}
+#cosmic-scene .cosmic-sun::after{opacity:.44}
+#cosmic-scene .cosmic-solar-loops{
+ right:clamp(-40px,-1.2vw,-6px);top:clamp(-65px,-4vh,-30px);width:clamp(570px,39vw,740px);
+ filter:drop-shadow(0 0 14px #ff7c2280);opacity:.84;
+}
+#cosmic-scene .cosmic-vignette{
+ background:radial-gradient(ellipse at 53% 35%,#020918d9 0%,#020918b9 30%,#02091843 53%,transparent 80%);
+}
+.cosmos-landing .cosmos-hero h1 em{
+ background:none!important;color:#b4d9ff!important;-webkit-text-fill-color:#b4d9ff!important;
+ text-shadow:0 4px 26px #06152bc9;
+}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-nebula-photo{opacity:.20;filter:brightness(.52) saturate(1.23)}
+ #cosmic-scene .cosmic-sun{right:-390px;top:175px;width:470px;opacity:.72}
+ #cosmic-scene .cosmic-solar-loops{right:-265px;top:130px;width:370px;opacity:.48}
+ #cosmic-scene .cosmic-moon{opacity:.70}
+ #cosmic-scene .cosmic-vignette{
+  background:radial-gradient(ellipse at 53% 33%,#020918f3 0%,#020918e4 43%,#0209186e 75%,transparent 95%);
+ }
+ .cosmos-landing .cosmos-hero h1 em{color:#d0e7ff!important;-webkit-text-fill-color:#d0e7ff!important}
+}
+
+
+/* Photographic Moon / spiral galaxy refinement. */
+#cosmic-scene .cosmic-galaxy-photo{
+ position:absolute;z-index:1;top:7.5%;left:65.5%;width:clamp(150px,15vw,245px);height:auto;aspect-ratio:1.1;
+ object-fit:cover;object-position:29% 52%;opacity:.53;mix-blend-mode:screen;pointer-events:none;
+ filter:contrast(1.4) saturate(1.4) hue-rotate(25deg) brightness(.78) drop-shadow(0 0 19px #5253b4a3);
+ -webkit-mask-image:radial-gradient(ellipse at 46% 50%,#000 0%,#000 19%,#0008 43%,transparent 71%);
+ mask-image:radial-gradient(ellipse at 46% 50%,#000 0%,#000 19%,#0008 43%,transparent 71%);
+ transform:rotate(-21deg);
+}
+#cosmic-scene .cosmic-moon{
+ background:radial-gradient(circle at 35% 25%,#a4b9d7,#506c9c 40%,#152d55 80%,#05112a);
+}
+#cosmic-scene .cosmic-moon img{
+ opacity:.96;transform:scale(1.18);mix-blend-mode:screen;
+ filter:brightness(1.01) contrast(1.14) saturate(.35);
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 57%,transparent 71%);
+ mask-image:radial-gradient(circle,#000 0%,#000 57%,transparent 71%);
+}
+#cosmic-scene .cosmic-solar-loops{opacity:.51;filter:drop-shadow(0 0 10px #e96b2a7a)}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-galaxy-photo{width:142px;left:60%;top:6%;opacity:.26}
+ #cosmic-scene .cosmic-moon img{filter:brightness(.95) contrast(1.16)}
+}
+
+
+/* ESA/Webb NGC 3324 Cosmic Cliffs: real interstellar cloud depth framing the UI. */
+#cosmic-scene .cosmic-cliffs{
+ position:absolute;z-index:1;pointer-events:none;object-fit:cover;
+ mix-blend-mode:screen;will-change:transform;
+}
+#cosmic-scene .cosmic-cliffs--left{
+ left:-8%;top:31%;width:50%;height:27%;object-position:28% 65%;
+ opacity:.76;filter:hue-rotate(166deg) brightness(.86) contrast(1.37) saturate(1.75);
+ -webkit-mask-image:linear-gradient(to bottom,transparent 1%,#000b 29%,#000 47%,#0009 78%,transparent 100%),linear-gradient(to right,#000 0%,#000 64%,transparent 100%);
+ mask-image:linear-gradient(to bottom,transparent 1%,#000b 29%,#000 47%,#0009 78%,transparent 100%);
+}
+#cosmic-scene .cosmic-cliffs--right{
+ right:-10%;top:34%;width:45%;height:26%;object-position:75% 66%;
+ opacity:.66;filter:hue-rotate(-12deg) brightness(.72) contrast(1.25) saturate(1.45);
+ -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 31%,#000 72%,transparent 100%);
+ mask-image:linear-gradient(to bottom,transparent 0%,#000 31%,#000 72%,transparent 100%);
+}
+#cosmic-scene .cosmic-cliffs--floor{
+ left:-3%;bottom:-3%;width:106%;height:25%;object-position:center 61%;
+ opacity:.50;filter:hue-rotate(174deg) brightness(.62) saturate(1.7) contrast(1.24);
+ -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 25%,#000 63%,transparent 100%);
+ mask-image:linear-gradient(to bottom,transparent 0%,#000 25%,#000 63%,transparent 100%);
+}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-cliffs--left{top:21%;left:-14%;width:78%;height:18%;opacity:.43}
+ #cosmic-scene .cosmic-cliffs--right{top:24%;right:-35%;width:79%;height:21%;opacity:.40}
+ #cosmic-scene .cosmic-cliffs--floor{bottom:0;width:112%;height:17%;opacity:.30}
+}
+@media(prefers-reduced-motion:reduce){
+ #cosmic-scene .cosmic-cliffs{will-change:auto}
+}
+
+
+/* Detailed visual calibration from Chromium capture (desktop 1792x912). */
+#cosmic-scene .cosmic-moon{
+ background:radial-gradient(circle at 36% 28%,#a9c5e4 0%,#627ca7 40%,#263b62 69%,#05122b 100%);
+ box-shadow:0 0 15px #9ccafa7c,0 0 70px #469ce845,inset -28px -25px 55px #0a1b3bd1;
+}
+#cosmic-scene .cosmic-moon img{
+ mix-blend-mode:normal;
+ filter:brightness(.75) contrast(1.35) saturate(.38) sepia(.035);
+ opacity:.98;transform:scale(1.12);
+}
+#cosmic-scene .cosmic-moon::after{opacity:.48}
+#cosmic-scene .cosmic-cliffs--left{
+ opacity:1;top:30%;height:30%;filter:hue-rotate(165deg) brightness(1.25) contrast(1.4) saturate(2);
+}
+#cosmic-scene .cosmic-cliffs--right{
+ opacity:.92;top:32%;height:30%;filter:hue-rotate(-9deg) brightness(1.1) contrast(1.4) saturate(1.6);
+}
+#cosmic-scene .cosmic-cliffs--floor{
+ opacity:.77;bottom:-1%;height:27%;filter:hue-rotate(166deg) brightness(.88) contrast(1.35) saturate(1.9);
+}
+#cosmic-scene .cosmic-atmosphere{opacity:1}
+#cosmic-scene .cosmic-nebula-photo{
+ opacity:.49;filter:brightness(.85) contrast(1.35) saturate(1.8) hue-rotate(9deg);
+}
+#cosmic-scene .cosmic-galaxy-photo{
+ opacity:.89;top:7%;left:65%;filter:contrast(1.35) saturate(1.6) hue-rotate(20deg) brightness(1.1) drop-shadow(0 0 26px #705bd8ae);
+}
+#cosmic-scene .cosmic-vignette{
+ background:radial-gradient(ellipse at 52% 29%,#020915b7 0%,#0209188e 27%,#02091627 52%,transparent 83%);
+}
+.cosmos-landing .cosmos-hero h1{text-shadow:0 3px 22px #000e,0 0 6px #0009}
+.cosmos-landing .cosmos-course{box-shadow:inset 0 1px #d9eeff6a,0 17px 45px #000a,0 0 21px #328fe543}
+.cosmos-landing .cosmos-course::after{
+ opacity:.95!important;filter:drop-shadow(0 0 16px #328ce48d);
+ background-position:center bottom;background-size:105% auto;
+}
+.cosmos-landing .cosmos-course--math::after{
+ filter:drop-shadow(0 0 18px #417ae49b) hue-rotate(25deg);
+}
+.cosmos-landing .cosmos-shortcut{background:linear-gradient(145deg,#193b60df,#06172be9);box-shadow:inset 0 1px #ddf6ff75,0 8px 28px #0009,0 0 13px #3b95d558}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-cliffs--left{opacity:.47;filter:hue-rotate(168deg) brightness(.9) saturate(1.55)}
+ #cosmic-scene .cosmic-cliffs--right{opacity:.46;filter:hue-rotate(-8deg) brightness(.85) saturate(1.3)}
+ #cosmic-scene .cosmic-cliffs--floor{opacity:.40}
+ #cosmic-scene .cosmic-vignette{background:radial-gradient(ellipse at 50% 33%,#020918e4 0%,#020918c9 40%,#0209186a 70%,transparent 97%)}
+}
+
+
+/* Approved-look finishing: blue lunar relief, deep blue clouds, glass detail. */
+#cosmic-scene .cosmic-moon img{
+ filter:grayscale(1) sepia(.42) hue-rotate(163deg) saturate(1.48) brightness(.94) contrast(1.18);
+}
+#cosmic-scene .cosmic-moon{
+ box-shadow:0 0 3px #effaffb8,0 0 27px #86c2f88c,0 0 85px #3f91ec48,inset -22px -28px 59px #0a1c3d94;
+}
+#cosmic-scene .cosmic-cliffs--left{
+ filter:hue-rotate(209deg) brightness(.87) contrast(1.45) saturate(1.65);
+ opacity:.95;
+}
+#cosmic-scene .cosmic-cliffs--floor{
+ filter:hue-rotate(201deg) brightness(.67) contrast(1.48) saturate(1.7);
+ opacity:.67;
+}
+#cosmic-scene .cosmic-nebula-photo{opacity:.40;filter:brightness(.79) contrast(1.34) saturate(1.6) hue-rotate(15deg)}
+#cosmic-scene .cosmic-cliffs--right{opacity:.81;filter:hue-rotate(-7deg) brightness(.86) contrast(1.5) saturate(1.55)}
+#cosmic-scene .cosmic-galaxy-photo{opacity:.90}
+#cosmic-scene .cosmic-solar-loops{opacity:.43}
+.cosmos-landing .cosmos-course--azure::before{
+ background:
+ radial-gradient(circle at 84% 83%,transparent 0 35px,#63c0ffb5 39px,#4c9df22b 42px,transparent 51px),
+ radial-gradient(circle at 81% 91%,#54a6ff23,transparent 86px),
+ linear-gradient(125deg,#4eaeef16,transparent 40%,#0f5bb924 100%);
+}
+.cosmos-landing .cosmos-course--math::before{
+ background:
+ radial-gradient(ellipse at 82% 90%,#6785e12e,transparent 40%),
+ linear-gradient(125deg,#608dff0f,transparent 35%,#22478b21);
+}
+.cosmos-landing .cosmos-btn--primary,.cosmos-landing .cosmos-btn--secondary{
+ box-shadow:inset 0 1px #d3f3ff86,0 7px 24px #000a,0 0 13px #286dab48;
+}
+.cosmos-landing .cosmos-btn--primary{box-shadow:inset 0 1px #f3fbffd9,0 0 13px #63b5fd8c,0 9px 25px #0009}
+body[data-cosmic-view="landing"] .cosmic-effects-toggle{opacity:.57;transform:scale(.82);transform-origin:bottom right}
+body[data-cosmic-view="landing"] .cosmic-effects-toggle:hover,
+body[data-cosmic-view="landing"] .cosmic-effects-toggle:focus-visible{opacity:1}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-moon img{filter:grayscale(1) sepia(.4) hue-rotate(163deg) saturate(1.35) brightness(.87) contrast(1.21)}
+ #cosmic-scene .cosmic-cliffs--left{opacity:.53;filter:hue-rotate(209deg) brightness(.75) saturate(1.35)}
+ #cosmic-scene .cosmic-cliffs--floor{opacity:.30}
+ body[data-cosmic-view="landing"] .cosmic-effects-toggle{opacity:.38;transform:scale(.72)}
+}
