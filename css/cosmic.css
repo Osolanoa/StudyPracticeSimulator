@@ -1,0 +1,69 @@
+/* Cosmic Study Simulator — progressive enhancement, dark theme only. */
+#cosmic-scene{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 22% 38%,#10274c 0,transparent 45%),radial-gradient(ellipse at 82% 70%,#46211b 0,transparent 43%),#040915;contain:paint}
+#cosmic-scene canvas{position:absolute;inset:0;width:100%;height:100%}
+#cosmic-scene .cosmic-mist{position:absolute;inset:-15%;background:radial-gradient(ellipse at 27% 33%,#1664b53d,transparent 38%),radial-gradient(ellipse at 72% 57%,#732e9a28,transparent 34%),radial-gradient(ellipse at 91% 77%,#e46c1520,transparent 30%);filter:blur(52px)}
+#cosmic-scene .cosmic-body{position:absolute;will-change:transform;transform:translate3d(0,0,0);border-radius:50%;aspect-ratio:1;overflow:visible}
+#cosmic-scene .cosmic-body::before{content:'';position:absolute;inset:-26%;border-radius:50%;z-index:-1}
+#cosmic-scene .cosmic-body img{display:block;width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;filter:contrast(1.07);opacity:.94}
+#cosmic-scene .cosmic-moon{left:clamp(-195px,-11vw,-65px);top:clamp(-125px,-10vw,-55px);width:clamp(350px,36vw,640px);filter:drop-shadow(0 0 25px #8bc7ff48)}
+#cosmic-scene .cosmic-moon::before{background:radial-gradient(circle,#81b7fa37 34%,#4285d41e 51%,transparent 73%);filter:blur(22px)}
+#cosmic-scene .cosmic-sun{right:clamp(-210px,-13vw,-75px);bottom:clamp(-260px,-21vw,-100px);width:clamp(440px,44vw,760px);filter:drop-shadow(0 0 28px #ff9b3855)}
+#cosmic-scene .cosmic-sun::before{background:radial-gradient(circle,#ffba5c70 15%,#f77b2240 40%,transparent 74%);filter:blur(38px)}
+#cosmic-scene .cosmic-sun img{filter:contrast(1.16) saturate(1.2);opacity:.94}
+#cosmic-scene .cosmic-vignette{position:absolute;inset:0;background:linear-gradient(90deg,#050b1a1c,transparent 40%,#050b1a1e),radial-gradient(ellipse at 50% 46%,#040918cb 0%,#0409188a 28%,transparent 69%)}
+body[data-cosmic-view]{background:#040915}
+body[data-cosmic-view] #app{position:relative;z-index:1}
+body[data-cosmic-view] .skip{z-index:15}
+body[data-cosmic-view="landing"] .landing{max-width:1180px;min-height:100vh;padding:clamp(20px,3vw,40px) 24px 60px;display:flex;flex-direction:column;justify-content:flex-start}
+.cosmic-header{display:none}
+body[data-cosmic-view="landing"] .cosmic-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 24px;border:1px solid #7f9bb858;background:#0b1529bc;box-shadow:inset 0 1px #ffffff26,0 12px 40px #0003;border-radius:20px;backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.cosmic-brand{font-size:1.02rem;font-weight:800;letter-spacing:-.02em;color:#eef7ff;display:flex;align-items:center;gap:12px}
+.cosmic-brand-symbol{font-size:1.5rem;color:#7cdaff}
+.cosmic-brand-sub{color:#b3c8e7;font-size:.78rem}
+body[data-cosmic-view="landing"] .landing-hero{max-width:830px;margin:clamp(70px,10vh,130px) auto 40px;text-align:center}
+body[data-cosmic-view="landing"] .landing-hero .eyebrow{color:#85c9fb;font-weight:800;letter-spacing:.19em}
+body[data-cosmic-view="landing"] .landing-hero h1{font-size:clamp(2.6rem,6vw,5.3rem);line-height:1.07;letter-spacing:-.055em;margin:12px 0 20px;font-weight:800;color:#f3f7ff;text-shadow:0 3px 25px #030714}
+body[data-cosmic-view="landing"] .landing-hero h1 em{display:block;font-style:normal;background:linear-gradient(90deg,#cbb0ff 5%,#8c9fff 45%,#69d7fb 95%);background-clip:text;-webkit-background-clip:text;color:transparent}
+body[data-cosmic-view="landing"] .landing-hero .sub{font-size:clamp(1rem,1.8vw,1.22rem);color:#d2def2}
+body[data-cosmic-view="landing"] .course-grid{gap:24px;max-width:1080px;width:100%;margin:0 auto}
+body[data-cosmic-view="landing"] .course-card{position:relative;min-height:230px;border:1px solid #77bdf579;border-radius:24px;background:linear-gradient(120deg,#132e4ddd,#091629dc);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 17px 48px #0008,inset 0 1px #ffffff19;padding:30px;overflow:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .35s}
+body[data-cosmic-view="landing"] .course-card:nth-child(2){border-color:#a68bf285;background:linear-gradient(120deg,#29234dda,#12152bdf)}
+body[data-cosmic-view="landing"] .course-card:hover,body[data-cosmic-view="landing"] .course-card:focus-within{transform:translateY(-7px);border-color:#a7e4ff;box-shadow:0 24px 70px #000a,0 0 35px #2c9bea38,inset 0 1px #ffffff35}
+body[data-cosmic-view="landing"] .course-card:nth-child(2):hover,body[data-cosmic-view="landing"] .course-card:nth-child(2):focus-within{border-color:#d7bcff;box-shadow:0 24px 70px #000a,0 0 35px #ab71ed35}
+body[data-cosmic-view="landing"] .course-card::after{content:'';position:absolute;inset:auto -20% -65% 25%;height:220px;border-radius:50%;background:radial-gradient(ellipse,#2f99e12c,transparent 72%);pointer-events:none}
+body[data-cosmic-view="landing"] .course-card:nth-child(2)::after{background:radial-gradient(ellipse,#a469ef2f,transparent 72%)}
+body[data-cosmic-view="landing"] .course-card h2{font-size:1.55rem;color:#f4f7ff;letter-spacing:-.025em;margin-top:9px}
+body[data-cosmic-view="landing"] .course-card .eyebrow{color:#7ddafa}
+body[data-cosmic-view="landing"] .course-card:nth-child(2) .eyebrow{color:#c5a7fa}
+body[data-cosmic-view="landing"] .course-card .sub,body[data-cosmic-view="landing"] .course-progress{color:#cedaee}
+body[data-cosmic-view="landing"] .course-facts span{background:#ffffff13;border-color:#ffffff27;color:#ecf4ff}
+body[data-cosmic-view="landing"] .course-card .btn{position:relative;z-index:1;background:linear-gradient(105deg,#1775c4,#6854d4);border:1px solid #91c9fc;border-radius:12px;box-shadow:0 5px 20px #295fea35;transition:transform .2s,box-shadow .2s}
+body[data-cosmic-view="landing"] .course-card .btn:hover{transform:translateY(-2px);box-shadow:0 7px 30px #6c81ff70}
+body[data-cosmic-view="landing"] .course-card:nth-child(2) .btn{background:linear-gradient(105deg,#5748b0,#9657bc);border-color:#c9a2fe}
+body[data-cosmic-view="course"] .side,body[data-cosmic-view="session"] .side{background:#070f22e8;backdrop-filter:blur(18px)}
+body[data-cosmic-view="course"] .card,body[data-cosmic-view="session"] .card{background:#111b2fdd;border-color:#5c719255;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+body[data-cosmic-view="course"] .content,body[data-cosmic-view="session"] .content{color:#edf4fc}
+body[data-cosmic-view="session"] #cosmic-scene{filter:brightness(.35) saturate(.58)}
+body[data-cosmic-view="session"] .question-card{background:#101828f4;box-shadow:0 18px 60px #0009}
+body[data-cosmic-view="session"] .option{background:#192438eb}
+body[data-cosmic-view="session"] .option:hover{background:#223451}
+.cosmic-effects-toggle{position:fixed;z-index:12;right:20px;bottom:18px;background:#08172bcc;border:1px solid #9ec9ed70;border-radius:99px;padding:9px 13px;color:#d9ebff;font:600 .78rem/1.2 system-ui;backdrop-filter:blur(14px);cursor:pointer}
+.cosmic-effects-toggle:hover{border-color:#b8e7ff;background:#1d3152}
+.cosmic-effects-toggle:focus-visible{outline:3px solid #9ad7ff;outline-offset:3px}
+body[data-cosmic-effect="off"] #cosmic-scene{display:none}
+body[data-cosmic-effect="off"]{background:#080d14}
+body[data-cosmic-effect="reduced"] #cosmic-scene .cosmic-body{will-change:auto}
+:root[data-theme="light"] #cosmic-scene{display:none}
+:root[data-theme="light"] body[data-cosmic-view]{background:var(--bg)}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .landing-hero h1{color:#13233b;text-shadow:none}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .landing-hero .sub{color:#5c6b82}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .course-card{background:#fff;border-color:#d8e3ef;box-shadow:0 12px 28px #16345a13}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .course-card h2{color:#13233b}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .course-card .sub,:root[data-theme="light"] body[data-cosmic-view="landing"] .course-progress{color:#5c6b82}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .course-facts span{background:#f2f6fa;border-color:#d8e3ef;color:#13233b}
+:root[data-theme="light"] body[data-cosmic-view="landing"] .cosmic-header{background:#f8fbff;border-color:#d8e3ef}
+:root[data-theme="light"] .cosmic-brand{color:#13233b}
+:root[data-theme="light"] body[data-cosmic-view="course"] .card,:root[data-theme="light"] body[data-cosmic-view="session"] .card{background:#fff;border-color:#d8e3ef}
+:root[data-theme="light"] body[data-cosmic-view="course"] .content,:root[data-theme="light"] body[data-cosmic-view="session"] .content{color:#13233b}
+@media(max-width:780px){body[data-cosmic-view="landing"] .landing{padding:15px 16px 80px}body[data-cosmic-view="landing"] .landing-hero{margin:78px auto 30px}body[data-cosmic-view="landing"] .course-card{min-height:0;padding:24px}#cosmic-scene .cosmic-moon{left:-155px;top:-110px;width:355px;opacity:.63}#cosmic-scene .cosmic-sun{right:-165px;bottom:-120px;width:440px;opacity:.55}.cosmic-header{padding:13px 17px!important}.cosmic-brand-sub{display:none}}
+@media(prefers-reduced-motion:reduce){body[data-cosmic-view="landing"] .course-card,body[data-cosmic-view="landing"] .course-card .btn{transition:none!important}body[data-cosmic-view="landing"] .course-card:hover{transform:none}}
