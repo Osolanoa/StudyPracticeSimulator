@@ -1,0 +1,161 @@
+/* Fidelity pass: matches the approved cinematic reference rather than an enlarged photo layout. */
+#cosmic-scene{background:radial-gradient(ellipse at 52% 33%,#0b1d3e 0%,#020919 61%,#010613 100%)!important}
+#cosmic-scene .cosmic-mist{opacity:.44;filter:blur(65px);
+ background:radial-gradient(ellipse at 18% 40%,#0e4a9d63,transparent 38%),radial-gradient(ellipse at 74% 52%,#4b24984a,transparent 37%),radial-gradient(ellipse at 92% 36%,#c3521e35,transparent 38%)}
+#cosmic-scene .cosmic-atmosphere{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+ pointer-events:none;z-index:0;opacity:.99;mix-blend-mode:screen;will-change:transform}
+#cosmic-scene .cosmic-horizon{display:none}
+#cosmic-scene .cosmic-vignette{z-index:1;background:
+ radial-gradient(ellipse at 53% 35%,#020918dd 0%,#020916b3 28%,#02091a45 53%,transparent 79%);
+ pointer-events:none}
+#cosmic-scene .cosmic-moon{z-index:2;top:clamp(-140px,-9.8vw,-70px);left:clamp(-160px,-8.5vw,-85px);
+ width:clamp(455px,34vw,600px);height:auto;aspect-ratio:1;
+ background:radial-gradient(circle at 27% 25%,#e5f2ff,#9caecc 35%,#46699c 69%,#0a1c3e 97%);
+ box-shadow:0 0 21px #b9dbff9c,0 0 90px #56a8f35d,inset -25px -35px 68px #081a3f9c;
+ filter:drop-shadow(0 0 36px #5bb0f45c)}
+#cosmic-scene .cosmic-moon::before{inset:-18%;filter:blur(35px);
+ background:radial-gradient(circle,#b8daff35 20%,#4c9fef23 43%,transparent 68%)}
+#cosmic-scene .cosmic-moon img{opacity:1;transform:scale(1.09);mix-blend-mode:luminosity;
+ filter:brightness(1.50) contrast(1.37) saturate(.38);
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 58%,transparent 71%);
+ mask-image:radial-gradient(circle,#000 0%,#000 58%,transparent 71%)}
+#cosmic-scene .cosmic-moon::after{inset:0;opacity:.82;
+ background:
+ radial-gradient(circle at 34% 26%,#fff 0 1px,#d5eeff 2px,transparent 9px),
+ radial-gradient(circle at 49% 16%,#fff 0 1px,#b3dcff 2px,transparent 8px),
+ radial-gradient(circle at 43% 52%,#fff 0 1px,#d9f3ff 2px,transparent 9px),
+ radial-gradient(circle at 59% 65%,#fff 0 1px,#d6efff 2px,transparent 10px),
+ radial-gradient(circle at 69% 35%,#fff 0 1px,#d8f4ff 2px,transparent 8px),
+ linear-gradient(128deg,#d9efff2a,transparent 45%,#07132e59 90%);
+ mix-blend-mode:screen;pointer-events:none}
+#cosmic-scene .cosmic-sun{z-index:2;top:clamp(85px,11vh,125px);bottom:auto;
+ right:clamp(-340px,-18vw,-195px);width:clamp(620px,38vw,745px);height:auto;aspect-ratio:1;
+ background:radial-gradient(circle at 32% 39%,#fff5b2 0%,#ffba31 27%,#ff7107 56%,#7c2008 92%);
+ filter:drop-shadow(0 0 48px #ff8a2d91);
+ box-shadow:0 0 19px #ffda7fbd,0 0 82px #ff851a6b,0 0 155px #ff6f2327,inset -26px -15px 59px #ac2c0b83}
+#cosmic-scene .cosmic-sun::before{inset:-31%;filter:blur(44px);
+ background:radial-gradient(circle,#ff9b4957 12%,#fa822e30 31%,#ff9b1a12 49%,transparent 71%)}
+#cosmic-scene .cosmic-sun img{opacity:.93;transform:scale(1.08);mix-blend-mode:screen;
+ filter:brightness(1.50) contrast(1.38) saturate(1.65);
+ -webkit-mask-image:radial-gradient(circle,#000 0%,#000 55%,transparent 72%);
+ mask-image:radial-gradient(circle,#000 0%,#000 55%,transparent 72%)}
+#cosmic-scene .cosmic-sun::after{inset:-3%;opacity:.68;filter:blur(8px);
+ background:conic-gradient(from 22deg,#ff8e2100,#ffe37b22 16deg,#ffa63a00 35deg,#ffef8f25 58deg,#ff982900 82deg,#ffdf8034 115deg,#ffa72700 141deg,#ffe98c2b 207deg,#ff7b1700 242deg,#ffe68026 301deg,#ff8e2100 360deg)}
+#cosmic-scene .cosmic-solar-loops{position:absolute;z-index:3;right:clamp(-165px,-9vw,-80px);
+ top:clamp(45px,6vh,83px);width:clamp(570px,40vw,740px);height:auto;opacity:.82;
+ mix-blend-mode:screen;pointer-events:none;filter:drop-shadow(0 0 14px #f99d296b)}
+/* Reference layout: compact hero, course cards visible and shortcuts above the fold. */
+body[data-cosmic-view="landing"] .cosmos-landing{max-width:1595px;
+ padding:clamp(12px,1.6vh,22px) clamp(16px,4vw,74px) 20px}
+.cosmos-landing .cosmos-topnav{max-width:1410px;margin:auto;min-height:68px;
+ padding:9px clamp(14px,2vw,30px);border-radius:24px;
+ border-color:#91b7d77d;background:linear-gradient(100deg,#0e2746eb,#07172eea 62%,#0b1831e8);
+ box-shadow:inset 0 1px #dcf4ff38,0 8px 28px #0008,0 0 14px #3d89c51f}
+.cosmos-landing .cosmos-brand{font-size:1.02rem;min-width:210px;line-height:1.1}
+.cosmos-landing .cosmos-brand svg{width:40px;height:40px;stroke:#a0d8ff}
+.cosmos-landing .cosmos-nav-link{font-size:.90rem;padding:10px 15px;gap:10px}
+.cosmos-landing .cosmos-nav-link.is-active{background:linear-gradient(145deg,#1b5687,#10345d);
+ border-color:#60b5f5;box-shadow:inset 0 1px #daf6ff80,0 0 19px #308bc37b}
+.cosmos-landing .cosmos-theme{background:#102844d9;border:1px solid #789fbf8f}
+.cosmos-landing .cosmos-hero{max-width:1080px;margin:clamp(35px,5.3vh,65px) auto clamp(29px,4.8vh,48px)}
+.cosmos-landing .cosmos-kicker{font-size:.72rem;letter-spacing:.34em;margin-bottom:15px;color:#cde6f8;gap:19px}
+.cosmos-landing .cosmos-hero h1{font-size:clamp(2.8rem,3.72vw,4.25rem);line-height:1.075;letter-spacing:-.046em;
+ max-width:1000px;margin:0 auto 15px;color:#f8fbff;font-weight:800;
+ text-shadow:0 4px 32px #000c}
+.cosmos-landing .cosmos-hero h1 em{background:linear-gradient(100deg,#deebff 6%,#a9cef9 49%,#79baff 100%);
+ -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.cosmos-landing .cosmos-hero-sub{font-size:clamp(.99rem,1.24vw,1.17rem);line-height:1.45;color:#e4efff;margin:0}
+.cosmos-landing .cosmos-hero-actions{gap:26px;margin-top:26px}
+.cosmos-landing .cosmos-btn{min-width:250px;min-height:57px;padding:11px 26px;gap:16px;
+ font-size:.99rem;border-radius:99px}
+.cosmos-landing .cosmos-btn--primary{background:linear-gradient(150deg,#194d7b,#0e2d51 70%,#0c2c54);
+ border-color:#8bd3ff;box-shadow:inset 0 1px #e6f6ffc7,0 0 6px #67bcffba,0 0 23px #287ec670,0 8px 22px #0009}
+.cosmos-landing .cosmos-btn--secondary{background:linear-gradient(150deg,#14263eea,#07172df2);
+ border-color:#a9c2dcb0;box-shadow:inset 0 1px #edf8ff30,0 6px 21px #0009}
+.cosmos-landing .cosmos-btn:hover{box-shadow:inset 0 1px #fff7,0 0 9px #8cd6ffbe,0 0 26px #448fc885,0 9px 30px #0009;
+ transform:translateY(-3px)}
+.cosmos-landing .cosmos-courses{max-width:1260px}
+.cosmos-landing .cosmos-section-head{margin-bottom:15px}
+.cosmos-landing .cosmos-section-head h2{font-size:1.53rem;gap:12px;text-shadow:0 4px 15px #000}
+.cosmos-landing .cosmos-section-head h2::before{width:4px;height:30px;box-shadow:0 0 14px #79caff}
+.cosmos-landing .cosmos-see-all{border:0;background:transparent;color:#9cd9ff;
+ font-size:.86rem;font-weight:650;letter-spacing:.01em;cursor:pointer;text-shadow:0 0 14px #2e9dca70}
+.cosmos-landing .cosmos-see-all:hover{text-decoration:underline;text-underline-offset:4px}
+.cosmos-landing .cosmos-course-grid{gap:22px}
+.cosmos-landing .cosmos-course{min-height:214px;border-radius:22px;cursor:pointer;
+ border:1px solid #93c8f3b8;
+ background:linear-gradient(112deg,#092443ed,#06182ce9 67%,#0b2b4fdc);
+ box-shadow:inset 0 1px #d9eeff63,0 13px 39px #0009,0 0 14px #3587bd31}
+.cosmos-landing .cosmos-course--math{background:linear-gradient(120deg,#112b4cec,#09172fea 67%,#122b49d7)}
+.cosmos-landing .cosmos-course::before{content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:linear-gradient(125deg,#4eaeef17,transparent 37%,#0f5bb927 100%)}
+.cosmos-landing .cosmos-course::after{content:'';position:absolute;z-index:0;inset:18% -10% -15% 42%;
+ pointer-events:none;opacity:.63;background:url("./../assets/cosmic-card-waves.svg") center bottom / contain no-repeat;
+ filter:drop-shadow(0 0 7px #2076c385)}
+.cosmos-landing .cosmos-course--math::after{opacity:.58;transform:scaleX(-1);
+ filter:hue-rotate(19deg) drop-shadow(0 0 9px #326dba7f)}
+.cosmos-landing .cosmos-course-visual{z-index:1;flex-basis:105px;padding:21px 15px 18px 24px}
+.cosmos-landing .cosmos-course-symbol{width:60px;height:60px;border-radius:15px;
+ border-color:#6ab1eebd;background:linear-gradient(142deg,#134471,#08213f);
+ box-shadow:inset 0 1px #d7efff73,0 0 24px #258be476}
+.cosmos-landing .cosmos-course-symbol svg{width:34px;height:34px}
+.cosmos-landing .cosmos-course-copy{z-index:1;padding:20px 23px 18px 0;gap:0}
+.cosmos-landing .cosmos-label{font-size:.69rem;letter-spacing:.15em;color:#93daff}
+.cosmos-landing .cosmos-course h3{font-size:clamp(1.02rem,1.38vw,1.33rem);margin:3px 0 6px;font-weight:760;color:#f4f9ff}
+.cosmos-landing .cosmos-course-copy>p{font-size:.77rem;line-height:1.45;color:#d7e5f4;max-width:35ch;margin:0 0 7px}
+.cosmos-landing .cosmos-facts{gap:10px;padding:3px 0 10px;margin-top:auto}
+.cosmos-landing .cosmos-facts span{font-size:.7rem;border:1px solid #8bc2e83d;background:#1639578c;padding:4px 10px}
+.cosmos-landing .cosmos-track-label{font-size:.72rem;margin:0 0 5px;color:#c8dff1}
+.cosmos-landing .cosmos-track-label strong{font-size:.80rem}
+.cosmos-landing .cosmos-track{height:6px;background:#09213be3}
+.cosmos-landing .cosmos-track>span{background:linear-gradient(90deg,#3285c5,#86d1ff)}
+.cosmos-landing .cosmos-course-go{position:absolute;top:17px;right:19px;z-index:2;
+ margin:0;width:29px;height:29px;display:grid;place-items:center;border-radius:50%;
+ color:#b8dbfa;font-size:0;background:#132e495e;border:1px solid #92c4e35b}
+.cosmos-landing .cosmos-course-go svg{width:15px;height:15px}
+.cosmos-landing .cosmos-course-go:hover{background:#24577c;color:#fff}
+.cosmos-landing .cosmos-quick{max-width:1260px;gap:17px;margin:clamp(18px,2.4vh,26px) auto 0}
+.cosmos-landing .cosmos-shortcut{min-height:90px;border-radius:21px;gap:8px;padding:12px;
+ font-size:.85rem;border-color:#9ac9f2a0;background:linear-gradient(145deg,#122d4ac9,#071628e9);
+ box-shadow:inset 0 1px #edfaff6a,0 8px 25px #0009,0 0 12px #3c9dd52d}
+.cosmos-landing .cosmos-shortcut svg{width:26px;height:26px;color:#b1ddff}
+.cosmos-landing .cosmos-shortcut:hover{border-color:#c3e7ff;background:linear-gradient(140deg,#1c4971,#122c4c);
+ box-shadow:inset 0 1px #eafaff99,0 0 20px #4689bf5e,0 10px 31px #0009}
+.cosmos-landing .cosmos-footer{margin:15px auto 0;opacity:.7;font-size:.61rem}
+/* Keep whole visual first screen fitting without squeezing controls on desktop. */
+@media(min-width:1120px) and (max-height:910px){
+ .cosmos-landing .cosmos-hero{margin-top:clamp(27px,4.5vh,45px);margin-bottom:clamp(20px,3vh,31px)}
+ .cosmos-landing .cosmos-hero h1{font-size:clamp(2.75rem,3.45vw,3.9rem)}
+ .cosmos-landing .cosmos-hero-actions{margin-top:19px}
+ .cosmos-landing .cosmos-course{min-height:196px}
+ .cosmos-landing .cosmos-course-visual{padding-top:18px}
+ .cosmos-landing .cosmos-course-copy{padding-top:18px;padding-bottom:15px}
+ .cosmos-landing .cosmos-shortcut{min-height:79px}
+ .cosmos-landing .cosmos-quick{margin-top:17px}
+}
+@media(max-width:950px){
+ #cosmic-scene .cosmic-moon{width:clamp(360px,50vw,510px);left:-145px;top:-95px}
+ #cosmic-scene .cosmic-sun{width:clamp(470px,56vw,660px);right:-270px;top:120px}
+ #cosmic-scene .cosmic-solar-loops{width:560px;right:-150px;top:90px}
+ .cosmos-landing .cosmos-hero{margin-top:62px}
+ .cosmos-landing .cosmos-course-grid{grid-template-columns:1fr;max-width:660px;margin:auto}
+ .cosmos-landing .cosmos-course{min-height:196px}
+}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-atmosphere{object-fit:cover;object-position:50% 50%;opacity:.85}
+ #cosmic-scene .cosmic-moon{width:390px;left:-195px;top:-135px;opacity:.72}
+ #cosmic-scene .cosmic-sun{width:480px;right:-335px;top:150px;opacity:.73}
+ #cosmic-scene .cosmic-solar-loops{width:380px;right:-205px;top:110px;opacity:.55}
+ #cosmic-scene .cosmic-vignette{background:radial-gradient(ellipse at 53% 32%,#020918e5 0%,#020918ca 44%,transparent 80%)}
+ .cosmos-landing .cosmos-hero{margin-top:70px;margin-bottom:36px}
+ .cosmos-landing .cosmos-hero h1{font-size:clamp(2.15rem,8.7vw,3.5rem)}
+ .cosmos-landing .cosmos-hero-actions{margin-top:26px}
+ .cosmos-landing .cosmos-btn{min-height:55px}
+ .cosmos-landing .cosmos-course{min-height:195px}
+ .cosmos-landing .cosmos-course::after{background-size:340px auto}
+ .cosmos-landing .cosmos-shortcut{min-height:83px}
+ .cosmos-landing .cosmos-footer{margin-top:19px}
+}
+@media(prefers-reduced-motion:reduce){
+ #cosmic-scene .cosmic-atmosphere,#cosmic-scene .cosmic-solar-loops{will-change:auto}
+}
