@@ -207,3 +207,10 @@ body[data-cosmic-view="landing"] .cosmic-effects-toggle{display:none!important}
 #cosmic-scene .cosmic-solar-corona{
   filter:drop-shadow(0 0 12px #ff923dc0) drop-shadow(0 0 20px #ec5d1a6c);
 }
+
+@media(max-width:700px){
+  /* Preserve contrast of the hero heading; keep the Sun away from the headline. */
+  #cosmic-scene .cosmic-sun{top:285px;right:-320px;opacity:.58}
+  #cosmic-scene .cosmic-solar-corona{opacity:.80}
+  .cosmos-landing .cosmos-hero h1{text-shadow:0 3px 24px #010817,0 0 6px #0009}
+}
