@@ -56,15 +56,20 @@ function drawStreaks(animate) {
   }
 }
 function drawOrbits(animate){ctx.save();ctx.translate(width*.5,height*.56);ctx.rotate(-.17);ctx.scale(1,.37);for(let j=0;j<2;j++){ctx.beginPath();ctx.ellipse(0,0,width*(.51+j*.14),height*(.84+j*.18),0,0,Math.PI*2);ctx.lineWidth=.9;ctx.strokeStyle=j?'rgba(255,158,106,.19)':'rgba(112,159,249,.30)';ctx.stroke()}if(animate)for(let i=0;i<motes.length;i++){const m=motes[i],a=m.phase+elapsed*m.rate,x=width*(.51+m.radius*.11)*Math.cos(a),y=height*(.84+m.radius*.13)*Math.sin(a);ctx.beginPath();ctx.arc(x,y,.7+m.brightness*1.6,0,Math.PI*2);ctx.fillStyle='rgba(170,208,255,'+(m.brightness*.65)+')';ctx.fill()}ctx.restore()}
-function render(time){raf=0;if(document.hidden||mode!=='high'||document.documentElement.dataset.theme==='light')return;if(!last)last=time;const dt=Math.min((time-last)/1000,.05);last=time;elapsed+=dt;px+=(aimX-px)*Math.min(1,dt*2.8);py+=(aimY-py)*Math.min(1,dt*2.8);if(ctx){ctx.clearRect(0,0,width,height);drawNebula(true);drawStars(true);drawOrbits(true);drawStreaks(true)}
+function render(time){raf=0;if(document.hidden||mode!=='high'||document.body.dataset.cosmicView==='session'||document.documentElement.dataset.theme==='light')return;if(!last)last=time;const dt=Math.min((time-last)/1000,.05);last=time;elapsed+=dt;px+=(aimX-px)*Math.min(1,dt*2.8);py+=(aimY-py)*Math.min(1,dt*2.8);if(ctx){ctx.clearRect(0,0,width,height);drawNebula(true);drawStars(true);drawOrbits(true);drawStreaks(true)}
 const mx=px*13+Math.sin(elapsed*.16)*9+Math.sin(elapsed*.073)*3,my=py*9+Math.cos(elapsed*.12)*8;
 const sx=px*8+Math.sin(elapsed*.09+1.7)*9,sy=py*6+Math.sin(elapsed*.14+.8)*7;
 moon.style.transform='translate3d('+mx.toFixed(2)+'px,'+my.toFixed(2)+'px,0) rotate('+(Math.sin(elapsed*.035)*.9).toFixed(3)+'deg)';
 sun.style.transform='translate3d('+sx.toFixed(2)+'px,'+sy.toFixed(2)+'px,0) scale('+(1+.012*Math.sin(elapsed*.19)+.004*Math.sin(elapsed*.089)).toFixed(4)+')';
 raf=requestAnimationFrame(render)}
-function start(){if(raf||document.hidden||mode!=='high'||document.documentElement.dataset.theme==='light')return;last=0;raf=requestAnimationFrame(render)}
+function start(){if(raf||document.hidden||mode!=='high'||document.body.dataset.cosmicView==='session'||document.documentElement.dataset.theme==='light')return;last=0;raf=requestAnimationFrame(render)}
 function stop(){if(raf){cancelAnimationFrame(raf);raf=0}}
 window.addEventListener('resize',measure,{passive:true});window.addEventListener('pointermove',e=>{aimX=(e.clientX/Math.max(1,width)-.5)*2;aimY=(e.clientY/Math.max(1,height)-.5)*2},{passive:true});window.addEventListener('blur',()=>{aimX=aimY=0});document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else start()});
 const themeObserver=new MutationObserver(()=>{if(document.documentElement.dataset.theme==='light')stop();else start()});themeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+const viewObserver=new MutationObserver(()=>{
+ if(document.body.dataset.cosmicView==='session'){stop();drawStatic();}
+ else if(mode==='high')start();
+});
+viewObserver.observe(document.body,{attributes:true,attributeFilter:['data-cosmic-view']});
 measure();applyMode();
 })();
