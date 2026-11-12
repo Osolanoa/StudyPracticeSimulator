@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: cosmic-visual-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   visual:
     runs-on: ubuntu-latest
@@ -29,6 +32,7 @@ jobs:
             const browser = await chromium.launch({ headless: true });
             for (const [label, width, height] of [['desktop', 1792, 912], ['mobile', 390, 844]]) {
               const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
+              page.setDefaultTimeout(12000);
               const errors = [];
               page.on('pageerror', error => errors.push(String(error)));
               await page.goto('file://' + path.resolve('index.html'), { waitUntil: 'domcontentloaded' });
