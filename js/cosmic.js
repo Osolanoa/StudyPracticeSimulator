@@ -14,7 +14,7 @@ const toggle=document.createElement('button');toggle.type='button';toggle.classN
 const motionQuery=window.matchMedia('(prefers-reduced-motion: reduce)');
 const allowed=['high','reduced','off'];let saved;try{saved=localStorage.getItem('study_cosmic_effects')}catch(e){}
 let mode=allowed.includes(saved)?saved:(motionQuery.matches?'reduced':'high');
-function applyMode(){document.body.dataset.cosmicEffect=mode;toggle.textContent=mode==='high'?'✦ Effects: High':mode==='reduced'?'✦ Effects: Reduced':'✦ Effects: Off';toggle.setAttribute('aria-label','Visual effects: '+mode+'. Click to change');if(mode==='off'||mode==='reduced'){moon.style.transform='';sun.style.transform='';atmosphere.style.transform='';solarLoops.style.transform='';earth.style.transform='';solarLoops.style.opacity='.82';clouds.forEach(c=>c.style.transform='');}if(mode==='high')start();else if(mode==='reduced')drawStatic();else stop();}
+function applyMode(){document.body.dataset.cosmicEffect=mode;toggle.textContent=mode==='high'?'✦ Effects: High':mode==='reduced'?'✦ Effects: Reduced':'✦ Effects: Off';toggle.setAttribute('aria-label','Visual effects: '+mode+'. Click to change');if(mode==='off'||mode==='reduced'){moon.style.transform='';sun.style.transform='';atmosphere.style.transform='';solarLoops.style.transform='';earth.style.transform='';solarLoops.style.opacity='.52';clouds.forEach(c=>c.style.transform='');}if(mode==='high')start();else if(mode==='reduced')drawStatic();else stop();}
 toggle.addEventListener('click',()=>{mode=allowed[(allowed.indexOf(mode)+1)%allowed.length];try{localStorage.setItem('study_cosmic_effects',mode)}catch(e){}applyMode()});
 let width=0,height=0,dpr=1,last=0,elapsed=0,raf=0;
 let aimX=0,aimY=0,px=0,py=0;
@@ -64,7 +64,7 @@ moon.style.transform='translate3d('+mx.toFixed(2)+'px,'+my.toFixed(2)+'px,0) rot
 sun.style.transform='translate3d('+sx.toFixed(2)+'px,'+sy.toFixed(2)+'px,0) scale('+(1+.012*Math.sin(elapsed*.19)+.004*Math.sin(elapsed*.089)).toFixed(4)+')';
 atmosphere.style.transform='translate3d('+(px*6+Math.sin(elapsed*.031)*10).toFixed(2)+'px,'+(py*4+Math.sin(elapsed*.023)*6).toFixed(2)+'px,0) scale(1.025)';
 solarLoops.style.transform='translate3d('+(sx*.48).toFixed(2)+'px,'+(sy*.45).toFixed(2)+'px,0) rotate('+(Math.sin(elapsed*.10)*1.4).toFixed(2)+'deg)';
-solarLoops.style.opacity=String(.73+.12*Math.sin(elapsed*.19)+.05*Math.sin(elapsed*.31));
+solarLoops.style.opacity=String(.50+.055*Math.sin(elapsed*.19)+.025*Math.sin(elapsed*.31));
 earth.style.transform='translate3d('+(px*3+Math.sin(elapsed*.018)*3.5).toFixed(2)+'px,'+(py*1.5+Math.cos(elapsed*.013)*2).toFixed(2)+'px,0)';
 clouds.forEach((cloud,i)=>{const rate=.018+i*.006;cloud.style.transform='translate3d('+(px*(5+i*2)+Math.sin(elapsed*rate+i)*11).toFixed(1)+'px,'+(py*(3+i)+Math.cos(elapsed*(rate*.73)+i)*7).toFixed(1)+'px,0) scale(1.04)';});
 raf=requestAnimationFrame(render)}
