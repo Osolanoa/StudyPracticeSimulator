@@ -3,7 +3,7 @@
 #cosmic-scene .cosmic-earth-globe {
   position:absolute;
   z-index:2;
-  inset:auto 0 0 0!important;
+  inset:auto 0 -86px 0!important;
   width:100%!important;
   height:clamp(350px,48vh,525px)!important;
   aspect-ratio:auto!important;
@@ -27,7 +27,7 @@
   mix-blend-mode:normal!important;
   border-radius:0!important;
   opacity:1!important;
-  filter:brightness(.90) contrast(1.15) saturate(1.03)!important;
+  filter:brightness(.67) contrast(1.18) saturate(1.06)!important;
   -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 88%,transparent 100%)!important;
   mask-image:linear-gradient(to bottom,transparent 0%,#000 8%,#000 88%,transparent 100%)!important;
 }
@@ -69,20 +69,20 @@
 }
 @media(max-width:1120px) {
   #cosmic-scene .cosmic-earth-globe {
-    inset:auto 0 0 0!important;
+    inset:auto 0 -65px 0!important;
     width:100%!important;
     height:clamp(310px,43vh,440px)!important;
   }
 }
 @media(max-width:700px) {
   #cosmic-scene .cosmic-earth-globe {
-    inset:auto 0 0 0!important;
+    inset:auto 0 -48px 0!important;
     width:100%!important;height:clamp(250px,37vh,390px)!important;
     opacity:.83!important;
   }
   #cosmic-scene .cosmic-earth-globe img {
     object-position:50% 27%!important;
-    filter:brightness(.78) contrast(1.21) saturate(1.01)!important;
+    filter:brightness(.59) contrast(1.22) saturate(1.02)!important;
   }
   #cosmic-scene > canvas {
     -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 25%,transparent 48%)!important;
