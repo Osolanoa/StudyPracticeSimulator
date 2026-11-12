@@ -235,3 +235,36 @@ body[data-cosmic-view="landing"] .cosmos-landing{max-width:1595px;
  #cosmic-scene .cosmic-galaxy-photo{width:142px;left:60%;top:6%;opacity:.26}
  #cosmic-scene .cosmic-moon img{filter:brightness(.95) contrast(1.16)}
 }
+
+
+/* ESA/Webb NGC 3324 Cosmic Cliffs: real interstellar cloud depth framing the UI. */
+#cosmic-scene .cosmic-cliffs{
+ position:absolute;z-index:1;pointer-events:none;object-fit:cover;
+ mix-blend-mode:screen;will-change:transform;
+}
+#cosmic-scene .cosmic-cliffs--left{
+ left:-8%;top:31%;width:50%;height:27%;object-position:28% 65%;
+ opacity:.76;filter:hue-rotate(166deg) brightness(.86) contrast(1.37) saturate(1.75);
+ -webkit-mask-image:linear-gradient(to bottom,transparent 1%,#000b 29%,#000 47%,#0009 78%,transparent 100%),linear-gradient(to right,#000 0%,#000 64%,transparent 100%);
+ mask-image:linear-gradient(to bottom,transparent 1%,#000b 29%,#000 47%,#0009 78%,transparent 100%);
+}
+#cosmic-scene .cosmic-cliffs--right{
+ right:-10%;top:34%;width:45%;height:26%;object-position:75% 66%;
+ opacity:.66;filter:hue-rotate(-12deg) brightness(.72) contrast(1.25) saturate(1.45);
+ -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 31%,#000 72%,transparent 100%);
+ mask-image:linear-gradient(to bottom,transparent 0%,#000 31%,#000 72%,transparent 100%);
+}
+#cosmic-scene .cosmic-cliffs--floor{
+ left:-3%;bottom:-3%;width:106%;height:25%;object-position:center 61%;
+ opacity:.50;filter:hue-rotate(174deg) brightness(.62) saturate(1.7) contrast(1.24);
+ -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 25%,#000 63%,transparent 100%);
+ mask-image:linear-gradient(to bottom,transparent 0%,#000 25%,#000 63%,transparent 100%);
+}
+@media(max-width:700px){
+ #cosmic-scene .cosmic-cliffs--left{top:21%;left:-14%;width:78%;height:18%;opacity:.43}
+ #cosmic-scene .cosmic-cliffs--right{top:24%;right:-35%;width:79%;height:21%;opacity:.40}
+ #cosmic-scene .cosmic-cliffs--floor{bottom:0;width:112%;height:17%;opacity:.30}
+}
+@media(prefers-reduced-motion:reduce){
+ #cosmic-scene .cosmic-cliffs{will-change:auto}
+}
