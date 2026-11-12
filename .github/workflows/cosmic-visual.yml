@@ -2,7 +2,7 @@ name: Cinematic design visual smoke
 on:
   push:
     branches:
-      - design/night-earth-real-sun-v8
+      - design/premium-reflective-title-graphite-menus
   workflow_dispatch:
 permissions:
   contents: read
@@ -40,6 +40,12 @@ jobs:
               await page.waitForFunction(() => !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth, {timeout:22000}).catch(()=>{});
               const metadata = await page.evaluate(() => ({
                 heading: document.querySelector('.cosmos-title-area h1')?.textContent || '',
+                premiumTitleLines: document.querySelectorAll('.cosmos-title-area .premium-title-line').length,
+                titleMetallicGradient: getComputedStyle(document.querySelector('.premium-title-line--top')).backgroundImage.includes('linear-gradient'),
+                titleReflection: getComputedStyle(document.querySelector('.premium-title-line--bottom'),'::after').content,
+                titleFontFamily: getComputedStyle(document.querySelector('.cosmos-title-area h1')).fontFamily,
+                cardBackground: getComputedStyle(document.querySelector('.cosmos-course')).backgroundImage,
+                firstTitleLineRect: (()=>{const r=document.querySelector('.premium-title-line--top').getBoundingClientRect();return {left:Math.round(r.left),right:Math.round(r.right)}})(),
                 oldHeroExists: !!document.querySelector('.cosmos-hero'),
                 oldLogoExists: !!document.querySelector('.cosmos-topnav'),
                 oldFakeLightsExist: !!document.querySelector('.cosmic-earth-night'),
@@ -83,6 +89,9 @@ jobs:
                   metadata.quickActions !== 0 || metadata.topMenuButtons !== 0 ||
                   metadata.themeButtons !== 0 || metadata.oldHeroExists || metadata.oldLogoExists || metadata.oldFakeLightsExist ||
                   !metadata.heading.includes('Study Practice') || !metadata.heading.includes('Simulator') ||
+                  metadata.premiumTitleLines !== 2 || !metadata.titleMetallicGradient ||
+                  !metadata.titleReflection.includes('Simulator') ||
+                  metadata.firstTitleLineRect.left < -1 || metadata.firstTitleLineRect.right > width+1 ||
                   metadata.solarSurfaceCanvas || metadata.solarCoronaCanvas || metadata.activeSolarPhysicsScript || !metadata.earthLoaded ||
                   !metadata.moonLoaded || !metadata.sunLoaded || metadata.pageScrollWidth > width ||
                   metadata.moonSpin !== 'cosmic-moon-axial-spin' ||
@@ -96,6 +105,9 @@ jobs:
                 await page.waitForSelector('.shell', {timeout: 12000});
                 await page.locator('[data-view="practiceTests"]').first().click();
                 const courseHeading = await page.locator('#main h1').first().textContent();
+                const activeMenuBackground = await page.locator('.nav button.active').first().evaluate(el=>getComputedStyle(el).backgroundImage);
+                console.log('graphite-nav',activeMenuBackground);
+                if(!activeMenuBackground.includes('61, 66, 73'))process.exitCode=1;
                 console.log('course-navigation', JSON.stringify({ courseHeading }));
                 await page.screenshot({ path:'visual-previews/course-practice.png',fullPage:true });
                 if (!/practice/i.test(courseHeading || '')) process.exitCode = 1;
