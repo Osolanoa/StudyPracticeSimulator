@@ -169,3 +169,17 @@ body[data-cosmic-effect="reduced"] #cosmic-scene .cosmic-sun img {
   filter:drop-shadow(0 0 11px #fdb04e80);
   opacity:.83;
 }
+
+/* Keep the visual-effects preference available without covering quiz content. */
+@media(max-width:700px){
+  body[data-cosmic-view="landing"] .cosmic-effects-toggle {
+    position:absolute;
+    top:144px;
+    bottom:auto;
+    right:14px;
+    opacity:.67;
+    font-size:.66rem;
+    padding:6px 10px;
+  }
+}
+body[data-cosmic-view="session"] .cosmic-effects-toggle {display:none}
