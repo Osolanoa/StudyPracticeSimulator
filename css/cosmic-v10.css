@@ -5,7 +5,7 @@
 #cosmic-scene .cosmic-sun{
   left:clamp(22px,4.2vw,75px)!important;
   right:auto!important;
-  top:clamp(385px,51vh,510px)!important;
+  top:clamp(410px,59vh,660px)!important;
   bottom:auto!important;
   width:clamp(165px,12vw,215px)!important;
   height:auto!important;
@@ -26,6 +26,9 @@
   /* Keep the horizon and blue atmosphere stationary while the image turns. */
   transform:none!important;
   isolation:isolate;
+  /* Curved planetary mask follows the photographed atmospheric arc.
+     It prevents the photograph's rectangular black sky from hiding the Sun. */
+  clip-path:polygon(0.0% 32.00%, 2.5% 30.13%, 5.0% 28.29%, 7.5% 26.48%, 10.0% 24.72%, 12.5% 22.99%, 15.0% 21.30%, 17.5% 19.65%, 20.0% 18.05%, 22.5% 16.49%, 25.0% 14.98%, 27.5% 13.53%, 30.0% 12.13%, 32.5% 10.79%, 35.0% 9.51%, 37.5% 8.31%, 40.0% 7.19%, 42.5% 6.16%, 45.0% 5.25%, 47.5% 4.49%, 50.0% 4.00%, 52.5% 4.49%, 55.0% 5.25%, 57.5% 6.16%, 60.0% 7.19%, 62.5% 8.31%, 65.0% 9.51%, 67.5% 10.79%, 70.0% 12.13%, 72.5% 13.53%, 75.0% 14.98%, 77.5% 16.49%, 80.0% 18.05%, 82.5% 19.65%, 85.0% 21.30%, 87.5% 22.99%, 90.0% 24.72%, 92.5% 26.48%, 95.0% 28.29%, 97.5% 30.13%, 100.0% 32.00%, 100% 100%, 0% 100%);
 }
 #cosmic-scene .cosmic-earth-globe img{
   transform-origin:50% 50%!important;
