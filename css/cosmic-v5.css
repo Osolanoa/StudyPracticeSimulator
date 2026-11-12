@@ -167,3 +167,34 @@ body[data-cosmic-view="landing"] .cosmic-effects-toggle{display:none!important}
 @media(max-width:700px){
   #cosmic-scene .cosmic-earth-globe img{transform:translateY(-19%) scale(1.23)}
 }
+
+/* Solar photographic clarity and improved Black Marble globe projection. */
+#cosmic-scene .cosmic-solar-disc img {
+  z-index:1;
+  opacity:1!important;
+  mix-blend-mode:normal!important;
+  transform:scale(1.34);
+  filter:brightness(1.32) contrast(1.31) saturate(1.45) hue-rotate(-5deg);
+  animation:solar-photo-v5 480s linear infinite!important;
+}
+#cosmic-scene .cosmic-solar-surface {
+  z-index:2;opacity:.23;mix-blend-mode:screen;
+}
+@keyframes solar-photo-v5{
+  from{transform:scale(1.34) rotate(0)}
+  to{transform:scale(1.34) rotate(360deg)}
+}
+#cosmic-scene .cosmic-earth-globe img {
+  height:63%;width:100%;inset:0 auto auto 0;
+  object-fit:cover;object-position:51% 45%;
+  transform:translateY(-4%) scale(1.04);
+  opacity:.96;filter:brightness(.89) contrast(1.45) saturate(1.05);
+  mix-blend-mode:screen;
+}
+#cosmic-scene .cosmic-earth-globe::after{
+  background:linear-gradient(180deg,#08294a08 0%,#031c3852 11%,#010b23a6 39%,#010716ed 72%);
+}
+#cosmic-scene .cosmic-earth-night{opacity:.31}
+@media(max-width:700px){
+  #cosmic-scene .cosmic-earth-globe img{height:68%;object-position:52% 44%}
+}
