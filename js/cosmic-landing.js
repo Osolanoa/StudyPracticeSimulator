@@ -39,25 +39,15 @@
         '<button type="button" class="cosmos-course-go" data-cosmic-course="'+esc(course.id)+'">'+(progress.done?'Continue course':'Explore course')+' '+icons.arrow+'</button></div>'+
         '</article>';
     }).join('');
-    const navItems=[
-      ['home','Home','home'],['courses','Courses','courses'],['practice','Practice','practice'],['progress','Progress','progress'],['settings','Settings','settings']
-    ];
-    const nav=navItems.map(([action,label,icon])=>
-      '<button type="button" class="cosmos-nav-link '+(action==='home'?'is-active':'')+'" data-cosmic-action="'+action+'" '+(action==='home'?'aria-current="page"':'')+'>'+icons[icon]+'<span>'+label+'</span></button>'
-    ).join('');
-    const quick=[['practice','Practice now','practice'],['exam','Take exam','exam'],['mistakes','Review mistakes','mistakes'],['bookmarks','Saved questions','bookmark'],['settings','Settings','settings']];
-    const quickNav=quick.map(([action,label,icon])=>'<button type="button" class="cosmos-shortcut" data-cosmic-action="'+action+'">'+icons[icon]+'<span>'+label+'</span></button>').join('');
     app.innerHTML='<main id="main" class="cosmos-landing">'+
-      '<header class="cosmos-topnav"><div class="cosmos-brand">'+icons.orbit+'<span>Study Practice<br>Simulator</span></div>'+
-      '<nav aria-label="Main navigation" class="cosmos-nav-links">'+nav+'</nav>'+
-      '<button type="button" class="cosmos-theme" data-cosmic-action="theme" aria-label="Switch color theme">'+icons.settings+'<span>Theme</span></button></header>'+
+      '<header class="cosmos-topnav cosmos-topnav--minimal"><div class="cosmos-brand">'+icons.orbit+'<span>Study Practice<br>Simulator</span></div></header>'+
       '<section class="cosmos-hero" aria-labelledby="cosmos-title"><p class="cosmos-kicker"><span></span> STUDY PRACTICE SIMULATOR <span></span></p>'+
       '<h1 id="cosmos-title">Master your subjects<br><em>with focused practice.</em></h1>'+
       '<p class="cosmos-hero-sub">Study, practice, and track your progress in a smarter, more engaging way.</p>'+
       '<div class="cosmos-hero-actions"><button type="button" class="cosmos-btn cosmos-btn--primary" data-cosmic-action="start">'+icons.play+'<span>Start studying</span>'+icons.arrow+'</button>'+
       '<button type="button" class="cosmos-btn cosmos-btn--secondary" data-cosmic-action="progress">'+icons.progress+'<span>View progress</span>'+icons.arrow+'</button></div></section>'+
-      '<section class="cosmos-courses" id="cosmos-courses" aria-labelledby="cosmos-courses-title"><div class="cosmos-section-head"><h2 id="cosmos-courses-title">Your courses</h2><button type="button" class="cosmos-see-all" data-cosmic-action="courses">See all courses →</button></div><div class="cosmos-course-grid">'+cards+'</div></section>'+
-      '<nav class="cosmos-quick" aria-label="Quick actions">'+quickNav+'</nav>'+
+      '<section class="cosmos-courses" id="cosmos-courses" aria-labelledby="cosmos-courses-title"><div class="cosmos-section-head"><h2 id="cosmos-courses-title">Your courses</h2></div><div class="cosmos-course-grid">'+cards+'</div></section>'+
+
       '<footer class="cosmos-footer"><span>Celestial imagery: NASA · ESA/Webb · ESO</span><span>Made for focused learning</span></footer></main>';
     const buttons=app.querySelectorAll('[data-cosmic-course]');
     buttons.forEach(b=>b.addEventListener('click',()=>loadCourse(b.dataset.cosmicCourse,'dashboard')));
@@ -65,21 +55,8 @@
       if(event.target.closest('button'))return;
       loadCourse(card.dataset.cosmicCard,'dashboard');
     }));
-    function updateActive(action) {
-      app.querySelectorAll('.cosmos-nav-link').forEach(b=>{
-        const active=b.dataset.cosmicAction===action;b.classList.toggle('is-active',active);
-        if(active)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');
-      });
-    }
     app.querySelectorAll('[data-cosmic-action]').forEach(b=>b.addEventListener('click',()=>{
       const action=b.dataset.cosmicAction;
-      if(action==='theme'){
-        const next=document.documentElement.dataset.theme==='dark'?'light':'dark';
-        try{localStorage.setItem('study_theme',next)}catch(_){}
-        document.documentElement.dataset.theme=next;return;
-      }
-      if(action==='home'){window.scrollTo({top:0,behavior:'smooth'});updateActive(action);return}
-      if(action==='courses'){document.getElementById('cosmos-courses')?.scrollIntoView({behavior:'smooth',block:'start'});updateActive(action);return}
       const views={start:'dashboard',practice:'practiceTests',exam:'examSetup',mistakes:'mistakes',bookmarks:'bookmarks',settings:'settings',progress:'dashboard'};
       if(views[action])choose(views[action]);
     }));
