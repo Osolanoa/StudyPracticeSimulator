@@ -43,3 +43,20 @@ NASA images may be used for educational pages when credited and without implying
 - Existing course content, questions, grading, localStorage progress, and the live \`main\` branch were not modified.
 
 **Not yet verified:** a full Chromium/WebGL screenshot of the deployed branch, real-world NASA asset CORS/loading on all browsers, mobile layout screenshots, end-to-end quiz completion, and GPU performance benchmarking. This PR intentionally stays **draft** until visual review and those checks are performed. The cosmetic WebGL path has a fallback; do not call it production verified yet.
+
+
+## Fidelity correction after screenshot comparison — November 11, 2026
+
+The first live preview was visibly different from the approved mock (Moon/Sun disproportionately large, plain raw solar imagery, no cosmic cloud depth, oversized title/cards below fold). This branch now includes a dedicated fidelity pass:
+
+- \`css/cosmic-fidelity.css\` restores the reference spacing, restrained navy CTAs, hero typography, small top nav and compact 2-card course grid plus five quick actions.
+- \`assets/cosmic-atmosphere.svg\` is a handcrafted high-resolution scalable galaxy/nebula/cloud and Earth-horizon layer.
+- \`assets/cosmic-solar-prominences.svg\` adds bright coronal loops and sparkles around the reduced-scale Sun.
+- \`assets/cosmic-card-waves.svg\` gives cards custom luminous technical wireframe art.
+- \`js/cosmic.js\` continuously animates celestial parallax, clouds, stars and loops without a video restart.
+- \`index.html\` no longer loads the optional Three.js module by default; the stable photographic composition is favored over the earlier inconsistent 3D rendering. The existing WebGL experiment remains in the branch but is inactive.
+- The course list, counts and completion values are read from the existing course registry and localStorage; their labels are not copied from the fictional demo courses in the image mock.
+
+A feature-branch-only GitHub Actions workflow, \`.github/workflows/cosmic-visual.yml\`, captures desktop (1792×912) and mobile (390×844) Chromium screenshots, checks page errors, layout metrics and image loading. It does not publish to main.
+
+**Do not consider the design visually verified until the screenshots have been inspected.** External NASA photos are runtime dependencies and may fail over time. A later release should cache or host optimized, properly attributed copies.
