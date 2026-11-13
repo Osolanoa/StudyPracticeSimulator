@@ -129,6 +129,18 @@ body[data-cosmic-view="landing"] .cosmos-course:focus-within {
     0 19px 35px rgba(0,0,0,.65),
     0 0 16px rgba(210,220,230,.14)!important;
 }
+/* Remove remaining blue/purple orb tint from older cosmic cards.
+   The restrained neutral glow keeps the panel surface coherent. */
+body[data-cosmic-view="landing"] .cosmos-course-orb,
+body[data-cosmic-view="landing"] .cosmos-course--math .cosmos-course-orb {
+  background:radial-gradient(circle at 55% 45%,rgba(192,199,209,.12),rgba(95,103,114,.045) 44%,transparent 73%)!important;
+  box-shadow:none!important;
+  filter:none!important;
+  opacity:.62;
+}
+body[data-cosmic-view="landing"] .cosmos-course-visual {
+  background:linear-gradient(145deg,rgba(57,61,69,.19),rgba(19,22,28,.055))!important;
+}
 /* Preserve the cards' actual content/progress, their clickable areas,
    silver icons and monochrome exam menus; prevent decorative overlays
    from intercepting input. */
