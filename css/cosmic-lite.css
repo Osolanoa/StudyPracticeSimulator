@@ -45,6 +45,16 @@
   box-shadow:0 0 3px .6px rgba(182,219,255,.39);
   pointer-events:none;
 }
+/* Stop the older perpetual metallic-title animation and avoid expensive
+   backdrop blurs on already opaque graphite course cards. */
+.cosmos-landing .cosmos-title-area h1 .premium-title-line {
+  animation:none!important;
+  background-position:55% 50%!important;
+}
+body[data-cosmic-view="landing"] .cosmos-course {
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
 /* Keep the photographic space background behind all functional study UI.
    Fade extra bright stars inside exams without destroying the static photo. */
 body[data-cosmic-view="session"] #cosmic-scene .cosmic-lite-stars {opacity:.12}
