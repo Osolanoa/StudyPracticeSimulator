@@ -1,16 +1,16 @@
-name: Cinematic design visual smoke
+name: Lightweight cosmic background QA
 on:
   push:
     branches:
-      - design/distant-sun-earth-rotation-v10
+      - perf/single-space-background-light-parallax
   workflow_dispatch:
 permissions:
   contents: read
 concurrency:
-  group: cosmic-visual-${{ github.ref }}
+  group: cosmic-lite-feature
   cancel-in-progress: true
 jobs:
-  visual:
+  browser:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -18,143 +18,107 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Install headless Chromium
+      - name: Install Chromium
         run: |
           npm install --no-save playwright@1.56.0
           npx playwright install --with-deps chromium
-      - name: Capture desktop and mobile previews
+      - name: Check lightweight background and course navigation
         run: |
           mkdir -p visual-previews
-          cat > /tmp/cosmic-visual.cjs <<'NODE'
+          cat > /tmp/cosmic-lite-test.cjs <<'NODE'
           const { chromium } = require(process.cwd() + '/node_modules/playwright');
           const path = require('node:path');
+
           (async () => {
             const browser = await chromium.launch({ headless: true });
             for (const [label, width, height] of [['desktop', 1792, 912], ['mobile', 390, 844]]) {
               const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
+              await page.addInitScript(() => {
+                window.__rafCalls = 0;
+                const original = window.requestAnimationFrame.bind(window);
+                window.requestAnimationFrame = callback => {
+                  window.__rafCalls++;
+                  return original(callback);
+                };
+              });
               page.setDefaultTimeout(12000);
               const errors = [];
               page.on('pageerror', error => errors.push(String(error)));
               await page.goto('file://' + path.resolve('index.html'), { waitUntil: 'domcontentloaded' });
-              await page.waitForTimeout(1800);
-              await page.waitForFunction(() => !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth, {timeout:22000}).catch(()=>{});
-              const metadata = await page.evaluate(() => ({
-                heading: document.querySelector('.cosmos-title-area h1')?.textContent || '',
-                premiumTitleLines: document.querySelectorAll('.cosmos-title-area .premium-title-line').length,
-                titleMetallicGradient: getComputedStyle(document.querySelector('.premium-title-line--top')).backgroundImage.includes('linear-gradient'),
-                titleReflection: getComputedStyle(document.querySelector('.premium-title-line--bottom'),'::after').content,
-                earthRotation: getComputedStyle(document.querySelector('.cosmic-earth-globe img')).animationName,
-                earthRotationDuration: getComputedStyle(document.querySelector('.cosmic-earth-globe img')).animationDuration,
-                earthStack: Number(getComputedStyle(document.querySelector('.cosmic-earth-globe')).zIndex),
-                sunStack: Number(getComputedStyle(document.querySelector('.cosmic-sun')).zIndex),
-                titleFontFamily: getComputedStyle(document.querySelector('.cosmos-title-area h1')).fontFamily,
-                cardBackground: getComputedStyle(document.querySelector('.cosmos-course')).backgroundImage,
-                firstTitleLineRect: (()=>{const r=document.querySelector('.premium-title-line--top').getBoundingClientRect();return {left:Math.round(r.left),right:Math.round(r.right)}})(),
-                oldHeroExists: !!document.querySelector('.cosmos-hero'),
-                oldLogoExists: !!document.querySelector('.cosmos-topnav'),
-                oldFakeLightsExist: !!document.querySelector('.cosmic-earth-night'),
-                activeSolarPhysicsScript: [...document.scripts].some(x=>x.src.includes('solar-physics.js')),
-                earthSrc: document.querySelector('.cosmic-earth-globe img')?.currentSrc || '',
-                cards: document.querySelectorAll('.cosmos-course').length,
-                quickActions: document.querySelectorAll('.cosmos-shortcut').length,
-                topMenuButtons: document.querySelectorAll('.cosmos-nav-link').length,
-                themeButtons: document.querySelectorAll('[data-cosmic-action="theme"],[data-action="setTheme"],.cosmic-effects-toggle').length,
-                solarSurfaceCanvas: !!document.querySelector('.cosmic-solar-surface'),
-                solarCoronaCanvas: !!document.querySelector('.cosmic-solar-corona'),
-                globeImageLoaded: !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth,
-                atmosphereLoaded: !!document.querySelector('.cosmic-atmosphere')?.naturalWidth,
-                prominencesLoaded: !!document.querySelector('.cosmic-solar-loops')?.naturalWidth,
-                moonLoaded: !!document.querySelector('.cosmic-moon img')?.naturalWidth,
-                sunLoaded: !!document.querySelector('.cosmic-sun img')?.naturalWidth,
-                sunSrc: document.querySelector('.cosmic-sun img')?.currentSrc || '',
-                earthLoaded: !!document.querySelector('.cosmic-earth-globe img')?.naturalWidth,
-                moonSpin: getComputedStyle(document.querySelector('.cosmic-moon img')).animationName,
-                moonSpinDuration: getComputedStyle(document.querySelector('.cosmic-moon img')).animationDuration,
-                sunSpin: getComputedStyle(document.querySelector('.cosmic-sun img')).animationName,
-                sunSpinDuration: getComputedStyle(document.querySelector('.cosmic-sun img')).animationDuration,
-                cloudLayers: [...document.querySelectorAll('.cosmic-cliffs')].map(i=>!!i.naturalWidth),
-                galaxyLoaded: !!document.querySelector('.cosmic-galaxy-photo')?.naturalWidth,
-                nebulaLoaded: !!document.querySelector('.cosmic-nebula-photo')?.naturalWidth,
-                titleHeight: Math.round(document.querySelector('.cosmos-title-area')?.getBoundingClientRect().height || 0),
-                cardsTop: Math.round(document.querySelector('.cosmos-courses')?.getBoundingClientRect().top || 0),
-                titleFontSize: getComputedStyle(document.querySelector('.cosmos-title-area h1')).fontSize,
-                titleColor: getComputedStyle(document.querySelector('.cosmos-title-area h1 span')).color,
-                sunBox: (()=>{const r=document.querySelector('.cosmic-sun')?.getBoundingClientRect();return r&&{left:Math.round(r.left),right:Math.round(r.right),top:Math.round(r.top),width:Math.round(r.width)}})(),
-                moonBox: (()=>{const r=document.querySelector('.cosmic-moon')?.getBoundingClientRect();return r&&{left:Math.round(r.left),right:Math.round(r.right),top:Math.round(r.top),width:Math.round(r.width)}})(),
-                earthBox: (()=>{const r=document.querySelector('.cosmic-earth-globe')?.getBoundingClientRect();return r&&{left:Math.round(r.left),top:Math.round(r.top),height:Math.round(r.height)}})(),
-                titleBox: (()=>{const r=document.querySelector('.cosmos-title-area')?.getBoundingClientRect();return r&&{top:Math.round(r.top),height:Math.round(r.height)}})(),
-                pageScrollWidth: document.documentElement.scrollWidth,
-                viewportWidth: window.innerWidth
-              }));
-              if (label === 'desktop') {
-                const earthMotion = await page.evaluate(()=>{
-                  const el=document.querySelector('.cosmic-earth-globe img');
-                  const motion=el.getAnimations().find(a=>a.animationName==='earth-night-axial-drift');
-                  if(!motion)return {found:false};
-                  const initial=window.getComputedStyle(el).transform;
-                  motion.pause();motion.currentTime=1;
-                  const start=window.getComputedStyle(el).transform;
-                  motion.currentTime=479999;
-                  const end=window.getComputedStyle(el).transform;
-                  motion.currentTime=100;
-                  motion.play();
-                  return {found:true,initial,start,end,moved:start!==end};
+              await page.waitForSelector('.cosmos-course');
+              await page.waitForTimeout(1250);
+
+              const metrics = await page.evaluate(() => {
+                const scene = document.getElementById('cosmic-scene');
+                const starLayer = scene.querySelector('.cosmic-lite-stars');
+                const photo = scene.querySelector('.cosmic-lite-photo');
+                const title = document.querySelector('.cosmos-title-area h1');
+                return {
+                  heading: title?.textContent?.trim(),
+                  courses: document.querySelectorAll('.cosmos-course').length,
+                  starCount: starLayer.querySelectorAll('.cosmic-lite-star').length,
+                  imgCount: scene.querySelectorAll('img').length,
+                  canvasCount: scene.querySelectorAll('canvas').length,
+                  planets: scene.querySelectorAll('.cosmic-sun,.cosmic-moon,.cosmic-earth-globe').length,
+                  photo: getComputedStyle(photo).backgroundImage,
+                  fontFamily: getComputedStyle(title).fontFamily,
+                  cardStyle: getComputedStyle(document.querySelector('.cosmos-course')).backgroundImage,
+                  horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
+                  rafCalls: window.__rafCalls
+                };
+              });
+              const photoCheck = await page.evaluate(async () => {
+                const style = getComputedStyle(document.querySelector('.cosmic-lite-photo')).backgroundImage;
+                const match = style.match(/url\(["']?([^"')]+)["']?\)/);
+                if (!match) return {loaded:false,reason:'missing background URL'};
+                return await new Promise(resolve => {
+                  const img = new Image();
+                  const timeout = setTimeout(() => resolve({loaded:false,reason:'timeout',src:match[1]}),15000);
+                  img.onload=()=>{clearTimeout(timeout);resolve({loaded:true,width:img.naturalWidth,height:img.naturalHeight,src:match[1]});};
+                  img.onerror=()=>{clearTimeout(timeout);resolve({loaded:false,reason:'load error',src:match[1]});};
+                  img.src=match[1];
                 });
-                console.log('earth-rotation-motion',JSON.stringify(earthMotion));
-                if(!earthMotion.found||!earthMotion.moved)process.exitCode=1;
+              });
+              console.log(label,JSON.stringify(metrics),JSON.stringify(photoCheck),'errors',JSON.stringify(errors));
+              if (metrics.courses!==2 || metrics.planets!==0 || metrics.imgCount!==0 ||
+                  metrics.canvasCount!==0 || metrics.starCount!==(label==='desktop'?42:18) ||
+                  !metrics.heading.includes('Study Practice Simulator') ||
+                  !metrics.fontFamily.includes('Outfit') || metrics.horizontalOverflow ||
+                  !metrics.photo.includes('eso1236c') || !photoCheck.loaded || errors.length) {
+                process.exitCode=1;
               }
-              await page.screenshot({ path: 'visual-previews/' + label + '.png', fullPage: true });
-              console.log(label, JSON.stringify(metadata), 'errors', JSON.stringify(errors));
-              if (metadata.cards !== 2 || !metadata.sunBox || !metadata.moonBox ||
-                  (label==='desktop' && (
-                    metadata.sunBox.left>=metadata.moonBox.left ||
-                    metadata.moonBox.width<500 ||
-                    metadata.sunBox.width>=240 ||
-                    metadata.sunBox.top<=360 ||
-                    metadata.sunBox.top>=metadata.earthBox.top ||
-                    metadata.sunBox.top+metadata.sunBox.width<=metadata.earthBox.top
-                  )) ||
-                  metadata.quickActions !== 0 || metadata.topMenuButtons !== 0 ||
-                  metadata.themeButtons !== 0 || metadata.oldHeroExists || metadata.oldLogoExists || metadata.oldFakeLightsExist ||
-                  !metadata.heading.includes('Study Practice') || !metadata.heading.includes('Simulator') ||
-                  metadata.premiumTitleLines !== 2 || !metadata.titleMetallicGradient ||
-                  metadata.earthRotation !== 'earth-night-axial-drift' ||
-                  metadata.earthStack <= metadata.sunStack ||
-                  !metadata.titleReflection.includes('Simulator') ||
-                  metadata.firstTitleLineRect.left < -1 || metadata.firstTitleLineRect.right > width+1 ||
-                  metadata.solarSurfaceCanvas || metadata.solarCoronaCanvas || metadata.activeSolarPhysicsScript || !metadata.earthLoaded ||
-                  !metadata.moonLoaded || !metadata.sunLoaded || metadata.pageScrollWidth > width ||
-                  metadata.moonSpin !== 'cosmic-moon-axial-spin' ||
-                  metadata.sunSpin !== 'solar-photo-v5' ||
-                  metadata.moonSpinDuration !== '720s' || !metadata.globeImageLoaded ||
-                  metadata.sunSpinDuration !== '480s' || errors.length) {
-                process.exitCode = 1;
+              if (label==='desktop') {
+                await page.mouse.move(90,90);
+                await page.waitForTimeout(310);
+                const first=await page.locator('.cosmic-lite-stars').evaluate(el=>getComputedStyle(el).transform);
+                await page.mouse.move(width-90,height-90);
+                await page.waitForTimeout(310);
+                const second=await page.locator('.cosmic-lite-stars').evaluate(el=>getComputedStyle(el).transform);
+                const idleBefore=await page.evaluate(()=>window.__rafCalls);
+                await page.waitForTimeout(900);
+                const idleAfter=await page.evaluate(()=>window.__rafCalls);
+                console.log('pointer-parallax',JSON.stringify({first,second,changed:first!==second,idleRafDelta:idleAfter-idleBefore}));
+                if(first===second || idleAfter-idleBefore>2)process.exitCode=1;
               }
-              if (label === 'desktop') {
+              await page.screenshot({path:'visual-previews/'+label+'.png',fullPage:true});
+              if(label==='desktop') {
                 await page.locator('[data-cosmic-course]').first().click();
-                await page.waitForSelector('.shell', {timeout: 12000});
+                await page.waitForSelector('.shell');
                 await page.locator('[data-view="practiceTests"]').first().click();
-                const courseHeading = await page.locator('#main h1').first().textContent();
-                const activeMenuBackground = await page.locator('.nav button.active').first().evaluate(el=>getComputedStyle(el).backgroundImage);
-                console.log('graphite-nav',activeMenuBackground);
-                if(!activeMenuBackground.includes('61, 66, 73'))process.exitCode=1;
-                console.log('course-navigation', JSON.stringify({ courseHeading }));
-                await page.screenshot({ path:'visual-previews/course-practice.png',fullPage:true });
-                if (!/practice/i.test(courseHeading || '')) process.exitCode = 1;
-                await page.locator('[data-view="settings"]').first().click();
-                const themeControls = await page.locator('[data-action="setTheme"]').count();
-                console.log('course-settings-theme-controls',themeControls);
-                if(themeControls!==0)process.exitCode=1;
+                const heading=await page.locator('#main h1').first().textContent();
+                console.log('navigation',JSON.stringify({heading}));
+                if(!/practice/i.test(heading||''))process.exitCode=1;
+                await page.screenshot({path:'visual-previews/course-practice.png',fullPage:true});
               }
               await page.close();
             }
             await browser.close();
-          })().catch(err => { console.error(err); process.exitCode = 1; });
+          })().catch(error=>{console.error(error);process.exitCode=1;});
           NODE
-          node /tmp/cosmic-visual.cjs
+          node /tmp/cosmic-lite-test.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: cosmic-visual-previews
+          name: cosmic-lite-browser-screenshots
           path: visual-previews/*.png
           if-no-files-found: warn
