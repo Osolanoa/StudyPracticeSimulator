@@ -32,7 +32,7 @@ jobs:
           (async () => {
             const browser = await chromium.launch({ headless: true });
             for (const [label, width, height] of [['desktop', 1792, 912], ['mobile', 390, 844]]) {
-              const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
+              const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1, isMobile: label==='mobile', hasTouch: label==='mobile' });
               await page.addInitScript(() => {
                 window.__rafCalls = 0;
                 const original = window.requestAnimationFrame.bind(window);
