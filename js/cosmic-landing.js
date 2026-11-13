@@ -38,7 +38,7 @@
       '<section class="cosmos-title-area cosmos-title-area--premium" aria-labelledby="cosmos-title"><h1 id="cosmos-title" aria-label="Study Practice Simulator"><span class="premium-title-line premium-title-line--top">Study Practice</span> <span class="premium-title-line premium-title-line--bottom" data-reflection="Simulator">Simulator</span></h1></section>'+
       '<section class="cosmos-courses" id="cosmos-courses" aria-labelledby="cosmos-courses-title"><div class="cosmos-section-head"><h2 id="cosmos-courses-title">Your courses</h2></div><div class="cosmos-course-grid">'+cards+'</div></section>'+
 
-      '<footer class="cosmos-footer"><span>Celestial imagery: NASA · ESA/Webb · ESO</span><span>Made for focused learning</span></footer></main>';
+      '<footer class="cosmos-footer"><span>Space imagery: ESO / Digitized Sky Survey 2</span><span>Made for focused learning</span></footer></main>';
     const buttons=app.querySelectorAll('[data-cosmic-course]');
     buttons.forEach(b=>b.addEventListener('click',()=>loadCourse(b.dataset.cosmicCourse,'dashboard')));
     app.querySelectorAll('[data-cosmic-card]').forEach(card=>card.addEventListener('click',event=>{
