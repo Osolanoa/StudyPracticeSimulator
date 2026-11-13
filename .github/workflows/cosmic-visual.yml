@@ -2,7 +2,7 @@ name: Lightweight cosmic background QA
 on:
   push:
     branches:
-      - perf/single-space-background-light-parallax
+      - design/compact-centered-landing-v12
   workflow_dispatch:
 permissions:
   contents: read
@@ -64,6 +64,10 @@ jobs:
                   fontFamily: getComputedStyle(title).fontFamily,
                   cardStyle: getComputedStyle(document.querySelector('.cosmos-course')).backgroundImage,
                   horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
+                  titleTop: Math.round(document.querySelector('.cosmos-title-area').getBoundingClientRect().top),
+                  titleBottom: Math.round(document.querySelector('.cosmos-title-area').getBoundingClientRect().bottom),
+                  courseSectionTop: Math.round(document.querySelector('.cosmos-courses').getBoundingClientRect().top),
+                  firstCardTop: Math.round(document.querySelector('.cosmos-course').getBoundingClientRect().top),
                   rafCalls: window.__rafCalls
                 };
               });
@@ -84,6 +88,9 @@ jobs:
                   metrics.canvasCount!==0 || metrics.starCount!==(label==='desktop'?42:18) ||
                   !metrics.heading.includes('Study Practice Simulator') ||
                   !metrics.fontFamily.includes('Outfit') || metrics.horizontalOverflow ||
+                  metrics.titleTop >= (label==='desktop' ? 170 : 180) ||
+                  metrics.firstCardTop >= (label==='desktop' ? 470 : 430) ||
+                  metrics.titleTop < 10 || metrics.firstCardTop <= metrics.titleBottom ||
                   !metrics.photo.includes('eso1236c') || !photoCheck.loaded || errors.length) {
                 process.exitCode=1;
               }
