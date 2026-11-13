@@ -1,0 +1,154 @@
+/* Premium Option A — restrained chrome echo and graphite mirror-glass.
+   No continuous animation, backdrop-filter, video, canvas or extra assets.
+   Keep actual text and course content in the DOM and fully interactive. */
+
+/* Metallic typography: backlight/echo is decorative, not duplicate content. */
+body[data-cosmic-view="landing"] .cosmos-title-area--premium h1 .premium-title-line {
+  isolation:isolate;
+  overflow:visible;
+  position:relative;
+  text-shadow:none!important;
+  filter:drop-shadow(0 2px 2px #02050bda) drop-shadow(0 8px 15px #0009)!important;
+}
+body[data-cosmic-view="landing"] .cosmos-title-area--premium h1 .premium-title-line::before {
+  content:attr(data-echo);
+  position:absolute;
+  inset:0;
+  z-index:-1;
+  display:block;
+  white-space:nowrap;
+  text-align:center;
+  letter-spacing:inherit;
+  line-height:inherit;
+  font:inherit;
+  font-weight:inherit;
+  pointer-events:none;
+  color:#e7ecf3;
+  background:none!important;
+  -webkit-text-fill-color:#c4cdd8!important;
+  transform:translate3d(0, .065em, 0) scale(1.018);
+  opacity:.23;
+  filter:blur(7px);
+}
+body[data-cosmic-view="landing"] .cosmos-title-area--premium h1 .premium-title-line--bottom::after {
+  content:attr(data-reflection);
+  position:absolute;
+  pointer-events:none;
+  left:0;top:calc(100% - .105em);
+  width:100%;
+  height:.49em;
+  color:rgba(231,237,244,.34)!important;
+  -webkit-text-fill-color:rgba(231,237,244,.34)!important;
+  font:inherit;font-weight:inherit;
+  letter-spacing:inherit;
+  line-height:1.08;
+  white-space:nowrap;
+  overflow:hidden;
+  opacity:.36;
+  transform:scaleY(-1);
+  transform-origin:top center;
+  filter:blur(.9px);
+  -webkit-mask-image:linear-gradient(to bottom,#000a,transparent 87%);
+  mask-image:linear-gradient(to bottom,#000a,transparent 87%);
+  background:none!important;
+}
+/* Graphite glass panels: a clean diagonal reflection, restrained edge shine
+   and a stationary low-intensity reflection along the lower edge. */
+body[data-cosmic-view="landing"] .cosmos-course {
+  isolation:isolate;
+  border:1px solid rgba(210,216,224,.50)!important;
+  border-radius:22px!important;
+  background:
+    linear-gradient(150deg,rgba(44,48,55,.98) 0%,rgba(25,28,33,.98) 34%,rgba(9,11,15,.97) 76%,rgba(14,16,20,.98) 100%)!important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 -1px 0 rgba(200,207,216,.20),
+    0 16px 31px rgba(0,0,0,.62),
+    0 0 12px rgba(176,185,195,.09),
+    0 4px 0 -3px rgba(237,241,245,.18)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+body[data-cosmic-view="landing"] .cosmos-course--math {
+  background:
+    linear-gradient(155deg,rgba(44,47,53,.98) 0%,rgba(25,27,32,.97) 37%,rgba(9,11,14,.98) 78%,rgba(15,17,21,.98) 100%)!important;
+}
+body[data-cosmic-view="landing"] .cosmos-course::before {
+  content:"";
+  display:block!important;
+  position:absolute!important;
+  inset:0!important;
+  width:auto!important;height:auto!important;
+  z-index:0!important;
+  pointer-events:none;
+  opacity:1!important;
+  border-radius:inherit;
+  background:
+    linear-gradient(146deg,
+      rgba(253,255,255,.20) 0%,
+      rgba(224,231,239,.105) 9%,
+      rgba(248,251,255,.035) 29%,
+      transparent 29.5%,
+      transparent 100%),
+    linear-gradient(180deg,
+      rgba(255,255,255,.14) 0,
+      rgba(255,255,255,.025) 6%,
+      transparent 31%)!important;
+  clip-path:none!important;
+  transform:none!important;
+  filter:none!important;
+}
+body[data-cosmic-view="landing"] .cosmos-course::after {
+  content:"";
+  position:absolute!important;
+  z-index:0!important;
+  inset:auto 6% 0 6%!important;
+  width:auto!important;
+  height:15px!important;
+  border-radius:0!important;
+  pointer-events:none;
+  opacity:.27!important;
+  background:radial-gradient(ellipse at 50% 100%,
+    rgba(242,248,255,.56) 0%,
+    rgba(190,202,218,.12) 43%,
+    transparent 78%)!important;
+  transform:none!important;
+  filter:none!important;
+  box-shadow:none!important;
+}
+body[data-cosmic-view="landing"] .cosmos-course-visual,
+body[data-cosmic-view="landing"] .cosmos-course-copy {
+  z-index:1;
+}
+body[data-cosmic-view="landing"] .cosmos-course:hover,
+body[data-cosmic-view="landing"] .cosmos-course:focus-within {
+  border-color:rgba(232,237,242,.78)!important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.32),
+    inset 0 -1px rgba(200,207,216,.26),
+    0 19px 35px rgba(0,0,0,.65),
+    0 0 16px rgba(210,220,230,.14)!important;
+}
+/* Preserve the cards' actual content/progress, their clickable areas,
+   silver icons and monochrome exam menus; prevent decorative overlays
+   from intercepting input. */
+body[data-cosmic-view="landing"] .cosmos-course .cosmos-course-symbol {
+  background:linear-gradient(147deg,#3b4048,#15171c)!important;
+  border-color:rgba(204,211,218,.48)!important;
+}
+@media(max-width:700px) {
+  body[data-cosmic-view="landing"] .cosmos-title-area--premium h1 .premium-title-line::before {
+    opacity:.14;
+    filter:blur(4px);
+  }
+  body[data-cosmic-view="landing"] .cosmos-title-area--premium h1 .premium-title-line--bottom::after {
+    opacity:.21;
+    height:.38em;
+  }
+  body[data-cosmic-view="landing"] .cosmos-course::before {
+    background:linear-gradient(147deg,rgba(255,255,255,.12) 0%,rgba(255,255,255,.04) 27%,transparent 27.5%)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  body[data-cosmic-view="landing"] .cosmos-course{transition:none!important}
+}
