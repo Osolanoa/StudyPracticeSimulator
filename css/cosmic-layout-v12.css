@@ -1,0 +1,29 @@
+/* V12: Raise the landing composition without changing its typography or functionality.
+   Previous cosmic-v7 margin rules intentionally overridden here. */
+body[data-cosmic-view="landing"] .cosmos-landing .cosmos-title-area {
+  margin:clamp(30px,6.4vh,67px) auto 0!important;
+  max-width:100%;
+}
+body[data-cosmic-view="landing"] .cosmos-landing .cosmos-courses {
+  margin:clamp(30px,4.6vh,47px) auto 0!important;
+  max-width:1240px;
+}
+body[data-cosmic-view="landing"] .cosmos-landing .cosmos-footer {
+  margin-top:30px;
+}
+@media (max-width:1120px) {
+  body[data-cosmic-view="landing"] .cosmos-landing .cosmos-title-area {
+    margin-top:clamp(38px,7vh,63px)!important;
+  }
+  body[data-cosmic-view="landing"] .cosmos-landing .cosmos-courses {
+    margin-top:clamp(28px,4.5vh,43px)!important;
+  }
+}
+@media (max-width:700px) {
+  body[data-cosmic-view="landing"] .cosmos-landing .cosmos-title-area {
+    margin:clamp(42px,6.3vh,59px) auto 0!important;
+  }
+  body[data-cosmic-view="landing"] .cosmos-landing .cosmos-courses {
+    margin:clamp(28px,4vh,37px) auto 0!important;
+  }
+}
