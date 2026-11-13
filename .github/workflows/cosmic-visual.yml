@@ -2,7 +2,7 @@ name: Lightweight cosmic background QA
 on:
   push:
     branches:
-      - design/compact-centered-landing-v12
+      - design/subtle-chrome-reflections-option-a-v13
   workflow_dispatch:
 permissions:
   contents: read
@@ -63,6 +63,12 @@ jobs:
                   photo: getComputedStyle(photo).backgroundImage,
                   fontFamily: getComputedStyle(title).fontFamily,
                   cardStyle: getComputedStyle(document.querySelector('.cosmos-course')).backgroundImage,
+                  titleEcho: getComputedStyle(document.querySelector('.premium-title-line--top'),'::before').content,
+                  titleMirror: getComputedStyle(document.querySelector('.premium-title-line--bottom'),'::after').content,
+                  titleEchoOpacity: getComputedStyle(document.querySelector('.premium-title-line--top'),'::before').opacity,
+                  cardGlassReflection: getComputedStyle(document.querySelector('.cosmos-course'),'::before').backgroundImage,
+                  cardBottomReflection: getComputedStyle(document.querySelector('.cosmos-course'),'::after').backgroundImage,
+                  cardGlintBorder: getComputedStyle(document.querySelector('.cosmos-course')).borderColor,
                   horizontalOverflow: document.documentElement.scrollWidth > innerWidth,
                   titleTop: Math.round(document.querySelector('.cosmos-title-area').getBoundingClientRect().top),
                   titleBottom: Math.round(document.querySelector('.cosmos-title-area').getBoundingClientRect().bottom),
@@ -91,6 +97,11 @@ jobs:
                   metrics.titleTop >= (label==='desktop' ? 170 : 180) ||
                   metrics.firstCardTop >= (label==='desktop' ? 470 : 430) ||
                   metrics.titleTop < 10 || metrics.firstCardTop <= metrics.titleBottom ||
+                  !metrics.titleEcho.includes('Study Practice') ||
+                  !metrics.titleMirror.includes('Simulator') ||
+                  !(Number(metrics.titleEchoOpacity)>0 && Number(metrics.titleEchoOpacity)<0.4) ||
+                  !metrics.cardGlassReflection.includes('linear-gradient') ||
+                  !metrics.cardBottomReflection.includes('radial-gradient') ||
                   !metrics.photo.includes('eso1236c') || !photoCheck.loaded || errors.length) {
                 process.exitCode=1;
               }
