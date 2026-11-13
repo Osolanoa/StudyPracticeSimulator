@@ -1,0 +1,75 @@
+/* Cosmic Lite V11 — one high-resolution ESO space photograph and a restrained
+   GPU-composited star layer. All astrophotography is a single image request.
+   Source: ESO / Digitized Sky Survey 2, Pencil Nebula region, eso1236c. */
+
+#cosmic-scene {
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+  contain:paint;
+  pointer-events:none;
+  background:#03060f!important;
+}
+#cosmic-scene .cosmic-lite-photo {
+  position:absolute;
+  inset:0;
+  background-color:#030814;
+  background-image:url("https://cdn.eso.org/images/wallpaper4/eso1236c.jpg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:center 32%;
+  opacity:1;
+  filter:brightness(.66) contrast(1.15) saturate(.93);
+}
+#cosmic-scene .cosmic-lite-shade {
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(ellipse 65% 50% at 50% 40%,rgba(0,3,12,.73),rgba(1,4,13,.37) 68%,transparent 100%),
+    linear-gradient(180deg,rgba(1,4,11,.18),rgba(2,6,14,.30) 55%,rgba(2,5,11,.63) 100%);
+}
+#cosmic-scene .cosmic-lite-stars {
+  position:absolute;
+  inset:-10px;
+  transform:translate3d(0,0,0);
+  transition:transform .22s ease-out;
+  will-change:transform;
+  pointer-events:none;
+}
+#cosmic-scene .cosmic-lite-star {
+  position:absolute;
+  display:block;
+  border-radius:50%;
+  background:#edf6ff;
+  box-shadow:0 0 3px .6px rgba(182,219,255,.39);
+  pointer-events:none;
+}
+/* Stop the older perpetual metallic-title animation and avoid expensive
+   backdrop blurs on already opaque graphite course cards. */
+.cosmos-landing .cosmos-title-area h1 .premium-title-line {
+  animation:none!important;
+  background-position:55% 50%!important;
+}
+body[data-cosmic-view="landing"] .cosmos-course {
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+/* Keep the photographic space background behind all functional study UI.
+   Fade extra bright stars inside exams without destroying the static photo. */
+body[data-cosmic-view="session"] #cosmic-scene .cosmic-lite-stars {opacity:.12}
+body[data-cosmic-view="course"] #cosmic-scene .cosmic-lite-stars {opacity:.3}
+@media(max-width:700px){
+  #cosmic-scene .cosmic-lite-photo {
+    background-image:url("https://cdn.eso.org/images/wallpaper1/eso1236c.jpg");
+    background-position:46% 40%;
+    filter:brightness(.56) contrast(1.13) saturate(.86);
+  }
+  #cosmic-scene .cosmic-lite-shade{
+    background:linear-gradient(180deg,rgba(1,4,12,.54),rgba(1,4,12,.41) 43%,rgba(1,4,12,.73));
+  }
+  #cosmic-scene .cosmic-lite-stars{will-change:auto;transition:none}
+}
+@media(prefers-reduced-motion:reduce){
+  #cosmic-scene .cosmic-lite-stars{transform:none!important;transition:none!important;will-change:auto}
+}
