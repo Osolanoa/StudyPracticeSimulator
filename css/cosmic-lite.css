@@ -51,7 +51,7 @@ body[data-cosmic-view="session"] #cosmic-scene .cosmic-lite-stars {opacity:.12}
 body[data-cosmic-view="course"] #cosmic-scene .cosmic-lite-stars {opacity:.3}
 @media(max-width:700px){
   #cosmic-scene .cosmic-lite-photo {
-    background-image:url("https://cdn.eso.org/images/wallpaper2/eso1236c.jpg");
+    background-image:url("https://cdn.eso.org/images/wallpaper1/eso1236c.jpg");
     background-position:46% 40%;
     filter:brightness(.56) contrast(1.13) saturate(.86);
   }
