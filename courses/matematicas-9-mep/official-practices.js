@@ -33,8 +33,9 @@
     return saved[packId];
   };
   const persist = () => { try { localStorage.setItem(STORAGE, JSON.stringify(saved)); } catch (_) {} };
+  const observed = n => !!data.reviewNotes?.[packId + ":" + n];
   const solved = (n, p = progress()) => !!p.checked[n];
-  const correct = (n, p = progress()) => solved(n, p) && p.answers[n] === active().answers[n - 1];
+  const correct = (n, p = progress()) => !observed(n) && solved(n, p) && p.answers[n] === active().answers[n - 1];
   const label = n => "Ítem " + n;
   function category(n) {
     if (packId === "2025") return n <= 12 ? "Números" : n <= 30 ? "Geometría" : n <= 47 ? "Relaciones y Álgebra" : "Estadística y Probabilidad";
@@ -77,10 +78,13 @@
     const set = active(), p = progress();
     const checked = set.answers.reduce((count, _, i) => count + Number(solved(i + 1, p)), 0);
     const hits = set.answers.reduce((count, _, i) => count + Number(correct(i + 1, p)), 0);
+    const scorable = set.answers.reduce((count, _, i) => count + Number(!observed(i + 1) && solved(i + 1, p)), 0);
     summary.innerHTML = '<div><span class="overline">TU PROGRESO · ' + esc(set.title) + '</span>' +
       '<p><strong>' + checked + ' / ' + set.answers.length + '</strong> corregidas <span class="summary-sep">·</span> ' +
       '<strong>' + hits + '</strong> correctas <span class="summary-sep">·</span> <strong>' +
-      (checked ? Math.round(100 * hits / checked) : 0) + '%</strong> de acierto entre las corregidas</p></div>' +
+      (scorable ? Math.round(100 * hits / scorable) : 0) + '%</strong> de acierto entre las puntuables <span class="summary-sep">·</span> ' +
+      '<strong>' + (set.answers.length - Object.keys(data.reviewNotes || {}).filter(k => k.startsWith(packId + ":")).length) +
+      '</strong> ítems puntuables</p></div>' +
       '<button class="outline reset" id="reset" type="button">Reiniciar esta práctica</button>';
     progressBar.style.width = (checked * 100 / set.answers.length) + "%";
     document.getElementById("reset").addEventListener("click", () => {
@@ -96,6 +100,7 @@
     const checked = solved(current, p);
     const right = set.answers[current - 1];
     const detail = data.solutions[packId + ":" + current];
+    const reviewNote = data.reviewNotes?.[packId + ":" + current];
     const buttons = ["A","B","C","D"].slice(0, set.answerCount).map(letter =>
       '<button class="choice ' + (answer === letter ? 'chosen' : '') +
       (checked && letter === right ? ' expected' : '') +
@@ -103,10 +108,13 @@
       '" type="button" data-answer="' + letter + '" aria-pressed="' + (letter === answer) +
       '"><span class="letter">' + letter + '</span><span>Opción ' + letter + ' del ítem ' + current + ' en el documento</span></button>'
     ).join("");
-    const outcome = checked ? '<section class="feedback ' + (correct(current, p) ? "success" : "error") + '">' +
-      '<h3>' + (correct(current, p) ? "✓ Respuesta correcta" : "Respuesta para repasar") + '</h3>' +
+    const outcome = checked ? '<section class="feedback ' + (reviewNote ? "observed" : (correct(current, p) ? "success" : "error")) + '">' +
+      '<h3>' + (reviewNote ? "Ítem observado · no puntuable" : (correct(current, p) ? "✓ Respuesta correcta" : "Respuesta para repasar")) + '</h3>' +
       '<p>Tu selección: <b>' + esc(answer) + '</b> · Solucionario MEP: <b>' + right + '</b>.</p>' +
-      (detail && detail.verified ?
+      (reviewNote ?
+        '<div class="worked pending"><p class="overline">REVISIÓN DE CALIDAD DEL ENUNCIADO</p><p>' +
+        esc(reviewNote) + '</p></div>' :
+        detail && detail.verified ?
         '<div class="worked"><p class="overline">DESARROLLO INDIVIDUAL VERIFICADO</p><h3>' + esc(detail.topic) + '</h3>' +
         '<p>' + esc(detail.procedure) + '</p><p>' + esc(detail.justification) + '</p></div>' :
         '<div class="worked pending"><p class="overline">GUÍA CONCEPTUAL · DESARROLLO INDIVIDUAL PENDIENTE</p>' +
@@ -142,7 +150,7 @@
     const p = progress(), set = active();
     nav.innerHTML = '<div class="navigator-heading"><h3>Navegador de ítems</h3><small>Gris: sin corregir · Plata: correcta · Borde: revisar</small></div><div class="numbers">' +
       set.answers.map((_, i) => {
-        const n = i + 1, status = solved(n, p) ? (correct(n, p) ? "pass" : "fail") : (p.answers[n] ? "picked" : "");
+        const n = i + 1, status = observed(n) ? "observed" : (solved(n, p) ? (correct(n, p) ? "pass" : "fail") : (p.answers[n] ? "picked" : ""));
         return '<button type="button" data-number="' + n + '" aria-label="Ir al ítem ' + n + '" ' +
           'aria-current="' + (current === n ? "true" : "false") + '" class="' + status +
           (current === n ? " current" : "") + '">' + n + '</button>';
