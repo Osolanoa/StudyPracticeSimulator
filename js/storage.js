@@ -1,7 +1,8 @@
 (function () {
   const courseId = String((window.COURSE_CONFIG || {}).id || window.STUDY_COURSE_ID || 'default')
     .toLowerCase().replace(/[^a-z0-9_-]/g, '-');
-  const prefix = 'study_' + courseId + '_';
+  /* El banco MEP 2025–2026 usa almacenamiento independiente: conserva el historial antiguo sin mezclarlo. */
+  const prefix = 'study_' + courseId + (courseId === 'matematicas-9-mep' ? '_v2' : '') + '_';
   const names = ['stats', 'history', 'bookmarks', 'exams', 'practiceTests', 'settings'];
   const KEYS = Object.fromEntries(names.map(name => [name, prefix + ({
     stats: 'stats',
