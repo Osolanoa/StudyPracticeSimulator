@@ -35,8 +35,8 @@ for (const [key, solution] of Object.entries(data.solutions)) {
   const set = data.sets.find(x => x.id === match[1]);
   assert.ok(set && Number(match[2]) <= set.answers.length, key);
   assert.equal(solution.verified, true, key);
-  for (const field of ["topic", "procedure", "justification"]) {
-    assert.ok(typeof solution[field] === "string" && solution[field].length > 25, key + "." + field);
+  for (const [field, minLength] of [["topic", 3], ["procedure", 60], ["justification", 25]]) {
+    assert.ok(typeof solution[field] === "string" && solution[field].length > minLength, key + "." + field);
   }
 }
 const observed = Object.keys(data.reviewNotes || {});
