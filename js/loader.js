@@ -1,7 +1,7 @@
 (function () {
   const registry = [
     { id: 'az900', visible: true, name: 'Microsoft Azure Fundamentals', shortName: 'AZ-900', description: 'Practice simulator for Microsoft Azure Fundamentals.', questionCount: 200, questionsPerPractice: 10 },
-    { id: 'matematicas-9-mep', visible: true, name: 'Matemáticas 9.º Año — MEP', shortName: 'Matemáticas 9.º', description: 'Práctica para la segunda convocatoria de Matemáticas de noveno año del MEP de Costa Rica.', questionCount: 60, questionsPerPractice: 10 },
+    { id: 'matematicas-9-mep', visible: true, name: 'Matemáticas 9.º Año — MEP', shortName: 'Matemáticas 9.º', description: '170 ejercicios de 2025 y 2026 con preguntas y procedimientos explicados.', questionCount: 170, questionsPerPractice: 10 },
     { id: 'example', visible: false, name: 'Example', shortName: 'Example', description: 'A minimal template course that demonstrates the generic study simulator.', questionCount: 3, questionsPerPractice: 10 }
   ];
   const app = document.getElementById('app');
@@ -12,7 +12,7 @@
   function applyTheme() { document.documentElement.dataset.theme = theme(); }
   function practiceSummary(course) {
     try {
-      const records = JSON.parse(localStorage.getItem('study_' + course.id + '_practice_tests') || '{}');
+      const records = JSON.parse(localStorage.getItem('study_' + course.id + (course.id === 'matematicas-9-mep' ? '_v2' : '') + '_practice_tests') || '{}');
       const total = Math.floor(course.questionCount / course.questionsPerPractice);
       const done = Array.from({ length: total }, (_, i) => records[i + 1]).filter(record => record && record.completed);
       const best = done.length ? Math.round(done.reduce((sum, record) => sum + (record.bestPercentage || 0), 0) / done.length) : null;
@@ -63,6 +63,12 @@
     app.innerHTML = '<main id="main" class="load-error"><p>Loading course…</p></main>';
     try {
       await load('./courses/' + id + '/config.js', token);
+      if (id === 'matematicas-9-mep') {
+        await load('./courses/matematicas-9-mep/official-data.js', token);
+        await load('./courses/matematicas-9-mep/inline-2025.js', token);
+        await load('./courses/matematicas-9-mep/inline-2026-01.js', token);
+        await load('./courses/matematicas-9-mep/inline-2026-02.js', token);
+      }
       await load('./courses/' + id + '/questions.js', token);
       if (id === 'az900') await load('./courses/az900/questions-extra.js', token);
       await load('./js/visuals.js', token);
