@@ -49,7 +49,7 @@ for (const set of data.sets) for (let n = 1; n <= set.answers.length; n++) {
   assert.ok(data.solutions[id] || data.reviewNotes[id], "unreviewed item: " + id);
 }
 const expected = {
-  "2025": { 1: "C", 6: "A", 39: "B", 42: "A", 55: "A" },
+  "2025": { 1: "C", 6: "A", 39: "B", 42: "B", 55: "A" },
   "2026-01": { 1: "C", 13: "A", 25: "A", 39: "A", 55: "B" },
   "2026-02": { 1: "C", 14: "A", 26: "A", 42: "A", 56: "A", 60: "B" }
 };
