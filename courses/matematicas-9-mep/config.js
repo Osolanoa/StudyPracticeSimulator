@@ -3,12 +3,13 @@ window.COURSE_CONFIG = {
   "id": "matematicas-9-mep",
   "name": "Matemáticas 9.º Año — MEP",
   "shortName": "Matemáticas 9.º",
-  "description": "Práctica para la segunda convocatoria de Matemáticas de noveno año del MEP de Costa Rica.",
+  "description": "170 preguntas de Matemáticas de noveno adaptadas de prácticas MEP 2025, primera y segunda convocatorias de 2026, con desarrollo paso a paso.",
   "language": "es",
-  "version": "1.0",
+  "version": "2.0",
   "questionsPerPractice": 10,
   "passingScore": 70,
   "examQuestionCounts": [
+    55,
     60
   ],
   "defaultExamCount": 60,
@@ -20,7 +21,7 @@ window.COURSE_CONFIG = {
     "estadistica": 0.16666666666666666
   },
   "referenceLabel": "Tema",
-  "disclaimer": "Herramienta independiente de práctica basada en los temas de Matemáticas de noveno año. Los ejercicios son originales; no son preguntas oficiales del MEP ni anticipan las de una convocatoria.",
+  "disclaimer": "Herramienta independiente con enunciados didácticos adaptados de las prácticas publicadas por el MEP en 2025 y 2026. Los desarrollos explicativos no son del MEP. Una pregunta original de 2025 se corrigió por una inconsistencia entre su expresión y las opciones.",
   "domains": [
     {
       "id": "numeros",
