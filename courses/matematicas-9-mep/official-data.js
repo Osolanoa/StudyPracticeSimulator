@@ -1,4 +1,4 @@
-/* Claves verificadas con los solucionarios MEP; desarrollos originales contrastados donde se indica. */
+/* Claves del solucionario MEP. Desarrollos originales verificados donde se indica. */
 window.MEP_OFFICIAL_DATA = {
   "sets": [
     {
@@ -862,6 +862,363 @@ window.MEP_OFFICIAL_DATA = {
       "procedure": "En la intersección hombres–pop aparecen 30 personas y el total de la tabla es 171. La probabilidad estimada de elegir al azar un hombre que baile pop es 30/171.",
       "justification": "La opción B es 30/171. No confundas «hombre y pop» con el total de hombres que es 84.",
       "verified": true
+    },
+    "2025:4": {
+      "topic": "Irracionales en √(x−2)",
+      "procedure": "Se pide un número con expansión decimal infinita no periódica, es decir, un irracional. Evalúa los tres valores propuestos en √(x−2): x=2 produce √0=0, entero racional; x=3 da √1=1, también racional; x=5 da √3, irracional porque 3 no es un cuadrado perfecto.",
+      "justification": "C, x=5. No confundas tener una raíz escrita con obtener obligatoriamente un número irracional: √0 y √1 son racionales.",
+      "verified": true
+    },
+    "2025:5": {
+      "topic": "Dominio real de √(4−x)",
+      "procedure": "En los reales, el radicando de una raíz cuadrada no puede ser negativo. Para √(4−x), se requiere 4−x≥0, equivalente a x≤4. Prueba las opciones: x=2 produce √2, real; x=4 produce √0=0, real; x=6 produce √(−2), que no tiene valor real.",
+      "justification": "C, x=6. El punto límite x=4 pertenece al dominio y da cero; el problema ocurre solamente para valores mayores que 4.",
+      "verified": true
+    },
+    "2025:15": {
+      "topic": "Perímetro de romboide",
+      "procedure": "En el romboide ABDC, la altura AE mide 8 y BE mide 6. El triángulo AEB es rectángulo y su hipotenusa AB=√(6²+8²)=√100=10. Dado BE=ED, la base BD=6+6=12. Los lados opuestos del romboide son iguales: perímetro=2(AB+BD)=2(10+12)=44.",
+      "justification": "A, 44 unidades. La altura 8 no es un lado del romboide: se usa junto con el segmento de 6 para obtener el lado inclinado.",
+      "verified": true
+    },
+    "2025:16": {
+      "topic": "Distancia entre dos puntos",
+      "procedure": "Lee del gráfico A=(−2,4) y B=(3,0). La fórmula de distancia es AB=√[(x₂−x₁)²+(y₂−y₁)²]. Sustituyendo: AB=√[(3−(−2))²+(0−4)²]=√(5²+(-4)²)=√41.",
+      "justification": "C, √41. El cambio horizontal es de cinco unidades, no de una; restar una coordenada negativa equivale a sumar.",
+      "verified": true
+    },
+    "2025:22": {
+      "topic": "Tangentede 50 grados",
+      "procedure": "En el triángulo ABC rectángulo en B, el cateto opuesto al ángulo A=50° es BC=15 y el adyacente es AB, que se busca. Por definición tan50°=15/AB. Despeja AB=15/tan50°≈12,5866 y redondea a 12,59.",
+      "justification": "A, 12,59. No uses seno: el dato proporcionado no es la hipotenusa y la razón pertinente es tangente.",
+      "verified": true
+    },
+    "2025:23": {
+      "topic": "Ley de senos con tres piezas",
+      "procedure": "El triángulo de las piezas de ajedrez tiene peón–torre de 30 cm, ángulo en el caballo 54° y ángulo en la torre 68°. La distancia peón–caballo es opuesta al ángulo de 68°, mientras la longitud conocida de 30 se opone a 54°. Por la ley de senos: distancia/sen68°=30/sen54°. La distancia es 30×sen68°/sen54°≈34,38 cm.",
+      "justification": "B, 34,38 cm. La correspondencia lado opuesto/ángulo opuesto es imprescindible: invertir los senos arroja un resultado diferente.",
+      "verified": true
+    },
+    "2025:27": {
+      "topic": "Área lateral de pirámide rectangular",
+      "procedure": "La pirámide recta tiene base 16 por 12 y altura 6. Las dos caras triangulares con base 16 tienen altura inclinada √(6²+6²)=√72, pues la semianchura es 12/2=6. En conjunto sus áreas son 16√72≈135,76. Las otras dos caras de base 12 tienen altura inclinada √(6²+8²)=10 y área conjunta 12×10=120. Área lateral total≈135,76+120=255,76.",
+      "justification": "B, 255,76 unidades cuadradas. En una base rectangular hay dos apotemas laterales distintas; aplicar una sola apotema a las cuatro caras sería incorrecto.",
+      "verified": true
+    },
+    "2025:31": {
+      "topic": "Discriminante y ordenada en el origen",
+      "procedure": "La parábola del PDF abre hacia abajo y corta al eje x en dos puntos. Eso significa que su ecuación cuadrática posee dos raíces reales distintas y, por tanto, el discriminante Δ es mayor que 0, no menor que 0. La gráfica también pasa por el origen (0,0), así que c=f(0)=0, no c>0. Las dos proposiciones son falsas.",
+      "justification": "A, ninguna afirmación. La existencia de dos cortes reales con el eje x determina el signo del discriminante sin conocer los coeficientes.",
+      "verified": true
+    },
+    "2025:32": {
+      "topic": "Concavidad y máximo en parábola",
+      "procedure": "El gráfico presenta una parábola orientada hacia abajo. En f(x)=ax²+bx+c eso exige a<0, por lo que la afirmación a>0 es falsa. El vértice P(n,m) es el punto más alto de la curva, así que sí representa el máximo de la función.",
+      "justification": "C, solo II. El vértice es máximo si la parábola abre hacia abajo y mínimo si abre hacia arriba.",
+      "verified": true
+    },
+    "2025:39": {
+      "topic": "Simplificación de fracción algebraica",
+      "procedure": "Factoriza el numerador x²+6x+9=(x+3)² y el denominador 2x³+6x²=2x²(x+3). Cancelando un factor (x+3) queda (x+3)/(2x²). El denominador reducido es 2x², con las restricciones originales x≠0 y x≠−3.",
+      "justification": "B, 2x². Cancelar solo factores multiplicativos comunes, no términos que se suman; además, las restricciones originales siguen vigentes.",
+      "verified": true
+    },
+    "2025:40": {
+      "topic": "Producto de fracciones algebraicas",
+      "procedure": "Multiplica (2x+3)/(x+1) por 1/(2x+3). El producto inicial es (2x+3)/[(x+1)(2x+3)], donde x≠−1 y x≠−3/2. Cancelando el factor común 2x+3 se obtiene 1/(x+1), cuyo numerador es 1.",
+      "justification": "A, 1. El factor 2x+3 se cancela porque multiplica ambos niveles de la fracción, no porque se resten términos.",
+      "verified": true
+    },
+    "2025:41": {
+      "topic": "Racionalización del numerador",
+      "procedure": "La expresión es √2/√5 y se solicita que el numerador ya no contenga raíz. Multiplica numerador y denominador por √2: (√2×√2)/(√5×√2)=2/√10. El numerador queda exactamente 2 y la fracción conserva su valor para radicandos positivos.",
+      "justification": "B, 2/√10. Habitualmente se racionaliza el denominador, pero en este ejercicio se pide explícitamente racionalizar el numerador.",
+      "verified": true
+    },
+    "2025:46": {
+      "topic": "Catetos con diferencia de dos",
+      "procedure": "Sea x el cateto menor y x+2 el mayor. Aplicando Pitágoras con hipotenusa 10: x²+(x+2)²=100. Al desarrollar: 2x²+4x+4=100; simplifica x²+2x−48=0=(x+8)(x−6). Las soluciones son x=−8 y x=6; se descarta la negativa porque se trata de longitudes.",
+      "justification": "C, 6 unidades. Se comprueba con la terna pitagórica 6²+8²=36+64=100.",
+      "verified": true
+    },
+    "2025:47": {
+      "topic": "Variable cuantitativa continua",
+      "procedure": "El tiempo que tarda en caer una piedra puede medirse con valores reales decimales: 1,8 s; 1,82 s; etcétera. Por eso es una variable cuantitativa continua. En cambio, la cantidad de matrimonios y la cantidad de materias ganadas son recuentos enteros y son discretos.",
+      "justification": "C, el tiempo de caída. La clasificación depende de si se mide una magnitud o se cuentan unidades separadas.",
+      "verified": true
+    },
+    "2026-01:13": {
+      "topic": "Distancia de puntos",
+      "procedure": "Los puntos del plano son D=(−3,1) y E=(0,5). La separación horizontal es 0−(−3)=3 y la vertical es 5−1=4. Usa la fórmula de distancia: DE=√(3²+4²)=√25=5.",
+      "justification": "El triángulo de desplazamientos es 3–4–5; la respuesta A es 5.",
+      "verified": true
+    },
+    "2026-01:14": {
+      "topic": "Perímetro de triángulo rectángulo",
+      "procedure": "La hipotenusa mide 15 y uno de los catetos mide 9. Por Pitágoras, el otro cateto es √(15²−9²)=√(225−81)=√144=12. Entonces el perímetro es 9+12+15=36.",
+      "justification": "B, 36. Para perímetro se suman los tres lados; para área se multiplicarían solo los catetos y dividiría entre dos.",
+      "verified": true
+    },
+    "2026-01:15": {
+      "topic": "Distancia de anclaje de cable",
+      "procedure": "La torre vertical tiene altura 8 m y el cable inclinado mide 10 m, que es la hipotenusa. La distancia horizontal d cumple d²+8²=10²; así d²=100−64=36 y d=6 m.",
+      "justification": "B, 6 m. La longitud horizontal debe ser menor que el cable.",
+      "verified": true
+    },
+    "2026-01:16": {
+      "topic": "Área rectangular con diagonal",
+      "procedure": "La diagonal de 20 m y el ancho 12 m forman un triángulo rectángulo cuyo largo es L=√(20²−12²)=√256=16 m. El área rectangular es 12×16=192 m².",
+      "justification": "C, 192 m². La diagonal permite hallar el largo pero no es el largo del terreno.",
+      "verified": true
+    },
+    "2026-01:17": {
+      "topic": "Convertir 270 grados a radianes",
+      "procedure": "La equivalencia es 180°=π radianes. Por tanto, 270°×π/180°=3π/2 radianes. También se obtiene como tres cuartos de 2π radianes.",
+      "justification": "C, 3π/2. Si piden radianes exactos, π permanece en la respuesta.",
+      "verified": true
+    },
+    "2026-01:18": {
+      "topic": "Convertir radianes a grados",
+      "procedure": "Multiplica 3π/5 radianes por 180°/π. Se cancela π: (3×180)/5=108°. El resultado corresponde a un ángulo obtuso de 108 grados.",
+      "justification": "A, 108°. El factor inverso π/180° convertiría grados a radianes y no sirve en este caso.",
+      "verified": true
+    },
+    "2026-01:19": {
+      "topic": "Coseno de β",
+      "procedure": "En el triángulo rectángulo del documento, β se ubica entre el cateto vertical y la hipotenusa. El cateto adyacente a β es y y la hipotenusa z; por definición cos(β)=adyacente/hipotenusa=y/z.",
+      "justification": "B, y/z. Usar x/z daría el seno de β, porque x es el cateto opuesto.",
+      "verified": true
+    },
+    "2026-01:20": {
+      "topic": "Tangente de ψ",
+      "procedure": "Para el ángulo ψ en el extremo izquierdo inferior, el cateto opuesto es el lado vertical y y el adyacente es la base horizontal x. La tangente es opuesto/adyacente, por lo que tan(ψ)=y/x.",
+      "justification": "A, y/x. La hipotenusa z no interviene en la tangente.",
+      "verified": true
+    },
+    "2026-01:21": {
+      "topic": "Cateto con seno de 40 grados",
+      "procedure": "El triángulo EFD es rectángulo en E; FD mide 43 y es la hipotenusa. El ángulo EFD en F es 40°. El lado buscado ED está frente a ese ángulo: sen40°=ED/43 y ED=43 sen40°≈27,64.",
+      "justification": "A, 27,64. Multiplicar la hipotenusa por seno entrega el cateto opuesto.",
+      "verified": true
+    },
+    "2026-01:22": {
+      "topic": "Ley de senos de triángulo RPQ",
+      "procedure": "En el triángulo RPQ, RQ=20 y está opuesto al ángulo P=26°. El lado PR está opuesto al ángulo Q=34°. Ley de senos: PR/sen34°=20/sen26°. Así PR=20×sen34°/sen26°≈25,51.",
+      "justification": "D, 25,51. Para no invertir la razón, marca siempre qué ángulo queda frente a cada lado.",
+      "verified": true
+    },
+    "2026-01:23": {
+      "topic": "Ley de senos entre ángulos B y C",
+      "procedure": "En el triángulo ABC se dan ∠B=51°, ∠C=21° y AB=12. El lado AB es opuesto al ángulo C, mientras AC es opuesto a B. Así AC/sen51°=12/sen21°, de donde AC≈26,02.",
+      "justification": "B, 26,02. El lado frente a 51° debe ser mayor que el lado de 12 frente a 21°.",
+      "verified": true
+    },
+    "2026-01:24": {
+      "topic": "Altura de acantilado",
+      "procedure": "El ángulo de depresión de 37° es igual al de elevación visto desde la rana respecto de la horizontal. La base del acantilado está a 36 m horizontalmente. Usa tan37°=altura/36 y altura=36 tan37°≈27,1 m.",
+      "justification": "B, aproximadamente 27 m. La longitud de 36 es cateto adyacente, no hipotenusa.",
+      "verified": true
+    },
+    "2026-01:25": {
+      "topic": "Ley de senos entre casas y escuela",
+      "procedure": "Los puntos escuela, casa Mora y casa Díaz forman un triángulo. Los ángulos de la línea horizontal son 21° en la escuela y 45° en Mora. La distancia Mora–Díaz es 210 m, opuesta al ángulo 21°. El lado escuela–Díaz está opuesto a 45°. Ley de senos: d/sen45°=210/sen21°; por tanto d≈414,4 m.",
+      "justification": "A, 414 m. La diferencia de distancias se explica por la diferencia de ángulos opuestos.",
+      "verified": true
+    },
+    "2026-01:32": {
+      "topic": "Parábola negativa con vértice en origen",
+      "procedure": "La gráfica pasa por (0,0), tiene ese punto como vértice y se abre hacia abajo. Una cuadrática de la forma a x² con a<0 posee esas características. Entre las opciones, −x² es la que corresponde; 2x y −2x serían rectas.",
+      "justification": "C, h(x)=−x². El signo del coeficiente cuadrático determina la dirección de apertura.",
+      "verified": true
+    },
+    "2026-01:33": {
+      "topic": "Parámetro b de función cuadrática",
+      "procedure": "La tabla sigue los valores x: −2,−1,0,1,2 y f(x):4,1,0,1,4, mientras la función está dada por f(x)=x²+2b. Usa el punto x=0: 0=0²+2b, así que b=0. Comprueba x=2: f(2)=4, consistente con la tabla.",
+      "justification": "A, b=0. El valor x=0 aísla directamente el término constante 2b.",
+      "verified": true
+    },
+    "2026-01:34": {
+      "topic": "Discriminante y apertura",
+      "procedure": "La curva g tiene forma de U: abre hacia arriba, por tanto a>0. El punto mínimo queda por encima del eje horizontal, de modo que no hay intersecciones reales con el eje x, y el discriminante Δ=b²−4ac<0. Ambas afirmaciones son verdaderas.",
+      "justification": "A, ambas. No tener cortes con el eje x equivale a no tener raíces reales.",
+      "verified": true
+    },
+    "2026-01:35": {
+      "topic": "Signo de término constante",
+      "procedure": "En g(x)=ax²+bx+c, c=g(0) es el punto donde la gráfica cruza el eje vertical. La curva del PDF corta dicho eje por encima del origen; por consiguiente, c es estrictamente positivo.",
+      "justification": "C, cualquier número mayor que cero. No se puede determinar su magnitud exacta sin una escala gráfica, solo su signo.",
+      "verified": true
+    },
+    "2026-01:39": {
+      "topic": "Producto de potencias algebraicas",
+      "procedure": "Multiplica (x²/x⁵)·(3/(2x)) con x distinto de cero. El producto es 3x²/(2x⁶)=3/(2x⁴), usando x⁶/x²=x⁴. El denominador final es 2x⁴.",
+      "justification": "A, 2x⁴. El producto de denominadores es x⁵·2x=2x⁶ y se simplifica después.",
+      "verified": true
+    },
+    "2026-01:40": {
+      "topic": "Reducir cociente de polinomios",
+      "procedure": "Factoriza x²+2x+1=(x+1)². Entonces (x²+2x+1)/(x+1)=(x+1)²/(x+1)=x+1, para x≠−1. La igualdad es algebraica en el dominio permitido.",
+      "justification": "C, x+1. La factorización es el cuadrado de un binomio, no una suma arbitraria.",
+      "verified": true
+    },
+    "2026-01:41": {
+      "topic": "Racionalizar 3 sobre raíz de 3",
+      "procedure": "Multiplica numerador y denominador de 3/√3 por √3. Se obtiene (3√3)/(√3·√3)=3√3/3=√3. La fracción original y el radical final representan el mismo valor.",
+      "justification": "B, √3. El denominador queda sin radical y el resultado se simplifica.",
+      "verified": true
+    },
+    "2026-01:42": {
+      "topic": "Denominador común en suma de fracciones",
+      "procedure": "Se suman 2a/b y 3a/(2b). El mínimo denominador común es 2b. Expresa 2a/b como 4a/(2b); suma: (4a+3a)/(2b)=7a/(2b). La pregunta pide el denominador, no toda la fracción.",
+      "justification": "B, 2b. No sumes los denominadores: utiliza un común denominador.",
+      "verified": true
+    },
+    "2026-01:47": {
+      "topic": "Variable cuantitativa continua",
+      "procedure": "La cantidad de kilogramos de sal consumidos es una medida susceptible de valores decimales, por ejemplo 2,35 kg. La cantidad de limones, perros o pares de zapatos se cuenta mediante números enteros. Por eso la masa en kg es continua y las otras opciones son discretas.",
+      "justification": "D, kilogramos de sal. Medición continua frente a conteo discreto.",
+      "verified": true
+    },
+    "2026-01:48": {
+      "topic": "Variable cuantitativa discreta",
+      "procedure": "El número de expresidentes de Costa Rica es un conteo: sus valores posibles son enteros no negativos. En cambio, la velocidad del viento, la longitud de un río y la temperatura son magnitudes medidas que pueden tener decimales.",
+      "justification": "B, número de expresidentes. El carácter discreto depende de contar unidades separadas.",
+      "verified": true
+    },
+    "2026-01:55": {
+      "topic": "Probabilidad de eventos disjuntos",
+      "procedure": "En la tabla hay 15 hombres que practican taekwondo y 8 mujeres que practican muay thai, entre 47 estudiantes. Los dos grupos no se traslapan, así que el evento «uno u otro» se calcula sumando favorables: 15+8=23, dividido entre 47. Probabilidad=23/47.",
+      "justification": "B, 23/47. No se suman denominadores; se mantiene el tamaño de la muestra porque el estudiante se elige entre los mismos 47.",
+      "verified": true
+    },
+    "2026-02:14": {
+      "topic": "Distancia de dos puntos en plano",
+      "procedure": "Los puntos D=(−3,1) y E=(0,5) están separados horizontalmente por 3 unidades y verticalmente por 4. Usando d=√[(Δx)²+(Δy)²] resulta √(9+16)=√25=5.",
+      "justification": "A, 5. Convierte correctamente la resta 0−(−3) en suma.",
+      "verified": true
+    },
+    "2026-02:15": {
+      "topic": "Perímetro de triángulo 9–12–15",
+      "procedure": "La hipotenusa mide 15 y un cateto 9. Calcula el otro cateto: √(15²−9²)=12. Sumando los tres lados: 9+12+15=36.",
+      "justification": "B, 36. No uses la fórmula de área cuando se pide perímetro.",
+      "verified": true
+    },
+    "2026-02:20": {
+      "topic": "Razón coseno β",
+      "procedure": "En la figura β está entre el lado vertical y y la hipotenusa z. Coseno es cateto adyacente dividido entre hipotenusa, de modo que cos(β)=y/z.",
+      "justification": "B, y/z. El otro cateto x es opuesto, no adyacente, a β.",
+      "verified": true
+    },
+    "2026-02:21": {
+      "topic": "Razón tangente ψ",
+      "procedure": "Respecto del ángulo ψ, el cateto vertical y está enfrente y el lado horizontal x está junto al ángulo. Así tan(ψ)=y/x.",
+      "justification": "A, y/x. Tangente no utiliza la hipotenusa.",
+      "verified": true
+    },
+    "2026-02:22": {
+      "topic": "Seno para hallar lado ED",
+      "procedure": "El triángulo EFD es rectángulo en E, con hipotenusa FD=43. ED está frente al ángulo de 40° en F, por lo que sen40°=ED/43 y ED=43 sen40°≈27,64.",
+      "justification": "A, 27,64. El lado buscado es más corto que la hipotenusa de 43.",
+      "verified": true
+    },
+    "2026-02:23": {
+      "topic": "Ley de senos para lado PR",
+      "procedure": "En el triángulo RPQ, RQ=20 está frente al ángulo de 26° y PR frente al ángulo de 34°. Aplica PR/sen34°=20/sen26°, luego PR=20 sen34°/sen26°≈25,51.",
+      "justification": "D, 25,51. Un mayor ángulo tiene enfrente un mayor lado.",
+      "verified": true
+    },
+    "2026-02:24": {
+      "topic": "Ley de senos para AC",
+      "procedure": "En el triángulo ABC, el lado AB=12 es opuesto a C=21°, mientras AC es opuesto a B=51°. Por la ley de senos: AC=12 sen51°/sen21°≈26,02.",
+      "justification": "B, 26,02. Los ángulos se emparejan con los lados que tienen enfrente.",
+      "verified": true
+    },
+    "2026-02:25": {
+      "topic": "Ángulo de depresión y tangente",
+      "procedure": "La rana está 36 m horizontalmente de la base del acantilado. La depresión observada desde arriba es 37°, equivalente al ángulo de elevación desde abajo. Por ello tan37°=h/36, así h≈36×0,7536≈27,13 m.",
+      "justification": "B, 27 m. No dividas por la tangente porque la altura es el cateto opuesto.",
+      "verified": true
+    },
+    "2026-02:26": {
+      "topic": "Distancia entre la escuela y Díaz",
+      "procedure": "El triángulo de la escuela, Mora y Díaz tiene 21° en la escuela, 45° en Mora y lado Mora–Díaz de 210 m. Por ley de senos, distancia escuela–Díaz /sen45° =210/sen21°, de donde distancia≈414 m.",
+      "justification": "A, 414 m. La longitud solicitada es opuesta a 45°, no a 21°.",
+      "verified": true
+    },
+    "2026-02:34": {
+      "topic": "Identificación de parábola",
+      "procedure": "La gráfica es una parábola con vértice (0,0) que abre hacia abajo. Una cuadrática simple con esas propiedades es h(x)=−x². x² abriría hacia arriba; 2x y −2x no son cuadráticas.",
+      "justification": "C, −x². Busca simultáneamente forma, ubicación del vértice y signo del coeficiente.",
+      "verified": true
+    },
+    "2026-02:35": {
+      "topic": "Coeficiente de ax² según tabla",
+      "procedure": "La tabla indica que f(1)=1 y la función es f(x)=a x². Sustituye x=1: 1=a·1², así a=1. Los demás valores lo verifican, por ejemplo f(−2)=1·4=4.",
+      "justification": "B, 1. Elegir x=1 permite hallar el coeficiente directamente.",
+      "verified": true
+    },
+    "2026-02:36": {
+      "topic": "Función cuadrática desde una tabla",
+      "procedure": "La tabla incluye g(0)=−1 y g(1)=0. La fórmula g(x)=x²−1 satisface ambos y también g(2)=4−1=3 y g(−2)=3. Las opciones con −x² abren hacia abajo o producen valores equivocados.",
+      "justification": "D, g(x)=x²−1. Verifica todos los pares de la tabla, no solo uno.",
+      "verified": true
+    },
+    "2026-02:37": {
+      "topic": "Discriminante y concavidad de parábola",
+      "procedure": "La gráfica abre hacia arriba, así que a>0. Su mínimo está por encima del eje x: no toca ni cruza ese eje, por lo que no hay raíces reales y Δ=b²−4ac<0. Ambas proposiciones son correctas.",
+      "justification": "A, ambas afirmaciones. La posición de la parábola respecto al eje horizontal revela cuántas raíces reales tiene.",
+      "verified": true
+    },
+    "2026-02:38": {
+      "topic": "Ordenada en el origen",
+      "procedure": "El coeficiente c de g(x)=ax²+bx+c es el valor g(0), o sea el corte con el eje vertical. En la figura dicho corte está por encima del eje x, por lo que c>0.",
+      "justification": "C, un número mayor que cero. La escala no permite concluir el valor exacto de c, solo que es positivo.",
+      "verified": true
+    },
+    "2026-02:42": {
+      "topic": "Multiplicar monomios y simplificar",
+      "procedure": "La expresión del documento es (x²/x⁵)·(3/(2x)). Multiplica: numerador 3x², denominador 2x⁶. Al cancelar x² se obtiene 3/(2x⁴), con x≠0.",
+      "justification": "A, 2x⁴, el denominador. Hay que sumar exponentes al multiplicar las potencias del denominador.",
+      "verified": true
+    },
+    "2026-02:43": {
+      "topic": "Simplificación de diferencia al cuadrado",
+      "procedure": "El numerador x²−4x+4 es (x−2)². Para x≠2, dividir por x−2 deja x−2. Aunque la expresión simplificada puede evaluarse en 2, la original no está definida allí.",
+      "justification": "A, x−2. Reconoce el trinomio cuadrado perfecto antes de cancelar.",
+      "verified": true
+    },
+    "2026-02:44": {
+      "topic": "Racionalización mediante conjugado",
+      "procedure": "Escribe el numerador 9x−4y como diferencia de cuadrados: (3√x)²−(2√y)²=(3√x−2√y)(3√x+2√y). El denominador original es 3√x−2√y, por lo que la fracción simplifica a 3√x+2√y siempre que el denominador no sea cero.",
+      "justification": "B, 3√x+2√y. En un producto de conjugados los términos cruzados desaparecen.",
+      "verified": true
+    },
+    "2026-02:45": {
+      "topic": "Resta de fracciones algebraicas",
+      "procedure": "Para 2a/b−3a/(2b), el denominador común es 2b. Reescribe 2a/b=4a/(2b); resta para obtener (4a−3a)/(2b)=a/(2b).",
+      "justification": "C, 2b, el denominador solicitado. No se restan los denominadores entre sí.",
+      "verified": true
+    },
+    "2026-02:52": {
+      "topic": "Diferenciar variable discreta",
+      "procedure": "La cantidad de expresidentes se obtiene contando personas y solo puede ser un número entero. En cambio velocidad del viento, longitud de un río y temperatura se miden en escalas continuas.",
+      "justification": "B, número de expresidentes. La categoría discreta no equivale a «pequeño», sino a valores contables separados.",
+      "verified": true
+    },
+    "2026-02:53": {
+      "topic": "Dos tipos de variable cuantitativa",
+      "procedure": "La masa de un hombre en kg es continua porque puede variar con fracciones de kilogramo. La cantidad de goles de un equipo es discreta porque se cuentan 0,1,2… goles enteros. Se clasifica I continua y II discreta.",
+      "justification": "A, I continua e II discreta. La diferencia es medir o contar, no que ambas variables sean numéricas.",
+      "verified": true
+    },
+    "2026-02:56": {
+      "topic": "Porcentaje de efectividad deportiva",
+      "procedure": "La gráfica muestra tiros y goles de cuatro jugadoras: Luz 12 tiros y 10 goles; Vera 8 y 6; Yeri 10 y 8; Sofía 14 y 6. Calcula acierto = goles/tiros×100: Luz≈83,33%; Vera=75%; Yeri=80%; Sofía≈42,86%. La mayor efectividad es la de Luz.",
+      "justification": "A, Luz. Comparar la cantidad absoluta de goles no es suficiente: hay que dividir entre tiros para comparar porcentajes.",
+      "verified": true
     }
+  },
+  "reviewNotes": {
+    "2025:42": "Revisión pendiente: el enunciado visible del PDF y las opciones de respuesta no parecen consistentes con la clave publicada. Se conserva la letra del solucionario oficial para referencia, pero no se presenta una solución individual como verificada."
   }
 };
