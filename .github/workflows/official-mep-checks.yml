@@ -1,0 +1,29 @@
+name: Verify official MEP practice bank
+on:
+  push:
+    paths:
+      - "courses/matematicas-9-mep/official*"
+      - "tests/official-mep-data.test.cjs"
+      - ".github/workflows/official-mep-checks.yml"
+  pull_request:
+    paths:
+      - "courses/matematicas-9-mep/official*"
+      - "tests/official-mep-data.test.cjs"
+      - ".github/workflows/official-mep-checks.yml"
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check JavaScript syntax
+        run: |
+          node --check courses/matematicas-9-mep/official-data.js
+          node --check courses/matematicas-9-mep/official-practices.js
+          node --check js/app.js
+      - name: Validate answer keys and educational explanations
+        run: node tests/official-mep-data.test.cjs

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Prácticas oficiales MEP de Matemáticas 9.º, 2025 y 2026, con claves y desarrollos de estudio.">
+<title>Prácticas oficiales MEP | Study Practice Simulator</title>
+<link rel="stylesheet" href="./official.css">
+<script src="./official-data.js" defer></script>
+<script src="./official-practices.js" defer></script>
+</head>
+<body>
+<a href="#main" class="skip">Ir al contenido</a>
+<div class="page">
+<header class="header">
+  <div>
+    <a class="back" href="../../index.html?course=matematicas-9-mep">← Matemáticas 9.º</a>
+    <p class="overline">STUDY PRACTICE SIMULATOR · MEP / ICER</p>
+    <h1>Prácticas oficiales <span>2025–2026</span></h1>
+    <p class="subtitle">170 ítems de tres documentos oficiales. Responde con la guía abierta y estudia los procedimientos desarrollados.</p>
+  </div>
+  <a href="../../index.html" class="all-courses">Todos los cursos</a>
+</header>
+<main id="main">
+ <nav id="packs" class="pack-tabs" aria-label="Seleccionar práctica"></nav>
+ <div class="progress-card"><div id="summary" aria-live="polite"></div><div class="track"><div id="progress" class="fill"></div></div></div>
+ <div class="workspace">
+  <section class="paper" aria-label="Documento oficial">
+    <div class="panel-header"><div><p class="overline">DOCUMENTO DEL MEP</p><h2 id="paper-title">Documento oficial</h2></div><a id="pdf-open" href="#" class="outline" target="_blank" rel="noopener noreferrer">Abrir PDF ↗</a></div>
+    <p class="note">Lee el enunciado y mira las figuras en el PDF. El panel derecho permite responder el mismo número de ítem; no reemplazamos las gráficas originales con texto extraído de forma incorrecta.</p>
+    <div class="viewer-actions"><button id="toggle-pdf" type="button">Ocultar vista del PDF</button><span id="pdf-note">Si el sitio del MEP impide mostrarlo aquí, usa «Abrir PDF».</span></div>
+    <iframe id="pdf-frame" title="Práctica oficial del MEP en PDF" loading="lazy"></iframe>
+  </section>
+  <section class="quiz" aria-label="Simulador de respuestas">
+    <div id="item" aria-live="polite"></div>
+    <div id="navigator" class="navigator" aria-label="Navegación por ítems"></div>
+  </section>
+ </div>
+ <footer>Material de apoyo independiente. Enunciados y diagramas: consultar los PDF originales del MEP. Respuestas cotejadas con los solucionarios publicados; las explicaciones didácticas no son del MEP.</footer>
+</main>
+</div>
+</body>
+</html>
