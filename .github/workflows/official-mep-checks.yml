@@ -2,13 +2,19 @@ name: Verify official MEP practice bank
 on:
   push:
     paths:
-      - "courses/matematicas-9-mep/official*"
-      - "tests/official-mep-data.test.cjs"
+      - "courses/matematicas-9-mep/**"
+      - "tests/*mep*.test.cjs"
+      - "js/app.js"
+      - "js/loader.js"
+      - "js/storage.js"
       - ".github/workflows/official-mep-checks.yml"
   pull_request:
     paths:
-      - "courses/matematicas-9-mep/official*"
-      - "tests/official-mep-data.test.cjs"
+      - "courses/matematicas-9-mep/**"
+      - "tests/*mep*.test.cjs"
+      - "js/app.js"
+      - "js/loader.js"
+      - "js/storage.js"
       - ".github/workflows/official-mep-checks.yml"
 jobs:
   verify:
@@ -20,10 +26,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - name: Check JavaScript syntax
+      - name: Check Javascript syntax for course and engine
         run: |
+          node --check courses/matematicas-9-mep/config.js
+          node --check courses/matematicas-9-mep/questions.js
           node --check courses/matematicas-9-mep/official-data.js
-          node --check courses/matematicas-9-mep/official-practices.js
+          node --check courses/matematicas-9-mep/inline-2025.js
+          node --check courses/matematicas-9-mep/inline-2026-01.js
+          node --check courses/matematicas-9-mep/inline-2026-02.js
           node --check js/app.js
-      - name: Validate answer keys and educational explanations
+          node --check js/loader.js
+          node --check js/storage.js
+      - name: Verify source answer keys
         run: node tests/official-mep-data.test.cjs
+      - name: Verify full questions and teacher feedback
+        run: node tests/inline-mep-bank.test.cjs
