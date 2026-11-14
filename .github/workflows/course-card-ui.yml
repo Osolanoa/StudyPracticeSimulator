@@ -1,0 +1,30 @@
+name: Course card UI regression
+on:
+  push:
+    paths:
+      - "js/cosmic-landing.js"
+      - "index.html"
+      - "tests/cosmic-landing-card.test.cjs"
+      - ".github/workflows/course-card-ui.yml"
+  pull_request:
+    paths:
+      - "js/cosmic-landing.js"
+      - "index.html"
+      - "tests/cosmic-landing-card.test.cjs"
+      - ".github/workflows/course-card-ui.yml"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/cosmic-landing.js
+          node --check tests/cosmic-landing-card.test.cjs
+      - name: Verify cards and navigation
+        run: node tests/cosmic-landing-card.test.cjs
