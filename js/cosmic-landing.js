@@ -8,7 +8,6 @@
     practice: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><path d="m13 11 7-7"/></svg>',
     progress: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="12" width="3" height="9" rx="1"/><rect x="10" y="7" width="3" height="14" rx="1"/><rect x="17" y="3" width="3" height="18" rx="1"/></svg>',
     settings: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m9.9 2 4.2 0 .7 2.9 2 .9 2.7-1.2 2.7 3.4-2 2.3.1 2.2 2 2.3-2.7 3.4-2.7-1.2-2 .9-.7 2.9H9.9l-.7-2.9-2-.9-2.7 1.2-2.7-3.4 2-2.3-.1-2.2-2-2.3 2.7-3.4 2.7 1.2 2-.9z" transform="translate(0 1) scale(1 .91)"/></svg>',
-    arrow: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>',
     play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 4 13 8-13 8z"/></svg>',
     bookmark: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18l-7-5-7 5z"/></svg>',
     mistakes: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 7 5-5 5 5M12 2v12a7 7 0 1 0 7 7"/><path d="M8 19h8"/></svg>',
@@ -25,13 +24,13 @@
     const percent=progress=>progress.total ? Math.min(100,Math.round(progress.done/progress.total*100)):0;
     const cards=overview.map(({course,progress},i)=>{
       const p=percent(progress),math=course.id.includes('matematicas');
-      return '<article data-cosmic-card="'+esc(course.id)+'" class="cosmos-course '+(math?'cosmos-course--math':'cosmos-course--azure')+'">'+
+      return '<article data-cosmic-card="'+esc(course.id)+'" role="button" tabindex="0" aria-label="Open '+esc(course.name)+'" class="cosmos-course '+(math?'cosmos-course--math':'cosmos-course--azure')+'">'+
         '<div class="cosmos-course-visual" aria-hidden="true"><span class="cosmos-course-symbol">'+(math?icons.math:icons.cloud)+'</span><span class="cosmos-course-orb"></span></div>'+
         '<div class="cosmos-course-copy"><span class="cosmos-label">'+esc(course.shortName)+'</span><h3>'+esc(course.name)+'</h3><p>'+esc(course.description)+'</p>'+
         '<div class="cosmos-facts"><span>'+course.questionCount+' questions</span><span>'+progress.total+' practice tests</span></div>'+
         '<div class="cosmos-track-label"><span>Study progress</span><strong>'+p+'%</strong></div>'+
         '<div class="cosmos-track" role="progressbar" aria-label="'+esc(course.shortName)+' completed" aria-valuenow="'+p+'" aria-valuemin="0" aria-valuemax="100"><span style="width:'+p+'%"></span></div>'+
-        '<button type="button" class="cosmos-course-go" data-cosmic-course="'+esc(course.id)+'">'+(progress.done?'Continue course':'Explore course')+' '+icons.arrow+'</button></div>'+
+        '</div>'+
         '</article>';
     }).join('');
     app.innerHTML='<main id="main" class="cosmos-landing cosmos-landing--compact">'+
@@ -39,12 +38,16 @@
       '<section class="cosmos-courses" id="cosmos-courses" aria-labelledby="cosmos-courses-title"><div class="cosmos-section-head"><h2 id="cosmos-courses-title">Your courses</h2></div><div class="cosmos-course-grid">'+cards+'</div></section>'+
 
       '<footer class="cosmos-footer"><span>Space imagery: ESO / Digitized Sky Survey 2</span><span>Made for focused learning</span></footer></main>';
-    const buttons=app.querySelectorAll('[data-cosmic-course]');
-    buttons.forEach(b=>b.addEventListener('click',()=>loadCourse(b.dataset.cosmicCourse,'dashboard')));
-    app.querySelectorAll('[data-cosmic-card]').forEach(card=>card.addEventListener('click',event=>{
-      if(event.target.closest('button'))return;
-      loadCourse(card.dataset.cosmicCard,'dashboard');
-    }));
+    app.querySelectorAll('[data-cosmic-card]').forEach(card=>{
+      const openCourse=()=>loadCourse(card.dataset.cosmicCard,'dashboard');
+      card.addEventListener('click',openCourse);
+      card.addEventListener('keydown',event=>{
+        if(event.key==='Enter'||event.key===' '){
+          event.preventDefault();
+          openCourse();
+        }
+      });
+    });
   }
   window.CosmicLanding={render};
 })();
