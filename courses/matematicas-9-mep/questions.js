@@ -63,18 +63,13 @@
       const intro = "Primero identifica lo que pide el problema y los datos que proporciona. " +
         "No basta con reconocer una fórmula: hay que aplicarla a las cantidades de este ejercicio.";
       const fullExplanation = [
-        "CONTEXTO
-" + context,
-        "PASO 1 — Interpretación del problema
-" + intro + " " + item.question,
-        "PASO 2 — Desarrollo matemático completo
-" + solution.procedure,
-        "PASO 3 — Comprobación y selección de la respuesta
-" +
+        "CONTEXTO\n" + context,
+        "PASO 1 — Interpretación del problema\n" + intro + " " + item.question,
+        "PASO 2 — Desarrollo matemático completo\n" + solution.procedure,
+        "PASO 3 — Comprobación y selección de la respuesta\n" +
           "El valor o la afirmación que satisface el enunciado es: " + correctText +
           " (alternativa " + letter + "). " + solution.justification,
-        "PASO 4 — Cómo resolver problemas semejantes
-" + notes.memory +
+        "PASO 4 — Cómo resolver problemas semejantes\n" + notes.memory +
           " " + notes.tip
       ].join("\n\n");
       const explanations = {};
