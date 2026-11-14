@@ -1,0 +1,71 @@
+"use strict";
+/* Verificación de la integración del curso MEP con el motor de práctica existente. */
+const assert = require("node:assert/strict");
+const fs = require("node:fs");
+const path = require("node:path");
+const vm = require("node:vm");
+const root = path.resolve(__dirname, "..");
+const ctx = { window: {} };
+const run = rel => vm.runInNewContext(fs.readFileSync(path.join(root, rel), "utf8"), ctx, {filename: rel,timeout:3000});
+const base="courses/matematicas-9-mep/";
+run(base+"config.js");
+run(base+"official-data.js");
+run(base+"inline-2025.js");
+run(base+"inline-2026-01.js");
+run(base+"inline-2026-02.js");
+run(base+"questions.js");
+const bank = ctx.window.COURSE_QUESTIONS;
+const packs = ctx.window.MEP_OFFICIAL_DATA.sets;
+assert.equal(bank.length,170);
+assert.equal(new Set(bank.map(q=>q.id)).size,170,"Unique persistent IDs");
+assert.equal(ctx.window.COURSE_CONFIG.version,"2.0");
+assert.equal(ctx.window.MEP_INLINE_2025.length,55);
+assert.equal(ctx.window.MEP_INLINE_2026_01.length,55);
+assert.equal(ctx.window.MEP_INLINE_2026_02.length,60);
+const groups = { "2025":0,"2026-01":0,"2026-02":0 };
+for (const q of bank) {
+  assert.ok(/^(MEP25|MEP26-I|MEP26-II)-\d{3}$/.test(q.id), "Invalid ID " + q.id);
+  assert.ok(["numeros","geometria","algebra","estadistica"].includes(q.domain),q.id);
+  assert.equal(q.type,"single-choice",q.id);
+  assert.ok(typeof q.question === "string" && q.question.length >= 45,q.id+" complete stem");
+  assert.ok(q.options.length===3 || q.options.length===4,q.id+" option number");
+  assert.equal(new Set(q.options.map(o=>o.id)).size,q.options.length,q.id+" option IDs");
+  assert.equal(new Set(q.options.map(o=>o.text)).size,q.options.length,q.id+" duplicate options");
+  assert.ok(q.options.every(o=>o.text.length>=1),q.id+" empty option text");
+  assert.ok(q.explanation.includes("PASO 1") && q.explanation.includes("PASO 2") &&
+            q.explanation.includes("PASO 3") && q.explanation.includes("PASO 4") &&
+            q.explanation.length > 420,q.id+" missing detailed explanatory procedure");
+  assert.ok(q.correctAnswers.length===1,q.id);
+  assert.ok(q.options.some(o=>o.id===q.correctAnswers[0]),q.id+" invalid correct letter");
+  assert.ok(typeof q.keyClue==="string" && q.keyClue.length>20,q.id+" clue");
+  assert.ok(typeof q.mentalModel==="string" && q.mentalModel.length>100,q.id+" mental model");
+  assert.ok(q.options.every(o=>typeof q.optionExplanations[o.id]==="string" &&
+         q.optionExplanations[o.id].length>140),q.id+" missing option-specific feedback");
+  const [id,indexText]=q.sourceId.split(":");
+  const n=+indexText;
+  const pack=packs.find(p=>p.id===id);
+  assert.ok(pack && n>=1 && n<=pack.answers.length,q.id+" reference");
+  assert.equal(q.correctAnswers[0],pack.answers[n-1],q.id+" not matching source key");
+  assert.equal(q.options.length,pack.answerCount,q.id+" exam option count");
+  assert.equal(q.sourceUrl,pack.url,q.id+" source URL");
+  assert.ok(q.id.startsWith(id==="2025"?"MEP25":id==="2026-01"?"MEP26-I":"MEP26-II"),q.id);
+  assert.ok(!q.id.startsWith("MEP9-"),"Legacy synthetic question still present");
+  groups[id]++;
+}
+assert.equal(groups["2025"],55);assert.equal(groups["2026-01"],55);assert.equal(groups["2026-02"],60);
+const item = (id,n)=>bank.find(q=>q.sourceId===id+":"+n);
+assert.equal(item("2025",42).correctAnswers[0],"B");
+assert.match(item("2025",42).question,/VERSIÓN CORREGIDA/);
+assert.match(item("2025",42).explanation,/resto de −4/);
+assert.equal(item("2026-01",55).options[1].text,"23/47");
+assert.equal(item("2026-02",7).options[0].text,"√(−2)");
+assert.equal(item("2026-02",58).options[2].text,"10/47");
+assert.match(item("2026-02",56).question,/Luz/);
+const loader=fs.readFileSync(path.join(root,"js/loader.js"),"utf8");
+const storage=fs.readFileSync(path.join(root,"js/storage.js"),"utf8");
+const app=fs.readFileSync(path.join(root,"js/app.js"),"utf8");
+assert.ok(loader.includes("questionCount: 170"),"landing registry");
+assert.ok(loader.includes("inline-2026-02.js"),"loader MEP source files");
+assert.ok(storage.includes("courseId === 'matematicas-9-mep' ? '_v2'"),"legacy stats isolation");
+assert.ok(!app.includes("Abrir prácticas oficiales ↗"),"PDF-only dashboard link remains");
+console.log("PASS: 170 full-text questions + option sets + 170 worked explanations, 17 sets of 10, versioned progress, native UI.");
