@@ -30,8 +30,8 @@ vm.runInNewContext(src, context, {filename: "cosmic-landing.js", timeout: 3000})
 assert.equal(typeof context.window.CosmicLanding?.render, "function");
 const opens = [];
 const registry = [
-  { id: "az900", shortName: "AZ-900", name: "Azure Fundamentals", description: "Azure", questionCount: 200 },
-  { id: "matematicas-9-mep", shortName: "Matemáticas 9.º", name: "Matemáticas 9.º Año — MEP", description: "MEP", questionCount: 170 }
+  { id: "az900", visible: true, shortName: "AZ-900", name: "Azure Fundamentals", description: "Azure", questionCount: 200 },
+  { id: "matematicas-9-mep", visible: true, shortName: "Matemáticas 9.º", name: "Matemáticas 9.º Año — MEP", description: "MEP", questionCount: 170 }
 ];
 context.window.CosmicLanding.render({
   registry,
