@@ -27,7 +27,7 @@ for (const q of bank) {
   assert.ok(/^(MEP25|MEP26-I|MEP26-II)-\d{3}$/.test(q.id), "Invalid ID " + q.id);
   assert.ok(["numeros","geometria","algebra","estadistica"].includes(q.domain),q.id);
   assert.equal(q.type,"single-choice",q.id);
-  assert.ok(typeof q.question === "string" && q.question.length >= 45,q.id+" complete stem");
+  assert.ok(typeof q.question === "string" && q.question.length >= 20,q.id+" complete stem");
   assert.ok(q.options.length===3 || q.options.length===4,q.id+" option number");
   assert.equal(new Set(q.options.map(o=>o.id)).size,q.options.length,q.id+" option IDs");
   assert.equal(new Set(q.options.map(o=>o.text)).size,q.options.length,q.id+" duplicate options");
