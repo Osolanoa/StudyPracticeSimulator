@@ -3,13 +3,14 @@
     .toLowerCase().replace(/[^a-z0-9_-]/g, '-');
   /* El banco MEP 2025–2026 usa almacenamiento independiente: conserva el historial antiguo sin mezclarlo. */
   const prefix = 'study_' + courseId + (courseId === 'matematicas-9-mep' ? '_v2' : '') + '_';
-  const names = ['stats', 'history', 'bookmarks', 'exams', 'practiceTests', 'settings'];
+  const names = ['stats', 'history', 'bookmarks', 'exams', 'practiceTests', 'practiceTestsV2', 'settings'];
   const KEYS = Object.fromEntries(names.map(name => [name, prefix + ({
     stats: 'stats',
     history: 'question_history',
     bookmarks: 'bookmarks',
     exams: 'exam_history',
     practiceTests: 'practice_tests',
+    practiceTestsV2: 'practice_tests_v2',
     settings: 'settings'
   })[name]]));
   const THEME_KEY = prefix + 'theme';
@@ -47,7 +48,7 @@
     theme: () => 'dark',
     setTheme: () => {}, // Legacy API preserved; the visual design is now fixed.
     reset: () => Object.values(KEYS).forEach(key => localStorage.removeItem(key)),
-    resetStats: () => ['stats', 'history', 'exams', 'practiceTests'].forEach(name => localStorage.removeItem(KEYS[name])),
+    resetStats: () => ['stats', 'history', 'exams', 'practiceTests', 'practiceTestsV2'].forEach(name => localStorage.removeItem(KEYS[name])),
     keys: KEYS,
     courseId
   };
