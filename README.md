@@ -38,7 +38,7 @@ Open `index.html` in a modern browser. The root page is a course selector; choos
 
 The Costa Rica mathematics course has six mixed practice tests of ten questions and a full 60-question, 180-minute examination. Its Spanish feedback teaches the solution steps, and its diagrams work offline in both themes.
 
-The CCAR-P course contains 163 questions from user-provided third-party practice PDFs, including nine visual question matrices adapted into equivalent multi-select exercises. It provides 17 fixed practices (16 of ten questions and one of three), timed practice exams, and detailed feedback. Suggested keys are third-party study content, not official Anthropic certification questions or independently certified answer keys. Run `node tests/ccar-course-smoke.test.js` for content-integrity checks.
+The CCAR-P course contains 163 questions from user-provided third-party practice PDFs, including nine visual question matrices adapted into equivalent multi-select exercises. It provides 17 fixed practices (16 of ten questions and one of three), with question order shuffled on every attempt, plus timed practice exams and detailed feedback. Fixed practice membership stays stable so retakes and saved scores remain comparable. Suggested keys are third-party study content, not official Anthropic certification questions or independently certified answer keys. Run `node tests/ccar-course-smoke.test.js` for content-integrity checks.
 
 No installation is required. Course scripts load with relative classic script URLs, so the application normally also works from `file://`.
 
