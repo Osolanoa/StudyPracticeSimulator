@@ -44,9 +44,12 @@ function simulate(search, prefersReducedMotion) {
 
 const normal = simulate('', false);
 assert.equal(normal.calls.length, 2, 'Animate both photographic sky and stars');
-assert.equal(normal.calls[0].options.duration, 65000);
-assert.equal(normal.calls[1].options.duration, 65000);
-assert.ok(normal.calls[0].frames[0].transform.includes('scale(1.20)'), 'Overscan prevents blank edges');
+assert.equal(normal.calls[0].options.duration, 180000);
+assert.equal(normal.calls[1].options.duration, 180000);
+assert.ok(normal.calls[0].frames[0].transform.includes('scale(1.08)'), 'Overscan prevents blank edges');
+assert.match(normal.calls[0].frames[0].transform, /1\.25vw/, 'Regular photo drift starts at 1.25vw');
+assert.match(normal.calls[0].frames[1].transform, /-1\.25vw/, 'Regular photo drift ends at -1.25vw');
+assert.match(normal.calls[1].frames[0].transform, /1\.1vw/, 'Regular star drift remains subtle');
 assert.equal(normal.controller.getStatus().status, 'playing');
 assert.equal(normal.badges.length, 0, 'Do not show diagnostic UI during normal study');
 normal.controller.restart();
@@ -56,6 +59,8 @@ assert.ok(normal.calls.slice(0, 2).every(x => x.animation.cancelled), 'Restart c
 const diagnostic = simulate('?skyTest=1', false);
 assert.equal(diagnostic.calls.length, 2);
 assert.ok(diagnostic.calls.every(x => x.options.duration === 12000), 'Diagnostic mode must be obvious');
+assert.match(diagnostic.calls[0].frames[0].transform, /5vw/, 'Diagnostic sweep remains broad');
+assert.match(diagnostic.calls[0].frames[1].transform, /-5vw/, 'Diagnostic sweep covers both sides');
 assert.equal(diagnostic.badges.length, 1);
 assert.match(diagnostic.badges[0].textContent, /SKY TEST: MOVING/);
 
@@ -71,5 +76,7 @@ assert.ok(html.indexOf('sky-motion-v21.js') > html.indexOf('js/cosmic.js'));
 assert.ok(html.indexOf('sky-motion-v21.js') < html.indexOf('js/cosmic-landing.js'));
 assert.ok(css.includes('animation: none !important;'), 'Old parent animation must be disabled');
 assert.ok(css.includes('prefers-reduced-motion: reduce'));
+assert.ok(css.includes('sky-photo-v21 180s linear'), 'CSS fallback must match the slow normal speed');
+assert.ok(css.includes('sky-stars-v21 180s linear'), 'Star fallback must match the slow normal speed');
 assert.ok(!css.includes('background-image:'), 'No photo replacement');
 console.log('PASS: native photo+star motion, obvious diagnostic mode, restart and reduced-motion behavior.');
