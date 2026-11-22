@@ -1,0 +1,292 @@
+/* Liquid Glass V17 — increased transparency and single typography system.
+ * The uploaded liquid-glass reference is interpreted as light, floating,
+ * semitransparent surfaces over the EXISTING dark cosmic scene.
+ *
+ * IMPORTANT: no body background, space imagery, canvas, or animation changes.
+ * Typography: freely distributable Inter for ALL UI except the landing title.
+ * Landing title: both lines use the same Cormorant Garamond italic.
+ */
+:root[data-theme="dark"] body[data-cosmic-view] {
+  --glass-ui-font: "Inter", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --glass-title-font: "Cormorant Garamond", Georgia, serif;
+  --glass-line: rgba(238,249,255,.33);
+  --glass-glow: rgba(235,250,255,.17);
+  --glass-blur: blur(10px) saturate(115%) brightness(.85);
+  font-family: var(--glass-ui-font) !important;
+  font-optical-sizing: auto;
+}
+
+/* A unified interface typeface: headings, questions, choices, side menu,
+ * filters, statistics, notes and landing cards. Only the logo-like title below
+ * is exempt. Prior V9/V15 heading font overrides are intentionally replaced. */
+:root[data-theme="dark"] body[data-cosmic-view] :is(
+  .content, .content *,
+  .side, .side *,
+  .cosmos-landing, .cosmos-landing *,
+  .modal, .modal *
+) {
+  font-family: var(--glass-ui-font) !important;
+  font-optical-sizing: auto;
+}
+:root[data-theme="dark"] body[data-cosmic-view] :is(
+  .content h1, .content h2, .modal h2,
+  .cosmos-section-head h2, .cosmos-course h3
+) {
+  font-family: var(--glass-ui-font) !important;
+  font-weight: 630 !important;
+  letter-spacing: -.033em !important;
+  line-height: 1.18 !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .content h1 {
+  font-size: clamp(2rem,2.9vw,2.75rem) !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .content h2 {
+  font-size: clamp(1.32rem,1.85vw,1.68rem) !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-course h3 {
+  font-size: clamp(1.16rem,1.65vw,1.44rem) !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] :is(
+  .question, .option, .feedback, .review
+) {
+  line-height: 1.6;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .eyebrow {
+  font-size: .77rem;
+  font-weight: 700;
+}
+
+/* Landing title: both words/lines equal in font, style and optical weight.
+ * Scoping via #app outranks old important rules; ensure pseudo-text
+ * reflections and metallic text use exactly the same typeface. */
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-title-area--premium h1,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-title-area--premium h1 .premium-title-line,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-title-area--premium h1 .premium-title-line--top,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-title-area--premium h1 .premium-title-line--bottom {
+  font-family: var(--glass-title-font) !important;
+  font-style: italic !important;
+  font-weight: 500 !important;
+  font-size: 1em !important;
+  letter-spacing: -.026em !important;
+  line-height: 1.035 !important;
+  text-transform: none !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-title-area--premium h1 {
+  font-size: clamp(3.2rem,6.35vw,6.7rem) !important;
+  line-height: 1 !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-title-area--premium h1 .premium-title-line--bottom {
+  margin-top: -.045em !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-title-area--premium h1 .premium-title-line::before,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-title-area--premium h1 .premium-title-line--bottom::after {
+  font-family: var(--glass-title-font) !important;
+  font-weight: 500 !important;
+  font-style: italic !important;
+  letter-spacing: -.026em !important;
+}
+
+/* Glass cards. V13 and V15 had backgrounds near 98% opaque. Replace them
+ * with mainly 8–22% tints, mild blur, soft bevels and a visible backdrop. */
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course--math {
+  border: 1px solid rgba(240,251,255,.34) !important;
+  border-radius: 25px !important;
+  background:
+    linear-gradient(139deg,
+      rgba(230,248,255,.20) 0%,
+      rgba(172,213,231,.075) 34%,
+      rgba(21,39,57,.11) 75%,
+      rgba(7,22,39,.17) 100%) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.37),
+    inset 1px 0 0 rgba(255,255,255,.09),
+    inset 0 -1px 0 rgba(240,252,255,.12),
+    0 19px 37px rgba(0,0,0,.26),
+    0 0 23px rgba(196,232,249,.065) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course::before {
+  pointer-events:none !important;
+  opacity:.62 !important;
+  background: linear-gradient(145deg,
+    rgba(255,255,255,.085),
+    rgba(255,255,255,.016) 30%,transparent 42%) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course::after {
+  pointer-events:none !important;
+  opacity:.075 !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course-visual {
+  background: rgba(220,245,253,.035) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course:hover,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course:focus-visible {
+  border-color: rgba(247,254,255,.79) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.43),
+    0 22px 42px rgba(0,0,0,.32),
+    0 0 25px rgba(207,240,247,.19) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course-symbol {
+  background: linear-gradient(140deg,
+    rgba(214,244,247,.17),rgba(18,39,58,.16)) !important;
+  border-color: rgba(239,250,255,.33) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-facts span {
+  background: rgba(218,242,247,.075) !important;
+  border-color: rgba(241,251,255,.18) !important;
+  color: #f1faff !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course :is(h3,p,.cosmos-label,.cosmos-track-label) {
+  text-shadow: 0 1px 9px rgba(0,0,0,.50);
+}
+
+/* Internal dashboards, learning cards and side rail: actual translucent
+ * panels rather than dark opaque gradient with a glass-colored highlight. */
+html[data-theme="dark"] body[data-cosmic-view="course"] .side,
+html[data-theme="dark"] body[data-cosmic-view="session"] .side {
+  background:
+    linear-gradient(175deg,rgba(168,201,216,.12),
+      rgba(10,25,41,.22) 54%,rgba(5,16,32,.27)) !important;
+  -webkit-backdrop-filter: blur(13px) saturate(112%) brightness(.78) !important;
+  backdrop-filter: blur(13px) saturate(112%) brightness(.78) !important;
+  border-right: 1px solid rgba(238,250,255,.23) !important;
+  box-shadow: inset -1px 0 rgba(255,255,255,.15),
+    10px 0 34px rgba(0,0,0,.11) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] .card,
+html[data-theme="dark"] body[data-cosmic-view="session"] .card,
+html[data-theme="dark"] body[data-cosmic-view="course"] .question-card,
+html[data-theme="dark"] body[data-cosmic-view="session"] .question-card {
+  border: 1px solid rgba(229,247,254,.30) !important;
+  border-radius: 20px !important;
+  background: linear-gradient(141deg,
+    rgba(224,248,255,.16) 0%,
+    rgba(105,155,180,.07) 35%,
+    rgba(12,30,49,.16) 75%,
+    rgba(7,24,42,.19)) !important;
+  -webkit-backdrop-filter: var(--glass-blur) !important;
+  backdrop-filter: var(--glass-blur) !important;
+  box-shadow:
+    inset 0 1px rgba(255,255,255,.33),
+    inset 0 -1px rgba(236,251,255,.09),
+    0 15px 34px rgba(0,0,0,.20) !important;
+}
+
+/* Rounded, floating transparent nav pills like the supplied reference. */
+html[data-theme="dark"] body[data-cosmic-view] .nav button {
+  border: 1px solid rgba(235,249,252,.15) !important;
+  border-radius: 15px !important;
+  background: linear-gradient(138deg,
+    rgba(224,241,250,.075),rgba(18,42,60,.10)) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.085) !important;
+  color: #eff8fb !important;
+}
+html[data-theme="dark"] body[data-cosmic-view] .nav button.active {
+  border-color: rgba(243,254,255,.49) !important;
+  background: linear-gradient(135deg,
+    rgba(218,241,252,.22),rgba(88,140,165,.11)) !important;
+  -webkit-backdrop-filter: blur(11px) !important;
+  backdrop-filter: blur(11px) !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.29),
+    0 6px 16px rgba(0,0,0,.16) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view] .nav button:hover:not(.active) {
+  border-color: rgba(230,248,254,.34) !important;
+  background: rgba(211,241,250,.13) !important;
+}
+/* Secondary controls, input surfaces and unselected answers stay glassy. */
+html[data-theme="dark"] body[data-cosmic-view] .field :is(select,input),
+html[data-theme="dark"] body[data-cosmic-view] .btn.secondary {
+  background: linear-gradient(142deg,
+    rgba(221,245,251,.14),rgba(10,30,48,.19)) !important;
+  border-color: rgba(233,249,255,.31) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view] .option:not(.correct):not(.wrong) {
+  background: linear-gradient(141deg,
+    rgba(226,248,254,.12),rgba(19,47,67,.14)) !important;
+  border-color: rgba(229,247,252,.26) !important;
+  -webkit-backdrop-filter: blur(7px) !important;
+  backdrop-filter: blur(7px) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view] .option.selected:not(.correct):not(.wrong) {
+  background: linear-gradient(139deg,
+    rgba(194,239,234,.20),rgba(29,86,91,.25)) !important;
+  border-color: rgba(226,253,248,.78) !important;
+}
+html[data-theme="dark"] body[data-cosmic-view] .badge:not(.hard):not(.easy) {
+  background: rgba(222,245,252,.11) !important;
+  border-color: rgba(232,251,255,.17) !important;
+  color: #effbff !important;
+}
+html[data-theme="dark"] body[data-cosmic-view] .modal {
+  background: linear-gradient(148deg,
+    rgba(183,216,230,.28),rgba(17,37,55,.57)) !important;
+  -webkit-backdrop-filter: blur(18px) brightness(.8) !important;
+  backdrop-filter: blur(18px) brightness(.8) !important;
+}
+
+/* Correct/incorrect states remain the existing clear green and red; the
+ * liquid-glass treatment must NEVER obscure grading or focus indicators. */
+
+/* Fallbacks for users without blurred glass support. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-theme="dark"] body[data-cosmic-view="landing"] #app .cosmos-course,
+  html[data-theme="dark"] body[data-cosmic-view="course"] .card,
+  html[data-theme="dark"] body[data-cosmic-view="session"] .card,
+  html[data-theme="dark"] body[data-cosmic-view="course"] .side,
+  html[data-theme="dark"] body[data-cosmic-view="session"] .side {
+    background: rgba(13,28,46,.86) !important;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html[data-theme="dark"] body[data-cosmic-view="landing"] #app .cosmos-course,
+  html[data-theme="dark"] body[data-cosmic-view="course"] .card,
+  html[data-theme="dark"] body[data-cosmic-view="session"] .card,
+  html[data-theme="dark"] body[data-cosmic-view="course"] .side,
+  html[data-theme="dark"] body[data-cosmic-view="session"] .side {
+    background: rgba(12,28,45,.93) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+@media (max-width: 780px) {
+  html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+  .cosmos-landing .cosmos-title-area--premium h1 {
+    font-size: clamp(2.65rem,9.8vw,4.4rem) !important;
+  }
+  html[data-theme="dark"] body[data-cosmic-view] {
+    --glass-blur: blur(7px) brightness(.86);
+  }
+  html[data-theme="dark"] body[data-cosmic-view="course"] .side,
+  html[data-theme="dark"] body[data-cosmic-view="session"] .side {
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(245,252,255,.25) !important;
+  }
+}
