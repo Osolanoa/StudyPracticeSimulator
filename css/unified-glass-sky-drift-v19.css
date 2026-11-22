@@ -76,36 +76,50 @@ html[data-theme="dark"] body[data-cosmic-view="landing"] #app
     0 0 18px rgba(193,235,238,.12) !important;
 }
 
-/* Move the ENTIRE cosmic background as one coherent panorama, not cards,
-   menus, or typography. Overscan by 9% to avoid empty bands at the sides.
-   2.5% of width traveled across 180 s is intentionally barely perceptible.
-   alternate prevents any snap when the drift reaches its limit. */
+/* V20: visible, still slow, cinematic camera pan.
+   Previous V19 was only -2.5% over 180s with ease-in-out: the first
+   few seconds were indistinguishable from a stationary photo.
+   Translate across an 8% horizontal arc in 80s (~1-2 px/second in
+   typical browsers), with constant speed and a smooth reversing loop.
+   The whole existing scene moves, not the card or menu UI.
+   1.14x overscan is large enough to hide both moving edges. */
 html[data-theme="dark"] body[data-cosmic-view] #cosmic-scene {
-  --celestial-pan-scale: 1.09;
-  --celestial-pan-x: -2.5%;
-  animation: celestial-pan-v19 180s ease-in-out infinite alternate;
+  --celestial-pan-scale: 1.14;
+  --celestial-pan-start: 4%;
+  --celestial-pan-end: -4%;
+  animation: celestial-pan-v20 80s linear infinite alternate !important;
   transform-origin: center center;
+  will-change: transform;
 }
-@keyframes celestial-pan-v19 {
-  from { transform: translate3d(0,0,0) scale(var(--celestial-pan-scale)); }
-  to   { transform: translate3d(var(--celestial-pan-x),0,0) scale(var(--celestial-pan-scale)); }
-}
-
-/* Gentle mobile drift with lower overscan to conserve screen space. */
-@media (max-width: 700px) {
-  html[data-theme="dark"] body[data-cosmic-view] #cosmic-scene {
-    --celestial-pan-scale: 1.065;
-    --celestial-pan-x: -1.5%;
-    animation-duration: 220s;
+@keyframes celestial-pan-v20 {
+  from {
+    transform: translate3d(var(--celestial-pan-start), 0, 0)
+               scale(var(--celestial-pan-scale));
+  }
+  to {
+    transform: translate3d(var(--celestial-pan-end), 0, 0)
+               scale(var(--celestial-pan-scale));
   }
 }
 
-/* Respect platform accessibility and power preferences: no motion when
-   reduced motion is requested, with the original unscaled view restored. */
+/* Smaller pan on mobile to reduce crop and GPU work.
+   Still visibly moves on common phone screen widths. */
+@media (max-width: 700px) {
+  html[data-theme="dark"] body[data-cosmic-view] #cosmic-scene {
+    --celestial-pan-scale: 1.12;
+    --celestial-pan-start: 3%;
+    --celestial-pan-end: -3%;
+    animation-duration: 75s !important;
+  }
+}
+
+/* Honor reduced-motion settings (e.g. Windows Animation effects off).
+   Users with this preference intentionally see a static background. */
 @media (prefers-reduced-motion: reduce) {
   html[data-theme="dark"] body[data-cosmic-view] #cosmic-scene {
     animation: none !important;
     transform: none !important;
+    will-change: auto;
   }
 }
 
