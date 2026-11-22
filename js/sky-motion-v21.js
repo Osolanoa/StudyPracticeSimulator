@@ -1,7 +1,7 @@
-/* Sky Motion V21 — native compositor animation for the existing space scene.
- * The CSS-only V19/V20 animation was too hard to verify reliably in deployment.
- * Animate the actual photo and star layer (not the site UI or document).
- * Query ?skyTest=1 for an unmistakable 12-second diagnostic sweep.
+/* Sky Motion V22 — native compositor animation of the original space photo.
+ * Normal speed restores the original very subtle 2.5vw/180s sky drift.
+ * Diagnostic ?skyTest=1 retains an obvious 10vw/12s sweep so the user can
+ * verify that the browser is actually running the background animation.
  */
 (() => {
   'use strict';
@@ -13,17 +13,21 @@
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const testMode = new URLSearchParams(location.search).get('skyTest') === '1';
-  const duration = testMode ? 12000 : 65000;
+  const duration = testMode ? 12000 : 180000;
   let animations = [];
   let status = 'initializing';
 
+  // Make the live page almost imperceptible, but preserve the much more
+  // obvious diagnostic animation when skyTest=1 is explicitly requested.
+  const photoShift = testMode ? 5 : 1.25;
+  const starShift = testMode ? 4.5 : 1.1;
   const photoFrames = [
-    { transform: 'translate3d(5vw, 0, 0) scale(1.20)' },
-    { transform: 'translate3d(-5vw, 0, 0) scale(1.20)' }
+    { transform: `translate3d(${photoShift}vw, 0, 0) scale(1.08)` },
+    { transform: `translate3d(-${photoShift}vw, 0, 0) scale(1.08)` }
   ];
   const starFrames = [
-    { transform: 'translate3d(4.5vw, 0, 0)' },
-    { transform: 'translate3d(-4.5vw, 0, 0)' }
+    { transform: `translate3d(${starShift}vw, 0, 0)` },
+    { transform: `translate3d(-${starShift}vw, 0, 0)` }
   ];
 
   function stop() {
