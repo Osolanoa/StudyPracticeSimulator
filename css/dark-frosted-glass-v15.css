@@ -1,0 +1,396 @@
+/* Dark Frosted Glass V15 — CSS-only visual refinement.
+ * Preserves the current cosmic background, image, canvas, and animations.
+ * Applied only to dark-theme landing, course, and session UI surfaces. */
+:root[data-theme="dark"] body[data-cosmic-view]{
+  --frost-mint:#afd9d5;
+  --frost-edge:rgba(223,243,250,.32);
+  --frost-blur:blur(22px) saturate(132%);
+  --frost-shadow:0 20px 43px rgba(0,0,0,.39);
+  font-family:"DM Sans","Segoe UI Variable","Segoe UI",sans-serif;
+  font-feature-settings:"kern" 1;
+}
+
+/* Editorial title: retain the original metallic top line, let the
+ * second line become an elegant italic serif, including its echo. */
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-title-area h1 .premium-title-line--bottom{
+  font-family:"Cormorant Garamond","Palatino Linotype",Georgia,serif!important;
+  font-style:italic!important;
+  font-weight:500!important;
+  font-size:1.14em;
+  letter-spacing:-.023em!important;
+  line-height:.99!important;
+  margin-top:-.04em!important;
+  padding:.02em .14em .09em;
+  text-rendering:optimizeLegibility;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-section-head h2{
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-weight:600!important;
+  font-size:clamp(1.95rem,2.75vw,2.45rem)!important;
+  letter-spacing:-.015em!important;
+  line-height:1.08;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-section-head h2::before{
+  background:linear-gradient(180deg,#e2f6f2,#6d9699)!important;
+  box-shadow:0 0 13px rgba(194,237,231,.18)!important;
+}
+
+/* Landing course cards: layered reflections + real backdrop blur.
+ * Every gradient stop is translucent so the EXISTING background shows
+ * through. The decorative overlays cannot intercept pointer events. */
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course{
+  position:relative;
+  isolation:isolate;
+  border:1px solid var(--frost-edge)!important;
+  border-radius:24px!important;
+  background:linear-gradient(151deg,
+    rgba(226,246,254,.15) 0%,rgba(91,127,143,.16) 20%,
+    rgba(22,35,51,.59) 50%,rgba(9,19,33,.56) 100%)!important;
+  -webkit-backdrop-filter:var(--frost-blur)!important;
+  backdrop-filter:var(--frost-blur)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.29),
+    inset 0 -1px 0 rgba(229,250,253,.10),
+    var(--frost-shadow),0 0 0 1px rgba(199,232,238,.05)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course--math{
+  background:linear-gradient(149deg,rgba(233,237,251,.13),
+    rgba(83,103,131,.14) 30%,rgba(18,29,49,.58) 70%,
+    rgba(11,18,31,.59))!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course::before{
+  content:"";
+  position:absolute!important;
+  inset:0!important;
+  z-index:0!important;
+  border-radius:inherit;
+  pointer-events:none;
+  opacity:1!important;
+  background:
+    linear-gradient(150deg,rgba(255,255,255,.17),rgba(255,255,255,.038) 28%,transparent 39%),
+    linear-gradient(to top,transparent 92%,rgba(223,247,250,.10))!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course::after{
+  pointer-events:none;
+  opacity:.18!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course:hover,
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course:focus-visible{
+  border-color:rgba(244,253,255,.75)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.38),
+    inset 0 -1px rgba(221,244,251,.17),
+    0 24px 48px rgba(0,0,0,.50),
+    0 0 23px rgba(179,227,226,.15)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course-visual{
+  background:linear-gradient(140deg,rgba(198,225,236,.09),rgba(255,255,255,.012))!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course-symbol{
+  color:#e9f8f8!important;
+  border-color:rgba(220,248,250,.45)!important;
+  border-radius:19px;
+  background:linear-gradient(143deg,rgba(195,223,230,.24),rgba(22,37,51,.60))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.26),
+    0 8px 22px rgba(0,0,0,.34)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course-symbol svg{
+  color:#e5f4f4!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-label{
+  color:var(--frost-mint)!important;
+  letter-spacing:.16em;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course h3{
+  font-family:"Cormorant Garamond","Iowan Old Style",Georgia,serif!important;
+  font-size:clamp(1.47rem,2vw,1.82rem)!important;
+  font-weight:600!important;
+  letter-spacing:-.016em!important;
+  line-height:1.06!important;
+  color:#f2f7f8!important;
+  text-wrap:balance;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course-copy>p{
+  color:#d7e3eb!important;
+  line-height:1.52!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-facts span{
+  background:rgba(136,173,186,.15)!important;
+  border-color:rgba(212,238,246,.24)!important;
+  color:#e5f3f5!important;
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-track{
+  background:rgba(2,11,24,.57)!important;
+  border:1px solid rgba(216,243,244,.12);
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-track>span{
+  background:linear-gradient(90deg,#66909a,#b7d9d5)!important;
+  box-shadow:0 0 13px rgba(184,228,221,.25)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-footer{
+  color:#bcd2d7;
+}
+
+/* Inner app: the existing cosmic layers remain in place behind both
+ * navigation and panels. This is a surface treatment only. */
+:root[data-theme="dark"] body[data-cosmic-view="course"] .side,
+:root[data-theme="dark"] body[data-cosmic-view="session"] .side{
+  background:linear-gradient(180deg,rgba(27,40,52,.69),rgba(8,17,31,.66))!important;
+  border-right:1px solid rgba(225,243,248,.19)!important;
+  -webkit-backdrop-filter:blur(27px) saturate(132%)!important;
+  backdrop-filter:blur(27px) saturate(132%)!important;
+  box-shadow:inset -1px 0 rgba(246,253,255,.09),
+    10px 0 35px rgba(0,0,0,.18)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="course"] .card,
+:root[data-theme="dark"] body[data-cosmic-view="session"] .card{
+  color:#edf5f7;
+  border:1px solid rgba(220,242,248,.26)!important;
+  border-radius:19px!important;
+  background:linear-gradient(157deg,rgba(187,220,233,.15),
+    rgba(39,56,74,.46) 24%,rgba(12,23,40,.59) 74%,
+    rgba(12,23,37,.58))!important;
+  -webkit-backdrop-filter:var(--frost-blur)!important;
+  backdrop-filter:var(--frost-blur)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.24),
+    inset 0 -1px rgba(214,235,245,.07),
+    0 17px 38px rgba(0,0,0,.34)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view="course"] .card.stat,
+:root[data-theme="dark"] body[data-cosmic-view="session"] .card.stat{
+  background:linear-gradient(148deg,rgba(195,225,231,.18),
+    rgba(25,44,60,.49) 43%,rgba(9,22,35,.56))!important;
+}
+
+/* Titles use serif; reading text, answer options and fine labels stay sans. */
+:root[data-theme="dark"] body[data-cosmic-view] .content h1,
+:root[data-theme="dark"] body[data-cosmic-view] .content h2,
+:root[data-theme="dark"] body[data-cosmic-view] .modal h2{
+  font-family:"Cormorant Garamond","Iowan Old Style",Georgia,serif;
+  font-weight:600;
+  line-height:1.1;
+  letter-spacing:-.012em;
+  color:#f0f8fa;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .content h1{
+  font-size:clamp(2.4rem,3.1vw,3.25rem);
+  margin-bottom:.53rem;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .content h2,
+:root[data-theme="dark"] body[data-cosmic-view] .modal h2{
+  font-size:clamp(1.65rem,2.3vw,2.05rem);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .content h3{
+  font-family:"DM Sans","Segoe UI",sans-serif;
+  font-size:1rem;
+  font-weight:650;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .stat strong{
+  color:#eff9fa;
+  font-family:"Outfit","DM Sans",sans-serif;
+  font-size:clamp(1.9rem,2.8vw,2.4rem);
+  font-weight:650;
+  letter-spacing:-.035em;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .eyebrow,
+:root[data-theme="dark"] body[data-cosmic-view] .stat span{
+  color:var(--frost-mint);
+  font-weight:700;
+  letter-spacing:.105em;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .sub,
+:root[data-theme="dark"] body[data-cosmic-view] .muted{
+  color:#c4d4dd;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .question{
+  color:#f1f8fa;
+  font-family:"DM Sans","Segoe UI",sans-serif;
+  font-weight:500;
+  line-height:1.58;
+  letter-spacing:-.006em;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .bar{
+  background:rgba(2,10,25,.56);
+  border:1px solid rgba(219,244,247,.12);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .bar i{
+  background:linear-gradient(90deg,#648f99,#b0d6d2);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .badge:not(.hard):not(.easy){
+  background:rgba(117,160,178,.19);
+  border:1px solid rgba(192,225,235,.20);
+  color:#def2f3;
+}
+
+/* Glassy controls. Existing correct/incorrect semantics are intentionally
+ * preserved, including the green/red states from V14. */
+:root[data-theme="dark"] body[data-cosmic-view] .field select,
+:root[data-theme="dark"] body[data-cosmic-view] .field input{
+  background:linear-gradient(155deg,rgba(108,148,160,.20),
+    rgba(14,27,42,.74))!important;
+  border-color:rgba(208,232,241,.32)!important;
+  border-radius:12px;
+  color:#f0f8fa!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.15),
+    0 4px 12px rgba(0,0,0,.18);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .field select option{
+  background:#152331;
+  color:#f2faff;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .field select:focus-visible,
+:root[data-theme="dark"] body[data-cosmic-view] .field input:focus-visible{
+  outline:3px solid rgba(180,238,231,.86);
+  outline-offset:2px;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn:not(.secondary):not(.danger){
+  color:#faffff!important;
+  border-color:rgba(216,245,245,.52)!important;
+  background:linear-gradient(156deg,rgba(216,247,248,.29),
+    rgba(96,134,145,.54) 30%,rgba(27,49,63,.79))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.44),
+    0 8px 20px rgba(0,0,0,.30)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn.secondary{
+  color:#e3f2f3!important;
+  border-color:rgba(210,232,241,.35)!important;
+  background:linear-gradient(150deg,rgba(185,211,222,.15),
+    rgba(21,39,53,.62))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.17),
+    0 7px 16px rgba(0,0,0,.23)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn.danger{
+  color:#ffe3e5!important;
+  border-color:rgba(239,158,165,.47)!important;
+  background:linear-gradient(150deg,rgba(145,78,89,.47),
+    rgba(61,27,38,.66))!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn:not(:disabled):hover{
+  filter:brightness(1.1);
+  border-color:rgba(242,251,254,.80)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.43),
+    0 13px 26px rgba(0,0,0,.35),
+    0 0 19px rgba(187,230,229,.15)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .nav button.active{
+  background:linear-gradient(108deg,rgba(201,232,237,.21),
+    rgba(44,67,81,.42))!important;
+  border-color:rgba(220,244,248,.37)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.20),
+    0 7px 17px rgba(0,0,0,.20)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .nav button:hover:not(.active){
+  background:rgba(136,177,192,.16)!important;
+  border-color:rgba(215,240,245,.22)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .option:not(.correct):not(.wrong){
+  background:linear-gradient(145deg,rgba(181,216,231,.13),
+    rgba(20,39,55,.56))!important;
+  border-color:rgba(218,240,248,.26)!important;
+  color:#f0f7fa;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .option:hover:not(:disabled):not(.correct):not(.wrong){
+  background:linear-gradient(146deg,rgba(191,229,239,.22),
+    rgba(35,56,74,.75))!important;
+  border-color:rgba(232,249,253,.66)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .option.selected:not(.correct):not(.wrong){
+  background:linear-gradient(146deg,rgba(173,228,220,.27),
+    rgba(37,76,84,.66))!important;
+  border-color:rgba(204,247,241,.84)!important;
+  box-shadow:inset 3px 0 #b6e7dc,
+    inset 0 1px rgba(255,255,255,.27),
+    0 7px 17px rgba(0,0,0,.24)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .navq:not(.answered):not(.current){
+  background:linear-gradient(145deg,rgba(180,211,224,.19),
+    rgba(22,37,52,.69))!important;
+  border-color:rgba(212,236,245,.28)!important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .navq.current{
+  background:linear-gradient(155deg,rgba(169,216,214,.76),
+    rgba(68,104,120,.86))!important;
+  border-color:#bfe8e5!important;
+}
+
+/* Pedagogical content keeps its semantic green/red feedback. */
+:root[data-theme="dark"] body[data-cosmic-view] .teaching-card{
+  color:#e8f3f5;
+  border-color:rgba(203,230,238,.23);
+  border-radius:15px;
+  background:linear-gradient(145deg,rgba(162,201,217,.14),
+    rgba(16,30,44,.56));
+}
+:root[data-theme="dark"] body[data-cosmic-view] .feedback{
+  border:1px solid rgba(126,217,177,.48);
+  border-left:4px solid #78d9ac;
+  border-radius:15px;
+  background:linear-gradient(148deg,rgba(41,108,82,.47),
+    rgba(15,40,35,.74));
+}
+:root[data-theme="dark"] body[data-cosmic-view] .feedback.bad{
+  border-color:rgba(239,157,164,.45);
+  border-left-color:#e89aa2;
+  background:linear-gradient(149deg,rgba(116,56,67,.54),
+    rgba(44,22,35,.74));
+}
+:root[data-theme="dark"] body[data-cosmic-view] .modal{
+  color:#f1f8fb;
+  border:1px solid rgba(228,246,249,.38)!important;
+  border-radius:21px!important;
+  background:linear-gradient(148deg,rgba(54,77,95,.84),
+    rgba(13,26,41,.90))!important;
+  -webkit-backdrop-filter:blur(30px) saturate(140%)!important;
+  backdrop-filter:blur(30px) saturate(140%)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.26),
+    0 24px 60px rgba(0,0,0,.57);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .modal-back{
+  background:rgba(0,5,13,.57);
+  -webkit-backdrop-filter:blur(5px);
+  backdrop-filter:blur(5px);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .review{
+  border-bottom-color:rgba(215,239,246,.15);
+}
+
+/* Accessibility and fallback: never use invisible text without native blur. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  :root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course{
+    background:linear-gradient(145deg,rgba(32,49,63,.95),rgba(11,21,36,.95))!important;
+  }
+  :root[data-theme="dark"] body[data-cosmic-view="course"] .card,
+  :root[data-theme="dark"] body[data-cosmic-view="session"] .card,
+  :root[data-theme="dark"] body[data-cosmic-view="course"] .side,
+  :root[data-theme="dark"] body[data-cosmic-view="session"] .side{
+    background:linear-gradient(145deg,rgba(32,48,62,.94),
+      rgba(11,22,35,.94))!important;
+  }
+}
+@media (max-width:780px){
+  :root[data-theme="dark"] body[data-cosmic-view]{--frost-blur:blur(12px) saturate(116%)}
+  :root[data-theme="dark"] body[data-cosmic-view="course"] .side,
+  :root[data-theme="dark"] body[data-cosmic-view="session"] .side{
+    border-right:none!important;
+    border-bottom:1px solid rgba(232,248,251,.24)!important;
+  }
+  :root[data-theme="dark"] body[data-cosmic-view] .content h1{
+    font-size:clamp(2.05rem,8vw,2.62rem);
+  }
+}
+@media (prefers-reduced-transparency:reduce){
+  :root[data-theme="dark"] body[data-cosmic-view="landing"] .cosmos-landing .cosmos-course,
+  :root[data-theme="dark"] body[data-cosmic-view="course"] .card,
+  :root[data-theme="dark"] body[data-cosmic-view="session"] .card,
+  :root[data-theme="dark"] body[data-cosmic-view="course"] .side,
+  :root[data-theme="dark"] body[data-cosmic-view="session"] .side{
+    background:rgba(19,30,44,.95)!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
+@media (prefers-reduced-motion:reduce){
+  :root[data-theme="dark"] body[data-cosmic-view="landing"] .premium-title-line{
+    animation:none!important;
+  }
+}
