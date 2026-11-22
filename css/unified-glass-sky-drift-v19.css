@@ -1,0 +1,128 @@
+/* V19 — unified glass cards + extremely slow firmament drift.
+   The photograph, its tint/brightness, stars, and study UI content are not
+   replaced. Only the scene container gently pans as one layer. */
+
+/* A single translucent card shell across the entire surface. Older V13–V17
+   styles colored the dedicated icon column and drew separate decorative
+   overlays, creating the apparent darker/lighter left-hand rectangle.
+   Keep the card layout, its icon, text and progress exactly where they are. */
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course--math {
+  background: rgba(178,210,226,.13) !important;
+  background-image: none !important;
+  border: 1px solid rgba(232,249,254,.38) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(124%) !important;
+  backdrop-filter: blur(12px) saturate(124%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 -1px 0 rgba(221,245,251,.10),
+    0 18px 38px rgba(0,0,0,.25) !important;
+}
+
+/* Completely clear the separate left/right panels and their old effects. */
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course .cosmos-course-visual,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course .cosmos-course-copy {
+  background: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* The angled highlight and its responsive hard stop were visually dividing
+   the card near the icon column. The border and inset edge above provide a
+   continuous glass highlight without adding a second rectangular surface. */
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course::before,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course::after,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course .cosmos-course-visual::before,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course .cosmos-course-visual::after {
+  content: none !important;
+  display: none !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course .cosmos-course-orb {
+  display: none !important;
+}
+
+/* Keep only the small symbol chip, itself translucent, above the same glass. */
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course .cosmos-course-symbol {
+  background: rgba(228,247,250,.11) !important;
+  background-image: none !important;
+  border: 1px solid rgba(239,252,255,.35) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  backdrop-filter: blur(8px) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.25),
+    0 5px 16px rgba(0,0,0,.13) !important;
+}
+
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course:hover,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+.cosmos-landing .cosmos-course:focus-visible {
+  background: rgba(185,218,231,.16) !important;
+  border-color: rgba(243,253,255,.75) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.37),
+    0 20px 40px rgba(0,0,0,.29),
+    0 0 18px rgba(193,235,238,.12) !important;
+}
+
+/* Move the ENTIRE cosmic background as one coherent panorama, not cards,
+   menus, or typography. Overscan by 9% to avoid empty bands at the sides.
+   2.5% of width traveled across 180 s is intentionally barely perceptible.
+   alternate prevents any snap when the drift reaches its limit. */
+html[data-theme="dark"] body[data-cosmic-view] #cosmic-scene {
+  --celestial-pan-scale: 1.09;
+  --celestial-pan-x: -2.5%;
+  animation: celestial-pan-v19 180s ease-in-out infinite alternate;
+  transform-origin: center center;
+}
+@keyframes celestial-pan-v19 {
+  from { transform: translate3d(0,0,0) scale(var(--celestial-pan-scale)); }
+  to   { transform: translate3d(var(--celestial-pan-x),0,0) scale(var(--celestial-pan-scale)); }
+}
+
+/* Gentle mobile drift with lower overscan to conserve screen space. */
+@media (max-width: 700px) {
+  html[data-theme="dark"] body[data-cosmic-view] #cosmic-scene {
+    --celestial-pan-scale: 1.065;
+    --celestial-pan-x: -1.5%;
+    animation-duration: 220s;
+  }
+}
+
+/* Respect platform accessibility and power preferences: no motion when
+   reduced motion is requested, with the original unscaled view restored. */
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="dark"] body[data-cosmic-view] #cosmic-scene {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* A clear glass card should still be legible without backdrop-filter. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+  .cosmos-landing .cosmos-course {
+    background: rgba(24,42,58,.82) !important;
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+  .cosmos-landing .cosmos-course,
+  html[data-theme="dark"] body[data-cosmic-view="landing"] #app
+  .cosmos-landing .cosmos-course--math {
+    background: rgba(20,36,53,.94) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
