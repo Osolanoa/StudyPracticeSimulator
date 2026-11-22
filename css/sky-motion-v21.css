@@ -19,18 +19,18 @@ html[data-theme="dark"] body[data-cosmic-view] #cosmic-scene {
 
 /* Simple CSS fallback for browsers without native Web Animations API. */
 @keyframes sky-photo-v21 {
-  from { transform: translate3d(5vw,0,0) scale(1.20); }
-  to { transform: translate3d(-5vw,0,0) scale(1.20); }
+  from { transform: translate3d(1.25vw,0,0) scale(1.08); }
+  to { transform: translate3d(-1.25vw,0,0) scale(1.08); }
 }
 @keyframes sky-stars-v21 {
-  from { transform: translate3d(4.5vw,0,0); }
-  to { transform: translate3d(-4.5vw,0,0); }
+  from { transform: translate3d(1.1vw,0,0); }
+  to { transform: translate3d(-1.1vw,0,0); }
 }
 #cosmic-scene .cosmic-lite-photo.sky-motion-fallback {
-  animation: sky-photo-v21 65s linear infinite alternate !important;
+  animation: sky-photo-v21 180s linear infinite alternate !important;
 }
 #cosmic-scene .cosmic-lite-stars.sky-motion-stars-fallback {
-  animation: sky-stars-v21 65s linear infinite alternate !important;
+  animation: sky-stars-v21 180s linear infinite alternate !important;
 }
 @media (prefers-reduced-motion: reduce) {
   #cosmic-scene .cosmic-lite-photo,
