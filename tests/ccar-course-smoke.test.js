@@ -29,7 +29,7 @@ const mixed = cfg.practiceQuestionIds.map(id => {
   assert.ok(lookup.has(id), id + ' is missing from the original bank');
   return lookup.get(id);
 });
-assert.deepEqual([...cfg.practiceQuestionIds].sort(), bank.map(q => q.id).sort(),
+assert.deepEqual([...cfg.practiceQuestionIds].sort(), Array.from(bank, q => q.id).sort(),
   'Redistribution must preserve exactly the original 163 questions');
 const practiceGroups = Array.from({ length: 17 }, (_, i) => mixed.slice(i * 10, (i + 1) * 10));
 assert.deepEqual(practiceGroups.map(group => group.length),
