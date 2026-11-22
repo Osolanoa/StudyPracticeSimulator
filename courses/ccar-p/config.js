@@ -7,6 +7,7 @@ window.COURSE_CONFIG = {
   "version": "2026-11-22",
   "questionsPerPractice": 10,
   "includePartialPracticeGroup": true,
+  "shufflePracticeQuestionOrder": true,
   "passingScore": 70,
   "examQuestionCounts": [
     30,
