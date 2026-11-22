@@ -1,0 +1,391 @@
+/* Premium Controls V14 — graphite + polished chrome.
+   Applied after V13 so the existing course layouts and exam behavior stay intact.
+   Decorative layers never intercept clicks. No external assets or JavaScript. */
+
+:root {
+  --control-ease: cubic-bezier(.22,.61,.36,1);
+  --control-focus: #dcecff;
+}
+body[data-cosmic-view] button,
+body[data-cosmic-view="landing"] [role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+body[data-cosmic-view] button:focus-visible,
+body[data-cosmic-view="landing"] [role="button"]:focus-visible {
+  outline: 3px solid var(--control-focus) !important;
+  outline-offset: 3px;
+}
+
+/* The primary action has a bright upper edge; secondary actions recede.
+   Layered background clips create a fine metal rim without extra markup. */
+body[data-cosmic-view] .btn {
+  position: relative;
+  isolation: isolate;
+  min-height: 43px;
+  padding: .76rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  font-weight: 740;
+  letter-spacing: .012em;
+  line-height: 1.2;
+  text-shadow: 0 1px 1px #0005;
+  box-shadow: inset 0 1px 0 #ffffff38, inset 0 -1px 0 #0005,
+              0 5px 0 -4px #e0e5eb80, 0 9px 19px #0006;
+  transition: transform .19s var(--control-ease),
+              box-shadow .19s var(--control-ease),
+              border-color .19s ease, filter .19s ease;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn:not(.secondary):not(.danger) {
+  color: #fff !important;
+  border-color: #9da6b3a6 !important;
+  background:
+    linear-gradient(157deg,#ffffff2c 0%,#ffffff06 37%,transparent 38%) padding-box,
+    linear-gradient(140deg,#656d79 0%,#414750 48%,#292e36 100%) padding-box,
+    linear-gradient(115deg,#e8edf1,#59616d 56%,#a7b1c0) border-box !important;
+  box-shadow: inset 0 1px 0 #ffffff66, inset 0 -1px 0 #0007,
+              0 1px 0 #e5ebf047, 0 9px 22px #0009 !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn.secondary {
+  color: #e8ebf0 !important;
+  border-color: #737d8cbd !important;
+  background:
+    linear-gradient(155deg,#ffffff17,transparent 37%) padding-box,
+    linear-gradient(140deg,#333840 0%,#1d2026 80%) padding-box,
+    linear-gradient(110deg,#a9b1be,#4b535e) border-box !important;
+  box-shadow: inset 0 1px 0 #ffffff2b, inset 0 -1px 0 #0007,
+              0 7px 17px #0007 !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn.danger {
+  color: #ffe8e8 !important;
+  border-color: #bc7b81 !important;
+  background: linear-gradient(145deg,#683b43,#321e25 78%) !important;
+  box-shadow: inset 0 1px #ffffff2e,0 8px 18px #0008 !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn:not(:disabled):hover {
+  filter: brightness(1.13);
+  border-color: #e1e6ef !important;
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px #ffffff7a,0 14px 27px #0009,
+              0 0 0 1px #d8e1ed35,0 0 24px #c5d7f21c !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .btn.danger:not(:disabled):hover {
+  border-color: #e4afb3 !important;
+  box-shadow: inset 0 1px #ffffff45,0 13px 23px #0008,
+              0 0 18px #c64c5033 !important;
+}
+body[data-cosmic-view] .btn:active:not(:disabled) {
+  transform: translateY(1px) scale(.985) !important;
+  filter: brightness(.94);
+  box-shadow: inset 0 2px 7px #0007,0 3px 9px #0005 !important;
+}
+body[data-cosmic-view] .btn:disabled {
+  opacity: .48;
+  cursor: not-allowed;
+  filter: saturate(.35);
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+/* Sidebar: graphite segments with a slim chrome selection rail. */
+body[data-cosmic-view] .nav button {
+  position: relative;
+  min-height: 45px;
+  border-radius: 12px;
+  font-weight: 660;
+  letter-spacing: .006em;
+  transition: background .19s ease, border-color .19s ease,
+              box-shadow .19s ease, transform .19s var(--control-ease);
+}
+body[data-cosmic-view] .nav button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 23%;
+  bottom: 23%;
+  width: 3px;
+  border-radius: 0 4px 4px 0;
+  background: #e7edf5;
+  box-shadow: 0 0 12px #e7edf577;
+  opacity: 0;
+  transform: scaleY(.65);
+  transition: opacity .19s ease,transform .19s ease;
+  pointer-events: none;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .nav button:hover:not(.active) {
+  color: #fff !important;
+  border-color: #a4afbb73 !important;
+  background: linear-gradient(110deg,#3a4049,#20252b) !important;
+  box-shadow: inset 0 1px #ffffff24,0 5px 15px #0006;
+  transform: translateX(2px);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .nav button.active {
+  color: #fff !important;
+  border: 1px solid #a5afbd9c !important;
+  background: linear-gradient(112deg,#464d56,#242a31 85%) !important;
+  box-shadow: inset 0 1px #ffffff48,inset 0 -1px #0005,
+              0 7px 19px #0008 !important;
+  padding-left: 1.04rem;
+}
+body[data-cosmic-view] .nav button.active::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+/* Answer options remain discernible after locking: green and red are semantic. */
+body[data-cosmic-view] .option {
+  position: relative;
+  border-radius: 15px;
+  line-height: 1.5;
+  box-shadow: inset 0 1px #ffffff1b,0 5px 16px #0004;
+  transition: background .17s ease,border-color .17s ease,
+              box-shadow .17s ease,transform .17s var(--control-ease);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .option:not(.correct):not(.wrong) {
+  border-color: #798391a1 !important;
+  background: linear-gradient(135deg,#30363ee8,#1b1f25f5) !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .option:hover:not(:disabled):not(.correct):not(.wrong) {
+  border-color: #d3dbe8 !important;
+  background: linear-gradient(135deg,#434b55,#272d35) !important;
+  box-shadow: inset 0 1px #ffffff40,0 8px 20px #0007,
+              0 0 0 1px #b8c6d42b;
+  transform: translateX(3px);
+}
+:root[data-theme="dark"] body[data-cosmic-view] .option.selected:not(.correct):not(.wrong) {
+  border-color: #e2e9f4 !important;
+  background: linear-gradient(135deg,#495563,#303b48) !important;
+  box-shadow: inset 3px 0 #d9e6f6, inset 0 1px #ffffff3a,
+              0 0 0 1px #c8d5e342,0 8px 19px #0007;
+}
+body[data-cosmic-view] .option b {
+  flex: 0 0 auto;
+  min-width: 1.9rem;
+  min-height: 1.9rem;
+  padding: .25rem .38rem;
+  border: 1px solid #aab4c454;
+  border-radius: 9px;
+  display: inline-grid;
+  place-items: center;
+  line-height: 1;
+  background: #ffffff0b;
+  font-size: .83rem;
+  letter-spacing: .015em;
+  box-shadow: inset 0 1px #ffffff20;
+}
+body[data-cosmic-view] .option.selected b {
+  border-color: #d9e4f6b8;
+  background: #d9e4f623;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .option.correct {
+  border-color: #63bf94 !important;
+  background: linear-gradient(130deg,#1d4538,#113026) !important;
+  box-shadow: inset 3px 0 #78d6a8,0 5px 17px #0005;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .option.wrong {
+  border-color: #d1878b !important;
+  background: linear-gradient(130deg,#523239,#311e24) !important;
+  box-shadow: inset 3px 0 #e79a9b,0 5px 17px #0005;
+}
+body[data-cosmic-view] .option.correct b {
+  color: #d5ffe7;
+  border-color: #7adbab99;
+  background: #75d1a328;
+}
+body[data-cosmic-view] .option.wrong b {
+  color: #ffe2e2;
+  border-color: #f1a6a68a;
+  background: #e8979824;
+}
+body[data-cosmic-view] .option:disabled {
+  opacity: 1;
+  cursor: default;
+  transform: none;
+}
+body[data-cosmic-view] .option input {
+  flex: 0 0 auto;
+  accent-color: #d5e5fa;
+}
+
+/* Question navigator: raised tactile keys and unambiguous current state. */
+body[data-cosmic-view] .navq {
+  min-width: 39px;
+  min-height: 39px;
+  border-radius: 10px;
+  font-weight: 750;
+  font-size: .85rem;
+  font-variant-numeric: tabular-nums;
+  transition: transform .16s ease,box-shadow .16s ease,border-color .16s ease;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .navq {
+  color: #e7edf6 !important;
+  border-color: #7b879795 !important;
+  background: linear-gradient(145deg,#323941,#1a1f26) !important;
+  box-shadow: inset 0 1px #ffffff29,0 5px 10px #0006;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .navq.answered:not(.current) {
+  border-color: #65ba92 !important;
+  background: linear-gradient(145deg,#295744,#15352a) !important;
+  color: #e4fff0 !important;
+}
+:root[data-theme="dark"] body[data-cosmic-view] .navq.current {
+  border-color: #e0e9f5 !important;
+  background: linear-gradient(145deg,#8995a7,#495564) !important;
+  box-shadow: inset 0 1px #fff8,0 0 0 2px #d3e2f34a,
+              0 7px 14px #0008 !important;
+  color: #fff !important;
+}
+body[data-cosmic-view] .navq.marked {
+  outline: 2px solid #e9b76a;
+  outline-offset: 2px;
+}
+body[data-cosmic-view] .navq:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px #ffffff60,0 9px 16px #0008 !important;
+}
+body[data-cosmic-view] .navq:active:not(:disabled) {
+  transform: translateY(1px) scale(.96);
+}
+
+/* Course cards are the landing page's clickable controls. */
+body[data-cosmic-view="landing"] .cosmos-course {
+  cursor: pointer;
+  transition: transform .22s var(--control-ease),
+              border-color .22s ease,box-shadow .22s ease;
+}
+body[data-cosmic-view="landing"] .cosmos-course:hover,
+body[data-cosmic-view="landing"] .cosmos-course:focus-visible {
+  transform: translateY(-5px);
+  border-color: #edf3fbdb !important;
+  box-shadow: inset 0 1px #ffffff75,inset 0 -1px #e3e9f13a,
+              0 22px 39px #000b,0 0 0 1px #d1dae437,
+              0 0 27px #d1e2f41e !important;
+}
+body[data-cosmic-view="landing"] .cosmos-course .cosmos-course-symbol {
+  transition: transform .2s var(--control-ease),box-shadow .2s ease;
+}
+body[data-cosmic-view="landing"] .cosmos-course:hover .cosmos-course-symbol,
+body[data-cosmic-view="landing"] .cosmos-course:focus-visible .cosmos-course-symbol {
+  transform: translateY(-2px) scale(1.045);
+  box-shadow: inset 0 1px #ffffff80,0 5px 19px #000d,
+              0 0 0 1px #dce6ef6b !important;
+}
+body[data-cosmic-view="landing"] .cosmos-course:active {
+  transform: translateY(-1px) scale(.995);
+}
+
+/* Optional floating controls share the same edge treatment. */
+.cosmic-theme-switch,.cosmic-effects-toggle {
+  min-height: 40px;
+  border: 1px solid #a5b1c68c;
+  border-radius: 999px;
+  color: #eef4ff;
+  background: linear-gradient(145deg,#454c58d9,#1e242ee8);
+  box-shadow: inset 0 1px #ffffff44,0 6px 16px #0007;
+  transition: transform .17s ease,background .17s ease,box-shadow .17s ease;
+}
+.cosmic-theme-switch:hover,.cosmic-effects-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 1px #ffffff70,0 10px 21px #0008;
+}
+
+/* Light theme is supported even though the current public course defaults dark. */
+:root[data-theme="light"] body[data-cosmic-view] .btn:not(.secondary):not(.danger) {
+  color: #fff;
+  border-color: #23659b;
+  background: linear-gradient(145deg,#398bc3,#15578e);
+  box-shadow: inset 0 1px #ffffff61,0 8px 18px #17466b30;
+}
+:root[data-theme="light"] body[data-cosmic-view] .btn.secondary {
+  color: #204b73;
+  border-color: #9ab0c5;
+  background: linear-gradient(145deg,#fff,#e9f0f7);
+  text-shadow: none;
+  box-shadow: inset 0 1px #fff,0 7px 15px #123b5b1c;
+}
+:root[data-theme="light"] body[data-cosmic-view] .btn.danger {
+  color: #8d2530;
+  border-color: #cc8f97;
+  background: linear-gradient(145deg,#fff1f1,#ffe0e2);
+  text-shadow: none;
+}
+:root[data-theme="light"] body[data-cosmic-view] .btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.035);
+  box-shadow: inset 0 1px #fff,0 11px 21px #123b5b31;
+}
+:root[data-theme="light"] body[data-cosmic-view] .option {
+  border-color: #acbece;
+  background: linear-gradient(145deg,#fff,#f1f5f9);
+  box-shadow: inset 0 1px #fff,0 4px 13px #263e5415;
+}
+:root[data-theme="light"] body[data-cosmic-view] .option:hover:not(:disabled) {
+  border-color: #4779a4;
+  background: #eef5fc;
+  transform: translateX(3px);
+}
+:root[data-theme="light"] body[data-cosmic-view] .option.selected:not(.correct):not(.wrong) {
+  border-color: #296caa;
+  background: #dfedf9;
+  box-shadow: inset 3px 0 #296caa;
+}
+:root[data-theme="light"] body[data-cosmic-view] .option b {
+  border-color: #a1b4c7;
+  background: #e9f0f8;
+}
+:root[data-theme="light"] body[data-cosmic-view] .option.correct {
+  border-color: #27956a;
+  background: #e5f8ef;
+  box-shadow: inset 3px 0 #27956a;
+}
+:root[data-theme="light"] body[data-cosmic-view] .option.wrong {
+  border-color: #c95860;
+  background: #fff0f0;
+  box-shadow: inset 3px 0 #c95860;
+}
+:root[data-theme="light"] body[data-cosmic-view] .option.correct b { color:#165c3b;background:#c9f0dd; }
+:root[data-theme="light"] body[data-cosmic-view] .option.wrong b { color:#8f252b;background:#f9d7d9; }
+:root[data-theme="light"] body[data-cosmic-view] .navq {
+  border-color:#a7b8c8;
+  color:#1d405f;
+  background:linear-gradient(145deg,#fff,#e9f1f8);
+  box-shadow:inset 0 1px #fff,0 4px 12px #173d5e26;
+}
+:root[data-theme="light"] body[data-cosmic-view] .navq.answered:not(.current) {
+  background:#e0f5e8;
+  border-color:#42966b;
+  color:#195c3c;
+}
+:root[data-theme="light"] body[data-cosmic-view] .navq.current {
+  background:linear-gradient(145deg,#326b9d,#16466c);
+  border-color:#20567f;
+  color:#fff;
+}
+
+/* Mobile touch surfaces and user motion preferences. */
+@media (max-width: 780px) {
+  body[data-cosmic-view] .btn { min-height: 44px; }
+  body[data-cosmic-view] .nav button { min-height: 44px; }
+  body[data-cosmic-view] .navq { min-width: 40px; min-height: 40px; }
+}
+@media (hover: none) {
+  body[data-cosmic-view] .btn:hover:not(:disabled),
+  body[data-cosmic-view] .nav button:hover:not(.active),
+  body[data-cosmic-view] .option:hover:not(:disabled),
+  body[data-cosmic-view] .navq:hover:not(:disabled),
+  body[data-cosmic-view="landing"] .cosmos-course:hover {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body[data-cosmic-view] .btn,
+  body[data-cosmic-view] .nav button,
+  body[data-cosmic-view] .nav button::before,
+  body[data-cosmic-view] .option,
+  body[data-cosmic-view] .navq,
+  body[data-cosmic-view="landing"] .cosmos-course,
+  body[data-cosmic-view="landing"] .cosmos-course .cosmos-course-symbol,
+  .cosmic-theme-switch,.cosmic-effects-toggle {
+    transition: none !important;
+    animation: none !important;
+  }
+}
