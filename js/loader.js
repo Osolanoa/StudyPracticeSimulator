@@ -1,6 +1,7 @@
 (function () {
   const registry = [
     { id: 'az900', visible: true, name: 'Microsoft Azure Fundamentals', shortName: 'AZ-900', description: 'Practice simulator for Microsoft Azure Fundamentals.', questionCount: 200, questionsPerPractice: 10 },
+    { id: 'ccar-p', visible: true, name: 'Claude Certified Architect – Professional', shortName: 'CCAR-P', description: '163 Claude architecture practice questions with detailed explanations.', questionCount: 163, questionsPerPractice: 10, includePartialPracticeGroup: true },
     { id: 'matematicas-9-mep', visible: true, name: 'Matemáticas 9.º Año — MEP', shortName: 'Matemáticas 9.º', description: '170 ejercicios de 2025 y 2026 con preguntas y procedimientos explicados.', questionCount: 170, questionsPerPractice: 10 },
     { id: 'example', visible: false, name: 'Example', shortName: 'Example', description: 'A minimal template course that demonstrates the generic study simulator.', questionCount: 3, questionsPerPractice: 10 }
   ];
@@ -13,11 +14,11 @@
   function practiceSummary(course) {
     try {
       const records = JSON.parse(localStorage.getItem('study_' + course.id + (course.id === 'matematicas-9-mep' ? '_v2' : '') + '_practice_tests') || '{}');
-      const total = Math.floor(course.questionCount / course.questionsPerPractice);
+      const total = course.includePartialPracticeGroup ? Math.ceil(course.questionCount / course.questionsPerPractice) : Math.floor(course.questionCount / course.questionsPerPractice);
       const done = Array.from({ length: total }, (_, i) => records[i + 1]).filter(record => record && record.completed);
       const best = done.length ? Math.round(done.reduce((sum, record) => sum + (record.bestPercentage || 0), 0) / done.length) : null;
       return { total, done: done.length, best };
-    } catch (_) { return { total: Math.floor(course.questionCount / course.questionsPerPractice), done: 0, best: null }; }
+    } catch (_) { return { total: course.includePartialPracticeGroup ? Math.ceil(course.questionCount / course.questionsPerPractice) : Math.floor(course.questionCount / course.questionsPerPractice), done: 0, best: null }; }
   }
   function esc(value) { return String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]); }
   function landing() {
@@ -34,7 +35,7 @@
     const cards = registry.filter(course => course.visible).map(course => {
       const progress = practiceSummary(course), continued = progress.done > 0;
       const status = continued ? `<p class="course-progress">${progress.done} of ${progress.total} practice tests completed${progress.best === null ? '' : ` · Best average: ${progress.best}%`}</p>` : '<p class="course-progress">Ready when you are.</p>';
-      return `<article class="course-card"><span class="course-icon" aria-hidden="true">${course.id === 'az900' ? 'A' : '∑'}</span><p class="eyebrow">${esc(course.shortName)}</p><h2>${esc(course.name)}</h2><p class="sub">${esc(course.description)}</p><div class="course-facts"><span>${course.questionCount} questions</span><span>${progress.total} practice tests</span></div>${status}<button class="btn" data-course-id="${esc(course.id)}">${continued ? 'Continue studying' : 'Start studying'} →</button></article>`;
+      return `<article class="course-card"><span class="course-icon" aria-hidden="true">${course.id === 'az900' ? 'A' : course.id === 'ccar-p' ? '✦' : '∑'}</span><p class="eyebrow">${esc(course.shortName)}</p><h2>${esc(course.name)}</h2><p class="sub">${esc(course.description)}</p><div class="course-facts"><span>${course.questionCount} questions</span><span>${progress.total} practice tests</span></div>${status}<button class="btn" data-course-id="${esc(course.id)}">${continued ? 'Continue studying' : 'Start studying'} →</button></article>`;
     }).join('');
     const publicCourses = registry.filter(course => course.visible);
     const summaries = publicCourses.map(course => ({ course, progress: practiceSummary(course) }));
