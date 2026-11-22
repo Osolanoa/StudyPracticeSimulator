@@ -25,7 +25,7 @@
     const cards=overview.map(({course,progress},i)=>{
       const p=percent(progress),math=course.id.includes('matematicas');
       return '<article data-cosmic-card="'+esc(course.id)+'" role="button" tabindex="0" aria-label="Open '+esc(course.name)+'" class="cosmos-course '+(math?'cosmos-course--math':'cosmos-course--azure')+'">'+
-        '<div class="cosmos-course-visual" aria-hidden="true"><span class="cosmos-course-symbol">'+(math?icons.math:icons.cloud)+'</span><span class="cosmos-course-orb"></span></div>'+
+        '<div class="cosmos-course-visual" aria-hidden="true"><span class="cosmos-course-symbol">'+(math?icons.math:course.id==='ccar-p'?icons.exam:icons.cloud)+'</span><span class="cosmos-course-orb"></span></div>'+
         '<div class="cosmos-course-copy"><span class="cosmos-label">'+esc(course.shortName)+'</span><h3>'+esc(course.name)+'</h3><p>'+esc(course.description)+'</p>'+
         '<div class="cosmos-facts"><span>'+course.questionCount+' questions</span><span>'+progress.total+' practice tests</span></div>'+
         '<div class="cosmos-track-label"><span>Study progress</span><strong>'+p+'%</strong></div>'+
