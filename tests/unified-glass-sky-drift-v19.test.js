@@ -33,8 +33,12 @@ assert.ok(css.includes('.cosmos-course .cosmos-course-symbol'),
   'The small icon is preserved as a translucent chip');
 assert.ok(cosmos.includes("scene.id = 'cosmic-scene'"),'Pan targets the actual space-scene container');
 assert.ok(background.includes('eso1236c.jpg'),'The original astronomical image is unchanged');
-assert.ok(css.includes('animation: celestial-pan-v19 180s ease-in-out infinite alternate'),
-  'Pan speed should be extremely slow and seamless');
+assert.ok(css.includes('animation: celestial-pan-v20 80s linear infinite alternate !important'),
+  'Pan must be visible over 80 seconds and move continuously without a long eased-in pause');
+assert.ok(css.includes('--celestial-pan-start: 4%') && css.includes('--celestial-pan-end: -4%'),
+  'Pan must cover eight percent of the viewport, rather than the imperceptible V19 drift');
+assert.ok(css.includes('transform-origin: center center') && css.includes('will-change: transform'),
+  'The whole scene should move as a composited layer');
 assert.ok(css.includes('scale(var(--celestial-pan-scale))'),
   'Scene must be slightly oversized to avoid blank edges during panning');
 assert.ok(css.includes('prefers-reduced-motion: reduce')&&css.includes('animation: none !important'),
