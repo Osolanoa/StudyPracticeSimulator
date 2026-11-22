@@ -1,0 +1,163 @@
+/* Course Light Glass V18
+   Explicit fixes for old heavyweight gradients, dim session, serif headings,
+   and V14 sidebar left-rail. The landing headline stays Cormorant Garamond.
+   The existing cosmic wallpaper/photo/assets and question engine are unchanged. */
+
+/* Highest-specificity targeted typography: Inter everywhere EXCEPT the
+   main landing headline. Older serif heading rules use !important. */
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app .cosmos-landing .cosmos-course h3,
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app .cosmos-landing .cosmos-section-head h2,
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .content h1,
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .content h2,
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .content h3,
+html[data-theme="dark"] body[data-cosmic-view="session"] #app .content h1,
+html[data-theme="dark"] body[data-cosmic-view="session"] #app .content h2,
+html[data-theme="dark"] body[data-cosmic-view="session"] #app .content h3 {
+  font-family:"Inter","Segoe UI Variable","Segoe UI",system-ui,sans-serif!important;
+  font-style:normal!important;
+  font-weight:650!important;
+  letter-spacing:-.03em!important;
+  line-height:1.22!important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app .cosmos-landing .cosmos-course h3 {
+  font-size:clamp(1.15rem,1.65vw,1.43rem)!important;
+}
+html[data-theme="dark"] body[data-cosmic-view="landing"] #app .cosmos-landing .cosmos-section-head h2 {
+  font-size:clamp(1.36rem,2vw,1.78rem)!important;
+}
+
+/* Prior session CSS had filter:brightness(.34) on the WHOLE cosmic scene.
+   Remove only this extra session dimmer; the original photo/image filters
+   and main background styling remain untouched and identical to landing. */
+html[data-theme="dark"] body[data-cosmic-view="session"] #cosmic-scene {
+  filter:none!important;
+}
+
+/* The old blur brightness(.78/.85) was also darkening course surfaces.
+   Lighter translucent fills and blur without brightness() keep space visible. */
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .shell,
+html[data-theme="dark"] body[data-cosmic-view="session"] #app .shell,
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .content,
+html[data-theme="dark"] body[data-cosmic-view="session"] #app .content {
+  background:transparent!important;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .side,
+html[data-theme="dark"] body[data-cosmic-view="session"] #app .side {
+  background:linear-gradient(145deg,rgba(210,234,246,.075),rgba(8,29,49,.12))!important;
+  -webkit-backdrop-filter:blur(9px) saturate(108%)!important;
+  backdrop-filter:blur(9px) saturate(108%)!important;
+  border-color:rgba(236,248,255,.20)!important;
+  box-shadow:inset -1px 0 rgba(240,252,255,.16)!important;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .card,
+html[data-theme="dark"] body[data-cosmic-view="session"] #app .card,
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .question-card,
+html[data-theme="dark"] body[data-cosmic-view="session"] #app .question-card {
+  background:linear-gradient(145deg,rgba(226,246,252,.12),rgba(33,80,105,.055) 52%,rgba(8,31,51,.12))!important;
+  -webkit-backdrop-filter:blur(7px) saturate(110%)!important;
+  backdrop-filter:blur(7px) saturate(110%)!important;
+  border-color:rgba(234,249,254,.27)!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.21),0 11px 25px rgba(0,0,0,.16)!important;
+}
+
+/* No left line. V14 created this with button.active::before and shifted the
+   active button's left padding. Both behaviors are now explicitly removed. */
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button::before,
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button.active::before {
+  content:none!important;
+  display:none!important;
+  opacity:0!important;
+  box-shadow:none!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button,
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button.active,
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button:hover,
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button:hover:not(.active) {
+  background:transparent!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+  border:1px solid transparent!important;
+  border-radius:14px!important;
+  padding:.7rem .8rem!important;
+  transform:none!important;
+  color:#edf7fa!important;
+  font-family:"Inter","Segoe UI",system-ui,sans-serif!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button.active {
+  border-color:rgba(239,251,255,.58)!important;
+  color:#fff!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button:hover:not(.active) {
+  border-color:rgba(229,248,252,.33)!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .side .nav button:focus-visible {
+  outline:3px solid #c7ebf4!important;
+  outline-offset:2px!important;
+}
+
+/* All main action buttons share zero-fill, no tint or metallic gradient.
+   Only border and text differentiate primary/secondary/destructive actions. */
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn,
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn.secondary,
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn.danger,
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn:hover:not(:disabled),
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn:active:not(:disabled) {
+  background:transparent!important;
+  background-image:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+  border:1px solid rgba(232,247,253,.49)!important;
+  color:#f6fcff!important;
+  filter:none!important;
+  transform:none!important;
+  font-family:"Inter","Segoe UI",system-ui,sans-serif!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn.secondary {
+  color:#e2f2f8!important;
+  border-color:rgba(224,243,250,.33)!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn.danger {
+  color:#ffdce2!important;
+  border-color:rgba(244,168,178,.7)!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn:hover:not(:disabled) {
+  border-color:rgba(251,254,255,.88)!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn:focus-visible {
+  outline:3px solid #c7ebf4!important;
+  outline-offset:3px!important;
+}
+html[data-theme="dark"] body[data-cosmic-view] #app .content .btn:disabled {
+  opacity:.46;
+  cursor:not-allowed;
+}
+
+/* Preserve the previous accessibility fallback: transparency is optional. */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))) {
+  html[data-theme="dark"] body[data-cosmic-view="course"] #app .card,
+  html[data-theme="dark"] body[data-cosmic-view="session"] #app .card,
+  html[data-theme="dark"] body[data-cosmic-view="course"] #app .side,
+  html[data-theme="dark"] body[data-cosmic-view="session"] #app .side {
+    background:rgba(14,32,48,.86)!important;
+  }
+}
+@media (prefers-reduced-transparency:reduce) {
+  html[data-theme="dark"] body[data-cosmic-view="course"] #app .card,
+  html[data-theme="dark"] body[data-cosmic-view="session"] #app .card,
+  html[data-theme="dark"] body[data-cosmic-view="course"] #app .side,
+  html[data-theme="dark"] body[data-cosmic-view="session"] #app .side {
+    background:rgba(14,32,48,.93)!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
+  }
+}
+@media (max-width:780px) {
+  html[data-theme="dark"] body[data-cosmic-view="course"] #app .side,
+  html[data-theme="dark"] body[data-cosmic-view="session"] #app .side {
+    border-right:0!important;
+    border-bottom:1px solid rgba(235,250,255,.24)!important;
+  }
+}
