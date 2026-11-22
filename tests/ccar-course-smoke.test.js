@@ -17,6 +17,7 @@ assert.equal(cfg.id, 'ccar-p');
 assert.equal(bank.length, 163, 'All 163 source questions must be included');
 assert.equal(new Set(bank.map(q => q.id)).size, 163, 'Stable IDs must be unique');
 assert.equal(cfg.includePartialPracticeGroup, true);
+assert.equal(cfg.shufflePracticeQuestionOrder, true, 'CCAR-P fixed tests should shuffle presentation order');
 assert.equal(Math.ceil(bank.length / cfg.questionsPerPractice), 17);
 assert.equal(bank.length % cfg.questionsPerPractice, 3, 'The last test must have 3 questions');
 for (const q of bank) {
@@ -44,5 +45,19 @@ assert.deepEqual(Array.from(bank[57].correctAnswers), ['A','C','E']);
 const app = fs.readFileSync(path.join(root, 'js/app.js'), 'utf8');
 const loader = fs.readFileSync(path.join(root, 'js/loader.js'), 'utf8');
 assert.ok(app.includes('CFG.includePartialPracticeGroup'));
+assert.ok(app.includes('(CFG.shufflePracticeQuestionOrder?shuffle(group.questions):group.questions)'),
+  'Fixed test membership must remain intact while display order is shuffled');
+const shuffleSource = app.match(/function shuffle\(a\)\{.*?return out\}/)?.[0];
+assert.ok(shuffleSource, 'Fisher-Yates shuffle should be present');
+const shuffle = vm.runInNewContext(shuffleSource + '; shuffle;', {});
+const original = Array.from({ length: 163 }, (_, i) => i + 1);
+let changed = false;
+for (let i = 0; i < 20; i++) {
+  const mixed = Array.from(shuffle(original));
+  assert.equal(mixed.length, original.length, 'Shuffling must preserve question count');
+  assert.deepEqual([...mixed].sort((a, b) => a - b), original, 'No question may be duplicated or dropped');
+  if (mixed.some((value, index) => value !== original[index])) changed = true;
+}
+assert.ok(changed, 'At least one shuffled order should differ from its source order');
 assert.ok(loader.includes("id: 'ccar-p'"));
-console.log('CCAR-P course smoke test passed: 163 questions, 17 fixed tests, 9 adapted visual questions.');
+console.log('CCAR-P course smoke test passed: 163 questions, 17 fixed tests, 9 adapted visual questions, unbiased presentation shuffle.');
