@@ -1,0 +1,32 @@
+/* V23 — single, ultra-slow panorama.
+   The photo, its brightness/color, and all glass surfaces stay unchanged.
+   JS animates the photo and generated stars with matching motion.
+   This CSS provides a fallback only if native animation is unavailable. */
+#cosmic-scene .cosmic-lite-photo {
+  transform-origin: center center;
+}
+#cosmic-scene .cosmic-lite-stars {
+  transition: none !important; /* no fast mouse-driven jumps */
+}
+@keyframes sky-v23-photo {
+  from { transform: translate3d(.75vw,0,0) scale(1.035); }
+  to   { transform: translate3d(-.75vw,0,0) scale(1.035); }
+}
+@keyframes sky-v23-stars {
+  from { transform: translate3d(.75vw,0,0); }
+  to   { transform: translate3d(-.75vw,0,0); }
+}
+#cosmic-scene .cosmic-lite-photo.sky-v23-photo-fallback {
+  animation: sky-v23-photo 480s linear infinite alternate !important;
+}
+#cosmic-scene .cosmic-lite-stars.sky-v23-stars-fallback {
+  animation: sky-v23-stars 480s linear infinite alternate !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #cosmic-scene .cosmic-lite-photo,
+  #cosmic-scene .cosmic-lite-stars {
+    animation: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
