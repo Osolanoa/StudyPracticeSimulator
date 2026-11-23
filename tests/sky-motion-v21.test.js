@@ -19,11 +19,13 @@ function simulate(search, prefersReducedMotion) {
     style: {}, classList: {
       items: new Set(),
       add(value) { this.items.add(value); },
-      remove(value) { this.items.delete(value); }
+      remove(value) { this.items.delete(value); },
+      contains(value) { return this.items.has(value); }
     },
     animate(frames, options) {
       const animation = {
-        currentTime: 0, cancelled: false,
+        currentTime: 0, cancelled: false, playbackRate: 1,
+        updatePlaybackRate(rate) { this.playbackRate = rate; },
         cancel() { this.cancelled = true; }
       };
       calls.push({ name, frames, options, animation });
@@ -54,7 +56,10 @@ assert.equal(normal.calls[0].frames[0].transform, 'translate3d(0.75vw,0,0) scale
 assert.equal(normal.calls[0].frames[1].transform, 'translate3d(-0.75vw,0,0) scale(1.035)');
 assert.equal(normal.calls[1].frames[0].transform, 'translate3d(0.75vw,0,0)');
 assert.equal(normal.calls[1].frames[1].transform, 'translate3d(-0.75vw,0,0)');
-assert.equal(normal.controller.getStatus().durationMs, 480000);
+assert.equal(normal.controller.getStatus().baseDurationMs, 480000);
+assert.equal(normal.controller.getStatus().durationMs, 240000);
+assert.equal(normal.controller.getStatus().speedPercent, 2);
+assert.ok(normal.calls.every(c => c.animation.playbackRate === 2));
 assert.equal(normal.controller.getStatus().distanceVw, 1.5);
 assert.equal(normal.controller.getStatus().status, 'playing');
 assert.equal(normal.badges.length, 0, 'No diagnostic UI unless explicitly requested');
@@ -72,7 +77,8 @@ assert.equal(oldDebugLink.badges.length, 0);
 const info = simulate('?skyInfo=1', false);
 assert.ok(info.calls.every(x => x.options.duration === 480000), 'Status mode never accelerates');
 assert.equal(info.badges.length, 1);
-assert.match(info.badges[0].textContent, /8 min por trayecto/);
+assert.match(info.badges[0].textContent, /velocidad 2%/);
+assert.match(info.badges[0].textContent, /240 s por trayecto/);
 
 const reduced = simulate('', true);
 assert.equal(reduced.calls.length, 0);
