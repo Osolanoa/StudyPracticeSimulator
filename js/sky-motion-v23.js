@@ -1,7 +1,8 @@
 /* Sky Motion V23
  * A single synchronized controller moves the original space photo and stars
- * together. Never accelerates based on the URL. Eight-minute one-way drift,
- * 1.5vw total excursion. Cards and menus never move with the background.
+ * together. Users can adjust 1%-10% speed in the study Settings UI;
+ * 1%=8 minutes/trip, 10%=48 seconds/trip. The preference is global
+ * and persists across courses, while the background image never changes.
  */
 (() => {
   'use strict';
@@ -11,9 +12,25 @@
   const stars = scene?.querySelector('.cosmic-lite-stars');
   if (!photo || !stars) return;
 
-  const DURATION_MS = 480000; // 8 minutes in each direction
-  const HALF_SHIFT_VW = 0.75; // 1.5vw total travel
-  const SCALE = 1.035;       // prevents exposed borders during movement
+  const DURATION_MS = 480000; // base duration at speed 1%
+  const HALF_SHIFT_VW = 0.75; // 1.5vw total travel; speed never changes distance
+  const SCALE = 1.035; // prevents exposed borders during movement
+  const SPEED_KEY = 'study_sky_speed_percent';
+  const DEFAULT_SPEED = 2; // 4 minutes/trip, between former too-slow and too-fast values
+  const normalizeSpeed = raw => {
+    const number = Number(raw);
+    return Number.isFinite(number) ? Math.max(1, Math.min(10, Math.round(number))) : DEFAULT_SPEED;
+  };
+  function readSpeed() {
+    try {
+      const stored = localStorage.getItem(SPEED_KEY);
+      return stored === null ? DEFAULT_SPEED : normalizeSpeed(stored);
+    } catch (_) {
+      return DEFAULT_SPEED; // storage blocked / private context
+    }
+  }
+  let speedPercent = readSpeed();
+  const durationPerTripMs = () => DURATION_MS / speedPercent;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const infoMode = new URLSearchParams(location.search).get('skyInfo') === '1';
   let animations = [];
@@ -37,7 +54,8 @@
       document.body.appendChild(infoBadge);
     }
     infoBadge.textContent = status === 'playing' || status === 'css-fallback'
-      ? 'Firmamento: 8 min por trayecto · 1.5% · ' + status
+      ? 'Firmamento: velocidad ' + speedPercent + '% · '
+        + Math.round(durationPerTripMs() / 1000) + ' s por trayecto · ' + status
       : 'Firmamento: ' + status;
   }
 
@@ -48,6 +66,8 @@
     stars.classList.remove('sky-v23-stars-fallback');
     photo.style.transform = '';
     stars.style.transform = '';
+    photo.style.animationDuration = '';
+    stars.style.animationDuration = '';
   }
 
   function start() {
@@ -80,28 +100,57 @@
         photo.animate(photoFrames, options),
         stars.animate(starFrames, options)
       ];
+      applyPlaybackSpeed();
       status = 'playing';
     } catch (_) {
       for (const animation of animations) animation.cancel();
       animations = [];
       photo.classList.add('sky-v23-photo-fallback');
       stars.classList.add('sky-v23-stars-fallback');
+      applyPlaybackSpeed();
       status = 'css-fallback';
     }
     updateInfo();
   }
 
+  // Alter playback speed without restarting or jumping to the start of the pan.
+  // Native animations use playbackRate; CSS fallback uses duration per trip.
+  function applyPlaybackSpeed() {
+    for (const animation of animations) {
+      if (typeof animation.updatePlaybackRate === 'function') animation.updatePlaybackRate(speedPercent);
+      else animation.playbackRate = speedPercent;
+    }
+    const cssDuration = (DURATION_MS / speedPercent / 1000) + 's';
+    if (status === 'css-fallback' || photo.classList.contains('sky-v23-photo-fallback')) {
+      photo.style.animationDuration = cssDuration;
+      stars.style.animationDuration = cssDuration;
+    }
+  }
+
+  function setSpeedPercent(value) {
+    const next = normalizeSpeed(value);
+    speedPercent = next;
+    try { localStorage.setItem(SPEED_KEY, String(next)); } catch (_) {}
+    applyPlaybackSpeed();
+    updateInfo();
+    return next;
+  }
+
   window.StudySkyMotion = Object.freeze({
     getStatus: () => ({
-      version: 'v23',
+      version: 'v24',
       status,
-      durationMs: DURATION_MS,
+      speedPercent,
+      durationMs: durationPerTripMs(),
+      baseDurationMs: DURATION_MS,
       distanceVw: HALF_SHIFT_VW * 2,
       reducedMotion: reduced.matches,
       photoTimeMs: animations[0]?.currentTime ?? null,
       photoTransform: getComputedStyle(photo).transform,
       starsTransform: getComputedStyle(stars).transform
     }),
+    getSpeedPercent: () => speedPercent,
+    setSpeedPercent,
     restart: start
   });
 
