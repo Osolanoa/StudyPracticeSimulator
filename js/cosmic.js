@@ -18,7 +18,6 @@
 
   const layer = scene.querySelector('.cosmic-lite-stars');
   const coarse = matchMedia('(pointer: coarse)').matches;
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const count = coarse ? 18 : 42;
 
   // Consistent layout on refresh. Tiny DOM circles are painted only once.
@@ -41,32 +40,6 @@
   }
   layer.appendChild(fragment);
 
-  // Only one scheduled frame when a pointer event occurs. No idle work.
-  if (!coarse && matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    let pending = 0;
-    let dx = 0, dy = 0;
-    const move = () => {
-      pending = 0;
-      layer.style.transform = 'translate3d(' + dx.toFixed(2) + 'px,' + dy.toFixed(2) + 'px,0)';
-    };
-    const schedule = () => {
-      if (!pending) pending = requestAnimationFrame(move);
-    };
-    const reset = () => {
-      dx = dy = 0;
-      schedule();
-    };
-    window.addEventListener('pointermove', (event) => {
-      if (reduced.matches || document.body.dataset.cosmicView === 'session') return;
-      dx = (0.5 - event.clientX / Math.max(innerWidth, 1)) * 14;
-      dy = (0.5 - event.clientY / Math.max(innerHeight, 1)) * 10;
-      schedule();
-    }, { passive: true });
-    document.addEventListener('pointerleave', reset, { passive: true });
-    document.addEventListener('visibilitychange', () => { if (document.hidden) reset(); });
-    reduced.addEventListener?.('change', reset);
-    new MutationObserver(() => {
-      if (document.body.dataset.cosmicView === 'session') reset();
-    }).observe(document.body, { attributes: true, attributeFilter: ['data-cosmic-view'] });
-  }
+  // Star positions stay fixed relative to the space photograph.
+  // All deliberate sky motion is controlled by sky-motion-v23.js.
 })();
