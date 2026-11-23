@@ -1,0 +1,91 @@
+/* Sky speed settings — a single, native, accessible range control.
+ * Scoped to the course settings screen, without altering cosmic imagery,
+ * correct/wrong answer states or the transparent navigation buttons. */
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .sky-speed-panel {
+  --sky-slider-accent: #d5f2f5;
+  --sky-slider-track: rgba(211,238,245,.19);
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .sky-speed-header {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .75rem;
+  margin-bottom: .8rem;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .sky-speed-header h2 {
+  margin: 0;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app #skySpeedValue {
+  font: 700 1.35rem/1 "Inter", system-ui, sans-serif !important;
+  letter-spacing: -.03em;
+  color: #effdff;
+  font-variant-numeric: tabular-nums;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app input#setSkySpeed[type="range"] {
+  display: block;
+  width: 100%;
+  height: 28px;
+  padding: 0 !important;
+  margin: .3rem 0 .2rem;
+  border: 0 !important;
+  border-radius: 0 !important;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  accent-color: var(--sky-slider-accent);
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app input#setSkySpeed::-webkit-slider-runnable-track {
+  height: 6px;
+  border: 1px solid rgba(241,253,255,.28);
+  border-radius: 999px;
+  background: var(--sky-slider-track);
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app input#setSkySpeed::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  margin-top: -8px;
+  border: 2px solid #d6f7fa;
+  border-radius: 50%;
+  background: #c3ebee;
+  box-shadow: 0 0 0 4px rgba(197,232,238,.13), 0 2px 8px rgba(0,0,0,.24);
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app input#setSkySpeed::-moz-range-track {
+  height: 6px;
+  border: 1px solid rgba(241,253,255,.28);
+  border-radius: 999px;
+  background: var(--sky-slider-track);
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app input#setSkySpeed::-moz-range-thumb {
+  width: 17px;
+  height: 17px;
+  border: 2px solid #d6f7fa;
+  border-radius: 50%;
+  background: #c3ebee;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app input#setSkySpeed:focus-visible {
+  outline: 3px solid #cbf3f9 !important;
+  outline-offset: 3px;
+  border-radius: 10px !important;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .sky-speed-scale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  color: #c6dbe3;
+  font: 500 .79rem/1.4 "Inter", system-ui, sans-serif;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .sky-speed-time {
+  margin: .95rem 0 .4rem;
+  color: #e7f9fa;
+  font: 600 .93rem/1.45 "Inter", system-ui, sans-serif;
+}
+html[data-theme="dark"] body[data-cosmic-view="course"] #app .sky-speed-panel .muted {
+  line-height: 1.55;
+}
