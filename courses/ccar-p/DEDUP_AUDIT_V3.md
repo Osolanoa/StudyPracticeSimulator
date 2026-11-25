@@ -48,7 +48,7 @@ This is **content deduplication, not an independent certification of third-party
 | CCARP-124 / CCARP-149 | CCARP-124 | CCARP-149 | Exact same question text |
 
 ## Delivery / user history
-- The 126 IDs are repartitioned in a filtered stable mixed permutation: 12 practice groups of 10 questions plus a final group of 6.
+- The 126 IDs are rebalanced into a stable mixed permutation: 12 practice groups of 10 questions plus a final group of 6. Each full group covers at least six domains and uses distinct original PDF pages.
 - New group score records use `study_ccar-p_practice_tests_v3`. The original v1/v2 practice results remain in their existing local storage keys; **do not reuse them for new group membership**.
 - Per-question attempt history is retained. If a removed duplicate was previously attempted but the canonical ID was not, the old statistics are copied onto the retained ID without deleting the original entry.
 - Bookmarks referring to removed IDs are remapped to the retained corresponding question.
