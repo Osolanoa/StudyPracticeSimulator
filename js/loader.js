@@ -1,7 +1,7 @@
 (function () {
   const registry = [
     { id: 'az900', visible: true, name: 'Microsoft Azure Fundamentals', shortName: 'AZ-900', description: 'Practice simulator for Microsoft Azure Fundamentals.', questionCount: 200, questionsPerPractice: 10 },
-    { id: 'ccar-p', visible: true, name: 'Claude Certified Architect – Professional', shortName: 'CCAR-P', description: '163 Claude architecture practice questions with detailed explanations.', questionCount: 163, questionsPerPractice: 10, includePartialPracticeGroup: true, practiceRecordsKey: 'practiceTestsV2' },
+    { id: 'ccar-p', visible: true, name: 'Claude Certified Architect – Professional', shortName: 'CCAR-P', description: '126 unique Claude architecture practice questions with detailed explanations.', questionCount: 126, questionsPerPractice: 10, includePartialPracticeGroup: true, practiceRecordsKey: 'practiceTestsV3' },
     { id: 'matematicas-9-mep', visible: true, name: 'Matemáticas 9.º Año — MEP', shortName: 'Matemáticas 9.º', description: '170 ejercicios de 2025 y 2026 con preguntas y procedimientos explicados.', questionCount: 170, questionsPerPractice: 10 },
     { id: 'example', visible: false, name: 'Example', shortName: 'Example', description: 'A minimal template course that demonstrates the generic study simulator.', questionCount: 3, questionsPerPractice: 10 }
   ];
@@ -13,7 +13,7 @@
   function applyTheme() { document.documentElement.dataset.theme = theme(); }
   function practiceSummary(course) {
     try {
-      const suffix = course.practiceRecordsKey === 'practiceTestsV2' ? '_practice_tests_v2' : '_practice_tests';
+      const suffix = course.practiceRecordsKey === 'practiceTestsV3' ? '_practice_tests_v3' : course.practiceRecordsKey === 'practiceTestsV2' ? '_practice_tests_v2' : '_practice_tests';
       const records = JSON.parse(localStorage.getItem('study_' + course.id + (course.id === 'matematicas-9-mep' ? '_v2' : '') + suffix) || '{}');
       const total = course.includePartialPracticeGroup ? Math.ceil(course.questionCount / course.questionsPerPractice) : Math.floor(course.questionCount / course.questionsPerPractice);
       const done = Array.from({ length: total }, (_, i) => records[i + 1]).filter(record => record && record.completed);
@@ -49,7 +49,7 @@
   }
   function load(src, token) {
     return new Promise((resolve, reject) => {
-      const script = document.createElement('script'); const version = src === './js/app.js' ? '?v=sky-speed-v24-20261122' : (window.STUDY_COURSE_ID === 'matematicas-9-mep' ? '?v=mep170-inline-20261114' : ''); script.src = src + version;
+      const script = document.createElement('script'); const isCcarV3 = window.STUDY_COURSE_ID === 'ccar-p' && (src === './courses/ccar-p/config.js' || src === './courses/ccar-p/questions.js' || src === './js/storage.js'); const version = src === './js/app.js' || isCcarV3 ? '?v=ccar-dedup-v3-20261124' : (window.STUDY_COURSE_ID === 'matematicas-9-mep' ? '?v=mep170-inline-20261114' : ''); script.src = src + version;
       script.onload = () => token === request ? resolve() : reject(new Error('Stale course request'));
       script.onerror = () => reject(new Error('Course asset could not load'));
       document.body.appendChild(script);

@@ -26,7 +26,7 @@ js/storage.js      course-namespaced browser storage
 js/visuals.js      reusable visual renderer
 js/loader.js       static course loader and registry
 courses/az900/     audited Microsoft Azure Fundamentals course pack
-courses/ccar-p/    163-question Claude Certified Architect – Professional practice set
+courses/ccar-p/    126-unique-question Claude Certified Architect – Professional practice set
 courses/example/   three-question authoring template
 courses/matematicas-9-mep/  Spanish ninth-year mathematics (60 questions)
 docs/              schema and course-authoring guides
@@ -38,7 +38,9 @@ Open `index.html` in a modern browser. The root page is a course selector; choos
 
 The Costa Rica mathematics course has six mixed practice tests of ten questions and a full 60-question, 180-minute examination. Its Spanish feedback teaches the solution steps, and its diagrams work offline in both themes.
 
-The CCAR-P course contains 163 questions from user-provided third-party practice PDFs, including nine visual question matrices adapted into equivalent multi-select exercises. It provides 17 fixed practices (16 of ten questions and one of three), with a stable cross-topic redistribution of the entire bank: every ten-question test covers at least six domains, and no test repeats two questions from the same original PDF page. Question presentation order is reshuffled on every attempt. Timed exams and detailed feedback remain available. The original 17 contiguous-source practice groups are superseded, so mixed-group scores use a separate browser-local storage key (`study_ccar-p_practice_tests_v2`); original results remain archived in `study_ccar-p_practice_tests`, and question history/bookmarks/exams remain unchanged. Current group membership remains stable so new retakes and new saved scores are comparable. Suggested keys are third-party study content, not official Anthropic certification questions or independently certified answer keys. Run `node tests/ccar-course-smoke.test.js` for content-integrity checks.
+The CCAR-P course contains **126 unique questions** retained from the original 163-question third-party practice PDF collection after removal of 37 duplicate/near-duplicate entries. Nine visual question matrices were adapted into equivalent multi-select exercises. The bank is organized into **13 mixed practice tests** (12 of ten questions and one of six); every ten-question test spans at least six domains, and no test repeats a question from the same original PDF page. Question presentation order is shuffled on each attempt. Timed exams can include up to 126 questions, with detailed per-option feedback.
+
+**Progress preservation:** The deduplicated mixed-group scores use `study_ccar-p_practice_tests_v3`, because the 13 new groups must not inherit scores from unrelated previous groups. Earlier v1/v2 practice results remain archived in `study_ccar-p_practice_tests` and `study_ccar-p_practice_tests_v2`. Per-question attempts and bookmarks are mapped from removed duplicate IDs to retained IDs where appropriate; original historical records are not deleted. Existing exam results remain saved. See [deduplication audit](courses/ccar-p/DEDUP_AUDIT_V3.md) for all 37 canonical-ID decisions. Suggested answer keys are from third-party PDFs, not official Anthropic certification materials or independently verified keys. Run `node tests/ccar-course-smoke.test.js` and `node tests/ccar-p-dedup-v3.test.js` for content-integrity checks.
 
 No installation is required. Course scripts load with relative classic script URLs, so the application normally also works from `file://`.
 
