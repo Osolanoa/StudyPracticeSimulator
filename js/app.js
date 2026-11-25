@@ -11,6 +11,27 @@ const skipLink=document.querySelector?.('.skip');if(skipLink)skipLink.textConten
 const ask=message=>confirm(translateText(message));
 function valid(q){return q&&q.id&&domains.includes(q.domain)&&['single-choice','multiple-choice','yes-no','scenario'].includes(q.type)&&q.options?.length&&q.correctAnswers?.length&&q.options.every(o=>o.id&&o.text&&q.optionExplanations?.[o.id])&&q.correctAnswers.every(a=>q.options.some(o=>o.id===a));}
 const ids=new Set(); const bank=Q.filter(q=>{let ok=valid(q)&&!ids.has(q.id); if(!ok)console.warn('Invalid question skipped',q?.id); ids.add(q.id);return ok});
+// Map bookmarked/attempted questions from removed duplicate IDs to the retained
+// canonical IDs, without deleting historical answer records or completed tests.
+function migrateDuplicateQuestionProgress(){
+ if(CFG.id!=='ccar-p'||CFG.practiceRecordsKey!=='practiceTestsV3')return;
+ const aliases=CFG.legacyQuestionAliases||{};
+ const history=S.get('history',{});
+ if(history&&typeof history==='object'&&!Array.isArray(history)){
+  let changed=false;
+  for(const [oldId,retainedId] of Object.entries(aliases)){
+   if(history[oldId]&&!history[retainedId]){history[retainedId]={...history[oldId]};changed=true}
+  }
+  if(changed)S.set('history',history);
+ }
+ const bookmarks=S.get('bookmarks',[]);
+ if(Array.isArray(bookmarks)){
+  const mapped=[...new Set(bookmarks.map(id=>aliases[id]||id))];
+  if(mapped.length!==bookmarks.length||mapped.some((id,i)=>id!==bookmarks[i]))S.set('bookmarks',mapped);
+ }
+}
+migrateDuplicateQuestionProgress();
+
 function getHist(){return S.get('history',{})} function stats(){let exams=S.get('exams',[]),records=practiceRecords(),groups=practiceGroups(),completed=0,correct=0;groups.forEach(group=>{let record=records[group.id];if(!record?.completed)return;let raw=Number(record.latestScore),score=Number.isFinite(raw)?raw:Math.round(group.questions.length*Number(record.latestPercentage||0)/100);completed+=group.questions.length;correct+=Math.max(0,Math.min(group.questions.length,Math.round(score)))});return{completed,correct,accuracy:completed?Math.round(correct/completed*100):0,exams,best:exams.length?Math.max(...exams.map(e=>e.score)):0}}
 /* A course can publish a complete stable permutation for varied fixed practices.
    IDs preserve reproducible membership and keep retake scores comparable. */
@@ -34,8 +55,10 @@ function practiceRecords(){
 }
 function practiceSummary(){
  let records=practiceRecords(),groups=practiceGroups(),done=groups.filter(g=>records[g.id]?.completed),avg=k=>done.length?Math.round(done.reduce((n,g)=>n+(records[g.id][k]||0),0)/done.length):0;
- let previous=CFG.practiceRecordsKey?S.get('practiceTests',{}):{};
- let previousCompleted=previous&&typeof previous==='object'&&!Array.isArray(previous)?Object.values(previous).filter(r=>r?.completed).length:0;
+ // A v3 question set changes practice group membership: archive old group results
+ // rather than assigning them to different questions in the new 13 tests.
+ const oldKeys=CFG.practiceRecordsKey==='practiceTestsV3'?['practiceTestsV2','practiceTests']:(CFG.practiceRecordsKey?['practiceTests']:[]);
+ let previousCompleted=oldKeys.reduce((total,key)=>{const records=S.get(key,{});return total+(records&&typeof records==='object'&&!Array.isArray(records)?Object.values(records).filter(r=>r?.completed).length:0)},0);
  return{groups,records,done,latest:avg('latestPercentage'),best:avg('bestPercentage'),previousCompleted};
 }
 const courseIcons={
