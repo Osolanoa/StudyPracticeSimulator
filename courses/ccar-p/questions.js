@@ -4760,12 +4760,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Posting Claude Code's review as a structured comment while a human keeps the approval decision is the design that delivers AI-assisted review without removing human oversight. In this setup Claude Code acts as an advisory reviewer, surfacing potential bugs, style issues, and risks so the human reviewer can make a faster, better-informed decision. Branch-protection rules stay in place, so a pull request still cannot merge without the required human approval. The alternatives either bypass approval through automatic merging, disable branch protection, or silently delete pull requests. Each of those removes the human gate the team explicitly wants to keep and undermines transparency and accountability in the workflow.\n\nStudy takeaway: Claude Code reviews the pull request and posts a structured analysis as a comment, while a human reviewer retains the approval decision under the existing branch-protection rules.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "AI review should provide evidence to human reviewers without changing who can approve or merge a pull request.",
     "optionExplanations": {
-      "A": "Correct. Posting Claude Code's review as a structured comment while a human keeps the approval decision is the design that delivers AI-assisted review without removing human oversight. In this setup Claude Code acts as an advisory reviewer, surfacing potential bugs, style issues, and risks so the human reviewer can make a faster, better-informed decision. The wording of option A matches the intended solution.",
-      "B": "Not selected. Each of those removes the human gate the team explicitly wants to keep and undermines transparency and accountability in the workflow. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Each of those removes the human gate the team explicitly wants to keep and undermines transparency and accountability in the workflow. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Each of those removes the human gate the team explicitly wants to keep and undermines transparency and accountability in the workflow. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Structured comments assist review while branch protection preserves the human approval gate.",
+      "B": "Not selected — Automatic merging bypasses the expressly required approval.",
+      "C": "Not selected — Disabling branch protection removes the existing enforceable approval boundary.",
+      "D": "Not selected — Deleting PRs prevents review, revision and accountability rather than assisting reviewers."
     },
     "reference": "CCAR-P practice PDF, Q108 (third-party answer key)",
     "tags": [
@@ -4803,12 +4803,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "A project-scoped CLAUDE.md stores durable instructions such as coding conventions, repository structure, architectural decisions, and preferred workflows alongside the codebase. Claude Code can load this context automatically for each session, eliminating repeated manual explanations while giving all engineers a consistent baseline. Committing the file to the repository also lets the guidance evolve through normal version control and review. Retyping the information only reduces the symptom, whereas persistent project context removes the repeated task.\n\nStudy takeaway: Capture the project's conventions and architecture in a project-scoped CLAUDE.md (or equivalent persistent project-context file) committed to the repository, so each session loads it automatically.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Persist shared repository context instead of repeatedly asking developers to supply it manually.",
     "optionExplanations": {
-      "A": "Not selected. Retyping the information only reduces the symptom, whereas persistent project context removes the repeated task. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. A project-scoped CLAUDE.md stores durable instructions such as coding conventions, repository structure, architectural decisions, and preferred workflows alongside the codebase. Claude Code can load this context automatically for each session, eliminating repeated manual explanations while giving all engineers a consistent baseline. The wording of option B matches the intended solution.",
-      "C": "Not selected. Retyping the information only reduces the symptom, whereas persistent project context removes the repeated task. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Retyping the information only reduces the symptom, whereas persistent project context removes the repeated task. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Banning the tool avoids setup cost only by eliminating its intended benefit.",
+      "B": "Correct — A version-controlled CLAUDE.md gives sessions reusable project-specific instructions and conventions.",
+      "C": "Not selected — Faster retyping still incurs the same repeated work and can introduce inconsistencies.",
+      "D": "Not selected — Removing conventions sacrifices consistency rather than solving context reuse."
     },
     "reference": "CCAR-P practice PDF, Q109 (third-party answer key)",
     "tags": [
@@ -4851,13 +4851,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "E"
     ],
-    "explanation": "Packaging the disclosure procedure as a Claude Skill owned by the compliance team, and referencing that same Skill from all three workflow integrations, keeps one authoritative version of the procedure under the control of the people who author it. When regulators issue an update, compliance revises the Skill once, and customer service, sales, and onboarding all pick up the change without separate redeployments. Embedding the text in each system prompt, or letting each team rewrite it, creates copies that drift and must be updated in several places four to six times a year. A shared retrieval corpus returns fragments based on relevance, so it does not guarantee that the complete procedure is applied identically in every workflow.\n\nStudy takeaway: Reference the same Claude Skill from all three of the workflow integrations directly.; Package the procedure as a Claude Skill owned by the compliance team directly.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Centralize a changing reusable procedure under its accountable owner and invoke the same artifact everywhere.",
     "optionExplanations": {
-      "A": "Correct. Packaging the disclosure procedure as a Claude Skill owned by the compliance team, and referencing that same Skill from all three workflow integrations, keeps one authoritative version of the procedure under the control of the people who author it. When regulators issue an update, compliance revises the Skill once, and customer service, sales, and onboarding all pick up the change without separate redeployments. The wording of option A matches the intended solution.",
-      "B": "Not selected. Packaging the disclosure procedure as a Claude Skill owned by the compliance team, and referencing that same Skill from all three workflow integrations, keeps one authoritative version of the procedure under the control of the people who author it. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Packaging the disclosure procedure as a Claude Skill owned by the compliance team, and referencing that same Skill from all three workflow integrations, keeps one authoritative version of the procedure under the control of the people who author it. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Packaging the disclosure procedure as a Claude Skill owned by the compliance team, and referencing that same Skill from all three workflow integrations, keeps one authoritative version of the procedure under the control of the people who author it. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Packaging the disclosure procedure as a Claude Skill owned by the compliance team, and referencing that same Skill from all three workflow integrations, keeps one authoritative version of the procedure under the control of the people who author it. When regulators issue an update, compliance revises the Skill once, and customer service, sales, and onboarding all pick up the change without separate redeployments. The wording of option E matches the intended solution."
+      "A": "Correct — A shared Skill keeps all three integrations aligned to the same maintained procedure.",
+      "B": "Not selected — Duplicating the procedure in prompts creates three maintenance points and potential drift.",
+      "C": "Not selected — A shared corpus centralizes information but is less direct for packaging an executable procedure with consistent task instructions.",
+      "D": "Not selected — Independent rewrites risk different interpretations of regulated requirements.",
+      "E": "Correct — Compliance ownership ensures regulatory updates are made to one authoritative Skill."
     },
     "reference": "CCAR-P practice PDF, Q110 (third-party answer key)",
     "tags": [
@@ -4895,12 +4895,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Inspecting the active permission rules across every settings scope is the right first step, because Claude Code merges rules from managed policy, command-line arguments, local project settings, shared project settings, and user settings in a defined order of precedence. A deny rule in a higher-priority scope, such as an organization's managed settings, overrides an allow rule the engineer may have added at the user or project level, which is a common reason an expected action is blocked. Tracing the denial to the specific rule and its source shows whether the block is an intentional policy or a misconfiguration that can be amended narrowly. Retrying the action changes nothing, since the same rules are evaluated each time. Disabling permissions or granting unrestricted Bash access removes safeguards wholesale instead of correcting the one rule involved.\n\nStudy takeaway: Inspect the active permission rules across all scopes (managed, command-line, local, project, user) to identify which rule is denying the action and confirm whether it should be amended or whether the action should remain denied.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Diagnose the effective permission rule and its scope before deciding whether access should change.",
     "optionExplanations": {
-      "A": "Not selected. Disabling permissions or granting unrestricted Bash access removes safeguards wholesale instead of correcting the one rule involved. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Disabling permissions or granting unrestricted Bash access removes safeguards wholesale instead of correcting the one rule involved. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Inspecting the active permission rules across every settings scope is the right first step, because Claude Code merges rules from managed policy, command-line arguments, local project settings, shared project settings, and user settings in a defined order of precedence. A deny rule in a higher-priority scope, such as an organization's managed settings, overrides an allow rule the engineer may have added at the user or project level, which is a common reason an expected action is blocked. The wording of option C matches the intended solution.",
-      "D": "Not selected. Disabling permissions or granting unrestricted Bash access removes safeguards wholesale instead of correcting the one rule involved. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Retries cannot resolve a deterministic policy denial.",
+      "B": "Not selected — Disabling all permissions destroys the controls instead of isolating the offending rule.",
+      "C": "Correct — Inspecting all applicable scopes identifies the effective restriction and whether it is intentional.",
+      "D": "Not selected — Unrestricted Bash exceeds the specific requested authority and increases exposure."
     },
     "reference": "CCAR-P practice PDF, Q111 (third-party answer key)",
     "tags": [
@@ -4943,13 +4943,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "D"
     ],
-    "explanation": "Reproducing the issue with a minimal reproduction case and forming a hypothesis about the likely root cause are the diagnostic steps that must happen before a targeted fix is applied. A minimal reproduction confirms that the reported symptom is real and consistent, and stripping away unrelated variables makes the failure easier to observe and reason about. A hypothesis grounded in the symptom, the Claude Code configuration, and recent changes then gives the fix a specific target, so it addresses the cause rather than guessing at surface effects. Documenting the root cause in the runbook and notifying users that a fix is deployed are follow-up activities that only make sense after the fix is verified. Opening a permanent change request is a process formality rather than a diagnostic step and does not help identify what is actually wrong.\n\nStudy takeaway: Form a hypothesis about the most likely root cause given the symptom, configuration, and recent changes.; Reproduce the issue with a minimal reproduction case to confirm the symptom and isolate variables.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A targeted fix should follow a reproducible symptom and a testable root-cause hypothesis.",
     "optionExplanations": {
-      "A": "Not selected. Opening a permanent change request is a process formality rather than a diagnostic step and does not help identify what is actually wrong. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Opening a permanent change request is a process formality rather than a diagnostic step and does not help identify what is actually wrong. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Reproducing the issue with a minimal reproduction case and forming a hypothesis about the likely root cause are the diagnostic steps that must happen before a targeted fix is applied. A minimal reproduction confirms that the reported symptom is real and consistent, and stripping away unrelated variables makes the failure easier to observe and reason about. The wording of option C matches the intended solution.",
-      "D": "Correct. Reproducing the issue with a minimal reproduction case and forming a hypothesis about the likely root cause are the diagnostic steps that must happen before a targeted fix is applied. A minimal reproduction confirms that the reported symptom is real and consistent, and stripping away unrelated variables makes the failure easier to observe and reason about. The wording of option D matches the intended solution.",
-      "E": "Not selected. Opening a permanent change request is a process formality rather than a diagnostic step and does not help identify what is actually wrong. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Change management may be necessary for deployment but does not diagnose the technical problem.",
+      "B": "Not selected — Documenting the root cause and fix follows confirmation and remediation.",
+      "C": "Correct — A hypothesis connects the symptom to configuration or recent changes and guides testing.",
+      "D": "Correct — A minimal reproduction isolates variables and checks that the hypothesized issue is real.",
+      "E": "Not selected — A resolution notification should follow verified remediation, not precede it."
     },
     "reference": "CCAR-P practice PDF, Q112 (third-party answer key)",
     "tags": [
@@ -4992,13 +4992,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "B"
     ],
-    "explanation": "Managed configuration sits at the top of Claude Code's settings hierarchy, so security and compliance policies deployed this way apply to every team member and cannot be overridden by project or user settings. Project-scope configuration files, such as shared MCP server definitions and tool permissions committed alongside the repository, give every engineer the same tooling and permission boundaries through version control. Together these layers make the environment both secure and consistent. Storing a shared API key in a committed settings file exposes the credential in source control, which is a security risk rather than a safeguard. Personal model choices and editor themes are individual preferences that do nothing to establish team-wide consistency or security.\n\nStudy takeaway: applying managed configuration to enforce non-overridable security and compliance policies across all team members; committing shared MCP server definitions and tool permissions in project-scope configuration files alongside the repository. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Use centrally enforced controls for mandatory policies and repository configuration for shared project behavior.",
     "optionExplanations": {
-      "A": "Correct. Managed configuration sits at the top of Claude Code's settings hierarchy, so security and compliance policies deployed this way apply to every team member and cannot be overridden by project or user settings. Project-scope configuration files, such as shared MCP server definitions and tool permissions committed alongside the repository, give every engineer the same tooling and permission boundaries through version control. The wording of option A matches the intended solution.",
-      "B": "Correct. Managed configuration sits at the top of Claude Code's settings hierarchy, so security and compliance policies deployed this way apply to every team member and cannot be overridden by project or user settings. Project-scope configuration files, such as shared MCP server definitions and tool permissions committed alongside the repository, give every engineer the same tooling and permission boundaries through version control. The wording of option B matches the intended solution.",
-      "C": "Not selected. Personal model choices and editor themes are individual preferences that do nothing to establish team-wide consistency or security. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Personal model choices and editor themes are individual preferences that do nothing to establish team-wide consistency or security. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Personal model choices and editor themes are individual preferences that do nothing to establish team-wide consistency or security. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Managed configuration provides consistent, non-overridable policy enforcement.",
+      "B": "Correct — Committed project settings distribute common tool definitions and permissions.",
+      "C": "Not selected — Personal model preferences do not establish a common secure baseline.",
+      "D": "Not selected — A committed shared key exposes credentials and removes individual accountability.",
+      "E": "Not selected — Editor appearance is personal preference, not a security or team integration requirement."
     },
     "reference": "CCAR-P practice PDF, Q113 (third-party answer key)",
     "tags": [
@@ -5036,12 +5036,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Project scope is the Claude Code configuration level designed for team-wide consistency, because its files live inside the repository and are committed to version control. MCP servers defined in.mcp.json, permission rules in.claude/settings.json, and shared context in CLAUDE.md are picked up automatically by every engineer who clones or pulls the monorepo. Changes are reviewed and versioned like any other code, so the whole team stays aligned without extra tooling. User scope lives in each engineer's home directory and only applies to that individual, so keeping it consistent depends on manual syncing that can easily drift. Local scope is personal and uncommitted, so it cannot distribute anything to the rest of the team.\n\nStudy takeaway: project scope, with the configuration committed to the repository so every engineer working in the project picks up the same MCP servers, permissions, and context. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Repository-specific team configuration belongs in version-controlled project scope.",
     "optionExplanations": {
-      "A": "Not selected. Local scope is personal and uncommitted, so it cannot distribute anything to the rest of the team. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Local scope is personal and uncommitted, so it cannot distribute anything to the rest of the team. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Project scope is the Claude Code configuration level designed for team-wide consistency, because its files live inside the repository and are committed to version control. MCP servers defined in.mcp.json, permission rules in.claude/settings.json, and shared context in CLAUDE.md are picked up automatically by every engineer who clones or pulls the monorepo. The wording of option C matches the intended solution.",
-      "D": "Not selected. Local scope is personal and uncommitted, so it cannot distribute anything to the rest of the team. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Manually synchronizing user settings creates configuration drift and is not repository-scoped.",
+      "B": "Not selected — A lead's local settings are not automatically shared with teammates.",
+      "C": "Correct — Project-scoped files distribute the same integration and context to repository contributors.",
+      "D": "Not selected — Independent personal configuration cannot guarantee a consistent team baseline."
     },
     "reference": "CCAR-P practice PDF, Q114 (third-party answer key)",
     "tags": [
@@ -5079,12 +5079,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "A centrally managed, non-overridable configuration enforces the security-hardening flag across all engineers and prevents local or project-level settings from changing it. This scope is controlled by the organization rather than by individual users or repositories, providing a reliable policy boundary. User and project configuration files can be edited by engineers, while a CI/CD-only environment variable does not prevent disabling the flag during local development.\n\nStudy takeaway: Managed configuration applied centrally and marked as non-overridable. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Enforce mandatory security settings through administrator-managed policy rather than editable personal or project settings.",
     "optionExplanations": {
-      "A": "Not selected. User and project configuration files can be edited by engineers, while a CI/CD-only environment variable does not prevent disabling the flag during local development. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. User and project configuration files can be edited by engineers, while a CI/CD-only environment variable does not prevent disabling the flag during local development. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. A centrally managed, non-overridable configuration enforces the security-hardening flag across all engineers and prevents local or project-level settings from changing it. This scope is controlled by the organization rather than by individual users or repositories, providing a reliable policy boundary. The wording of option C matches the intended solution.",
-      "D": "Not selected. User and project configuration files can be edited by engineers, while a CI/CD-only environment variable does not prevent disabling the flag during local development. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Engineers can modify their personal settings.",
+      "B": "Not selected — A CI-only variable does not govern interactive developer sessions.",
+      "C": "Correct — Centrally managed policy is the intended non-overridable configuration boundary.",
+      "D": "Not selected — Repository configuration can be modified and does not by itself enforce an organization-wide mandate."
     },
     "reference": "CCAR-P practice PDF, Q115 (third-party answer key)",
     "tags": [
@@ -5122,12 +5122,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "A database MCP server uses least-privilege access when it defaults to read-only credentials and exposes only read-only tools to the subagent. Explicit human confirmation creates a separate approval boundary before any write, update, or delete operation can affect production data. This layered design limits accidental changes while preserving the ability to investigate and act when authorized. Fully privileged credentials, unrestricted tools, or absent confirmation gates remove these essential safeguards.\n\nStudy takeaway: Configure the database MCP server with a read-only credential by default, restrict the subagent’s tool list to read-only operations, and require explicit human confirmation on any operation that would modify data.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Default to read-only credentials and narrow tool access; put an explicit authorization gate before data modification.",
     "optionExplanations": {
-      "A": "Not selected. Fully privileged credentials, unrestricted tools, or absent confirmation gates remove these essential safeguards. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Fully privileged credentials, unrestricted tools, or absent confirmation gates remove these essential safeguards. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Fully privileged credentials, unrestricted tools, or absent confirmation gates remove these essential safeguards. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. A database MCP server uses least-privilege access when it defaults to read-only credentials and exposes only read-only tools to the subagent. Explicit human confirmation creates a separate approval boundary before any write, update, or delete operation can affect production data. The wording of option D matches the intended solution."
+      "A": "Not selected — Unrestricted direct writes can cause irreversible production changes without oversight.",
+      "B": "Not selected — A fully privileged credential defeats least privilege even when normal usage is benign.",
+      "C": "Not selected — Removing auditability prevents investigation and accountability for modifications.",
+      "D": "Correct — Scoped credentials and tools limit available actions; a human gate controls exceptional writes."
     },
     "reference": "CCAR-P practice PDF, Q116 (third-party answer key)",
     "tags": [
@@ -5170,13 +5170,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "B"
     ],
-    "explanation": "User-scope configuration stores personal preferences that should follow an individual engineer across projects and repositories. Editor theme settings and a preferred Claude response language are user- specific choices, so they belong in that scope rather than being tied to one project. Company-wide feature restrictions require an organization or enterprise policy scope, while shared MCP endpoints belong in repository or project configuration. API authentication keys should be managed through secure secret storage or environment-based credential mechanisms, not ordinary user configuration. \n\nStudy takeaway: Persisting personal editor theme preferences that follow an engineer across projects.; Saving a preferred Claude response language that applies to all repositories the engineer uses.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "User scope is for personal preferences across repositories, not centrally enforced policy or shared project resources.",
     "optionExplanations": {
-      "A": "Correct. User-scope configuration stores personal preferences that should follow an individual engineer across projects and repositories. Editor theme settings and a preferred Claude response language are user- specific choices, so they belong in that scope rather than being tied to one project. The wording of option A matches the intended solution.",
-      "B": "Correct. User-scope configuration stores personal preferences that should follow an individual engineer across projects and repositories. Editor theme settings and a preferred Claude response language are user- specific choices, so they belong in that scope rather than being tied to one project. The wording of option B matches the intended solution.",
-      "C": "Not selected. API authentication keys should be managed through secure secret storage or environment-based credential mechanisms, not ordinary user configuration. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. API authentication keys should be managed through secure secret storage or environment-based credential mechanisms, not ordinary user configuration. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. API authentication keys should be managed through secure secret storage or environment-based credential mechanisms, not ordinary user configuration. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — An engineer's editor preferences should follow that engineer rather than a repository.",
+      "B": "Correct — Personal language preferences can apply across projects without imposing them on teammates.",
+      "C": "Not selected — Company-wide mandatory settings belong in managed policy.",
+      "D": "Not selected — Repository-shared endpoints belong in project scope.",
+      "E": "Not selected — Keeping keys out of Git is necessary, but use approved credential storage or runtime injection rather than treating user settings as a secret store."
     },
     "reference": "CCAR-P practice PDF, Q117 (third-party answer key)",
     "tags": [
@@ -5219,13 +5219,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "D"
     ],
-    "explanation": "Identify team workflows, security boundaries, and ownership decisions first, because these requirements determine what the standardized configuration must control centrally versus at the project level. The project-scope baseline can then define the required MCP servers, permission rules, and subagents consistently for the pilot group. Training the entire organization, iterating from pilot feedback, and expanding rollout occur after the pilot has validated the initial configuration. \n\nStudy takeaway: Define the project-scope baseline covering Model Context Protocol (MCP) servers, permission rules, and subagents.; Identify the team workflows, security boundaries, and which decisions belong to managed configuration versus project scope.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Design the shared baseline and its security boundaries before testing it with a pilot group.",
     "optionExplanations": {
-      "A": "Correct. Identify team workflows, security boundaries, and ownership decisions first, because these requirements determine what the standardized configuration must control centrally versus at the project level. The project-scope baseline can then define the required MCP servers, permission rules, and subagents consistently for the pilot group. The wording of option A matches the intended solution.",
-      "B": "Not selected. Training the entire organization, iterating from pilot feedback, and expanding rollout occur after the pilot has validated the initial configuration. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Training the entire organization, iterating from pilot feedback, and expanding rollout occur after the pilot has validated the initial configuration. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Identify team workflows, security boundaries, and ownership decisions first, because these requirements determine what the standardized configuration must control centrally versus at the project level. The project-scope baseline can then define the required MCP servers, permission rules, and subagents consistently for the pilot group. The wording of option D matches the intended solution.",
-      "E": "Not selected. Training the entire organization, iterating from pilot feedback, and expanding rollout occur after the pilot has validated the initial configuration. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Defining project tools, permissions and subagents establishes the configuration to pilot.",
+      "B": "Not selected — Organization-wide onboarding should follow pilot validation, not precede it.",
+      "C": "Not selected — Broader rollout requires a stabilized baseline and pilot evidence.",
+      "D": "Correct — Workflow analysis and scope decisions determine which settings are shared or centrally enforced.",
+      "E": "Not selected — Iteration based on pilot findings necessarily comes after the pilot."
     },
     "reference": "CCAR-P practice PDF, Q118 (third-party answer key)",
     "tags": [
@@ -5263,12 +5263,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Tool Search defers MCP tool definitions until they are needed, rather than placing definitions for every available tool into the initial context. This preserves access to the full set of servers and tools while reducing the context consumed at session startup. Disabling servers removes capabilities, while adding instructions or more servers increases context pressure instead of addressing the tool-definition overhead.\n\nStudy takeaway: Enable Tool Search so tool definitions are deferred and discovered on demand rather than loaded into context upfront.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Defer loading tool definitions until the task requires them so the full capability catalog remains accessible.",
     "optionExplanations": {
-      "A": "Correct. Tool Search defers MCP tool definitions until they are needed, rather than placing definitions for every available tool into the initial context. This preserves access to the full set of servers and tools while reducing the context consumed at session startup. The wording of option A matches the intended solution.",
-      "B": "Not selected. Disabling servers removes capabilities, while adding instructions or more servers increases context pressure instead of addressing the tool-definition overhead. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Disabling servers removes capabilities, while adding instructions or more servers increases context pressure instead of addressing the tool-definition overhead. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Disabling servers removes capabilities, while adding instructions or more servers increases context pressure instead of addressing the tool-definition overhead. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Tool Search reduces initial tool-definition context while preserving on-demand discovery.",
+      "B": "Not selected — Disabling servers saves context by sacrificing the required capabilities.",
+      "C": "Not selected — Adding prompt text increases context usage and does not reduce tool definitions.",
+      "D": "Not selected — More servers increase the potential definition overhead rather than addressing it."
     },
     "reference": "CCAR-P practice PDF, Q119 (third-party answer key)",
     "tags": [
@@ -5306,12 +5306,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Project-scope.claude/settings.json and.mcp.json files committed to the repository provide a version- controlled, shared source of MCP server definitions. Every engineer who clones or updates the repository receives the same configuration automatically, and changes are reviewed and synchronized through normal source-control workflows. Personal home-directory settings and workstation environment variables are local to each engineer and require separate manual maintenance.\n\nStudy takeaway: project-scope.claude/settings.json and.mcp.json files committed to the repository. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Use repository-scoped MCP configuration for automatic distribution of repository-specific integrations.",
     "optionExplanations": {
-      "A": "Not selected. Personal home-directory settings and workstation environment variables are local to each engineer and require separate manual maintenance. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Personal home-directory settings and workstation environment variables are local to each engineer and require separate manual maintenance. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Project-scope.claude/settings.json and.mcp.json files committed to the repository provide a version- controlled, shared source of MCP server definitions. Every engineer who clones or updates the repository receives the same configuration automatically, and changes are reviewed and synchronized through normal source-control workflows. The wording of option C matches the intended solution.",
-      "D": "Not selected. Personal home-directory settings and workstation environment variables are local to each engineer and require separate manual maintenance. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Managed settings can distribute organization-wide policy but are broader than the repository-specific requirement.",
+      "B": "Not selected — Workstation variables require separate distribution and do not define a shared repository catalog by themselves.",
+      "C": "Correct — Committed project configuration, including the MCP definition file, keeps contributors aligned with the repository.",
+      "D": "Not selected — Personal settings require manual synchronization and can drift."
     },
     "reference": "CCAR-P practice PDF, Q120 (third-party answer key)",
     "tags": [
@@ -5349,12 +5349,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Many configured MCP servers can add substantial tool-definition text to a Claude Code session before the engineer sends any message. Without Tool Search, Claude loads the definitions for all available tools into the initial context, and a large collection of servers can therefore consume tens of thousands of tokens. Tool Search reduces this overhead by making tool definitions available on demand rather than placing every definition in the prompt upfront. Keyboard, display, and font settings do not affect model context usage.\n\nStudy takeaway: Many MCP servers are configured, each contributing tool definitions to the context budget; Tool Search is not enabled, so all definitions load upfront.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Investigate preloaded tool definitions and other startup context when token usage is already high before a user message.",
     "optionExplanations": {
-      "A": "Not selected. Keyboard, display, and font settings do not affect model context usage. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Many configured MCP servers can add substantial tool-definition text to a Claude Code session before the engineer sends any message. Without Tool Search, Claude loads the definitions for all available tools into the initial context, and a large collection of servers can therefore consume tens of thousands of tokens. The wording of option B matches the intended solution.",
-      "C": "Not selected. Keyboard, display, and font settings do not affect model context usage. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Keyboard, display, and font settings do not affect model context usage. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Keyboard layout does not load model context before input.",
+      "B": "Correct — Many eagerly loaded MCP schemas can consume substantial startup context; deferral reduces that overhead.",
+      "C": "Not selected — An unobservable personal preference of the model is not a plausible diagnostic explanation.",
+      "D": "Not selected — IDE display scaling affects rendering, not prompt token accounting."
     },
     "reference": "CCAR-P practice PDF, Q121 (third-party answer key)",
     "tags": [
@@ -5392,12 +5392,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Claude Code resolves configuration with managed settings at the top, followed by command-line arguments, then local project settings, shared project settings, and finally user settings. Managed settings come from organizational policy and cannot be overridden, so administrators can enforce security and compliance rules. Command-line arguments apply temporary overrides for a single session. Local settings in.claude/settings.local.json hold personal, uncommitted preferences for one repository and override the team-shared.claude/settings.json. User settings in ~/.claude/settings.json act as the broadest personal defaults, so they sit at the bottom. Orderings that place user or local settings above managed settings are wrong because they would let individuals bypass enforced policy. \n\nStudy takeaway: Managed → command-line arguments → local → project → user. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "For the scope hierarchy tested here, centrally enforced policy takes precedence, followed by invocation-specific and then local, project and user settings.",
     "optionExplanations": {
-      "A": "Not selected. Orderings that place user or local settings above managed settings are wrong because they would let individuals bypass enforced policy. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Orderings that place user or local settings above managed settings are wrong because they would let individuals bypass enforced policy. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Claude Code resolves configuration with managed settings at the top, followed by command-line arguments, then local project settings, shared project settings, and finally user settings. Managed settings come from organizational policy and cannot be overridden, so administrators can enforce security and compliance rules. The wording of option C matches the intended solution.",
-      "D": "Not selected. Orderings that place user or local settings above managed settings are wrong because they would let individuals bypass enforced policy. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Local settings cannot take priority over centrally managed policy.",
+      "B": "Not selected — Project and user settings cannot override managed or invocation-specific settings in the stated hierarchy.",
+      "C": "Correct — The ordering matches the intended highest-to-lowest precedence in the source question.",
+      "D": "Not selected — This reverses the hierarchy and would incorrectly permit personal preferences to override central policy."
     },
     "reference": "CCAR-P practice PDF, Q122 (third-party answer key)",
     "tags": [
@@ -5435,12 +5435,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Narrowly scoped Bash tool patterns enforce least-privilege access by permitting only the commands required for approved workflows. Explicit deny rules add protection for sensitive operations even when broader allow patterns might otherwise match. This reduces the risk of accidental destructive commands, credential exposure, or unauthorized system changes across projects. Unrestricted Bash access gives every developer a broad execution capability that is inappropriate for an enterprise-wide rollout. \n\nStudy takeaway: Replace unrestricted Bash with narrowly scoped tool patterns that allow only the specific commands the workflows require, and add explicit deny rules for sensitive operations.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Scope command permissions to necessary operations and explicitly restrict sensitive actions.",
     "optionExplanations": {
-      "A": "Not selected. Unrestricted Bash access gives every developer a broad execution capability that is inappropriate for an enterprise-wide rollout. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Unrestricted Bash access gives every developer a broad execution capability that is inappropriate for an enterprise-wide rollout. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Narrowly scoped Bash tool patterns enforce least-privilege access by permitting only the commands required for approved workflows. Explicit deny rules add protection for sensitive operations even when broader allow patterns might otherwise match. The wording of option C matches the intended solution.",
-      "D": "Not selected. Unrestricted Bash access gives every developer a broad execution capability that is inappropriate for an enterprise-wide rollout. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Expanding other tools merely increases the attack surface.",
+      "B": "Not selected — Unrestricted Bash is disproportionate to the workflows' defined needs.",
+      "C": "Correct — Specific allow patterns and deny rules reduce available authority while preserving required operations.",
+      "D": "Not selected — Eliminating permissions removes the enforcement boundary altogether."
     },
     "reference": "CCAR-P practice PDF, Q123 (third-party answer key)",
     "tags": [
@@ -5478,12 +5478,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Subagents that can read relevant repository files and use code-search tools generate documentation from the current implementation rather than from general model knowledge. This grounds descriptions, APIs, and examples in the code the team actually maintains. Sending the resulting changes through the normal review workflow preserves human oversight and established quality controls before publication.\n\nStudy takeaway: Configure subagents that read the relevant code files via filesystem and code-search tools, generate the documentation, and emit changes through the team’s normal review workflow.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Ground generated documentation in the current repository and submit changes through the existing review process.",
     "optionExplanations": {
-      "A": "Not selected. Sending the resulting changes through the normal review workflow preserves human oversight and established quality controls before publication. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Sending the resulting changes through the normal review workflow preserves human oversight and established quality controls before publication. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Subagents that can read relevant repository files and use code-search tools generate documentation from the current implementation rather than from general model knowledge. This grounds descriptions, APIs, and examples in the code the team actually maintains. The wording of option C matches the intended solution.",
-      "D": "Not selected. Sending the resulting changes through the normal review workflow preserves human oversight and established quality controls before publication. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Training-data recall cannot establish the current implementation details.",
+      "B": "Not selected — Direct publication bypasses the team's correctness and approval checks.",
+      "C": "Correct — Reading relevant code supplies evidence, and normal review lets maintainers verify generated documentation.",
+      "D": "Not selected — Disabling code-reading tools prevents grounding in the actual implementation."
     },
     "reference": "CCAR-P practice PDF, Q124 (third-party answer key)",
     "tags": [
@@ -5521,12 +5521,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "The MCP server listing command confirms whether the newly added server is actually registered and available to Claude Code. If it is registered but does not appear in the current session, reconnecting or restarting the session loads the updated configuration. This targeted check distinguishes a registration problem from a session-refresh issue without disrupting other configured tools.\n\nStudy takeaway: Verify the MCP server is registered using the listing command, then reconnect the session if needed, since configuration changes typically require a restart to take effect.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Verify registration and reload the relevant session before making disruptive changes.",
     "optionExplanations": {
-      "A": "Not selected. This targeted check distinguishes a registration problem from a session-refresh issue without disrupting other configured tools. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. This targeted check distinguishes a registration problem from a session-refresh issue without disrupting other configured tools. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. The MCP server listing command confirms whether the newly added server is actually registered and available to Claude Code. If it is registered but does not appear in the current session, reconnecting or restarting the session loads the updated configuration. The wording of option C matches the intended solution.",
-      "D": "Not selected. This targeted check distinguishes a registration problem from a session-refresh issue without disrupting other configured tools. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Disabling every server does not first establish whether the new server was registered.",
+      "B": "Not selected — Changing product families avoids rather than diagnoses the configuration issue.",
+      "C": "Correct — Listing registered servers checks the configuration; reconnecting can load changes into the active session.",
+      "D": "Not selected — Reinstalling the OS is disproportionate and destroys useful diagnostic state."
     },
     "reference": "CCAR-P practice PDF, Q125 (third-party answer key)",
     "tags": [
@@ -5564,12 +5564,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Scoping a customer-support agent's tools means keeping those required for its defined tasks plus those it uses frequently to avoid unnecessary hand-offs. Required tools let the agent complete its core work, and frequently used tools that reduce hand-offs directly improve resolution rates and user experience within the agent's actual role. Tools that are only occasionally useful for unrelated work, or that are kept for speculative future needs, widen the decision space and the attack surface, which can degrade tool selection and increase the risk of misuse. A strict \"required only\" approach goes too far, because it forces avoidable escalations for routine, recurring needs. A well-scoped configuration balances least privilege against practical, regular use.\n\nStudy takeaway: Categories 1 and 2 only, because they map to defined tasks and the agent’s regular hand- offs.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Retain tools that support defined work and recurring authorized handoffs; remove unrelated and speculative capabilities.",
     "optionExplanations": {
-      "A": "Not selected. A well-scoped configuration balances least privilege against practical, regular use. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. A well-scoped configuration balances least privilege against practical, regular use. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Scoping a customer-support agent's tools means keeping those required for its defined tasks plus those it uses frequently to avoid unnecessary hand-offs. Required tools let the agent complete its core work, and frequently used tools that reduce hand-offs directly improve resolution rates and user experience within the agent's actual role. The wording of option C matches the intended solution.",
-      "D": "Not selected. A well-scoped configuration balances least privilege against practical, regular use. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Keeping only indispensable tools may unnecessarily preserve frequent manual handoffs; the source treats category 2 as within scope.",
+      "B": "Not selected — Occasionally useful tools for unrelated work expand authority beyond the agent's purpose.",
+      "C": "Correct — Categories 1 and 2 support actual recurring responsibilities, provided each tool remains appropriately scoped.",
+      "D": "Not selected — Speculative access increases context cost and security exposure without a defined need."
     },
     "reference": "CCAR-P practice PDF, Q130 (third-party answer key)",
     "tags": [
@@ -5607,12 +5607,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "A zero-shot prompt that lists each category with its description and defines the required output format is the right starting point. When categories are well-defined and clearly described, the model has everything it needs to classify directly, so the simplest technique should be tried first and only made more complex if evaluation shows errors. Prompt chaining through a coarse grouping step adds latency, cost, and extra failure points without evidence that a single step falls short. Chain-of-thought suits multi-step reasoning, not a straightforward routing decision. Omitting descriptions forces the model to guess the label set, which produces inconsistent outputs.\n\nStudy takeaway: a zero-shot prompt that specifies the categories with their descriptions and the required output format. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Start with the simplest prompt that clearly defines the closed label set and output contract; add complexity only if evaluation warrants it.",
     "optionExplanations": {
-      "A": "Not selected. Omitting descriptions forces the model to guess the label set, which produces inconsistent outputs. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Omitting descriptions forces the model to guess the label set, which produces inconsistent outputs. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. A zero-shot prompt that lists each category with its description and defines the required output format is the right starting point. When categories are well-defined and clearly described, the model has everything it needs to classify directly, so the simplest technique should be tried first and only made more complex if evaluation shows errors. The wording of option C matches the intended solution.",
-      "D": "Not selected. Omitting descriptions forces the model to guess the label set, which produces inconsistent outputs. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Chaining adds an extra classification step before evidence shows it is needed.",
+      "B": "Not selected — Multi-step reasoning is unnecessary as the initial approach for a well-defined label-selection task.",
+      "C": "Correct — Explicit categories and output format make zero-shot classification a suitable baseline.",
+      "D": "Not selected — Without category descriptions, the model must infer a taxonomy that the system already defines."
     },
     "reference": "CCAR-P practice PDF, Q134 (third-party answer key)",
     "tags": [
@@ -5655,13 +5655,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "C"
     ],
-    "explanation": "Control A, an outbound tool allow-list with destination restrictions and per-call review, addresses unauthorized data leaving the system through tool invocations, because it limits which tools can be called, where their output can be sent, and lets reviewers inspect each call before data is transmitted. Control B, scoring responses against a stable adversarial evaluation set after each model-version change, addresses undetected behavioral regression, because a fixed benchmark lets the team compare results across versions and spot degraded safety or quality behavior. Swapping the pairings fails: an evaluation set measures behavior but does not block data from leaving through tools, and an allow-list constrains actions but reveals nothing about whether a new model version behaves worse. Prompt injection from retrieved content is mainly mitigated by treating retrieved data as untrusted input and separating it from instructions, not by an outbound allow-list alone.\n\nStudy takeaway: Control B -> undetected behavioral regression following a model change; Control A -> unauthorized data leaving the system through tool invocations. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Match each control to the failure it directly prevents or detects.",
     "optionExplanations": {
-      "A": "Correct. Control A, an outbound tool allow-list with destination restrictions and per-call review, addresses unauthorized data leaving the system through tool invocations, because it limits which tools can be called, where their output can be sent, and lets reviewers inspect each call before data is transmitted. Control B, scoring responses against a stable adversarial evaluation set after each model-version change, addresses undetected behavioral regression, because a fixed benchmark lets the team compare results across versions and spot degraded safety or quality behavior. The wording of option A matches the intended solution.",
-      "B": "Not selected. Prompt injection from retrieved content is mainly mitigated by treating retrieved data as untrusted input and separating it from instructions, not by an outbound allow-list alone. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Control A, an outbound tool allow-list with destination restrictions and per-call review, addresses unauthorized data leaving the system through tool invocations, because it limits which tools can be called, where their output can be sent, and lets reviewers inspect each call before data is transmitted. Control B, scoring responses against a stable adversarial evaluation set after each model-version change, addresses undetected behavioral regression, because a fixed benchmark lets the team compare results across versions and spot degraded safety or quality behavior. The wording of option C matches the intended solution.",
-      "D": "Not selected. Prompt injection from retrieved content is mainly mitigated by treating retrieved data as untrusted input and separating it from instructions, not by an outbound allow-list alone. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Prompt injection from retrieved content is mainly mitigated by treating retrieved data as untrusted input and separating it from instructions, not by an outbound allow-list alone. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — A stable adversarial benchmark detects behavioral changes after model upgrades.",
+      "B": "Not selected — Evaluation can detect unsafe behavior but does not directly restrict outbound data transfer.",
+      "C": "Correct — Destination restrictions and per-call review limit unauthorized data leaving through tools.",
+      "D": "Not selected — Outbound restrictions reduce some consequences of injection but do not directly prevent malicious retrieved instructions.",
+      "E": "Not selected — An outbound allow-list cannot measure version-related quality regression."
     },
     "reference": "CCAR-P practice PDF, Q135 (third-party answer key)",
     "tags": [
@@ -5699,12 +5699,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Risk-stratified sampling concentrates limited reviewer capacity where errors are most likely or most costly, so every low-confidence and high-impact output gets human review. A smaller random sample of high-confidence routine outputs is still checked, which catches calibration drift and systematic errors the model is confidently making. Universal review is ruled out because the volume makes it infeasible, and inverse sampling wastes effort on the safest outputs while letting the riskiest ones through unchecked. Relying only on user complaints is reactive, surfacing problems after harm has occurred and missing errors users never notice or report.\n\nStudy takeaway: risk-stratified sampling that reviews all low-confidence and high-impact outputs and a smaller random sample of high-confidence routine outputs. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Allocate scarce reviewer capacity according to risk while retaining random checks on routine outputs.",
     "optionExplanations": {
-      "A": "Correct. Risk-stratified sampling concentrates limited reviewer capacity where errors are most likely or most costly, so every low-confidence and high-impact output gets human review. A smaller random sample of high-confidence routine outputs is still checked, which catches calibration drift and systematic errors the model is confidently making. The wording of option A matches the intended solution.",
-      "B": "Not selected. Relying only on user complaints is reactive, surfacing problems after harm has occurred and missing errors users never notice or report. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Relying only on user complaints is reactive, surfacing problems after harm has occurred and missing errors users never notice or report. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Relying only on user complaints is reactive, surfacing problems after harm has occurred and missing errors users never notice or report. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Reviewing risky cases and sampling routine ones balances coverage with throughput.",
+      "B": "Not selected — Reviewing only high-confidence cases ignores the cases most likely to need intervention.",
+      "C": "Not selected — Reviewing every output violates the stated capacity constraint.",
+      "D": "Not selected — Complaints detect failures after users are affected and miss many silent errors."
     },
     "reference": "CCAR-P practice PDF, Q138 (third-party answer key)",
     "tags": [
@@ -5742,12 +5742,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Configuration Y is the better recommendation because the deployment's stated priorities rank accuracy above latency, and Configuration X gives up measured accuracy to gain speed. When priorities are explicitly ordered, a tradeoff that sacrifices the top priority for the secondary one goes against the requirements, however large the secondary gain. This matters especially for a compliance assistant, where wrong answers carry real risk. The options favoring X rely on general rules about latency outweighing accuracy, or treat a measured 2 percent drop as noise. Both set aside the deployment's own stated ranking and the evidence of a regression.\n\nStudy takeaway: Configuration Y, because the deployment’s stated priority is accuracy first, and Configuration X reduces measured accuracy.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Respect the deployment's explicit ordering of priorities rather than assuming latency gains justify accuracy loss.",
     "optionExplanations": {
-      "A": "Not selected. Both set aside the deployment's own stated ranking and the evidence of a regression. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Both set aside the deployment's own stated ranking and the evidence of a regression. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Both set aside the deployment's own stated ranking and the evidence of a regression. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Configuration Y is the better recommendation because the deployment's stated priorities rank accuracy above latency, and Configuration X gives up measured accuracy to gain speed. When priorities are explicitly ordered, a tradeoff that sacrifices the top priority for the secondary one goes against the requirements, however large the secondary gain. The wording of option D matches the intended solution."
+      "A": "Not selected — A general trade-off rule cannot override the stated accuracy-first requirement.",
+      "B": "Not selected — No evidence is given that the measured accuracy decline is within benchmark uncertainty.",
+      "C": "Not selected — Latency is expressly the secondary priority in this deployment.",
+      "D": "Correct — Y preserves measured accuracy; choose X only if stakeholders accept the measured quality trade-off."
     },
     "reference": "CCAR-P practice PDF, Q139 (third-party answer key)",
     "tags": [
@@ -5785,12 +5785,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Consistent escalation depends on criteria that are objective, observable, and tied to the actual risk of an automated decision: a confidence threshold below a defined level, high-impact decision categories, ambiguity flags raised by content classifiers, and the user's explicit request for review. A defined confidence threshold catches cases where the model itself is uncertain. High-impact categories make sure consequential decisions get human oversight even when confidence is high. Classifier-based ambiguity flags and explicit user requests add independent signals that the threshold alone might miss. Options built on case age, department, seniority, past complaints, or an engineer's personal preference rely on factors unrelated to decision quality or applied subjectively. That produces unpredictable and inequitable escalation outcomes.\n\nStudy takeaway: confidence threshold below a defined level, presence of high-impact decision categories, ambiguity flags raised by content classifiers, and the user’s explicit request for review. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Define objective, reproducible escalation triggers based on uncertainty, impact, ambiguity and user requests.",
     "optionExplanations": {
-      "A": "Not selected. That produces unpredictable and inequitable escalation outcomes. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. That produces unpredictable and inequitable escalation outcomes. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Consistent escalation depends on criteria that are objective, observable, and tied to the actual risk of an automated decision: a confidence threshold below a defined level, high-impact decision categories, ambiguity flags raised by content classifiers, and the user's explicit request for review. A defined confidence threshold catches cases where the model itself is uncertain. The wording of option C matches the intended solution.",
-      "D": "Not selected. That produces unpredictable and inequitable escalation outcomes. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Case age and department are not sufficient risk triggers; inconsistent use reduces reliability.",
+      "B": "Not selected — Complaints are retrospective, and seniority is not a substitute for objective risk criteria.",
+      "C": "Correct — Defined thresholds and impact categories make similar cases escalate consistently and preserve a human-review path.",
+      "D": "Not selected — A confidence threshold is useful, but personal preference and missing impact criteria leave inconsistent decisions."
     },
     "reference": "CCAR-P practice PDF, Q144 (third-party answer key)",
     "tags": [
@@ -5828,12 +5828,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Disclosing AI involvement directly to end users, consistent with the organization's transparency policy, and offering a documented path to a human is the practice that best supports responsible deployment. People whose interactions are materially shaped by AI have a legitimate interest in knowing that, so they can calibrate their trust and decide how to rely on the responses. A clear escalation route to a human matters when the AI cannot resolve an issue, makes an error, or handles a sensitive situation. Limiting disclosure to internal staff or treating the AI's role as confidential leaves users uninformed. A single notice buried in the signup terms of service rarely gives meaningful awareness at the moment of interaction.\n\nStudy takeaway: Disclose AI involvement to end users in line with the organization’s transparency policy and provide a documented path to reach a human when needed.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Disclose material AI involvement at an appropriate point and provide a practical route to human assistance.",
     "optionExplanations": {
-      "A": "Not selected. A single notice buried in the signup terms of service rarely gives meaningful awareness at the moment of interaction. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. A single notice buried in the signup terms of service rarely gives meaningful awareness at the moment of interaction. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Disclosing AI involvement directly to end users, consistent with the organization's transparency policy, and offering a documented path to a human is the practice that best supports responsible deployment. People whose interactions are materially shaped by AI have a legitimate interest in knowing that, so they can calibrate their trust and decide how to rely on the responses. The wording of option C matches the intended solution.",
-      "D": "Not selected. A single notice buried in the signup terms of service rarely gives meaningful awareness at the moment of interaction. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Internal-only disclosure does not inform the people affected by AI-generated responses.",
+      "B": "Not selected — A one-time terms-of-service notice may not provide meaningful awareness during later interactions.",
+      "C": "Correct — Clear disclosure plus a documented human escalation path supports informed use and accountability.",
+      "D": "Not selected — Refusing to explain AI involvement undermines transparency."
     },
     "reference": "CCAR-P practice PDF, Q158 (third-party answer key)",
     "tags": [
