@@ -51,7 +51,7 @@ function simulate(search, prefersReducedMotion) {
 const normal = simulate('', false);
 assert.equal(normal.calls.length, 2, 'Photo and stars move together');
 assert.ok(normal.calls.every(x => x.options.duration === 480000), 'Eight-minute one-way drift');
-assert.ok(normal.calls.every(x => x.options.easing === 'linear'), 'Constant nearly imperceptible speed');
+assert.ok(normal.calls.every(x => x.options.easing === 'steps(240, end)'), 'Constant sub-pixel stepped drift (no per-frame repaint)');
 assert.equal(normal.calls[0].frames[0].transform, 'translate3d(0.75vw,0,0) scale(1.035)');
 assert.equal(normal.calls[0].frames[1].transform, 'translate3d(-0.75vw,0,0) scale(1.035)');
 assert.equal(normal.calls[1].frames[0].transform, 'translate3d(0.75vw,0,0)');

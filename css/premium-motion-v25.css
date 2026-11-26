@@ -3,6 +3,12 @@
    text colors, so the existing palette and space background stay as they are. */
 :root{--pm-ease:cubic-bezier(.2,.8,.2,1);--pm-spring:cubic-bezier(.34,1.56,.64,1)}
 
+/* One typeface for the whole app: Outfit for titles and text. */
+:root{--glass-ui-font:"Outfit","Segoe UI",system-ui,sans-serif;--glass-title-font:"Outfit","Segoe UI",system-ui,sans-serif}
+/* The extra :not(#pm-x) ids raise specificity above the older theme layers. */
+body,#app:not(#pm-a):not(#pm-b),#app:not(#pm-a):not(#pm-b) *:not(code):not(pre):not(kbd):not(samp){font-family:"Outfit","Segoe UI",system-ui,sans-serif!important}
+body #app h1,body #app h2,body #app h3{letter-spacing:-.015em}
+
 /* Buttons: spring press, lift, sweeping shine, cursor light, ripple */
 #app .btn,#app .cosmos-landing button{position:relative;overflow:hidden;isolation:isolate;
   transition:transform .35s var(--pm-spring),box-shadow .3s var(--pm-ease),background-color .3s,border-color .3s,opacity .2s}
@@ -42,7 +48,7 @@
 /* Progress bars: animated fill plus a moving shine */
 #app .bar i,#app .cosmic-track-fill,#app .cosmos-track span{position:relative;overflow:hidden;transition:width .7s var(--pm-ease)}
 #app .bar i::after,#app .cosmic-track-fill::after{content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:pm-shine 2.6s infinite}
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:pm-shine 2.6s 2}
 @keyframes pm-shine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 
 /* Cards: cursor light and 3D tilt (tilt set from JS) */

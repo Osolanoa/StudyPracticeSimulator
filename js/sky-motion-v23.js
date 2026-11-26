@@ -14,6 +14,7 @@
 
   const DURATION_MS = 480000; // base duration at speed 1%
   const HALF_SHIFT_VW = 0.75; // 1.5vw total travel; speed never changes distance
+  const STEPS_PER_TRIP = 240;
   const SCALE = 1.035; // prevents exposed borders during movement
   const SPEED_KEY = 'study_sky_speed_percent';
   const DEFAULT_SPEED = 2; // 4 minutes/trip, between former too-slow and too-fast values
@@ -81,7 +82,10 @@
       duration: DURATION_MS,
       iterations: Infinity,
       direction: 'alternate',
-      easing: 'linear',
+      // 240 sub-pixel steps per trip (~0.1px each) instead of 60 updates per
+      // second. The drift looks identical, but blurred glass panels no longer
+      // have to be repainted every frame, which was the main CPU/GPU cost.
+      easing: 'steps(' + STEPS_PER_TRIP + ', end)',
       fill: 'both'
     };
     const photoFrames = [

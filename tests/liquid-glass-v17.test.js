@@ -15,7 +15,7 @@ assert.equal(allLinkOpens.length,completeLinkTags.length,
 for(const tag of completeLinkTags) {
   assert.equal((tag[0].match(/<link\b/gi)||[]).length,1,'No nested/malformed link tags');
 }
-assert.match(html,/family=Inter:[^"\n]*" rel="stylesheet">/,'Inter font tag must be correctly closed');
+assert.match(html,/family=Outfit:[^"\n]*" rel="stylesheet">/,'V26: Outfit font tag must be correctly closed');
 assert.ok(html.indexOf('liquid-glass-v17.css')>html.indexOf('clear-glass-v16.css'));
 assert.ok(html.includes('cosmic-lite.css'),'The original background asset is preserved');
 assert.ok(!/#cosmic-scene|\.cosmic-lite-photo|\.cosmic-mist|\.cosmic-sun|\.cosmic-body/.test(css),

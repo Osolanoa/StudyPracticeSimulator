@@ -8,7 +8,7 @@ const css=fs.readFileSync(path.join(root,'css/course-lightglass-v18.css'),'utf8'
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const old=fs.readFileSync(path.join(root,'css/premium-controls-v14.css'),'utf8');
 const cosmic=fs.readFileSync(path.join(root,'css/cosmic.css'),'utf8');
-assert.ok(index.includes('family=Inter:'));
+assert.ok(index.includes('family=Outfit:'),'V26: Outfit is the single loaded UI font');
 assert.ok(index.indexOf('course-lightglass-v18.css')>index.indexOf('liquid-glass-v17.css'));
 assert.ok(index.includes('cosmic-lite.css'),'Original wallpaper must stay loaded');
 assert.ok(css.includes('.cosmos-course h3') && css.includes('font-family:"Inter"'),
