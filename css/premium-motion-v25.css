@@ -1,0 +1,71 @@
+/* V25 premium motion layer.
+   Adds animation and interaction only: it never sets backgrounds, borders or
+   text colors, so the existing palette and space background stay as they are. */
+:root{--pm-ease:cubic-bezier(.2,.8,.2,1);--pm-spring:cubic-bezier(.34,1.56,.64,1)}
+
+/* Buttons: spring press, lift, sweeping shine, cursor light, ripple */
+#app .btn,#app .cosmos-landing button{position:relative;overflow:hidden;isolation:isolate;
+  transition:transform .35s var(--pm-spring),box-shadow .3s var(--pm-ease),background-color .3s,border-color .3s,opacity .2s}
+#app .btn:hover:not(:disabled){transform:translateY(-2px)}
+#app .btn:active:not(:disabled),#app .cosmos-landing button:active{transform:translateY(0) scale(.96)}
+#app .btn::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%);transform:translateX(-120%)}
+#app .btn:hover:not(:disabled)::after{transform:translateX(120%);transition:transform .8s var(--pm-ease)}
+#app .btn::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(120px circle at var(--pm-x,50%) var(--pm-y,50%),rgba(255,255,255,.14),transparent 70%)}
+#app .btn:hover:not(:disabled)::before{opacity:1}
+.pm-ripple{position:absolute;border-radius:50%;background:rgba(255,255,255,.35);transform:scale(0);pointer-events:none;z-index:0;animation:pm-ripple .6s var(--pm-ease) forwards}
+@keyframes pm-ripple{to{transform:scale(4);opacity:0}}
+
+/* Screen transitions and staggered entrance (only when the screen or question changes) */
+@keyframes pm-rise{from{opacity:.001;transform:translateY(14px)}}
+#app.pm-enter .content>*,#app.pm-enter .landing>*,#app.pm-enter .cosmos-landing section{animation:pm-rise .55s var(--pm-ease) both}
+#app.pm-enter .content>*:nth-child(2){animation-delay:.05s}
+#app.pm-enter .content>*:nth-child(3){animation-delay:.1s}
+#app.pm-enter .content>*:nth-child(n+4){animation-delay:.15s}
+#app.pm-enter .card,#app.pm-enter .cosmos-course{animation:pm-rise .55s var(--pm-ease) both}
+#app.pm-enter .option{animation:pm-rise .45s var(--pm-ease) both}
+#app.pm-enter .option:nth-child(2){animation-delay:.05s}
+#app.pm-enter .option:nth-child(3){animation-delay:.1s}
+#app.pm-enter .option:nth-child(4){animation-delay:.15s}
+#app.pm-enter .option:nth-child(n+5){animation-delay:.2s}
+
+/* Answer options */
+#app .option{transition:transform .3s var(--pm-ease),background-color .3s,border-color .3s,box-shadow .3s}
+#app .option:hover:not(:disabled){transform:translateX(3px)}
+#app .option:active:not(:disabled){transform:scale(.985)}
+#app .option.pm-correct{animation:pm-glow 1s var(--pm-ease)}
+#app .option.pm-wrong{animation:pm-shake .45s}
+@keyframes pm-glow{0%{box-shadow:0 0 0 0 rgba(70,214,160,.55)}100%{box-shadow:0 0 0 14px rgba(70,214,160,0)}}
+@keyframes pm-shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+
+/* Progress bars: animated fill plus a moving shine */
+#app .bar i,#app .cosmic-track-fill,#app .cosmos-track span{position:relative;overflow:hidden;transition:width .7s var(--pm-ease)}
+#app .bar i::after,#app .cosmic-track-fill::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);animation:pm-shine 2.6s infinite}
+@keyframes pm-shine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
+/* Cards: cursor light and 3D tilt (tilt set from JS) */
+#app .card,#app .cosmos-course{transition:transform .4s var(--pm-ease),border-color .3s,box-shadow .3s}
+#app .cosmos-course{position:relative}
+#app .pm-light{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;z-index:1;
+  background:radial-gradient(260px circle at var(--pm-x,50%) var(--pm-y,50%),rgba(255,255,255,.08),transparent 70%)}
+#app .cosmos-course:hover .pm-light{opacity:1}
+
+/* Score count-up target and confetti canvas */
+.pm-score{font-variant-numeric:tabular-nums}
+#pm-confetti{position:fixed;inset:0;pointer-events:none;z-index:9999}
+
+/* Fine details */
+::selection{background:rgba(140,180,255,.35)}
+html{scrollbar-color:rgba(200,215,240,.25) transparent}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:rgba(200,215,240,.22);border-radius:99px;border:2px solid transparent;background-clip:padding-box}
+::-webkit-scrollbar-track{background:transparent}
+
+@media (hover:none){#app .btn:hover:not(:disabled),#app .option:hover:not(:disabled){transform:none}}
+@media (prefers-reduced-motion:reduce){
+  #app .btn,#app .option,#app .card,#app .cosmos-course,#app .btn::after,#app .bar i,#app .cosmic-track-fill{transition:none!important}
+  #app.pm-enter *,#app .option.pm-correct,#app .option.pm-wrong,#app .bar i::after,#app .cosmic-track-fill::after,.pm-ripple{animation:none!important}
+  #app .btn:hover:not(:disabled),#app .option:hover:not(:disabled){transform:none}
+}
