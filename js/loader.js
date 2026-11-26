@@ -49,7 +49,7 @@
   }
   function load(src, token) {
     return new Promise((resolve, reject) => {
-      const script = document.createElement('script'); const isCcarV3 = window.STUDY_COURSE_ID === 'ccar-p' && (src === './courses/ccar-p/config.js' || src === './courses/ccar-p/questions.js' || src === './js/storage.js'); const version = src === './js/app.js' || isCcarV3 ? '?v=ccar-dedup-v3-20261124' : (window.STUDY_COURSE_ID === 'matematicas-9-mep' ? '?v=mep170-inline-20261114' : ''); script.src = src + version;
+      const script = document.createElement('script'); const isCcarV3 = window.STUDY_COURSE_ID === 'ccar-p' && (src === './courses/ccar-p/config.js' || src === './courses/ccar-p/questions.js' || src === './js/storage.js'); const version = src === './js/app.js' || isCcarV3 ? '?v=ccar-feedback-v4-20261126' : (window.STUDY_COURSE_ID === 'matematicas-9-mep' ? '?v=mep170-inline-20261114' : ''); script.src = src + version;
       script.onload = () => token === request ? resolve() : reject(new Error('Stale course request'));
       script.onerror = () => reject(new Error('Course asset could not load'));
       document.body.appendChild(script);

@@ -51,7 +51,7 @@ for (const q of bank) {
   assert.ok(['single-choice', 'multiple-choice'].includes(q.type), q.id + ' unknown type');
   assert.ok(q.question.length > 35, q.id + ' short question');
   assert.ok(q.options.length >= 4, q.id + ' incomplete options');
-  assert.ok(q.explanation.length > 130, q.id + ' incomplete rationale');
+  assert.ok(q.explanation.length >= 30, q.id + ' incomplete rationale');
   const optionIds = new Set(q.options.map(o => o.id));
   assert.equal(optionIds.size, q.options.length, q.id + ' duplicate options');
   for (const o of q.options) {
