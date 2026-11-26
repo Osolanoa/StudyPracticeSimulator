@@ -3631,12 +3631,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Acknowledging the request, stating its scope and timeline implications openly, and offering concrete options such as deferral, descoping other work, or extending the timeline is the approach that best balances stakeholder needs with delivery reality. It treats the stakeholder's underlying need as legitimate while making the trade-offs explicit, so the decision rests with the person who owns the business priority. Silently absorbing the change creates hidden risk that later surfaces as missed dates and eroded trust. Refusing outright protects the plan but ignores the need behind the request. Concealing it from the team undermines coordination.\n\nStudy takeaway: Acknowledge the request, name the scope and timeline implications transparently, and propose options (defer, descope something else, or extend the timeline) for the stakeholder to choose.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Make the cost of additional scope explicit and offer choices that address the underlying need.",
     "optionExplanations": {
-      "A": "Not selected. Concealing it from the team undermines coordination. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Acknowledging the request, stating its scope and timeline implications openly, and offering concrete options such as deferral, descoping other work, or extending the timeline is the approach that best balances stakeholder needs with delivery reality. It treats the stakeholder's underlying need as legitimate while making the trade-offs explicit, so the decision rests with the person who owns the business priority. The wording of option B matches the intended solution.",
-      "C": "Not selected. Concealing it from the team undermines coordination. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Concealing it from the team undermines coordination. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Concealment prevents the team from planning capacity and creates surprise delays.",
+      "B": "Correct — Transparent trade-offs let stakeholders choose between scope, timing and deferral.",
+      "C": "Not selected — An outright refusal ignores the need and available alternatives.",
+      "D": "Not selected — Accepting scope without adjusting constraints hides the real delivery impact."
     },
     "reference": "CCAR-P practice PDF, Q83 (third-party answer key)",
     "tags": [
@@ -3679,13 +3679,13 @@ window.COURSE_QUESTIONS = [
       "D",
       "E"
     ],
-    "explanation": "A regular cadence for revisiting expectations and assumptions keeps stakeholders aligned as project conditions, priorities, and constraints change. Explicitly reconciling divergent positions surfaces trade- offs and produces shared decisions instead of allowing unresolved conflict to reappear later. Recording sessions can improve communication, but it does not itself create alignment. Escalation or rotating facilitation may sometimes be useful, but neither replaces ongoing expectation review and direct resolution of differences.\n\nStudy takeaway: Set a regular cadence for revisiting expectations and assumptions as conditions evolve over time.; Reconcile divergent stakeholder positions explicitly rather than papering over them in the moment.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Expectation alignment is continuous and requires explicitly resolving differences.",
     "optionExplanations": {
-      "A": "Not selected. Escalation or rotating facilitation may sometimes be useful, but neither replaces ongoing expectation review and direct resolution of differences. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Escalation or rotating facilitation may sometimes be useful, but neither replaces ongoing expectation review and direct resolution of differences. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Escalation or rotating facilitation may sometimes be useful, but neither replaces ongoing expectation review and direct resolution of differences. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. A regular cadence for revisiting expectations and assumptions keeps stakeholders aligned as project conditions, priorities, and constraints change. Explicitly reconciling divergent positions surfaces trade- offs and produces shared decisions instead of allowing unresolved conflict to reappear later. The wording of option D matches the intended solution.",
-      "E": "Correct. A regular cadence for revisiting expectations and assumptions keeps stakeholders aligned as project conditions, priorities, and constraints change. Explicitly reconciling divergent positions surfaces trade- offs and produces shared decisions instead of allowing unresolved conflict to reappear later. The wording of option E matches the intended solution."
+      "A": "Not selected — Recordings help absent participants but do not establish recurring alignment or resolution.",
+      "B": "Not selected — Escalation is useful when necessary, not the default for every disagreement.",
+      "C": "Not selected — Rotating facilitators may encourage participation but does not itself reconcile expectations.",
+      "D": "Correct — A regular cadence catches changed assumptions before they become delivery surprises.",
+      "E": "Correct — Explicitly resolving differences exposes conflicting priorities and enables agreement."
     },
     "reference": "CCAR-P practice PDF, Q84 (third-party answer key)",
     "tags": [
@@ -3723,12 +3723,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "A useful operational runbook gives on-call engineers actionable guidance throughout an incident. It documents common alerts, how to triage them, when and how to escalate, and how to safely roll back a problematic change. Links to relevant dashboards and logs provide the evidence needed to diagnose service behavior quickly. References alone or partial procedures leave responders without enough information to manage incidents consistently.\n\nStudy takeaway: Common alerts and their triage steps, escalation paths, rollback procedures, and references to the relevant dashboards and logs.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "An on-call engineer needs the complete path from detecting a problem through triage, escalation and recovery.",
     "optionExplanations": {
-      "A": "Not selected. References alone or partial procedures leave responders without enough information to manage incidents consistently. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. A useful operational runbook gives on-call engineers actionable guidance throughout an incident. It documents common alerts, how to triage them, when and how to escalate, and how to safely roll back a problematic change. The wording of option B matches the intended solution.",
-      "C": "Not selected. References alone or partial procedures leave responders without enough information to manage incidents consistently. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. References alone or partial procedures leave responders without enough information to manage incidents consistently. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Dashboards show signals but do not tell the operator how to respond.",
+      "B": "Correct — Alerts, diagnostic steps, escalation, rollback and evidence links make incident response actionable.",
+      "C": "Not selected — Triage without escalation or recovery instructions leaves the operator without a resolution path.",
+      "D": "Not selected — Recovery instructions alone do not explain how to identify or investigate the incident."
     },
     "reference": "CCAR-P practice PDF, Q85 (third-party answer key)",
     "tags": [
@@ -3766,12 +3766,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Implementation guidance for a delivery team must be detailed enough to build, configure, integrate, and operate the solution consistently. Component responsibilities and interface contracts define ownership and integration boundaries, while sequence diagrams clarify how major workflows behave across components. Configuration parameters and defaults make deployments repeatable, and operational runbooks prepare the team to support common operational tasks. Higher-level architecture descriptions alone do not provide the actionable detail needed for implementation.\n\nStudy takeaway: Component responsibilities, contracts between components, sequence diagrams of the dominant flows, configuration parameters with defaults, and operational runbooks.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "An implementation guide must translate architecture into specific interfaces, configuration and executable operational guidance.",
     "optionExplanations": {
-      "A": "Correct. Implementation guidance for a delivery team must be detailed enough to build, configure, integrate, and operate the solution consistently. Component responsibilities and interface contracts define ownership and integration boundaries, while sequence diagrams clarify how major workflows behave across components. The wording of option A matches the intended solution.",
-      "B": "Not selected. Higher-level architecture descriptions alone do not provide the actionable detail needed for implementation. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Higher-level architecture descriptions alone do not provide the actionable detail needed for implementation. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Higher-level architecture descriptions alone do not provide the actionable detail needed for implementation. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Responsibilities, contracts, flows, defaults and runbooks provide enough detail to build and operate the system.",
+      "B": "Not selected — Contracts alone omit interaction sequences, configuration and operations.",
+      "C": "Not selected — Overview and sequences help understanding but omit precise implementation interfaces and operational guidance.",
+      "D": "Not selected — High-level descriptions and limitations do not specify how to implement the design."
     },
     "reference": "CCAR-P practice PDF, Q86 (third-party answer key)",
     "tags": [
@@ -3809,12 +3809,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Decomposing a vague request through targeted questioning turns \"fix our customer escalations\" into requirements a team can actually design against. Asking who escalates and what triggers escalation identifies the actors and entry points. Defining what good resolution looks like supplies measurable success criteria. Surfacing constraints such as latency, cost, audit needs, and data sensitivity shapes the architecture before any build begins. Accepting the sponsor's phrasing as final, or reusing assumptions from a past engagement in another industry, skips this validation and risks building a system that solves the wrong problem.\n\nStudy takeaway: Decompose the request by asking targeted questions about who escalates, what triggers escalation, what good resolution looks like, and which constraints (latency, cost, audit, data sensitivity) apply.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Turn a vague solution request into a measurable problem by identifying actors, triggers, outcomes and constraints.",
     "optionExplanations": {
-      "A": "Not selected. Accepting the sponsor's phrasing as final, or reusing assumptions from a past engagement in another industry, skips this validation and risks building a system that solves the wrong problem. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Decomposing a vague request through targeted questioning turns \"fix our customer escalations\" into requirements a team can actually design against. Asking who escalates and what triggers escalation identifies the actors and entry points. The wording of option B matches the intended solution.",
-      "C": "Not selected. Accepting the sponsor's phrasing as final, or reusing assumptions from a past engagement in another industry, skips this validation and risks building a system that solves the wrong problem. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Accepting the sponsor's phrasing as final, or reusing assumptions from a past engagement in another industry, skips this validation and risks building a system that solves the wrong problem. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — The sponsor's broad request does not specify a problem that engineers can design or evaluate.",
+      "B": "Correct — Targeted discovery establishes the workflow, success criteria and non-functional requirements.",
+      "C": "Not selected — Discovery is the mechanism for resolving uncertainty; it should not wait for a complete specification.",
+      "D": "Not selected — A previous engagement may differ in users, risk and constraints; assumptions must be validated."
     },
     "reference": "CCAR-P practice PDF, Q87 (third-party answer key)",
     "tags": [
@@ -3852,12 +3852,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "A p95 latency target under 800 milliseconds at the expected request volume defines a performance constraint rather than a system capability. It specifies how quickly the system must operate for most requests under load, which is a non-functional quality attribute. The other options describe functional behaviors: extracting fields, drafting editable responses, and classifying tickets.\n\nStudy takeaway: The system must respond at p95 latency under 800 milliseconds at the expected request volume.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Functional requirements describe what the system does; non-functional requirements specify how well or under what constraints it operates.",
     "optionExplanations": {
-      "A": "Not selected. The other options describe functional behaviors: extracting fields, drafting editable responses, and classifying tickets. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. The other options describe functional behaviors: extracting fields, drafting editable responses, and classifying tickets. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. The other options describe functional behaviors: extracting fields, drafting editable responses, and classifying tickets. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. A p95 latency target under 800 milliseconds at the expected request volume defines a performance constraint rather than a system capability. It specifies how quickly the system must operate for most requests under load, which is a non-functional quality attribute. The wording of option D matches the intended solution."
+      "A": "Not selected — Extracting fields and populating records defines a system capability.",
+      "B": "Not selected — Producing editable drafts describes a required workflow behavior.",
+      "C": "Not selected — Classifying tickets describes an operation the system performs.",
+      "D": "Correct — A p95 response-time target specifies measurable performance at a stated load."
     },
     "reference": "CCAR-P practice PDF, Q88 (third-party answer key)",
     "tags": [
@@ -3900,13 +3900,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "E"
     ],
-    "explanation": "Measured p50 and p95 latency baselines give stakeholders an objective view of typical and worst-case response times relative to the agreed SLA. This replaces assumptions with shared evidence and clarifies whether the system is meeting its commitments. If production constraints make the existing target unrealistic, collaboratively revising the SLA aligns expectations with feasible performance and documented trade-offs. Halting development or changing models without evaluation does not establish agreement on acceptable latency.\n\nStudy takeaway: Present measured p50 and p95 latency baselines against the agreed SLA thresholds so stakeholders have accurate data.; Revise the SLA definition collaboratively with stakeholders if current targets are not achievable given production constraints.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Use measured latency to align expectations and agree on feasible commitments before making architectural changes.",
     "optionExplanations": {
-      "A": "Correct. Measured p50 and p95 latency baselines give stakeholders an objective view of typical and worst-case response times relative to the agreed SLA. This replaces assumptions with shared evidence and clarifies whether the system is meeting its commitments. The wording of option A matches the intended solution.",
-      "B": "Not selected. Halting development or changing models without evaluation does not establish agreement on acceptable latency. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Halting development or changing models without evaluation does not establish agreement on acceptable latency. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Halting development or changing models without evaluation does not establish agreement on acceptable latency. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Measured p50 and p95 latency baselines give stakeholders an objective view of typical and worst-case response times relative to the agreed SLA. This replaces assumptions with shared evidence and clarifies whether the system is meeting its commitments. The wording of option E matches the intended solution."
+      "A": "Correct — Comparing p50 and p95 with the agreed targets makes the discussion evidence-based.",
+      "B": "Not selected — Stopping all other work is premature without analyzing the gap or stakeholder priorities.",
+      "C": "Not selected — Attributing everything to inherent LLM limitations avoids evaluating the architecture's actual constraints.",
+      "D": "Not selected — Switching models without evaluation may introduce quality or cost regressions.",
+      "E": "Correct — Collaboratively revising an infeasible SLA establishes a realistic, explicit commitment."
     },
     "reference": "CCAR-P practice PDF, Q89 (third-party answer key)",
     "tags": [
@@ -3944,12 +3944,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "An effective architecture presentation begins with the decision, its business value, and the trade-offs it accepts, giving the executive sponsor the context needed to approve and support it. It then provides technical rationale, considered alternatives, and implementation implications so engineering leads can validate and execute the decision. This layered structure serves different information needs without omitting essential context for either audience.\n\nStudy takeaway: Lead with the decision, the business outcomes it serves, and the trade-offs accepted; follow with the technical rationale, alternatives, and implementation implications for the engineering audience.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Lead with the decision and its business implications, then provide the technical depth implementers need.",
     "optionExplanations": {
-      "A": "Not selected. This layered structure serves different information needs without omitting essential context for either audience. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. An effective architecture presentation begins with the decision, its business value, and the trade-offs it accepts, giving the executive sponsor the context needed to approve and support it. It then provides technical rationale, considered alternatives, and implementation implications so engineering leads can validate and execute the decision. The wording of option B matches the intended solution.",
-      "C": "Not selected. This layered structure serves different information needs without omitting essential context for either audience. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. This layered structure serves different information needs without omitting essential context for either audience. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Low-level details alone do not answer the sponsor's strategic questions.",
+      "B": "Correct — A layered presentation addresses business trade-offs first and implementation rationale afterward.",
+      "C": "Not selected — Announcing the result without rationale prevents informed review and implementation.",
+      "D": "Not selected — An undifferentiated narrative makes both audiences search for the information relevant to them."
     },
     "reference": "CCAR-P practice PDF, Q90 (third-party answer key)",
     "tags": [
@@ -3987,12 +3987,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "The recommendation leads with the architectural decision so the committee can quickly understand what approval is being requested. It then addresses the CFO’s cost, return, and financial-risk concerns, the general counsel’s legal, privacy, and compliance requirements, and the CIO’s technical integration, security, and operational considerations. This stakeholder-oriented structure makes the rationale relevant to each decision-maker while keeping all parties aligned on one recommendation. Starting with technical detail or cost projections alone can obscure the business decision and fail to address the committee’s broader concerns.\n\nStudy takeaway: Lead with the architectural decision, then address each stakeholder’s primary concerns directly.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Structure the recommendation around the decision and each executive's distinct concerns.",
     "optionExplanations": {
-      "A": "Not selected. Starting with technical detail or cost projections alone can obscure the business decision and fail to address the committee’s broader concerns. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Starting with technical detail or cost projections alone can obscure the business decision and fail to address the committee’s broader concerns. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Starting with technical detail or cost projections alone can obscure the business decision and fail to address the committee’s broader concerns. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. The recommendation leads with the architectural decision so the committee can quickly understand what approval is being requested. It then addresses the CFO’s cost, return, and financial-risk concerns, the general counsel’s legal, privacy, and compliance requirements, and the CIO’s technical integration, security, and operational considerations. The wording of option D matches the intended solution."
+      "A": "Not selected — A diagram may support the CIO but is not the most useful opening for the whole committee.",
+      "B": "Not selected — Cost detail matters to the CFO but does not address legal or technical decision criteria by itself.",
+      "C": "Not selected — Uniform depth makes the recommendation less accessible to different stakeholders.",
+      "D": "Correct — Lead with the decision, then address financial value, legal risk and technical feasibility separately."
     },
     "reference": "CCAR-P practice PDF, Q91 (third-party answer key)",
     "tags": [
@@ -4030,12 +4030,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "An architecture overview, ADRs, and component contracts give the implementation team the intended system structure, key decisions, and integration expectations. An evaluation framework with a reference set provides a repeatable way to validate Claude behavior and quality during delivery. Runbooks, an on-call playbook, and a known-limitations register prepare operational teams to support, troubleshoot, and safely evolve the deployment. Slides, verbal handoffs, or source code alone do not provide the documented technical and operational context needed for a reliable transition.\n\nStudy takeaway: Architecture overview, ADRs, component contracts, evaluation framework with reference set, runbooks, on-call playbook, and known limitations.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A clean handoff requires enough design, evaluation and operational evidence for the next team to act independently.",
     "optionExplanations": {
-      "A": "Not selected. Slides, verbal handoffs, or source code alone do not provide the documented technical and operational context needed for a reliable transition. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Slides, verbal handoffs, or source code alone do not provide the documented technical and operational context needed for a reliable transition. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. An architecture overview, ADRs, and component contracts give the implementation team the intended system structure, key decisions, and integration expectations. An evaluation framework with a reference set provides a repeatable way to validate Claude behavior and quality during delivery. The wording of option C matches the intended solution.",
-      "D": "Not selected. Slides, verbal handoffs, or source code alone do not provide the documented technical and operational context needed for a reliable transition. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Slides may summarize design but omit actionable contracts, tests and operating instructions.",
+      "B": "Not selected — A verbal walkthrough is not a durable source of implementation or operational guidance.",
+      "C": "Correct — Contracts and evaluation define build and quality expectations; ADRs and runbooks preserve rationale and operational knowledge.",
+      "D": "Not selected — Code alone cannot explain all design decisions, acceptance criteria or operational procedures."
     },
     "reference": "CCAR-P practice PDF, Q92 (third-party answer key)",
     "tags": [
@@ -4073,12 +4073,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Facilitating structured discovery establishes the business decision, customer journey, and measurable outcome before solution design begins. A vague goal such as improving customer experience does not provide enough information to select an appropriate AI capability, define success, or evaluate risk. Discovery aligns the sponsor and delivery team on the problem to solve and the metric that will demonstrate value. Prototyping or imposing a scope based on assumptions risks building a solution that addresses the wrong need. \n\nStudy takeaway: Facilitate a structured discovery to define the failing decision and the target metric.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Do not delegate an undefined decision to AI: establish the failing workflow and measurable outcome first.",
     "optionExplanations": {
-      "A": "Not selected. Prototyping or imposing a scope based on assumptions risks building a solution that addresses the wrong need. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Prototyping or imposing a scope based on assumptions risks building a solution that addresses the wrong need. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Prototyping or imposing a scope based on assumptions risks building a solution that addresses the wrong need. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Facilitating structured discovery establishes the business decision, customer journey, and measurable outcome before solution design begins. A vague goal such as improving customer experience does not provide enough information to select an appropriate AI capability, define success, or evaluate risk. The wording of option D matches the intended solution."
+      "A": "Not selected — Sending the request back avoids helping the sponsor turn it into usable requirements.",
+      "B": "Not selected — A generic prototype can optimize a problem the sponsor does not actually have.",
+      "C": "Not selected — Committing to assumptions risks solving the wrong customer journey.",
+      "D": "Correct — Structured discovery defines the decision, scope and target metric before architecture work."
     },
     "reference": "CCAR-P practice PDF, Q93 (third-party answer key)",
     "tags": [
@@ -4121,13 +4121,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "D"
     ],
-    "explanation": "Carrying the same evaluation framework and reference set across iterations preserves consistent quality criteria, making results comparable as the system evolves. Capturing lessons learned at each phase boundary also creates a feedback loop, so later work benefits from earlier outcomes, failures, and refinements. Archiving deliverables preserves history but does not actively support continuity in subsequent phases. Locking early decisions prevents the adaptation that iterative deployment practices require. \n\nStudy takeaway: Carry the evaluation framework and reference set forward across iterations rather than rebuilding each time.; Capture lessons learned at the end of each phase and surface them as inputs to the next phase.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Preserve the evidence used to evaluate changes and transfer learning from one phase to the next.",
     "optionExplanations": {
-      "A": "Not selected. Locking early decisions prevents the adaptation that iterative deployment practices require. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Carrying the same evaluation framework and reference set across iterations preserves consistent quality criteria, making results comparable as the system evolves. Capturing lessons learned at each phase boundary also creates a feedback loop, so later work benefits from earlier outcomes, failures, and refinements. The wording of option B matches the intended solution.",
-      "C": "Not selected. Locking early decisions prevents the adaptation that iterative deployment practices require. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Carrying the same evaluation framework and reference set across iterations preserves consistent quality criteria, making results comparable as the system evolves. Capturing lessons learned at each phase boundary also creates a feedback loop, so later work benefits from earlier outcomes, failures, and refinements. The wording of option D matches the intended solution.",
-      "E": "Not selected. Locking early decisions prevents the adaptation that iterative deployment practices require. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Stakeholder notifications are useful but do not ensure technical or evaluation continuity.",
+      "B": "Correct — Reusing the reference set preserves comparable evidence across iterations.",
+      "C": "Not selected — Archiving artifacts preserves records but does not necessarily apply their learning to future work.",
+      "D": "Correct — Lessons carried into the next phase prevent repeated mistakes and inform subsequent choices.",
+      "E": "Not selected — Locking early decisions prevents adaptation when evidence or constraints change."
     },
     "reference": "CCAR-P practice PDF, Q94 (third-party answer key)",
     "tags": [
@@ -4165,12 +4165,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "When new requirements cannot be met without changing component responsibilities or core contracts, the deployment has crossed beyond routine iteration into architectural change. Responsibilities, interfaces, and contracts define how system components interact, so altering them requires reconsidering the design as a whole. Documentation edits, alert tuning, and localized copy changes are bounded operational or content updates that preserve the existing architecture.\n\nStudy takeaway: The system’s current architecture cannot meet the new requirements without changes to component responsibilities or core contracts.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Re-enter design when the architecture itself cannot satisfy requirements without changing core responsibilities or contracts.",
     "optionExplanations": {
-      "A": "Not selected. Documentation edits, alert tuning, and localized copy changes are bounded operational or content updates that preserve the existing architecture. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Documentation edits, alert tuning, and localized copy changes are bounded operational or content updates that preserve the existing architecture. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Documentation edits, alert tuning, and localized copy changes are bounded operational or content updates that preserve the existing architecture. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. When new requirements cannot be met without changing component responsibilities or core contracts, the deployment has crossed beyond routine iteration into architectural change. Responsibilities, interfaces, and contracts define how system components interact, so altering them requires reconsidering the design as a whole. The wording of option D matches the intended solution."
+      "A": "Not selected — A clarification is a documentation change within the existing design.",
+      "B": "Not selected — Threshold adjustment is an operational tuning change.",
+      "C": "Not selected — A minor copy change does not alter architectural responsibilities.",
+      "D": "Correct — Changing core contracts or component boundaries requires renewed architectural analysis."
     },
     "reference": "CCAR-P practice PDF, Q95 (third-party answer key)",
     "tags": [
@@ -4213,13 +4213,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "D"
     ],
-    "explanation": "Strong architectural-decision communication records who owns the decision and when it will be revisited if assumptions, constraints, or business conditions change. It also documents the alternatives considered and the evaluation criteria, making the rationale transparent and allowing future reviewers to understand trade-offs. Omitting rejected alternatives removes important context, while mandatory forums and visual-template consistency may help process but do not by themselves establish decision quality or traceability.\n\nStudy takeaway: Ownership and review cadence for revisiting the decision when conditions or assumptions change.; Alternatives considered along with the criteria that were used to evaluate each alternative.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A strong decision record explains alternatives and criteria and establishes how the decision will be revisited.",
     "optionExplanations": {
-      "A": "Correct. Strong architectural-decision communication records who owns the decision and when it will be revisited if assumptions, constraints, or business conditions change. It also documents the alternatives considered and the evaluation criteria, making the rationale transparent and allowing future reviewers to understand trade-offs. The wording of option A matches the intended solution.",
-      "B": "Not selected. Omitting rejected alternatives removes important context, while mandatory forums and visual-template consistency may help process but do not by themselves establish decision quality or traceability. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Omitting rejected alternatives removes important context, while mandatory forums and visual-template consistency may help process but do not by themselves establish decision quality or traceability. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Strong architectural-decision communication records who owns the decision and when it will be revisited if assumptions, constraints, or business conditions change. It also documents the alternatives considered and the evaluation criteria, making the rationale transparent and allowing future reviewers to understand trade-offs. The wording of option D matches the intended solution.",
-      "E": "Not selected. Omitting rejected alternatives removes important context, while mandatory forums and visual-template consistency may help process but do not by themselves establish decision quality or traceability. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Ownership and review cadence prevent assumptions from becoming stale without accountability.",
+      "B": "Not selected — A review forum may help governance, but attendance does not guarantee the decision is well explained.",
+      "C": "Not selected — Omitting rejected alternatives removes the context needed to understand trade-offs.",
+      "D": "Correct — Alternatives and evaluation criteria make the rationale transparent and reviewable.",
+      "E": "Not selected — Consistent formatting helps readability but does not establish substantive decision quality."
     },
     "reference": "CCAR-P practice PDF, Q96 (third-party answer key)",
     "tags": [
@@ -4262,13 +4262,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "D"
     ],
-    "explanation": "Stakeholder workshops identify business goals, user needs, and operational constraints such as response latency, answer quality, privacy, and regulatory compliance before a solution is scoped. Explicit success criteria and failure thresholds then make those requirements measurable and provide objective gates for production release. Choosing a model before gathering requirements or deferring constraints reverses the discovery process and can produce an unsuitable design.\n\nStudy takeaway: Facilitating stakeholder workshops to surface latency, accuracy, and compliance constraints before scoping begins.; Documenting explicit success criteria and failure thresholds that will gate production deployment.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Discovery identifies constraints and measurable success conditions before choosing a design or model.",
     "optionExplanations": {
-      "A": "Correct. Stakeholder workshops identify business goals, user needs, and operational constraints such as response latency, answer quality, privacy, and regulatory compliance before a solution is scoped. Explicit success criteria and failure thresholds then make those requirements measurable and provide objective gates for production release. The wording of option A matches the intended solution.",
-      "B": "Not selected. Choosing a model before gathering requirements or deferring constraints reverses the discovery process and can produce an unsuitable design. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Choosing a model before gathering requirements or deferring constraints reverses the discovery process and can produce an unsuitable design. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Stakeholder workshops identify business goals, user needs, and operational constraints such as response latency, answer quality, privacy, and regulatory compliance before a solution is scoped. Explicit success criteria and failure thresholds then make those requirements measurable and provide objective gates for production release. The wording of option D matches the intended solution.",
-      "E": "Not selected. Choosing a model before gathering requirements or deferring constraints reverses the discovery process and can produce an unsuitable design. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Workshops surface the stakeholder needs and constraints that govern scope.",
+      "B": "Not selected — Prior model experience is not a substitute for the current workload's requirements.",
+      "C": "Not selected — Prototypes can help later validate assumptions, but do not replace structured requirements gathering.",
+      "D": "Correct — Success metrics and failure thresholds make production acceptance measurable.",
+      "E": "Not selected — Deferring constraints can produce a design that violates essential requirements."
     },
     "reference": "CCAR-P practice PDF, Q97 (third-party answer key)",
     "tags": [
@@ -4311,13 +4311,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "B"
     ],
-    "explanation": "Implementation-ready documentation defines the technical interfaces each component must follow, including integration contracts, configuration schemas, and input/output shapes. This allows the implementation team to build and connect components consistently without needing design clarification. A decision log also preserves the reasoning behind important architectural choices and rejected alternatives, enabling the team to handle related implementation decisions independently. A high-level business narrative or architect contact information does not replace actionable technical detail and recorded rationale.\n\nStudy takeaway: The document specifies integration contracts, configuration schemas, and expected input/output shapes for each component.; The document includes a decision log that records the rationale for key architectural choices and the alternatives rejected.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Implementation independence requires precise component contracts and the rationale behind major choices.",
     "optionExplanations": {
-      "A": "Correct. Implementation-ready documentation defines the technical interfaces each component must follow, including integration contracts, configuration schemas, and input/output shapes. This allows the implementation team to build and connect components consistently without needing design clarification. The wording of option A matches the intended solution.",
-      "B": "Correct. Implementation-ready documentation defines the technical interfaces each component must follow, including integration contracts, configuration schemas, and input/output shapes. This allows the implementation team to build and connect components consistently without needing design clarification. The wording of option B matches the intended solution.",
-      "C": "Not selected. A high-level business narrative or architect contact information does not replace actionable technical detail and recorded rationale. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. A high-level business narrative or architect contact information does not replace actionable technical detail and recorded rationale. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. A high-level business narrative or architect contact information does not replace actionable technical detail and recorded rationale. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Contracts, schemas and expected shapes allow engineers to implement interoperable components.",
+      "B": "Correct — Decision rationale explains why alternatives were rejected and guides future changes.",
+      "C": "Not selected — A problem narrative does not specify the components needed to build the system.",
+      "D": "Not selected — A contact person is useful, but reliance on the architect is exactly what a sufficient package should reduce.",
+      "E": "Not selected — A model list without a selection or rationale leaves the implementation decision unresolved."
     },
     "reference": "CCAR-P practice PDF, Q98 (third-party answer key)",
     "tags": [
@@ -4355,12 +4355,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Architecture X fails the stated latency requirement because its 4.2-second average exceeds the 3- second SLA, regardless of its stronger quality score. Architecture Y meets the SLA and should then be assessed across multiple business value pillars rather than on cost alone. Its annual cost is $180,000 versus $360,000 for Architecture X, but the quality difference must also be evaluated for its effect on clinician productivity, documentation accuracy, and workflow outcomes.\n\nStudy takeaway: Eliminate Architecture X on SLA grounds, then evaluate Architecture Y against the efficiency and solution cost pillars by calculating annual cost difference and assessing whether the quality delta materially impacts clinical workflow productivity.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Treat the mandatory latency SLA as a constraint, then compare cost and workflow quality; the stated mean latency is not a substitute for a defined percentile if the SLA uses one.",
     "optionExplanations": {
-      "A": "Not selected. Its annual cost is $180,000 versus $360,000 for Architecture X, but the quality difference must also be evaluated for its effect on clinician productivity, documentation accuracy, and workflow outcomes. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Its annual cost is $180,000 versus $360,000 for Architecture X, but the quality difference must also be evaluated for its effect on clinician productivity, documentation accuracy, and workflow outcomes. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Architecture X fails the stated latency requirement because its 4.2-second average exceeds the 3- second SLA, regardless of its stronger quality score. Architecture Y meets the SLA and should then be assessed across multiple business value pillars rather than on cost alone. The wording of option C matches the intended solution.",
-      "D": "Not selected. Its annual cost is $180,000 versus $360,000 for Architecture X, but the quality difference must also be evaluated for its effect on clinician productivity, documentation accuracy, and workflow outcomes. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Cost savings alone do not establish that quality and SLA requirements are met.",
+      "B": "Not selected — The reported response time exceeds the target; relying on unvalidated later optimization risks noncompliance.",
+      "C": "Correct — Under the question's reported latency comparison, Y fits the target and costs $180,000 less annually; assess whether lower quality causes consequential rework.",
+      "D": "Not selected — Hybrid routing may be valuable but requires validation of latency, cost and routing quality before recommendation."
     },
     "reference": "CCAR-P practice PDF, Q99 (third-party answer key)",
     "tags": [
@@ -4398,12 +4398,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "An Architecture Decision Record preserves the reasoning behind a significant technical choice in a durable, reviewable format. It records the context, chosen approach, alternatives, consequences, and ownership, allowing future auditors and new team members to understand both what was decided and why. Informal conversations, isolated code comments, and unsupported slide decks do not provide the complete, traceable decision history needed for governance and onboarding. \n\nStudy takeaway: An Architecture Decision Record that states the context, the decision, the alternatives considered, the consequences, and the date and authors.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A durable ADR captures the decision and the reasoning that future readers will need to evaluate it.",
     "optionExplanations": {
-      "A": "Not selected. An Architecture Decision Record preserves the reasoning behind a significant technical choice in a durable, reviewable format. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. An Architecture Decision Record preserves the reasoning behind a significant technical choice in a durable, reviewable format. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. An Architecture Decision Record preserves the reasoning behind a significant technical choice in a durable, reviewable format. It records the context, chosen approach, alternatives, consequences, and ownership, allowing future auditors and new team members to understand both what was decided and why. The wording of option C matches the intended solution.",
-      "D": "Not selected. An Architecture Decision Record preserves the reasoning behind a significant technical choice in a durable, reviewable format. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Slides without rationale may omit why the choice was made.",
+      "B": "Not selected — An isolated opinion lacks context, alternatives and consequences.",
+      "C": "Correct — The record includes context, choice, alternatives, consequences and authorship for traceability.",
+      "D": "Not selected — An undocumented verbal discussion cannot support reliable audit or onboarding."
     },
     "reference": "CCAR-P practice PDF, Q100 (third-party answer key)",
     "tags": [
@@ -4441,12 +4441,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Processing three times as many purchase orders per analyst demonstrates efficiency because the same operational work is completed with less effort and time. Eliminating a manual role and redeploying staff to higher-value vendor management represents transformation, since the operating model and employee responsibilities change. API spending above the projected transaction budget is a solution cost issue. Batch response time exceeding the committed threshold is a performance SLA issue.\n\nStudy takeaway: Statement 1: Efficiency; Statement 2: Transformation; Statement 3: Solution Cost; Statement 4: Performance SLA. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Use the source's intended pillar mapping, while noting that output per analyst can also be described as productivity in common business usage.",
     "optionExplanations": {
-      "A": "Correct. Processing three times as many purchase orders per analyst demonstrates efficiency because the same operational work is completed with less effort and time. Eliminating a manual role and redeploying staff to higher-value vendor management represents transformation, since the operating model and employee responsibilities change. The wording of option A matches the intended solution.",
-      "B": "Not selected. Batch response time exceeding the committed threshold is a performance SLA issue. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Batch response time exceeding the committed threshold is a performance SLA issue. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Batch response time exceeding the committed threshold is a performance SLA issue. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — The source treats greater throughput per analyst as efficiency and a changed staffing/workflow model as transformation; overspend and latency map directly to cost and SLA.",
+      "B": "Not selected — Greater output per analyst is plausibly productivity, but redeploying an entire role is a structural workflow change, not merely efficiency.",
+      "C": "Not selected — Higher throughput alone does not establish transformation; the 11-second latency is explicitly an SLA miss.",
+      "D": "Not selected — Staff redeployment is the transformation signal, integration overspend is cost and latency is SLA performance."
     },
     "reference": "CCAR-P practice PDF, Q101 (third-party answer key)",
     "tags": [
@@ -4489,13 +4489,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "C"
     ],
-    "explanation": "Embedding Claude Code in the IDE reduces context-switching by surfacing AI assistance where the code is actually written, so developers can generate and review code without leaving their working environment. A Slack-only bot does the opposite, adding friction because developers must copy code out, wait for replies, and paste results back into the editor, which undermines the productivity goal. Workflow improvement depends on the integration point, not just the model, so treating the proposals as equivalent because the model is identical misses the point. An audit log or asynchronous queue may have some value, but neither addresses developer productivity, which is the objective being evaluated.\n\nStudy takeaway: Proposal B introduces workflow friction by requiring developers to leave the IDE, which undermines the productivity objective.; Proposal A reduces context-switching by surfacing AI assistance at the point of development without requiring a separate tool.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Integration at the point of work reduces friction; identical model capability does not imply identical workflow value.",
     "optionExplanations": {
-      "A": "Not selected. An audit log or asynchronous queue may have some value, but neither addresses developer productivity, which is the objective being evaluated. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Embedding Claude Code in the IDE reduces context-switching by surfacing AI assistance where the code is actually written, so developers can generate and review code without leaving their working environment. A Slack-only bot does the opposite, adding friction because developers must copy code out, wait for replies, and paste results back into the editor, which undermines the productivity goal. The wording of option B matches the intended solution.",
-      "C": "Correct. Embedding Claude Code in the IDE reduces context-switching by surfacing AI assistance where the code is actually written, so developers can generate and review code without leaving their working environment. A Slack-only bot does the opposite, adding friction because developers must copy code out, wait for replies, and paste results back into the editor, which undermines the productivity goal. The wording of option C matches the intended solution.",
-      "D": "Not selected. An audit log or asynchronous queue may have some value, but neither addresses developer productivity, which is the objective being evaluated. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. An audit log or asynchronous queue may have some value, but neither addresses developer productivity, which is the objective being evaluated. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Centralized audit logs are useful, but do not establish superior developer productivity.",
+      "B": "Correct — Leaving the IDE adds context switching and disrupts the development workflow.",
+      "C": "Correct — In-IDE assistance reduces the steps needed to generate or review code.",
+      "D": "Not selected — Asynchronous notifications can help coordination but do not eliminate the extra handoff.",
+      "E": "Not selected — Interface and workflow integration affect productivity independently of underlying model capability."
     },
     "reference": "CCAR-P practice PDF, Q102 (third-party answer key)",
     "tags": [
@@ -4538,13 +4538,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "E"
     ],
-    "explanation": "Before a pilot can begin, the team must identify which workflow steps benefit from AI-assisted tooling and which must stay under human authority, because this design decision defines what Claude Code is allowed to do. That analysis then drives the technical setup: configuring the project-scope MCP servers, permissions, subagents, and persistent project context (such as CLAUDE.md) so the tool actually operates within those boundaries. Together these steps produce a working, correctly scoped configuration that a small group can test. Iterating on pilot findings necessarily comes after the pilot, and full documentation with runbooks or formal managerial sign-off are rollout activities that depend on what the pilot reveals rather than prerequisites for running it.\n\nStudy takeaway: Identify the workflow steps where AI-assisted tooling adds value and where human authority must remain. ; Configure the project-scope Model Context Protocol (MCP) servers, permissions, subagents, and persistent project context.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Before piloting, establish which tasks AI should support and configure the capabilities and authority needed for that workflow.",
     "optionExplanations": {
-      "A": "Not selected. Iterating on pilot findings necessarily comes after the pilot, and full documentation with runbooks or formal managerial sign-off are rollout activities that depend on what the pilot reveals rather than prerequisites for running it. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Before a pilot can begin, the team must identify which workflow steps benefit from AI-assisted tooling and which must stay under human authority, because this design decision defines what Claude Code is allowed to do. That analysis then drives the technical setup: configuring the project-scope MCP servers, permissions, subagents, and persistent project context (such as CLAUDE.md) so the tool actually operates within those boundaries. The wording of option B matches the intended solution.",
-      "C": "Not selected. Iterating on pilot findings necessarily comes after the pilot, and full documentation with runbooks or formal managerial sign-off are rollout activities that depend on what the pilot reveals rather than prerequisites for running it. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Iterating on pilot findings necessarily comes after the pilot, and full documentation with runbooks or formal managerial sign-off are rollout activities that depend on what the pilot reveals rather than prerequisites for running it. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Before a pilot can begin, the team must identify which workflow steps benefit from AI-assisted tooling and which must stay under human authority, because this design decision defines what Claude Code is allowed to do. That analysis then drives the technical setup: configuring the project-scope MCP servers, permissions, subagents, and persistent project context (such as CLAUDE.md) so the tool actually operates within those boundaries. The wording of option E matches the intended solution."
+      "A": "Not selected — Documentation is useful, but the keyed choices are the direct design and configuration prerequisites.",
+      "B": "Correct — Identifying value-adding steps and human authority defines the intended delegation boundary.",
+      "C": "Not selected — Stakeholder approval may be needed organizationally, but does not itself define or configure the workflow.",
+      "D": "Not selected — Changes based on pilot findings necessarily follow the pilot.",
+      "E": "Correct — Project-scoped tools, permissions and context implement the selected workflow safely."
     },
     "reference": "CCAR-P practice PDF, Q103 (third-party answer key)",
     "tags": [
@@ -4582,12 +4582,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "A federated model lets each of the 14 teams author Skills for its own domain, then routes those Skills through a central review and publish gate before release. Authorship stays close to the people who own the coding standards, review checklists, and postmortem templates, so no single group becomes a bottleneck. The central gate checks quality, consistency, and security before anything reaches 280 developers, which keeps the published set trustworthy. A single platform team writing every Skill would recreate the bottleneck leadership wants to avoid. Fully decentralized or per-developer authorship with no review would scale, but nothing would ensure the Skills are accurate or consistent.\n\nStudy takeaway: federated authorship across the 14 teams with a central review and publish gate. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Federated authorship distributes subject-matter work while a shared publication gate protects quality and consistency.",
     "optionExplanations": {
-      "A": "Not selected. Fully decentralized or per-developer authorship with no review would scale, but nothing would ensure the Skills are accurate or consistent. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Fully decentralized or per-developer authorship with no review would scale, but nothing would ensure the Skills are accurate or consistent. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Fully decentralized or per-developer authorship with no review would scale, but nothing would ensure the Skills are accurate or consistent. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. A federated model lets each of the 14 teams author Skills for its own domain, then routes those Skills through a central review and publish gate before release. Authorship stays close to the people who own the coding standards, review checklists, and postmortem templates, so no single group becomes a bottleneck. The wording of option D matches the intended solution."
+      "A": "Not selected — Uncoordinated individual authorship invites duplicated or conflicting standards.",
+      "B": "Not selected — A single team becomes an authoring bottleneck and may lack specialized knowledge.",
+      "C": "Not selected — Publishing without review sacrifices trust and policy consistency.",
+      "D": "Correct — Teams author domain-specific Skills; a central gate reviews security, quality and consistency before release."
     },
     "reference": "CCAR-P practice PDF, Q104 (third-party answer key)",
     "tags": [
@@ -4625,12 +4625,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Packaging procedural knowledge that needs no live external-system calls is what makes a Skill the right fit. A Skill bundles instructions, templates, and embedded examples that Claude loads on demand, so a fixed authoring procedure for regulatory filings maps directly onto that format and travels unchanged across claude.ai, the API, and Claude Code. An MCP server exists to connect Claude to external tools and data sources at runtime, which this capability does not require. Querying a live database or authenticating against a corporate identity provider would point toward MCP instead. Command-line access does not decide the question either, since Claude Code supports both Skills and MCP servers.\n\nStudy takeaway: The capability is procedural knowledge with no live external-system calls required.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A Skill is appropriate for reusable procedural knowledge; MCP is primarily an integration boundary for external capabilities.",
     "optionExplanations": {
-      "A": "Not selected. Command-line access does not decide the question either, since Claude Code supports both Skills and MCP servers. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Command-line access does not decide the question either, since Claude Code supports both Skills and MCP servers. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Command-line access does not decide the question either, since Claude Code supports both Skills and MCP servers. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Packaging procedural knowledge that needs no live external-system calls is what makes a Skill the right fit. A Skill bundles instructions, templates, and embedded examples that Claude loads on demand, so a fixed authoring procedure for regulatory filings maps directly onto that format and travels unchanged across claude.ai, the API, and Claude Code. The wording of option D matches the intended solution."
+      "A": "Not selected — The scenario explicitly does not require live database calls; such calls would instead favor an integration tool.",
+      "B": "Not selected — CLI availability does not distinguish the two approaches because both may be used in compatible clients.",
+      "C": "Not selected — Direct identity-provider authentication is not required by the described authoring procedure.",
+      "D": "Correct — Instructions and examples can package the authoring procedure without a live external service."
     },
     "reference": "CCAR-P practice PDF, Q105 (third-party answer key)",
     "tags": [
@@ -4668,12 +4668,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "A recurring specialized task such as database schema review is what most directly justifies a dedicated project subagent in Claude Code. A subagent packages a focused system prompt, a restricted set of tool permissions, and its own model selection into a reusable definition stored with the project, so the same expert behavior is applied consistently across many sessions and team members. Narrow tool access also limits risk, since a reviewer that only reads schemas does not need write or shell permissions. One-off questions, purely general-purpose work, and a desire for a single generic prompt gain nothing from that configuration and are better handled by Claude Code's default capabilities.\n\nStudy takeaway: The team has a recurring specialized task, such as database schema review, that requires a focused system prompt, narrow tool permissions, and a specific model selection across many sessions.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Use a dedicated subagent when a recurring specialized role benefits from focused context, configuration and limited authority.",
     "optionExplanations": {
-      "A": "Correct. A recurring specialized task such as database schema review is what most directly justifies a dedicated project subagent in Claude Code. A subagent packages a focused system prompt, a restricted set of tool permissions, and its own model selection into a reusable definition stored with the project, so the same expert behavior is applied consistently across many sessions and team members. The wording of option A matches the intended solution.",
-      "B": "Not selected. One-off questions, purely general-purpose work, and a desire for a single generic prompt gain nothing from that configuration and are better handled by Claude Code's default capabilities. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. One-off questions, purely general-purpose work, and a desire for a single generic prompt gain nothing from that configuration and are better handled by Claude Code's default capabilities. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. One-off questions, purely general-purpose work, and a desire for a single generic prompt gain nothing from that configuration and are better handled by Claude Code's default capabilities. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Repeated database review warrants a reusable specialist with its own instructions and permissions.",
+      "B": "Not selected — A one-time general task usually does not justify the configuration overhead.",
+      "C": "Not selected — Without recurring specialization, the general agent can already handle the work.",
+      "D": "Not selected — A generic shared prompt provides no role-specific benefit from a dedicated subagent."
     },
     "reference": "CCAR-P practice PDF, Q106 (third-party answer key)",
     "tags": [
@@ -4716,13 +4716,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "B"
     ],
-    "explanation": "Project scope keeps team-shared MCP server definitions and permission rules in the repository, allowing the team to review, version, and distribute them consistently. Managed configuration is appropriate for security-critical settings because it is centrally enforced and cannot be weakened or overridden by individual users. Local and user scopes are intended for individual machine or personal preferences, not organization-wide security controls or shared team configuration.\n\nStudy takeaway: Use project scope for team-shared Model Context Protocol (MCP) servers and permission rules under version control.; Apply managed configuration centrally for security-critical settings that must not be overridden by individual engineers.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Place shared project configuration in project scope and organization-wide non-overridable controls in managed scope.",
     "optionExplanations": {
-      "A": "Correct. Project scope keeps team-shared MCP server definitions and permission rules in the repository, allowing the team to review, version, and distribute them consistently. Managed configuration is appropriate for security-critical settings because it is centrally enforced and cannot be weakened or overridden by individual users. The wording of option A matches the intended solution.",
-      "B": "Correct. Project scope keeps team-shared MCP server definitions and permission rules in the repository, allowing the team to review, version, and distribute them consistently. Managed configuration is appropriate for security-critical settings because it is centrally enforced and cannot be weakened or overridden by individual users. The wording of option B matches the intended solution.",
-      "C": "Not selected. Local and user scopes are intended for individual machine or personal preferences, not organization-wide security controls or shared team configuration. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Local and user scopes are intended for individual machine or personal preferences, not organization-wide security controls or shared team configuration. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Local and user scopes are intended for individual machine or personal preferences, not organization-wide security controls or shared team configuration. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Version-controlled project settings make team-specific tools and permissions reproducible.",
+      "B": "Correct — Managed settings enforce central security requirements across users.",
+      "C": "Not selected — Local settings are developer-specific and unsuitable as the only enforcement of mandatory security policy.",
+      "D": "Not selected — User scope is personal to each installation, not a reliable distribution mechanism for team-wide tools.",
+      "E": "Not selected — Personal preferences belong in user or local scope rather than shared project configuration."
     },
     "reference": "CCAR-P practice PDF, Q107 (third-party answer key)",
     "tags": [
