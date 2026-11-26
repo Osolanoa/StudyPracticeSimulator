@@ -59,6 +59,6 @@ for(const o of q.options){
 assert.ok(app.includes('CFG.conciseFeedback?conciseOptionFeedback(q,true)'),'Exam and practice review use enhanced feedback');
 const other=build({}).feedback(q,q.correctAnswers,true);
 assert.ok(other.includes('Why the options are correct or incorrect')&&other.includes(esc(q.options[0].text)),'Other courses retain prior format');
-assert.ok(read('index.html').includes('refine-v28-20261126'));
-assert.ok(read('js/loader.js').includes('refine-v28-20261126'));
+assert.ok(read('index.html').includes('polish-v29-20261126'));
+assert.ok(read('js/loader.js').includes('polish-v29-20261126'));
 console.log('PASS: 126 clean questions, 573 distinct concise rationales, correct labels, compact practice and full exam review.');

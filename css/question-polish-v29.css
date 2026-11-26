@@ -1,0 +1,24 @@
+/* V29: course-card motion on answer options, and the ribbon bookmark. */
+
+/* Answer options get the same cursor light and gentle 3D tilt as course
+   cards (tilt angles are smaller because options are wide). */
+#app .option{transform-style:preserve-3d}
+#app .option .pm-light{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;z-index:0;
+  background:radial-gradient(240px circle at var(--pm-x,50%) var(--pm-y,50%),rgba(175,217,213,.10),transparent 70%)}
+#app .option:hover:not(:disabled) .pm-light{opacity:1}
+#app:not(#pm-a):not(#pm-b) .option:hover:not(:disabled){border-color:rgba(175,217,213,.42)!important}
+
+/* Ribbon bookmark: outline when empty, filled with a star cut-out and a
+   small pop when saved. */
+#app .bm-btn{display:inline-flex!important;align-items:center;gap:.5rem}
+#app .bm-icon{width:1.15em;height:1.15em;flex:none;overflow:visible}
+#app .bm-icon path:first-child{fill:transparent;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round;transition:fill .3s,stroke .3s}
+#app .bm-icon .bm-spark{fill:transparent;transition:fill .3s}
+#app .bm-btn:hover .bm-icon path:first-child{fill:rgba(175,217,213,.15)}
+#app .bm-btn.saved .bm-icon path:first-child{fill:#afd9d5;stroke:#afd9d5}
+#app .bm-btn.saved .bm-icon .bm-spark{fill:#0d1622}
+#app:not(#pm-a):not(#pm-b) .bm-btn.saved{border-color:rgba(175,217,213,.5)!important;color:#e9f6f4!important;background:rgba(175,217,213,.08)!important}
+#app .bm-btn.saved.pm-pop .bm-icon{animation:bm-pop .5s cubic-bezier(.34,1.56,.64,1)}
+@keyframes bm-pop{0%{transform:scale(.6) translateY(-3px)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+
+@media (prefers-reduced-motion:reduce){#app .bm-btn.saved.pm-pop .bm-icon{animation:none}}

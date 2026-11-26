@@ -117,7 +117,7 @@ assert.ok(loader.includes("src === './courses/ccar-p/config.js'"));
 assert.ok(loader.includes("src === './courses/ccar-p/questions.js'"));
 assert.ok(loader.includes("src === './js/storage.js'"));
 assert.ok(app.includes("['practiceTestsV2','practiceTests']"));
-assert.ok(html.includes('js/loader.js?v=refine-v28-20261126'));
+assert.ok(html.includes('js/loader.js?v=polish-v29-20261126'));
 assert.ok(cssBundle.includes('css/cosmic-lite.css'),'Photographic background unchanged');
 assert.ok(loader.includes('questionCount: 200')&&loader.includes('questionCount: 170'),'Other courses unchanged');
 console.log('PASS: 126 unique CCAR-P questions; 37 removals; 13 practice tests; archived scores; bookmarks/history safe.');

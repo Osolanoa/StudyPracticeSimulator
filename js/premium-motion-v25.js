@@ -22,17 +22,19 @@
   // Cursor light on buttons and cards, tilt on course cards
   if (finePointer) {
     app.addEventListener('pointermove', e => {
-      const el = e.target.closest('.btn, .cosmos-course');
+      const el = e.target.closest('.btn, .cosmos-course, .option:not(:disabled)');
       if (!el) return;
       const r = el.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;
       el.style.setProperty('--pm-x', x + 'px');
       el.style.setProperty('--pm-y', y + 'px');
       if (el.classList.contains('cosmos-course') && !reduced()) {
         el.style.transform = `perspective(800px) rotateX(${(y / r.height - .5) * -5}deg) rotateY(${(x / r.width - .5) * 5}deg) translateY(-3px)`;
+      } else if (el.classList.contains('option') && !reduced()) {
+        el.style.transform = `perspective(900px) rotateX(${(y / r.height - .5) * -4}deg) rotateY(${(x / r.width - .5) * 1.5}deg) translateY(-2px)`;
       }
     });
     app.addEventListener('pointerout', e => {
-      const el = e.target.closest('.cosmos-course');
+      const el = e.target.closest('.cosmos-course, .option');
       if (el && !el.contains(e.relatedTarget)) el.style.transform = '';
     });
   }
@@ -122,7 +124,7 @@
       }
       lastLocked = '';
     }
-    app.querySelectorAll('.cosmos-course').forEach(card => {
+    app.querySelectorAll('.cosmos-course, .option').forEach(card => {
       if (!card.querySelector(':scope > .pm-light')) { const l = document.createElement('span'); l.className = 'pm-light'; l.setAttribute('aria-hidden', 'true'); card.appendChild(l); }
     });
     // Answer feedback plays once, right after "Check answer"
@@ -132,6 +134,12 @@
       app.querySelectorAll('.option.correct').forEach(o => o.classList.add('pm-correct'));
       app.querySelectorAll('.option.wrong').forEach(o => o.classList.add('pm-wrong'));
     } else if (!locked) lastLocked = '';
+    const bm = app.querySelector('.bm-btn');
+    if (bm) {
+      const saved = bm.classList.contains('saved');
+      if (saved && enhance.bmKey === key && enhance.bmSaved === false) bm.classList.add('pm-pop');
+      enhance.bmKey = key; enhance.bmSaved = saved;
+    }
     results();
   }
 
