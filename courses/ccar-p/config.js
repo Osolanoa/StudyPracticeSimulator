@@ -23,7 +23,7 @@ window.COURSE_CONFIG = {
   "defaultExamCount": 50,
   "examTimeMinutes": 180,
   "referenceLabel": "Source",
-  "disclaimer": "Independent CCAR-P study module adapted from user-supplied Examice PDFs. The suggested keys are from a third-party source and are not official Anthropic certification answers. Nine visual matching/Yes-No questions were converted to equivalent multiple-selection items. Some answer keys may be ambiguous or need independent verification.",
+  "conciseFeedback": true,
   "domains": [
     {
       "id": "claude-code",
