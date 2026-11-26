@@ -75,3 +75,10 @@ html{scrollbar-color:rgba(200,215,240,.25) transparent}
   #app.pm-enter *,#app .option.pm-correct,#app .option.pm-wrong,#app .bar i::after,#app .cosmic-track-fill::after,.pm-ripple{animation:none!important}
   #app .btn:hover:not(:disabled),#app .option:hover:not(:disabled){transform:none}
 }
+
+/* Hero title and its reflection pseudo-elements: upright Outfit. */
+html body #app:not(#pm-a):not(#pm-b) .cosmos-landing h1,
+html body #app:not(#pm-a):not(#pm-b) .cosmos-landing h1 .premium-title-line,
+html body #app:not(#pm-a):not(#pm-b) .cosmos-landing h1 .premium-title-line::before,
+html body #app:not(#pm-a):not(#pm-b) .cosmos-landing h1 .premium-title-line::after{
+  font-family:"Outfit","Segoe UI",system-ui,sans-serif!important;font-style:normal!important;font-weight:600!important}
