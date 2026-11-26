@@ -1,0 +1,24 @@
+/* V27 space background (from the premium prototype) + fluidity pass.
+   The old photo scene is no longer created; this layer paints the sky. */
+html body,html body[data-cosmic-view]{background:radial-gradient(1200px 700px at 70% -10%,#13204a 0%,transparent 60%),#05070f!important}
+#cosmic-scene{display:none!important}
+#space-v27{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;contain:strict}
+#space-v27 canvas{position:absolute;inset:0;width:100%;height:100%}
+/* Aurora: soft gradients (no blur filter) moved with transform only, on the GPU. */
+#space-v27 .aurora{position:absolute;inset:-20%;opacity:.55;will-change:transform;
+  background:radial-gradient(40% 30% at 30% 40%,rgba(90,120,255,.30),transparent 70%),radial-gradient(35% 25% at 70% 60%,rgba(155,123,255,.24),transparent 70%),radial-gradient(30% 20% at 50% 80%,rgba(70,214,200,.13),transparent 70%);
+  animation:space-v27-drift 40s ease-in-out infinite alternate}
+@keyframes space-v27-drift{to{transform:translate3d(4%,-3%,0) rotate(6deg) scale(1.08)}}
+#space-v27 .vignette{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.6))}
+#space-v27 .grain{position:absolute;inset:0;opacity:.06;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* Fluidity: live blur behind panels is recalculated whenever the sky moves.
+   Over a dark, mostly uniform sky a slightly denser tint looks the same,
+   so panels drop backdrop-filter. */
+#app:not(#pm-a):not(#pm-b) *,#app:not(#pm-a):not(#pm-b) .side,#app:not(#pm-a):not(#pm-b) .card,#app:not(#pm-a):not(#pm-b) .cosmos-course{
+  -webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+#app:not(#pm-a):not(#pm-b) .card,#app:not(#pm-a):not(#pm-b) .cosmos-course,#app:not(#pm-a):not(#pm-b) .modal>*{background-color:rgba(16,22,34,.82)!important}
+#app:not(#pm-a):not(#pm-b) .side{background-color:rgba(10,14,22,.86)!important}
+
+@media (prefers-reduced-motion:reduce){#space-v27 .aurora{animation:none}}

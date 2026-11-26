@@ -90,8 +90,9 @@ assert.equal(reduced.calls.length, 2);
 assert.ok(!cosmic.includes('pointermove'), 'Remove old fast mouse-driven parallax');
 assert.ok(!cosmic.includes('requestAnimationFrame'), 'Only one motion system drives the sky');
 assert.ok(html.indexOf('sky-motion-v23.css') > html.indexOf('sky-motion-v21.css'));
-assert.ok(html.indexOf('sky-motion-v23.js') > html.indexOf('js/cosmic.js'));
-assert.ok(html.indexOf('sky-motion-v23.js') < html.indexOf('js/cosmic-landing.js'));
+// V27: the photo scene (cosmic.js + sky-motion-v23.js) is replaced by space-v27.js.
+assert.ok(!html.includes('js/cosmic.js') && !html.includes('js/sky-motion-v23.js'), 'V27 replaces the photo sky');
+assert.ok(html.indexOf('js/space-v27.js') > -1 && html.indexOf('js/space-v27.js') < html.indexOf('js/cosmic-landing.js'));
 assert.ok(!html.includes('sky-motion-v21.js'), 'Do not execute the previous JS controller');
 assert.ok(css.includes('sky-v23-photo 480s linear'), 'CSS fallback matches main controller');
 assert.ok(css.includes('sky-v23-stars 480s linear'), 'Stars fallback matches main controller');
