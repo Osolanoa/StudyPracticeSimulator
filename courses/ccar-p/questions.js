@@ -1274,13 +1274,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "B"
     ],
-    "explanation": "Prompt caching on a static system-prompt prefix and routing simple queries to a smaller model are the two changes that cut cost and latency at once. When the same prefix appears on every call, caching lets Claude reuse the already-processed tokens, which are billed at a reduced rate and skip recomputation, so time to first token drops along with spend. Model routing sends straightforward requests to a smaller model that is both cheaper per token and faster to respond. The full model stays on the complex cases where its capability matters, which preserves quality on the core use case. Raising max_tokens does not make generation cheaper or faster. Loading the full corpus into context or adding few-shot examples to every request increases input tokens, which raises both cost and latency.\n\nStudy takeaway: Enable prompt caching on the static system-prompt prefix to reduce billable input tokens on repeated calls.; Route straightforward query types to a smaller, faster Claude model and reserve the full model for complex cases.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Reduce repeated input processing and reserve expensive inference for cases that need it.",
     "optionExplanations": {
-      "A": "Correct. Prompt caching on a static system-prompt prefix and routing simple queries to a smaller model are the two changes that cut cost and latency at once. When the same prefix appears on every call, caching lets Claude reuse the already-processed tokens, which are billed at a reduced rate and skip recomputation, so time to first token drops along with spend. The wording of option A matches the intended solution.",
-      "B": "Correct. Prompt caching on a static system-prompt prefix and routing simple queries to a smaller model are the two changes that cut cost and latency at once. When the same prefix appears on every call, caching lets Claude reuse the already-processed tokens, which are billed at a reduced rate and skip recomputation, so time to first token drops along with spend. The wording of option B matches the intended solution.",
-      "C": "Not selected. Loading the full corpus into context or adding few-shot examples to every request increases input tokens, which raises both cost and latency. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Loading the full corpus into context or adding few-shot examples to every request increases input tokens, which raises both cost and latency. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Loading the full corpus into context or adding few-shot examples to every request increases input tokens, which raises both cost and latency. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Prefix caching cuts repeated input processing and can reduce latency.",
+      "B": "Correct — A faster model handles routine queries more cheaply if it maintains the required quality.",
+      "C": "Not selected — A larger output allowance may help truncation but does not generally reduce cost and latency.",
+      "D": "Not selected — Fetching the full corpus increases input processing and usually worsens both metrics.",
+      "E": "Not selected — More examples enlarge the prompt; quality gains must justify their overhead."
     },
     "reference": "CCAR-P practice PDF, Q28 (third-party answer key)",
     "tags": [
@@ -1318,12 +1318,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Regression tests compare the updated prompt template's outputs with a stable set of previously validated inputs and expected behaviors. They are designed to reveal unintended changes introduced by updates, such as outputs that differ from known-good results. Integration tests focus on interactions between components, while smoke tests only check basic availability. Adversarial tests target security weaknesses such as prompt injection rather than behavior drift.\n\nStudy takeaway: Regression tests scored against a stable reference set of known-good behavior.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Compare the updated prompt against known-good behavior to catch regressions.",
     "optionExplanations": {
-      "A": "Not selected. Adversarial tests target security weaknesses such as prompt injection rather than behavior drift. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Adversarial tests target security weaknesses such as prompt injection rather than behavior drift. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Regression tests compare the updated prompt template's outputs with a stable set of previously validated inputs and expected behaviors. They are designed to reveal unintended changes introduced by updates, such as outputs that differ from known-good results. The wording of option C matches the intended solution.",
-      "D": "Not selected. Adversarial tests target security weaknesses such as prompt injection rather than behavior drift. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Integration tests establish interactions between components, not specifically changed historical behavior.",
+      "B": "Not selected — Adversarial tests target attack resistance rather than ordinary previously passing cases.",
+      "C": "Correct — A stable reference set reveals whether the prompt change broke an established capability.",
+      "D": "Not selected — Basic availability can pass even when individual output quality has regressed."
     },
     "reference": "CCAR-P practice PDF, Q29 (third-party answer key)",
     "tags": [
@@ -1366,13 +1366,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "C"
     ],
-    "explanation": "Define the metrics and traffic slices to observe, along with the service-level objectives and associated error budgets. Metrics and slices establish what behavior must be measured across normal and adversarial inputs, while SLOs define the reliability targets those measurements are evaluated against. Error budgets translate the SLOs into an allowable amount of degraded performance. Alert tuning, dashboards, and on-call documentation depend on telemetry and objectives that have already been specified.\n\nStudy takeaway: Define the metrics and the slices the deployment will monitor across normal and adversarial traffic.; Define the service-level objectives (SLOs) and the error budgets the deployment will be held to.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Specify what to measure and what performance is acceptable before implementing instrumentation.",
     "optionExplanations": {
-      "A": "Correct. Define the metrics and traffic slices to observe, along with the service-level objectives and associated error budgets. Metrics and slices establish what behavior must be measured across normal and adversarial inputs, while SLOs define the reliability targets those measurements are evaluated against. The wording of option A matches the intended solution.",
-      "B": "Not selected. Alert tuning, dashboards, and on-call documentation depend on telemetry and objectives that have already been specified. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Define the metrics and traffic slices to observe, along with the service-level objectives and associated error budgets. Metrics and slices establish what behavior must be measured across normal and adversarial inputs, while SLOs define the reliability targets those measurements are evaluated against. The wording of option C matches the intended solution.",
-      "D": "Not selected. Alert tuning, dashboards, and on-call documentation depend on telemetry and objectives that have already been specified. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Alert tuning, dashboards, and on-call documentation depend on telemetry and objectives that have already been specified. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Metrics and slices define which signals must be captured.",
+      "B": "Not selected — Threshold tuning needs actual baseline distributions collected after instrumentation.",
+      "C": "Correct — SLOs and error budgets determine which measurements matter and when to alert.",
+      "D": "Not selected — Dashboards consume the metrics; they come after instrumentation.",
+      "E": "Not selected — Operational documentation follows the definition and construction of the monitoring system."
     },
     "reference": "CCAR-P practice PDF, Q31 (third-party answer key)",
     "tags": [
@@ -1410,12 +1410,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "D"
     ],
-    "explanation": "Reviewing production telemetry, sampled output evaluations, and stakeholder feedback identifies where the deployed system has the greatest opportunity to improve. The evaluation framework provides a consistent baseline for assessing whether a proposed change actually improves quality, safety, cost, or user outcomes. Iteration is evidence-driven and focuses on prioritizing targeted changes rather than rebuilding the system or ending measurement after launch.\n\nStudy takeaway: Review production telemetry, sampled output evaluations, and stakeholder feedback to identify the highest-impact change for the next cycle, then plan the change against the evaluation framework.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Iteration is evidence-driven improvement of a live system against established evaluation criteria.",
     "optionExplanations": {
-      "A": "Not selected. Iteration is evidence-driven and focuses on prioritizing targeted changes rather than rebuilding the system or ending measurement after launch. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Iteration is evidence-driven and focuses on prioritizing targeted changes rather than rebuilding the system or ending measurement after launch. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Iteration is evidence-driven and focuses on prioritizing targeted changes rather than rebuilding the system or ending measurement after launch. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Reviewing production telemetry, sampled output evaluations, and stakeholder feedback identifies where the deployed system has the greatest opportunity to improve. The evaluation framework provides a consistent baseline for assessing whether a proposed change actually improves quality, safety, cost, or user outcomes. The wording of option D matches the intended solution."
+      "A": "Not selected — Full redesign is justified only when architectural changes are necessary.",
+      "B": "Not selected — Go-live begins production learning; it does not end evaluation.",
+      "C": "Not selected — Discarding the benchmark removes the ability to measure improvement consistently.",
+      "D": "Correct — Telemetry, sampled quality and stakeholder feedback identify a targeted, measurable improvement."
     },
     "reference": "CCAR-P practice PDF, Q32 (third-party answer key)",
     "tags": [
@@ -1458,13 +1458,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "D"
     ],
-    "explanation": "Role-based access-control enforcement rate verifies that the pipeline consistently blocks unauthorized roles from accessing patient data, including under adversarial red-team testing. Per-query token cost directly measures whether each request stays within the established spending limit. BLEU score evaluates summary similarity, while throughput and latency measure operational performance rather than privacy authorization or per-query cost compliance.\n\nStudy takeaway: Role-based access-control enforcement rate measured on a red-team dataset; Per-query token cost measured against the defined cost ceiling . The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Measure the stated cost limit and access-control requirement directly.",
     "optionExplanations": {
-      "A": "Not selected. BLEU score evaluates summary similarity, while throughput and latency measure operational performance rather than privacy authorization or per-query cost compliance. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Role-based access-control enforcement rate verifies that the pipeline consistently blocks unauthorized roles from accessing patient data, including under adversarial red-team testing. Per-query token cost directly measures whether each request stays within the established spending limit. The wording of option B matches the intended solution.",
-      "C": "Not selected. BLEU score evaluates summary similarity, while throughput and latency measure operational performance rather than privacy authorization or per-query cost compliance. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Role-based access-control enforcement rate verifies that the pipeline consistently blocks unauthorized roles from accessing patient data, including under adversarial red-team testing. Per-query token cost directly measures whether each request stays within the established spending limit. The wording of option D matches the intended solution.",
-      "E": "Not selected. BLEU score evaluates summary similarity, while throughput and latency measure operational performance rather than privacy authorization or per-query cost compliance. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Summary similarity measures text quality, not spending or authorization.",
+      "B": "Correct — Red-team authorization tests expose whether restricted data can reach unauthorized roles.",
+      "C": "Not selected — Request throughput measures capacity rather than either stated requirement.",
+      "D": "Correct — Per-query spending can be compared directly with the budget ceiling.",
+      "E": "Not selected — P95 latency measures response speed, not cost or authorization."
     },
     "reference": "CCAR-P practice PDF, Q33 (third-party answer key)",
     "tags": [
@@ -1507,13 +1507,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "E"
     ],
-    "explanation": "Prompt caching removes the repeated cost of processing the unchanged 6,000-token policy preamble while preserving the exact instructions and therefore the same projection behavior. Caching commonly retrieved historical sales chunks similarly avoids repeatedly processing identical source material across daily queries without reducing the information available to the assistant. These two measures target the largest prompt-related costs while maintaining equivalent inputs and model quality. Reducing retrieved content, trimming policies, or switching to a smaller model could change accuracy.\n\nStudy takeaway: Enable prompt caching on the static policy preamble across the recurring calls.; Cache common retrieved sales chunks accessed across many of the daily queries.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Start with reuse of unchanged information to save processing without removing evidence or reducing model capability.",
     "optionExplanations": {
-      "A": "Not selected. Reducing retrieved content, trimming policies, or switching to a smaller model could change accuracy. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Reducing retrieved content, trimming policies, or switching to a smaller model could change accuracy. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Prompt caching removes the repeated cost of processing the unchanged 6,000-token policy preamble while preserving the exact instructions and therefore the same projection behavior. Caching commonly retrieved historical sales chunks similarly avoids repeatedly processing identical source material across daily queries without reducing the information available to the assistant. The wording of option C matches the intended solution.",
-      "D": "Not selected. Reducing retrieved content, trimming policies, or switching to a smaller model could change accuracy. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Prompt caching removes the repeated cost of processing the unchanged 6,000-token policy preamble while preserving the exact instructions and therefore the same projection behavior. Caching commonly retrieved historical sales chunks similarly avoids repeatedly processing identical source material across daily queries without reducing the information available to the assistant. The wording of option E matches the intended solution."
+      "A": "Not selected — Fewer sales chunks can remove evidence needed for accurate projections.",
+      "B": "Not selected — Truncating policy risks dropping governing constraints.",
+      "C": "Correct — Caching the repeated policy prefix targets the largest cost contributor without rewriting it.",
+      "D": "Not selected — A smaller model may change projection quality and needs evaluation first.",
+      "E": "Correct — Reusing common chunks can reduce repeated retrieval work; prompt-token savings require a cacheable input prefix."
     },
     "reference": "CCAR-P practice PDF, Q34 (third-party answer key)",
     "tags": [
@@ -1551,12 +1551,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Reducing retrieval depth limits the amount of context that must be retrieved, processed, and included in each request, directly lowering per-turn latency. Keeping only the passages that usually contain the needed information preserves routine answer quality while avoiding unnecessary context. Caching stable system-prompt content also avoids repeatedly processing unchanged prompt prefixes. Increasing retrieval depth or using a heavier model adds latency, while disabling prompt caching removes an important latency optimization.\n\nStudy takeaway: Reduce retrieval depth to the top-k passages that historically cover the answer, and cache stable system-prompt content.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Reduce unnecessary context and repeated processing while retaining historically sufficient evidence.",
     "optionExplanations": {
-      "A": "Not selected. Increasing retrieval depth or using a heavier model adds latency, while disabling prompt caching removes an important latency optimization. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Reducing retrieval depth limits the amount of context that must be retrieved, processed, and included in each request, directly lowering per-turn latency. Keeping only the passages that usually contain the needed information preserves routine answer quality while avoiding unnecessary context. The wording of option B matches the intended solution.",
-      "C": "Not selected. Increasing retrieval depth or using a heavier model adds latency, while disabling prompt caching removes an important latency optimization. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Increasing retrieval depth or using a heavier model adds latency, while disabling prompt caching removes an important latency optimization. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Disabling caching increases the work repeated on each request.",
+      "B": "Correct — A validated top-k keeps relevant evidence while caching removes redundant prefix processing.",
+      "C": "Not selected — Maximum retrieval adds more context and may slow inference substantially.",
+      "D": "Not selected — Heavier reasoning adds latency when routine quality is already acceptable."
     },
     "reference": "CCAR-P practice PDF, Q35 (third-party answer key)",
     "tags": [
@@ -1594,12 +1594,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "A representative evaluation set must reflect the geographic regions and tenure bands where the hiring-support tool will be used. Expanding coverage helps identify performance differences, bias, or reliability issues that a narrow regional and tenure-specific sample can conceal. Rescoring on the broader set provides evidence that the system performs acceptably across its intended population before release. High scores on one subgroup do not establish generalizable performance.\n\nStudy takeaway: Expand the evaluation set to cover the geographic regions and tenure bands the tool will serve, and rescore the system on the expanded set before broader release.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A high score on one narrow population is not evidence of performance across the intended population.",
     "optionExplanations": {
-      "A": "Not selected. High scores on one subgroup do not establish generalizable performance. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. A representative evaluation set must reflect the geographic regions and tenure bands where the hiring-support tool will be used. Expanding coverage helps identify performance differences, bias, or reliability issues that a narrow regional and tenure-specific sample can conceal. The wording of option B matches the intended solution.",
-      "C": "Not selected. High scores on one subgroup do not establish generalizable performance. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. High scores on one subgroup do not establish generalizable performance. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Convenience-based qualitative impressions do not resolve coverage gaps.",
+      "B": "Correct — Expanding across intended regions and tenure bands tests whether performance generalizes.",
+      "C": "Not selected — Narrowing the dataset makes representativeness worse.",
+      "D": "Not selected — High scores on the existing subset cannot establish reliability for unrepresented groups."
     },
     "reference": "CCAR-P practice PDF, Q36 (third-party answer key)",
     "tags": [
@@ -1642,13 +1642,13 @@ window.COURSE_QUESTIONS = [
       "D",
       "E"
     ],
-    "explanation": "Model identity and version must be captured with each turn so operators can correlate behavior, quality changes, latency, and failures with the exact model configuration used. Request-scoped correlation identifiers must also propagate through every agent and tool call to reconstruct an end-to- end execution path. Without these records, incidents cannot be reliably traced across the multi-agent workflow. Exported spans, per-span metrics, and redacted tool-call logging are observability capabilities rather than gaps.\n\nStudy takeaway: Model identity and version on each turn are not recorded with the turn artifacts.; Request-scoped correlation identifiers do not propagate across agent and tool calls.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A useful trace must identify the model used and connect related agent and tool activity across the request.",
     "optionExplanations": {
-      "A": "Not selected. Exported spans, per-span metrics, and redacted tool-call logging are observability capabilities rather than gaps. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Exported spans, per-span metrics, and redacted tool-call logging are observability capabilities rather than gaps. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Exported spans, per-span metrics, and redacted tool-call logging are observability capabilities rather than gaps. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Model identity and version must be captured with each turn so operators can correlate behavior, quality changes, latency, and failures with the exact model configuration used. Request-scoped correlation identifiers must also propagate through every agent and tool call to reconstruct an end-to- end execution path. The wording of option D matches the intended solution.",
-      "E": "Correct. Model identity and version must be captured with each turn so operators can correlate behavior, quality changes, latency, and failures with the exact model configuration used. Request-scoped correlation identifiers must also propagate through every agent and tool call to reconstruct an end-to- end execution path. The wording of option E matches the intended solution."
+      "A": "Not selected — Exported step-level spans are a useful observability capability, not a gap.",
+      "B": "Not selected — Latency and token telemetry are useful measurements already being captured.",
+      "C": "Not selected — Redacted payload and outcome logging supports diagnosis while limiting exposure.",
+      "D": "Correct — Missing model/version attribution prevents isolating regressions after upgrades.",
+      "E": "Correct — Without correlation IDs, separate spans cannot reliably be reconstructed into a single request trace."
     },
     "reference": "CCAR-P practice PDF, Q37 (third-party answer key)",
     "tags": [
@@ -1691,13 +1691,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "D"
     ],
-    "explanation": "Curating and labeling the evaluation dataset ensures that each example has reliable reference data and belongs to the intended evaluation slices. Defining metrics and slices establishes what the framework measures across representative, edge, and adversarial cases before any outputs are produced. Scoring outputs, reviewing failures, and publishing dashboard metrics occur after the deployment has run against the prepared dataset.\n\nStudy takeaway: Curate and label the evaluation dataset to match the defined slices.; Define the metrics and slices the framework will report across representative, edge, and adversarial cases.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Define measurement and build the labeled dataset before running the system against it.",
     "optionExplanations": {
-      "A": "Not selected. Scoring outputs, reviewing failures, and publishing dashboard metrics occur after the deployment has run against the prepared dataset. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Curating and labeling the evaluation dataset ensures that each example has reliable reference data and belongs to the intended evaluation slices. Defining metrics and slices establishes what the framework measures across representative, edge, and adversarial cases before any outputs are produced. The wording of option B matches the intended solution.",
-      "C": "Not selected. Scoring outputs, reviewing failures, and publishing dashboard metrics occur after the deployment has run against the prepared dataset. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Curating and labeling the evaluation dataset ensures that each example has reliable reference data and belongs to the intended evaluation slices. Defining metrics and slices establishes what the framework measures across representative, edge, and adversarial cases before any outputs are produced. The wording of option D matches the intended solution.",
-      "E": "Not selected. Scoring outputs, reviewing failures, and publishing dashboard metrics occur after the deployment has run against the prepared dataset. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Publishing metrics and release gating require evaluation results.",
+      "B": "Correct — A labeled, representative dataset is needed to compare actual outputs with expectations.",
+      "C": "Not selected — Reviewing failures is an analysis step after initial runs.",
+      "D": "Correct — Metrics and slices specify what the dataset and scoring must cover.",
+      "E": "Not selected — Scoring and aggregation consume outputs generated during execution."
     },
     "reference": "CCAR-P practice PDF, Q38 (third-party answer key)",
     "tags": [
@@ -1735,12 +1735,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Caching the long, repeated system prompt avoids repeatedly processing the same prefix, reducing input-token cost across requests. Trimming retrieved context to only the spans relevant to the query directly lowers the large variable portion of each request’s token usage. Increasing retrieval depth or adding more prompt content raises input costs, while switching to a heavier model increases inference cost without reducing the repeated prompt or retrieved-context tokens. \n\nStudy takeaway: Move the long, repeated system prompt into a cacheable prefix and trim retrieved context to the spans relevant to each query.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Target repeated system-prefix tokens and excessive retrieved input rather than increasing context or model cost.",
     "optionExplanations": {
-      "A": "Not selected. Caching the long, repeated system prompt avoids repeatedly processing the same prefix, reducing input-token cost across requests. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Caching the long, repeated system prompt avoids repeatedly processing the same prefix, reducing input-token cost across requests. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Caching the long, repeated system prompt avoids repeatedly processing the same prefix, reducing input-token cost across requests. Trimming retrieved context to only the spans relevant to the query directly lowers the large variable portion of each request’s token usage. The wording of option C matches the intended solution.",
-      "D": "Not selected. Caching the long, repeated system prompt avoids repeatedly processing the same prefix, reducing input-token cost across requests. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Greater retrieval depth adds input tokens to the dominant cost source.",
+      "B": "Not selected — More prompt text increases the repeated input cost.",
+      "C": "Correct — Caching the stable prefix and retaining only relevant spans directly reduce redundant processing.",
+      "D": "Not selected — A heavier model increases inference expense without addressing the input-token problem."
     },
     "reference": "CCAR-P practice PDF, Q39 (third-party answer key)",
     "tags": [
@@ -1783,13 +1783,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "E"
     ],
-    "explanation": "Comparing the current system prompt and output schema with the last known good version identifies configuration changes introduced during maintenance that can alter JSON formatting. Replaying premaintenance requests against the current configuration provides a controlled comparison and exposes whether malformed output originates from the model response or downstream parsing. Together, these steps isolate changes in behavior while preserving the same request inputs. Clearing caches, changing model tiers, or increasing token limits may alter symptoms but do not directly establish the maintenance-related cause. \n\nStudy takeaway: Compare the current system prompt and output schema configuration against the last known good version from before the maintenance window.; Replay a set of premaintenance requests against the current configuration and inspect the raw model output before downstream parsing.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Compare configuration changes and replay known-good inputs to locate where malformed output first appears.",
     "optionExplanations": {
-      "A": "Not selected. Clearing caches, changing model tiers, or increasing token limits may alter symptoms but do not directly establish the maintenance-related cause. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Comparing the current system prompt and output schema with the last known good version identifies configuration changes introduced during maintenance that can alter JSON formatting. Replaying premaintenance requests against the current configuration provides a controlled comparison and exposes whether malformed output originates from the model response or downstream parsing. The wording of option B matches the intended solution.",
-      "C": "Not selected. Clearing caches, changing model tiers, or increasing token limits may alter symptoms but do not directly establish the maintenance-related cause. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Clearing caches, changing model tiers, or increasing token limits may alter symptoms but do not directly establish the maintenance-related cause. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Comparing the current system prompt and output schema with the last known good version identifies configuration changes introduced during maintenance that can alter JSON formatting. Replaying premaintenance requests against the current configuration provides a controlled comparison and exposes whether malformed output originates from the model response or downstream parsing. The wording of option E matches the intended solution."
+      "A": "Not selected — Clearing a cache is a possible remedy but does not identify the changed configuration.",
+      "B": "Correct — Diffing prompts and schema settings reveals changes coinciding with maintenance.",
+      "C": "Not selected — Changing models introduces another variable before isolating the existing failure.",
+      "D": "Not selected — A larger output limit helps only if truncation is established; it is not the strongest initial diagnostic.",
+      "E": "Correct — Raw replay distinguishes malformed model output from a downstream parser or integration failure."
     },
     "reference": "CCAR-P practice PDF, Q40 (third-party answer key)",
     "tags": [
@@ -1832,13 +1832,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "C"
     ],
-    "explanation": "Defining the hypothesis and primary success metric establishes exactly what the prompt comparison is intended to test and how success will be measured. Determining the minimum detectable effect and required sample size ensures the experiment has sufficient statistical power before participants or requests are randomly assigned. Analysis, promotion decisions, and documentation occur only after the experiment produces results.\n\nStudy takeaway: Determine the minimum detectable effect size and the sample size needed for power.; Define the hypothesis and the primary success metric for the comparison.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Pre-register the experiment's hypothesis, metric and statistical design before observing results.",
     "optionExplanations": {
-      "A": "Correct. Defining the hypothesis and primary success metric establishes exactly what the prompt comparison is intended to test and how success will be measured. Determining the minimum detectable effect and required sample size ensures the experiment has sufficient statistical power before participants or requests are randomly assigned. The wording of option A matches the intended solution.",
-      "B": "Not selected. Analysis, promotion decisions, and documentation occur only after the experiment produces results. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Defining the hypothesis and primary success metric establishes exactly what the prompt comparison is intended to test and how success will be measured. Determining the minimum detectable effect and required sample size ensures the experiment has sufficient statistical power before participants or requests are randomly assigned. The wording of option C matches the intended solution.",
-      "D": "Not selected. Analysis, promotion decisions, and documentation occur only after the experiment produces results. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Analysis, promotion decisions, and documentation occur only after the experiment produces results. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Power and effect-size planning establish how many samples are needed.",
+      "B": "Not selected — Promotion decisions follow analysis of the experimental evidence.",
+      "C": "Correct — A predefined hypothesis and success metric prevent post-hoc selection of favorable outcomes.",
+      "D": "Not selected — Result analysis occurs only after data has been collected.",
+      "E": "Not selected — The recommendation and accepted trade-offs are documented after the comparison."
     },
     "reference": "CCAR-P practice PDF, Q41 (third-party answer key)",
     "tags": [
@@ -1881,13 +1881,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "D"
     ],
-    "explanation": "A Claude model can retain demographic patterns and biases learned during broad pretraining, even when it is not trained or fine-tuned on the company’s own data. In a candidate-screening context, those patterns can affect recommendations or rankings for protected groups. Evaluating outcome- disparity metrics across relevant groups before deployment helps identify unequal treatment or adverse impact. A provider’s responsible-use policy and disclosure that AI is used do not replace system-specific fairness testing.\n\nStudy takeaway: The model may carry demographic biases from pretraining that manifest in screening outcomes regardless of fine-tuning.; The system should be evaluated on outcome-disparity metrics across protected groups before deployment.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Bias can arise from model pretraining and system use even without company-specific training data.",
     "optionExplanations": {
-      "A": "Not selected. A provider’s responsible-use policy and disclosure that AI is used do not replace system-specific fairness testing. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. A provider’s responsible-use policy and disclosure that AI is used do not replace system-specific fairness testing. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. A Claude model can retain demographic patterns and biases learned during broad pretraining, even when it is not trained or fine-tuned on the company’s own data. In a candidate-screening context, those patterns can affect recommendations or rankings for protected groups. The wording of option C matches the intended solution.",
-      "D": "Correct. A Claude model can retain demographic patterns and biases learned during broad pretraining, even when it is not trained or fine-tuned on the company’s own data. In a candidate-screening context, those patterns can affect recommendations or rankings for protected groups. The wording of option D matches the intended solution.",
-      "E": "Not selected. A provider’s responsible-use policy and disclosure that AI is used do not replace system-specific fairness testing. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Disclosure supports transparency but cannot measure unequal outcomes.",
+      "B": "Not selected — Bias can occur without explicit protected-class labels in training data.",
+      "C": "Correct — Pretraining can encode stereotypes or patterns that affect screening decisions.",
+      "D": "Correct — Disparity testing measures whether outcomes differ materially across relevant groups.",
+      "E": "Not selected — A vendor policy does not establish fairness of this particular deployment."
     },
     "reference": "CCAR-P practice PDF, Q42 (third-party answer key)",
     "tags": [
@@ -1930,13 +1930,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "C"
     ],
-    "explanation": "An ethics review for AI deployments focuses on how outputs affect people and who answers for the outcomes. Checking that outputs do not rest on unsupported generalizations about people addresses bias and stereotyping, a core ethical risk when models reproduce patterns that the data does not justify. Requiring human accountability for high-impact decisions ensures that responsibility stays with identifiable people rather than being deflected onto the model. Licensing terms and latency targets are legal and performance concerns, not ethical ones. Limiting the review to high-confidence outputs is also flawed, because a model can be confidently wrong or biased.\n\nStudy takeaway: Verify that outputs do not rely on generalizations about people that the underlying data does not support.; Confirm that high-impact decisions retain human accountability rather than being attributed to the model.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Ethics review focuses on supported judgments about people and accountability for consequential actions.",
     "optionExplanations": {
-      "A": "Not selected. Limiting the review to high-confidence outputs is also flawed, because a model can be confidently wrong or biased. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. An ethics review for AI deployments focuses on how outputs affect people and who answers for the outcomes. Checking that outputs do not rest on unsupported generalizations about people addresses bias and stereotyping, a core ethical risk when models reproduce patterns that the data does not justify. The wording of option B matches the intended solution.",
-      "C": "Correct. An ethics review for AI deployments focuses on how outputs affect people and who answers for the outcomes. Checking that outputs do not rest on unsupported generalizations about people addresses bias and stereotyping, a core ethical risk when models reproduce patterns that the data does not justify. The wording of option C matches the intended solution.",
-      "D": "Not selected. Limiting the review to high-confidence outputs is also flawed, because a model can be confidently wrong or biased. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Limiting the review to high-confidence outputs is also flawed, because a model can be confidently wrong or biased. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Licensing is a legal/procurement check, not the specific ethical safeguards being tested.",
+      "B": "Correct — Checking unsupported generalizations helps prevent stereotyping and unfair decisions.",
+      "C": "Correct — A responsible human or organization must remain accountable for high-impact outcomes.",
+      "D": "Not selected — Performance SLOs matter, but do not directly test ethical treatment or accountability.",
+      "E": "Not selected — Confidence alone cannot determine ethical risk; confident outputs can still be harmful."
     },
     "reference": "CCAR-P practice PDF, Q43 (third-party answer key)",
     "tags": [
@@ -1974,12 +1974,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Human review belongs between the model’s output and any high-impact or irreversible action. This creates a meaningful approval gate, allowing the reviewer to verify defined safety, accuracy, policy, or business criteria before harm can occur. Post-action review cannot prevent an irreversible result, while random or undefined review leaves critical cases without reliable oversight. \n\nStudy takeaway: Place a human reviewer between the model's output and any high-impact, irreversible action, with explicit criteria for what the reviewer must check before approval.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Human approval must occur before consequential irreversible actions and use clear review criteria.",
     "optionExplanations": {
-      "A": "Not selected. Post-action review cannot prevent an irreversible result, while random or undefined review leaves critical cases without reliable oversight. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Human review belongs between the model’s output and any high-impact or irreversible action. This creates a meaningful approval gate, allowing the reviewer to verify defined safety, accuracy, policy, or business criteria before harm can occur. The wording of option B matches the intended solution.",
-      "C": "Not selected. Post-action review cannot prevent an irreversible result, while random or undefined review leaves critical cases without reliable oversight. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Post-action review cannot prevent an irreversible result, while random or undefined review leaves critical cases without reliable oversight. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — A post-action audit cannot prevent an irreversible harmful outcome.",
+      "B": "Correct — A pre-action gate lets a reviewer stop or correct a high-impact decision.",
+      "C": "Not selected — Random samples help measure quality but do not guarantee review of critical actions.",
+      "D": "Not selected — Removing review sacrifices control over consequential outcomes for throughput."
     },
     "reference": "CCAR-P practice PDF, Q44 (third-party answer key)",
     "tags": [
@@ -2017,12 +2017,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Credentials should be obtained at runtime from a secure secret store rather than embedded in repository files. Version-controlled configuration can be copied, retained in commit history, and exposed to anyone with repository access, making an API key difficult to fully revoke from history. Secret stores keep sensitive values separate from code and allow controlled access, rotation, and auditing. Configuration scope ordering does not make storing credentials in a tracked file safe.\n\nStudy takeaway: Credentials must be resolved at runtime from a secret store and never stored in version- controlled files.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A committed API key is a credential-management failure, not a configuration precedence problem.",
     "optionExplanations": {
-      "A": "Not selected. Configuration scope ordering does not make storing credentials in a tracked file safe. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Configuration scope ordering does not make storing credentials in a tracked file safe. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Credentials should be obtained at runtime from a secure secret store rather than embedded in repository files. Version-controlled configuration can be copied, retained in commit history, and exposed to anyone with repository access, making an API key difficult to fully revoke from history. The wording of option C matches the intended solution.",
-      "D": "Not selected. Configuration scope ordering does not make storing credentials in a tracked file safe. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Scope precedence does not make a repository safe for secrets.",
+      "B": "Not selected — Ordering of managed and project settings is unrelated to credential exposure.",
+      "C": "Correct — Resolving credentials at runtime avoids distributing plaintext secrets through version control.",
+      "D": "Not selected — MCP definitions do not universally need environment variables; secret handling is the relevant issue."
     },
     "reference": "CCAR-P practice PDF, Q45 (third-party answer key)",
     "tags": [
@@ -2065,13 +2065,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "D"
     ],
-    "explanation": "Line count is a poor proxy for risk, and removing review strips away the verification step that AI- generated code needs. Both objections reflect the Diligence competency, which holds humans accountable for checking AI output before it takes effect. A three-line change to an authentication check, a permissions rule, or a database migration can cause far more damage than a 300-line refactor of test fixtures, so a size threshold misjudges where risk actually lives. Code review is also the point where a human confirms that AI output is correct, secure, and fits the system's intent, and skipping it leaves plausible-looking but flawed changes unchecked. Raising the threshold or expanding review capacity misses the core problem, and rejecting all AI pull requests abandons verification in favor of blanket avoidance.\n\nStudy takeaway: Line count is a poor proxy for the actual risk a code change introduces into the system.; Removing review removes the verification mechanism that AI-generated output requires across the workflow.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Review requirements should follow change risk and preserve independent verification of generated code.",
     "optionExplanations": {
-      "A": "Not selected. Raising the threshold or expanding review capacity misses the core problem, and rejecting all AI pull requests abandons verification in favor of blanket avoidance. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Raising the threshold or expanding review capacity misses the core problem, and rejecting all AI pull requests abandons verification in favor of blanket avoidance. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Line count is a poor proxy for risk, and removing review strips away the verification step that AI- generated code needs. Both objections reflect the Diligence competency, which holds humans accountable for checking AI output before it takes effect. The wording of option C matches the intended solution.",
-      "D": "Correct. Line count is a poor proxy for risk, and removing review strips away the verification step that AI- generated code needs. Both objections reflect the Diligence competency, which holds humans accountable for checking AI output before it takes effect. The wording of option D matches the intended solution.",
-      "E": "Not selected. Raising the threshold or expanding review capacity misses the core problem, and rejecting all AI pull requests abandons verification in favor of blanket avoidance. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Raising the line threshold increases exposure and still uses a poor risk proxy.",
+      "B": "Not selected — Expanding review capacity is a possible operational response, not the underlying diligence objection.",
+      "C": "Correct — A one-line authorization or deletion change can be high-impact; line count is not risk.",
+      "D": "Correct — Bypassing review removes the independent check needed to catch AI-generated mistakes.",
+      "E": "Not selected — Blanket rejection discards potentially valuable AI assistance instead of validating it."
     },
     "reference": "CCAR-P practice PDF, Q46 (third-party answer key)",
     "tags": [
@@ -2114,13 +2114,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "B"
     ],
-    "explanation": "Hallucination (a fluent answer with no support in the retrieved documents) and over-refusal (declining a legitimate query because surface features resemble something risky) are failure modes intrinsic to LLM-based systems. Both arise from the probabilistic way the model generates and filters text, so they can occur even when every surrounding component works perfectly. Mitigating them requires LLM- specific measures such as grounding checks, citation requirements, careful prompt design, and evaluation against refusal benchmarks. An expired TLS certificate, a database timeout, and a misconfigured load balancer are ordinary infrastructure defects that would affect any networked application, whether or not it uses a language model.\n\nStudy takeaway: the model generating a plausible-sounding answer that is unsupported by any retrieved document; the model refusing a legitimate query because surface features triggered an overly broad safety pattern. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Distinguish failures intrinsic to probabilistic language-model behavior from infrastructure defects.",
     "optionExplanations": {
-      "A": "Correct. Hallucination (a fluent answer with no support in the retrieved documents) and over-refusal (declining a legitimate query because surface features resemble something risky) are failure modes intrinsic to LLM-based systems. Both arise from the probabilistic way the model generates and filters text, so they can occur even when every surrounding component works perfectly. The wording of option A matches the intended solution.",
-      "B": "Correct. Hallucination (a fluent answer with no support in the retrieved documents) and over-refusal (declining a legitimate query because surface features resemble something risky) are failure modes intrinsic to LLM-based systems. Both arise from the probabilistic way the model generates and filters text, so they can occur even when every surrounding component works perfectly. The wording of option B matches the intended solution.",
-      "C": "Not selected. An expired TLS certificate, a database timeout, and a misconfigured load balancer are ordinary infrastructure defects that would affect any networked application, whether or not it uses a language model. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. An expired TLS certificate, a database timeout, and a misconfigured load balancer are ordinary infrastructure defects that would affect any networked application, whether or not it uses a language model. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. An expired TLS certificate, a database timeout, and a misconfigured load balancer are ordinary infrastructure defects that would affect any networked application, whether or not it uses a language model. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Plausible unsupported output is a grounding/hallucination failure.",
+      "B": "Correct — An overly broad safety trigger can produce false refusals of legitimate requests.",
+      "C": "Not selected — TLS expiry is a transport/infrastructure issue independent of LLM reasoning.",
+      "D": "Not selected — Database timeouts are conventional retrieval-infrastructure failures.",
+      "E": "Not selected — Incorrect load-balancer routing is a conventional deployment/configuration defect."
     },
     "reference": "CCAR-P practice PDF, Q47 (third-party answer key)",
     "tags": [
@@ -2163,13 +2163,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "E"
     ],
-    "explanation": "Determine whether the regulation applies by evaluating the deployment’s data types, jurisdictions, and intended audience. The team must also inventory the vendor-provided compliance tooling and confirm the available compliance affordances before assessing flows against clause-level obligations. Gap analysis, remediation planning, and sign-off documentation occur later, after the relevant requirements have been mapped and evaluated.\n\nStudy takeaway: Identify the applicability of the regulation based on data types, jurisdiction, and audience.; Inventory the vendor-provided compliance tooling and confirm which compliance affordances are in place. . The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Establish which regulation applies and what compliance capabilities exist before mapping requirements to data flows.",
     "optionExplanations": {
-      "A": "Not selected. Gap analysis, remediation planning, and sign-off documentation occur later, after the relevant requirements have been mapped and evaluated. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Determine whether the regulation applies by evaluating the deployment’s data types, jurisdictions, and intended audience. The team must also inventory the vendor-provided compliance tooling and confirm the available compliance affordances before assessing flows against clause-level obligations. The wording of option B matches the intended solution.",
-      "C": "Not selected. Gap analysis, remediation planning, and sign-off documentation occur later, after the relevant requirements have been mapped and evaluated. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Gap analysis, remediation planning, and sign-off documentation occur later, after the relevant requirements have been mapped and evaluated. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Determine whether the regulation applies by evaluating the deployment’s data types, jurisdictions, and intended audience. The team must also inventory the vendor-provided compliance tooling and confirm the available compliance affordances before assessing flows against clause-level obligations. The wording of option E matches the intended solution."
+      "A": "Not selected — Comparing controls with clauses requires the earlier applicability and mapping work.",
+      "B": "Correct — Data, jurisdiction and users establish the scope of the applicable regulation.",
+      "C": "Not selected — Scheduling remediation comes after gaps are identified and prioritized.",
+      "D": "Not selected — Documenting gaps and residual risk follows the control assessment.",
+      "E": "Correct — Inventorying available compliance controls establishes what can support the mapping."
     },
     "reference": "CCAR-P practice PDF, Q48 (third-party answer key)",
     "tags": [
@@ -2212,13 +2212,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "C"
     ],
-    "explanation": "Placing service credentials in the prompt context and enforcing RBAC only at the response-rendering layer are both genuine security gaps. Anything in the prompt context is treated as ordinary text, so secrets there can be echoed in model output, captured in logs and traces, or extracted through prompt injection; credentials belong in a server-side secrets store and are applied outside the model. Enforcing access control only when rendering the response means the model has already read restricted data, which can then surface through summaries, tool calls, or indirect leakage. Authorization has to happen before data retrieval so the model never sees content the user is not entitled to. Least- privilege service principals, scope-restricted per-user OAuth tokens, and TLS between services are sound controls, not gaps.\n\nStudy takeaway: Service credentials are placed in the prompt context, where they can leak into logs and traces.; Role-based access control (RBAC) is enforced only at the response-rendering layer after the model accesses restricted data.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Keep credentials outside prompts and authorize data before retrieval or model exposure.",
     "optionExplanations": {
-      "A": "Not selected. Least- privilege service principals, scope-restricted per-user OAuth tokens, and TLS between services are sound controls, not gaps. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Placing service credentials in the prompt context and enforcing RBAC only at the response-rendering layer are both genuine security gaps. Anything in the prompt context is treated as ordinary text, so secrets there can be echoed in model output, captured in logs and traces, or extracted through prompt injection; credentials belong in a server-side secrets store and are applied outside the model. The wording of option B matches the intended solution.",
-      "C": "Correct. Placing service credentials in the prompt context and enforcing RBAC only at the response-rendering layer are both genuine security gaps. Anything in the prompt context is treated as ordinary text, so secrets there can be echoed in model output, captured in logs and traces, or extracted through prompt injection; credentials belong in a server-side secrets store and are applied outside the model. The wording of option C matches the intended solution.",
-      "D": "Not selected. Least- privilege service principals, scope-restricted per-user OAuth tokens, and TLS between services are sound controls, not gaps. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Least- privilege service principals, scope-restricted per-user OAuth tokens, and TLS between services are sound controls, not gaps. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Scoped server-side tool execution is a security control already in place.",
+      "B": "Correct — Secrets in model context can leak through outputs, logs or traces.",
+      "C": "Correct — Response-layer authorization occurs too late: restricted data has already entered context.",
+      "D": "Not selected — Per-user scoped tokens support least-privilege access.",
+      "E": "Not selected — Transport encryption protects data in transit; it is not itself a gap."
     },
     "reference": "CCAR-P practice PDF, Q49 (third-party answer key)",
     "tags": [
@@ -2261,13 +2261,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "E"
     ],
-    "explanation": "A structured risk assessment begins with inventory work, because threats cannot be weighed until it is known what is at stake and who might cause harm. Identifying the assets the Claude-based deployment touches, along with the sensitivity of each, establishes what could be damaged and how severe that damage would be. Enumerating the relevant threat actors and attack vectors establishes who might attack and through which paths. Only with both inventories in hand can each threat be mapped against each asset to estimate likelihood and impact. Recommending mitigations, accepting residual risk, and documenting the outcome all come later, because they depend on the results of that likelihood and impact analysis.\n\nStudy takeaway: Identify the assets that the deployment touches, along with the sensitivity of each asset.; Enumerate the threat actors and attack vectors that are relevant to the deployment. . The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Inventory sensitive assets and relevant threats before estimating likelihood and impact.",
     "optionExplanations": {
-      "A": "Not selected. Recommending mitigations, accepting residual risk, and documenting the outcome all come later, because they depend on the results of that likelihood and impact analysis. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Recommending mitigations, accepting residual risk, and documenting the outcome all come later, because they depend on the results of that likelihood and impact analysis. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. A structured risk assessment begins with inventory work, because threats cannot be weighed until it is known what is at stake and who might cause harm. Identifying the assets the Claude-based deployment touches, along with the sensitivity of each, establishes what could be damaged and how severe that damage would be. The wording of option C matches the intended solution.",
-      "D": "Not selected. Recommending mitigations, accepting residual risk, and documenting the outcome all come later, because they depend on the results of that likelihood and impact analysis. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. A structured risk assessment begins with inventory work, because threats cannot be weighed until it is known what is at stake and who might cause harm. Identifying the assets the Claude-based deployment touches, along with the sensitivity of each, establishes what could be damaged and how severe that damage would be. The wording of option E matches the intended solution."
+      "A": "Not selected — The final assessment document depends on completed threat analysis.",
+      "B": "Not selected — Mitigation recommendations require knowing the identified risks and their severity.",
+      "C": "Correct — Asset identity and sensitivity establish what could be harmed.",
+      "D": "Not selected — As with B, remediation and residual-risk decisions come after assessment.",
+      "E": "Correct — Threat actors and vectors identify how those assets could be compromised."
     },
     "reference": "CCAR-P practice PDF, Q50 (third-party answer key)",
     "tags": [
@@ -2305,12 +2305,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Role-based access control belongs at the retrieval layer, where document permissions can be enforced before content is selected for the model context. This prevents unauthorized material from ever reaching prompt construction or Claude, reducing the risk of disclosure through generated responses. System-prompt instructions and model refusals are not reliable authorization controls, while post- generation filtering acts too late because restricted data may already have influenced the response.\n\nStudy takeaway: At the retrieval layer, before any role-restricted content reaches the prompt-construction step or the model.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Authorization belongs at the retrieval boundary so restricted documents never enter the model's context.",
     "optionExplanations": {
-      "A": "Not selected. System-prompt instructions and model refusals are not reliable authorization controls, while post- generation filtering acts too late because restricted data may already have influenced the response. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Role-based access control belongs at the retrieval layer, where document permissions can be enforced before content is selected for the model context. This prevents unauthorized material from ever reaching prompt construction or Claude, reducing the risk of disclosure through generated responses. The wording of option B matches the intended solution.",
-      "C": "Not selected. System-prompt instructions and model refusals are not reliable authorization controls, while post- generation filtering acts too late because restricted data may already have influenced the response. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. System-prompt instructions and model refusals are not reliable authorization controls, while post- generation filtering acts too late because restricted data may already have influenced the response. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — A natural-language instruction is not an enforceable authorization boundary.",
+      "B": "Correct — Pre-retrieval role filtering prevents unauthorized documents from reaching prompt assembly.",
+      "C": "Not selected — A refusal is not a substitute for checking permissions.",
+      "D": "Not selected — Post-filtering cannot reliably remove all direct or inferred disclosure from data already seen by the model."
     },
     "reference": "CCAR-P practice PDF, Q51 (third-party answer key)",
     "tags": [
@@ -2348,12 +2348,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Delegation scope should reflect the nature and impact of the risk, rather than relying only on a dollar threshold. Even low-value refunds can create risks such as fraud patterns, inconsistent policy application, customer harm, or cumulative financial loss. A workflow may be appropriate for some refund decisions, but its authority should be based on defined risk controls, escalation criteria, and monitoring. Efficiency alone does not establish that a decision is safe to automate. \n\nStudy takeaway: Delegation scope should reflect the type of risk involved, not the transaction size alone.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Delegation should be based on the nature and consequences of risk, not a dollar threshold alone.",
     "optionExplanations": {
-      "A": "Not selected. Efficiency alone does not establish that a decision is safe to automate. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Delegation scope should reflect the nature and impact of the risk, rather than relying only on a dollar threshold. Even low-value refunds can create risks such as fraud patterns, inconsistent policy application, customer harm, or cumulative financial loss. The wording of option B matches the intended solution.",
-      "C": "Not selected. Efficiency alone does not establish that a decision is safe to automate. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Efficiency alone does not establish that a decision is safe to automate. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Universal review is disproportionate when low-risk decisions can be safely automated.",
+      "B": "Correct — Small refunds can still create fraud, policy, cumulative or fairness risks; use risk-based authority limits.",
+      "C": "Not selected — Efficiency is a benefit, not the sole criterion for granting decision authority.",
+      "D": "Not selected — Financial workflows can be delegated selectively with suitable controls."
     },
     "reference": "CCAR-P practice PDF, Q52 (third-party answer key)",
     "tags": [
@@ -2396,13 +2396,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "C"
     ],
-    "explanation": "Sampling recent summaries measures whether fabricated citations are a broader reliability pattern or an isolated event, providing evidence for proportionate action. Reviewing the generation pipeline identifies whether citation-grounding controls, such as source retrieval and verification, are absent or failing. Disabling the system immediately is premature without diagnostic evidence, while dismissing the report or assuring users that fabrication cannot occur ignores a potential quality risk.\n\nStudy takeaway: Sample recent summaries to estimate the fabrication frequency across the population.; Review whether citation-grounding controls exist anywhere in the current generation pipeline.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Assess the frequency of fabricated citations and inspect the controls before deciding on the scope of architectural action.",
     "optionExplanations": {
-      "A": "Correct. Sampling recent summaries measures whether fabricated citations are a broader reliability pattern or an isolated event, providing evidence for proportionate action. Reviewing the generation pipeline identifies whether citation-grounding controls, such as source retrieval and verification, are absent or failing. The wording of option A matches the intended solution.",
-      "B": "Not selected. Disabling the system immediately is premature without diagnostic evidence, while dismissing the report or assuring users that fabrication cannot occur ignores a potential quality risk. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Sampling recent summaries measures whether fabricated citations are a broader reliability pattern or an isolated event, providing evidence for proportionate action. Reviewing the generation pipeline identifies whether citation-grounding controls, such as source retrieval and verification, are absent or failing. The wording of option C matches the intended solution.",
-      "D": "Not selected. Disabling the system immediately is premature without diagnostic evidence, while dismissing the report or assuring users that fabrication cannot occur ignores a potential quality risk. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Disabling the system immediately is premature without diagnostic evidence, while dismissing the report or assuring users that fabrication cannot occur ignores a potential quality risk. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Sampling production summaries estimates whether the problem is systemic.",
+      "B": "Not selected — Immediate shutdown may be appropriate if risk warrants it, but the question asks for diagnosis first.",
+      "C": "Correct — Checking grounding controls identifies a potential design weakness in citation generation.",
+      "D": "Not selected — Claiming fabrication is impossible is contradicted by the reported incident.",
+      "E": "Not selected — One report is evidence requiring investigation, not grounds to assume isolation."
     },
     "reference": "CCAR-P practice PDF, Q53 (third-party answer key)",
     "tags": [
@@ -2440,12 +2440,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "An indirect prompt injection that steers the model into sending retrieved sensitive content to an attacker-controlled URL is the clearest data-exfiltration risk. The danger comes from combining two capabilities in one agent: access to private data through internal retrieval, and an outbound channel through the HTTP tool. When untrusted text inside a retrieved document is treated as instructions, an attacker can chain these capabilities to move confidential data outside the organization without the user's intent. The other scenarios describe expected, authorized behavior, such as an allow-listed call made for a user-initiated request or a user viewing documents they are permitted to see. Mitigations include treating retrieved content as data rather than commands, restricting outbound destinations, and requiring approval for sensitive tool calls.\n\nStudy takeaway: Adversarial content in retrieved documents instructs the model to call the outbound HTTP tool and send sensitive content to an attacker-controlled URL.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Exfiltration occurs when access to private data is combined with an unauthorized outbound destination.",
     "optionExplanations": {
-      "A": "Correct. An indirect prompt injection that steers the model into sending retrieved sensitive content to an attacker-controlled URL is the clearest data-exfiltration risk. The danger comes from combining two capabilities in one agent: access to private data through internal retrieval, and an outbound channel through the HTTP tool. The wording of option A matches the intended solution.",
-      "B": "Not selected. Mitigations include treating retrieved content as data rather than commands, restricting outbound destinations, and requiring approval for sensitive tool calls. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Mitigations include treating retrieved content as data rather than commands, restricting outbound destinations, and requiring approval for sensitive tool calls. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Mitigations include treating retrieved content as data rather than commands, restricting outbound destinations, and requiring approval for sensitive tool calls. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Injected retrieved text can persuade the model to transmit protected information through its outbound tool.",
+      "B": "Not selected — A user-authorized lookup to an approved domain is normal tool use, not inherently exfiltration.",
+      "C": "Not selected — A routine answer alone provides no evidence of unauthorized transfer.",
+      "D": "Not selected — Retrieving a document within the user's permissions is normal authorized access."
     },
     "reference": "CCAR-P practice PDF, Q54 (third-party answer key)",
     "tags": [
