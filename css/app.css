@@ -4585,3 +4585,9 @@ html body,html body[data-cosmic-view]{background:radial-gradient(1200px 700px at
 @keyframes bm-pop{0%{transform:scale(.6) translateY(-3px)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
 
 @media (prefers-reduced-motion:reduce){#app .bm-btn.saved.pm-pop .bm-icon{animation:none}}
+
+/* Use regular weight for question stems in every course and review. */
+#app .question,
+#app:not(#pm-a):not(#pm-b) .review h3 {
+  font-weight: 400 !important;
+}
