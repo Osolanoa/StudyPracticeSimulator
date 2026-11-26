@@ -2483,12 +2483,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Constraining responses to source-supported content, requiring citations, and adding a verification step directly addresses ungrounded claims, which are hallucinations relative to the retrieved documents. Requiring each claim to cite a specific passage makes unsupported statements visible. The verification step then checks that every claim actually traces back to the source and rejects or revises those that do not. Scoring new model versions against an adversarial evaluation set can detect regressions, but it does not prevent unsupported content in production responses. OAuth tokens and ingestion-time input classifiers deal with access control and prompt injection rather than grounding fidelity.\n\nStudy takeaway: constraining responses to source-supported content combined with required citations and a verification step. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Grounding failures require evidence constraints and a check that claims are actually supported.",
     "optionExplanations": {
-      "A": "Not selected. OAuth tokens and ingestion-time input classifiers deal with access control and prompt injection rather than grounding fidelity. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. OAuth tokens and ingestion-time input classifiers deal with access control and prompt injection rather than grounding fidelity. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Constraining responses to source-supported content, requiring citations, and adding a verification step directly addresses ungrounded claims, which are hallucinations relative to the retrieved documents. Requiring each claim to cite a specific passage makes unsupported statements visible. The wording of option C matches the intended solution.",
-      "D": "Not selected. OAuth tokens and ingestion-time input classifiers deal with access control and prompt injection rather than grounding fidelity. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Per-user tokens address authorization, not whether claims follow evidence.",
+      "B": "Not selected — Versioned evaluations detect regressions but do not directly prevent unsupported claims in production.",
+      "C": "Correct — Citations plus verification make unsupported claims identifiable and correctable before release.",
+      "D": "Not selected — Input classifiers address malicious content; they do not ensure ordinary generated claims are grounded."
     },
     "reference": "CCAR-P practice PDF, Q56 (third-party answer key)",
     "tags": [
@@ -2526,12 +2526,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Claude Enterprise supports a HIPAA-eligible deployment when it is covered by a signed Business Associate Agreement and configured with appropriate privacy and accountability controls. Zero Data Retention helps limit retention of sensitive healthcare data, while audit logging provides the traceability needed for compliance monitoring and investigations. Consumer or personal accounts without a BAA are not appropriate for PHI processing, and disabling logs removes an important compliance control rather than satisfying HIPAA requirements.\n\nStudy takeaway: Claude Enterprise with a signed Business Associate Agreement, Zero Data Retention enabled, and audit logging configured for compliance tracking.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Among these choices, the source key favors contractual safeguards, appropriate retention and auditability; actual HIPAA eligibility depends on the specific service and agreement.",
     "optionExplanations": {
-      "A": "Not selected. Consumer or personal accounts without a BAA are not appropriate for PHI processing, and disabling logs removes an important compliance control rather than satisfying HIPAA requirements. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Claude Enterprise supports a HIPAA-eligible deployment when it is covered by a signed Business Associate Agreement and configured with appropriate privacy and accountability controls. Zero Data Retention helps limit retention of sensitive healthcare data, while audit logging provides the traceability needed for compliance monitoring and investigations. The wording of option B matches the intended solution.",
-      "C": "Not selected. Consumer or personal accounts without a BAA are not appropriate for PHI processing, and disabling logs removes an important compliance control rather than satisfying HIPAA requirements. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Consumer or personal accounts without a BAA are not appropriate for PHI processing, and disabling logs removes an important compliance control rather than satisfying HIPAA requirements. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — A consumer account without the required contractual safeguards is not sufficient.",
+      "B": "Correct — A signed BAA, appropriate retention and controlled audit logging address the stated safeguards; confirm service eligibility and configuration.",
+      "C": "Not selected — Avoiding logs alone does not satisfy HIPAA or replace a required BAA.",
+      "D": "Not selected — Personal accounts without approved safeguards cannot establish an appropriate PHI-processing arrangement."
     },
     "reference": "CCAR-P practice PDF, Q57 (third-party answer key)",
     "tags": [
@@ -2575,13 +2575,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "E"
     ],
-    "explanation": "The agent needs read-only catalog and policy data plus a narrowly scoped ability to create drafts in the review queue. Sending emails directly would bypass human review, and administering an unrelated production database exceeds its assignment. Tool permissions, not model discretion alone, must enforce these boundaries.\n\nStudy takeaway: Read-only catalog lookup for vendor and SKU information.; Draft-write tool to create purchase-request drafts in the review queue.; Read-only retrieval of relevant procurement policies.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Drafting authority requires access to supporting information and the draft queue, not authority to commit purchases.",
     "optionExplanations": {
-      "A": "Correct. The agent needs read-only catalog and policy data plus a narrowly scoped ability to create drafts in the review queue. Sending emails directly would bypass human review, and administering an unrelated production database exceeds its assignment. Tool permissions, not model discretion alone, must enforce these boundaries. The wording of option A matches the intended solution.",
-      "B": "Not selected. Tool permissions, not model discretion alone, must enforce these boundaries. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. The agent needs read-only catalog and policy data plus a narrowly scoped ability to create drafts in the review queue. Sending emails directly would bypass human review, and administering an unrelated production database exceeds its assignment. Tool permissions, not model discretion alone, must enforce these boundaries. The wording of option C matches the intended solution.",
-      "D": "Not selected. Tool permissions, not model discretion alone, must enforce these boundaries. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. The agent needs read-only catalog and policy data plus a narrowly scoped ability to create drafts in the review queue. Sending emails directly would bypass human review, and administering an unrelated production database exceeds its assignment. Tool permissions, not model discretion alone, must enforce these boundaries. The wording of option E matches the intended solution."
+      "A": "Correct — Catalog information supports drafting an accurate request.",
+      "B": "Not selected — Sending messages to vendors exceeds the explicit draft-only authority.",
+      "C": "Correct — The queue is the authorized destination for drafts awaiting review.",
+      "D": "Not selected — Database administration is unrelated and unnecessarily privileged.",
+      "E": "Correct — Policy retrieval helps ensure drafts follow procurement requirements."
     },
     "reference": "CCAR-P practice PDF, Q58 (third-party answer key)",
     "tags": [
@@ -2619,12 +2619,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "An enterprise-tier deployment with a signed Data Processing Addendum establishes contractual safeguards for processing personal data. Defined retention settings, redaction of unnecessary personal data, and purpose-limited prompts support data minimization and storage limitation principles. A documented process for data-subject rights enables the organization to respond appropriately to access, deletion, and related GDPR requests. Together, these controls provide governance and operational evidence of responsible EU personal-data handling.\n\nStudy takeaway: enterprise-tier deployment with a signed Data Processing Addendum, defined data- retention configuration, redaction of personal data not needed for the task, and documented data-subject- rights handling. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "GDPR-oriented design combines contractual, retention, minimization and data-subject-rights controls; the specific legal requirements depend on the deployment.",
     "optionExplanations": {
-      "A": "Correct. An enterprise-tier deployment with a signed Data Processing Addendum establishes contractual safeguards for processing personal data. Defined retention settings, redaction of unnecessary personal data, and purpose-limited prompts support data minimization and storage limitation principles. The wording of option A matches the intended solution.",
-      "B": "Not selected. Together, these controls provide governance and operational evidence of responsible EU personal-data handling. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Together, these controls provide governance and operational evidence of responsible EU personal-data handling. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Together, these controls provide governance and operational evidence of responsible EU personal-data handling. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — The combination addresses processor obligations and limits unnecessary personal-data processing.",
+      "B": "Not selected — Removing safeguards increases exposure and prevents managing retention and rights.",
+      "C": "Not selected — A personal account alone does not establish the required processing arrangements or rights procedures.",
+      "D": "Not selected — Sending unnecessary personal data conflicts with purpose limitation and minimization."
     },
     "reference": "CCAR-P practice PDF, Q61 (third-party answer key)",
     "tags": [
@@ -2662,12 +2662,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "A per-role allow-list grants the assistant only the two capabilities required for its defined responsibilities: reading the knowledge base and writing to the draft queue. Enforcement at the orchestration layer prevents access to unapproved tools regardless of model behavior or prompt content. Global read access exposes unnecessary systems, while relying on the model to decline tools is not an enforceable permission boundary.\n\nStudy takeaway: Per-role allow-list of exactly the read-knowledge-base and write-draft-queue tools, enforced at the orchestration layer.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Grant exactly the tools and operations required for the defined role, and enforce permissions outside the model.",
     "optionExplanations": {
-      "A": "Not selected. Global read access exposes unnecessary systems, while relying on the model to decline tools is not an enforceable permission boundary. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. A per-role allow-list grants the assistant only the two capabilities required for its defined responsibilities: reading the knowledge base and writing to the draft queue. Enforcement at the orchestration layer prevents access to unapproved tools regardless of model behavior or prompt content. The wording of option B matches the intended solution.",
-      "C": "Not selected. Global read access exposes unnecessary systems, while relying on the model to decline tools is not an enforceable permission boundary. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Global read access exposes unnecessary systems, while relying on the model to decline tools is not an enforceable permission boundary. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Global read access exposes resources unrelated to the role.",
+      "B": "Correct — A scoped allow-list permits necessary reads and draft writes without broader capability.",
+      "C": "Not selected — Model discretion is not a security boundary.",
+      "D": "Not selected — Denying all tools prevents legitimate work; least privilege is not zero privilege."
     },
     "reference": "CCAR-P practice PDF, Q62 (third-party answer key)",
     "tags": [
@@ -2710,13 +2710,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "E"
     ],
-    "explanation": "An output classifier can identify recommendation language in generated responses and block it before it reaches the customer. Explicit system-prompt boundaries also instruct the assistant to treat regulated investment advice as out of scope and return a consistent refusal instead. Together, these controls prevent both intentional and inadvertent recommendation generation. Higher temperature is not a safety control, while session limits and SIEM logging do not stop prohibited content in real time.\n\nStudy takeaway: Add an output classifier that detects and blocks responses containing regulated investment- recommendation language.; Define explicit out-of-scope categories in the system prompt with fixed refusal phrasing for investment advice requests.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Layer an explicit refusal policy with runtime checks that prevent disallowed advice from reaching users.",
     "optionExplanations": {
-      "A": "Not selected. Higher temperature is not a safety control, while session limits and SIEM logging do not stop prohibited content in real time. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. An output classifier can identify recommendation language in generated responses and block it before it reaches the customer. Explicit system-prompt boundaries also instruct the assistant to treat regulated investment advice as out of scope and return a consistent refusal instead. The wording of option B matches the intended solution.",
-      "C": "Not selected. Higher temperature is not a safety control, while session limits and SIEM logging do not stop prohibited content in real time. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Higher temperature is not a safety control, while session limits and SIEM logging do not stop prohibited content in real time. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. An output classifier can identify recommendation language in generated responses and block it before it reaches the customer. Explicit system-prompt boundaries also instruct the assistant to treat regulated investment advice as out of scope and return a consistent refusal instead. The wording of option E matches the intended solution."
+      "A": "Not selected — Higher randomness does not reliably prevent regulated recommendations.",
+      "B": "Correct — Output classification can intercept disallowed recommendation language before delivery.",
+      "C": "Not selected — Session limits reduce usage but do not enforce content restrictions.",
+      "D": "Not selected — Audit logging helps investigate violations after the fact, not stop them.",
+      "E": "Correct — Clear out-of-scope instructions guide refusals before generation; runtime controls add enforcement."
     },
     "reference": "CCAR-P practice PDF, Q63 (third-party answer key)",
     "tags": [
@@ -2754,12 +2754,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "C"
     ],
-    "explanation": "Threat models, control mappings, residual-risk acceptance criteria, and audit traceability address the evidence a security and compliance reviewer needs to evaluate an architectural decision. They show how threats are identified, which controls mitigate them, what risk remains, who can accept that risk, and how compliance can be demonstrated during an audit. Delivery schedules and implementation details serve product or engineering audiences, while executives typically need a more concise business and risk summary. \n\nStudy takeaway: Threat model, control mappings, residual-risk acceptance criteria, and audit traceability.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Security reviewers need evidence of threats, mitigations, remaining exposure and auditability.",
     "optionExplanations": {
-      "A": "Not selected. Threat models, control mappings, residual-risk acceptance criteria, and audit traceability address the evidence a security and compliance reviewer needs to evaluate an architectural decision. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Threat models, control mappings, residual-risk acceptance criteria, and audit traceability address the evidence a security and compliance reviewer needs to evaluate an architectural decision. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Threat models, control mappings, residual-risk acceptance criteria, and audit traceability address the evidence a security and compliance reviewer needs to evaluate an architectural decision. They show how threats are identified, which controls mitigate them, what risk remains, who can accept that risk, and how compliance can be demonstrated during an audit. The wording of option C matches the intended solution.",
-      "D": "Not selected. Threat models, control mappings, residual-risk acceptance criteria, and audit traceability address the evidence a security and compliance reviewer needs to evaluate an architectural decision. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Roadmap and scope information primarily serve product planning.",
+      "B": "Not selected — Interfaces and sequence primarily support implementation teams.",
+      "C": "Correct — Threat models and control mappings allow reviewers to assess residual risk and verify safeguards.",
+      "D": "Not selected — Business outcomes and high-level risks are better suited to an executive sponsor."
     },
     "reference": "CCAR-P practice PDF, Q64 (third-party answer key)",
     "tags": [
@@ -2797,12 +2797,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "Treating retrieved documents as untrusted input directly mitigates indirect prompt injection, where malicious text in retrieved content attempts to override instructions or alter model behavior. Input classifiers can detect suspicious or policy-violating retrieved material before it reaches the model context, while output validation helps prevent manipulated responses from being returned. Citations improve grounding but do not stop malicious instructions embedded in sources. Tool allow-lists and adversarial evaluations address related risks but not the immediate threat posed by retrieved content.\n\nStudy takeaway: Treat all retrieved content as untrusted input and apply input classifiers with output validation.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Retrieved documents are untrusted data; protect the pipeline against embedded instructions rather than treating them as authority.",
     "optionExplanations": {
-      "A": "Correct. Treating retrieved documents as untrusted input directly mitigates indirect prompt injection, where malicious text in retrieved content attempts to override instructions or alter model behavior. Input classifiers can detect suspicious or policy-violating retrieved material before it reaches the model context, while output validation helps prevent manipulated responses from being returned. The wording of option A matches the intended solution.",
-      "B": "Not selected. Tool allow-lists and adversarial evaluations address related risks but not the immediate threat posed by retrieved content. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Tool allow-lists and adversarial evaluations address related risks but not the immediate threat posed by retrieved content. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Tool allow-lists and adversarial evaluations address related risks but not the immediate threat posed by retrieved content. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Screening untrusted inputs and validating outputs addresses manipulation at both ends of generation.",
+      "B": "Not selected — Citation grounding improves factuality but does not by itself neutralize malicious instructions in a source.",
+      "C": "Not selected — An outbound allow-list limits exfiltration but not other injected behaviors.",
+      "D": "Not selected — Adversarial evaluation detects vulnerabilities, but does not directly enforce protections during execution."
     },
     "reference": "CCAR-P practice PDF, Q65 (third-party answer key)",
     "tags": [
@@ -2845,13 +2845,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "D"
     ],
-    "explanation": "Validating output against a structured schema prevents malformed, incomplete, or unsafe responses from triggering downstream actions. Layering prompt-level instructions with runtime content checks provides defense in depth, because prompt guidance alone can be bypassed or misinterpreted during generation. Lower temperature may make responses more consistent but does not enforce policy. Override phrases and a single system prompt create avoidable paths around safety controls.\n\nStudy takeaway: Validate the model output against a structured schema before downstream actions are taken.; Layer prompt-level guardrails with runtime content checks rather than relying on either alone.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Effective guardrails use enforceable checks at multiple layers, particularly before downstream actions.",
     "optionExplanations": {
-      "A": "Not selected. Override phrases and a single system prompt create avoidable paths around safety controls. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Override phrases and a single system prompt create avoidable paths around safety controls. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Validating output against a structured schema prevents malformed, incomplete, or unsafe responses from triggering downstream actions. Layering prompt-level instructions with runtime content checks provides defense in depth, because prompt guidance alone can be bypassed or misinterpreted during generation. The wording of option C matches the intended solution.",
-      "D": "Correct. Validating output against a structured schema prevents malformed, incomplete, or unsafe responses from triggering downstream actions. Layering prompt-level instructions with runtime content checks provides defense in depth, because prompt guidance alone can be bypassed or misinterpreted during generation. The wording of option D matches the intended solution.",
-      "E": "Not selected. Override phrases and a single system prompt create avoidable paths around safety controls. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Override phrases create a bypass based on text rather than verified authorization.",
+      "B": "Not selected — Lower temperature makes output less variable, not reliably policy-compliant.",
+      "C": "Correct — Schema validation prevents invalid structured outputs from triggering downstream actions.",
+      "D": "Correct — Runtime checks supplement prompt guidance when the model fails to follow policy.",
+      "E": "Not selected — A single prompt is not a dependable enforcement boundary."
     },
     "reference": "CCAR-P practice PDF, Q66 (third-party answer key)",
     "tags": [
@@ -2894,13 +2894,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "B"
     ],
-    "explanation": "Logging generated summaries to the compliance audit trail and verifying that the requester is authorized are application-layer responsibilities. The application controls identity, permissions, access context, and integration with enterprise retention systems, which a Skill cannot reliably enforce on its own. The Skill should encapsulate reusable content and behavior, such as standardized disclaimers, prohibited-language rules, and output guidance, while the application enforces who may invoke it and records the resulting activity.\n\nStudy takeaway: Log every generated summary to the firm’s compliance audit trail for retention.; Verify the requesting user is authorized to generate investment summaries at all.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Reusable Skills encode task guidance, while the application owns identity, authorization and independent audit controls.",
     "optionExplanations": {
-      "A": "Correct. Logging generated summaries to the compliance audit trail and verifying that the requester is authorized are application-layer responsibilities. The application controls identity, permissions, access context, and integration with enterprise retention systems, which a Skill cannot reliably enforce on its own. The wording of option A matches the intended solution.",
-      "B": "Correct. Logging generated summaries to the compliance audit trail and verifying that the requester is authorized are application-layer responsibilities. The application controls identity, permissions, access context, and integration with enterprise retention systems, which a Skill cannot reliably enforce on its own. The wording of option B matches the intended solution.",
-      "C": "Not selected. Logging generated summaries to the compliance audit trail and verifying that the requester is authorized are application-layer responsibilities. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Logging generated summaries to the compliance audit trail and verifying that the requester is authorized are application-layer responsibilities. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Logging generated summaries to the compliance audit trail and verifying that the requester is authorized are application-layer responsibilities. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Application logging records activity even if the Skill fails or is modified.",
+      "B": "Correct — Authorization must be enforced before the user can invoke the capability.",
+      "C": "Not selected — House style is reusable task-specific formatting suited to the Skill.",
+      "D": "Not selected — A standardized disclaimer template belongs to the task guidance; enforcement can still be verified independently.",
+      "E": "Not selected — The provided prohibited-language list is part of the Skill's task rules; critical restrictions may also need runtime enforcement."
     },
     "reference": "CCAR-P practice PDF, Q67 (third-party answer key)",
     "tags": [
@@ -2943,13 +2943,13 @@ window.COURSE_QUESTIONS = [
       "D",
       "E"
     ],
-    "explanation": "Actor attribution in tool-call logs records the initiating user for every action, providing the audit trail and accountability missing from untracked tool execution. Per-user OAuth tokens replace the shared API key with individual, scope-limited credentials, allowing access to be identified and revoked per user. Schema validation and retrieval RBAC improve other security controls but do not solve shared authentication or missing caller attribution. \n\nStudy takeaway: Add actor attribution to tool-call logs so each call records the initiating user identity.; Replace the shared API key with per-user OAuth tokens carrying scope-restricted permissions.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Replace shared identity with scoped user identity and record who initiated each tool call.",
     "optionExplanations": {
-      "A": "Not selected. Schema validation and retrieval RBAC improve other security controls but do not solve shared authentication or missing caller attribution. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Schema validation and retrieval RBAC improve other security controls but do not solve shared authentication or missing caller attribution. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Schema validation and retrieval RBAC improve other security controls but do not solve shared authentication or missing caller attribution. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Correct. Actor attribution in tool-call logs records the initiating user for every action, providing the audit trail and accountability missing from untracked tool execution. Per-user OAuth tokens replace the shared API key with individual, scope-limited credentials, allowing access to be identified and revoked per user. The wording of option D matches the intended solution.",
-      "E": "Correct. Actor attribution in tool-call logs records the initiating user for every action, providing the audit trail and accountability missing from untracked tool execution. Per-user OAuth tokens replace the shared API key with individual, scope-limited credentials, allowing access to be identified and revoked per user. The wording of option E matches the intended solution."
+      "A": "Not selected — Schema validation does not solve shared credentials or missing attribution.",
+      "B": "Not selected — Retrieval RBAC is valuable but does not directly identify tool-call actors or replace the shared credential.",
+      "C": "Not selected — Secret storage protects credentials at rest but leaves a shared identity if the key is unchanged.",
+      "D": "Correct — Recording the actor creates an accountable audit trail.",
+      "E": "Correct — Per-user scoped credentials provide differentiated access instead of one shared identity."
     },
     "reference": "CCAR-P practice PDF, Q68 (third-party answer key)",
     "tags": [
@@ -2992,13 +2992,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "D"
     ],
-    "explanation": "Role-based access controls restrict access to protected health information to authorized personnel, supporting HIPAA’s minimum necessary and access-control safeguards. Patient data must also be kept out of provider training or feedback workflows unless an appropriate Business Associate Agreement is in place, protecting PHI from unauthorized use or disclosure. Token limits, model capability, and streaming behavior may affect cost, quality, or latency, but they do not directly establish HIPAA compliance.\n\nStudy takeaway: Enforcing role-based access controls so that PHI is retrievable only by authorized personnel.; Ensuring patient data is never included in training feedback loops sent to the model provider without a BAA in place.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Protect PHI with authorization and appropriate contractual/data-use restrictions, not merely model settings.",
     "optionExplanations": {
-      "A": "Not selected. Token limits, model capability, and streaming behavior may affect cost, quality, or latency, but they do not directly establish HIPAA compliance. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Token limits, model capability, and streaming behavior may affect cost, quality, or latency, but they do not directly establish HIPAA compliance. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Role-based access controls restrict access to protected health information to authorized personnel, supporting HIPAA’s minimum necessary and access-control safeguards. Patient data must also be kept out of provider training or feedback workflows unless an appropriate Business Associate Agreement is in place, protecting PHI from unauthorized use or disclosure. The wording of option C matches the intended solution.",
-      "D": "Correct. Role-based access controls restrict access to protected health information to authorized personnel, supporting HIPAA’s minimum necessary and access-control safeguards. Patient data must also be kept out of provider training or feedback workflows unless an appropriate Business Associate Agreement is in place, protecting PHI from unauthorized use or disclosure. The wording of option D matches the intended solution.",
-      "E": "Not selected. Token limits, model capability, and streaming behavior may affect cost, quality, or latency, but they do not directly establish HIPAA compliance. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Output length does not ensure sensitive data is protected.",
+      "B": "Not selected — Model capability does not establish compliant PHI handling.",
+      "C": "Correct — Role enforcement prevents unauthorized access to patient data.",
+      "D": "Correct — Keeping PHI out of unapproved provider feedback paths addresses unauthorized disclosure; a BAA alone is not blanket permission for training.",
+      "E": "Not selected — Streaming improves perceived responsiveness, not privacy or compliance."
     },
     "reference": "CCAR-P practice PDF, Q69 (third-party answer key)",
     "tags": [
@@ -3041,13 +3041,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "E"
     ],
-    "explanation": "Identifying decision points by their impact and reversibility establishes where human oversight is needed and where automated handling is acceptable. Defining the sampling strategy and escalation criteria then determines which cases reach reviewers and how higher-risk or uncertain cases are handled. Together, these steps create the control structure required to test a representative pilot safely. Workflow iteration is driven by pilot observations, so it occurs after the pilot rather than before it.\n\nStudy takeaway: Define the sampling strategy and the escalation criteria at each oversight point in the pipeline.; Identify the decision points in the pipeline that require human oversight by impact and reversibility.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "First design where review is necessary and how cases are routed; then implement and pilot those rules.",
     "optionExplanations": {
-      "A": "Correct. Identifying decision points by their impact and reversibility establishes where human oversight is needed and where automated handling is acceptable. Defining the sampling strategy and escalation criteria then determines which cases reach reviewers and how higher-risk or uncertain cases are handled. The wording of option A matches the intended solution.",
-      "B": "Not selected. Workflow iteration is driven by pilot observations, so it occurs after the pilot rather than before it. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. Workflow iteration is driven by pilot observations, so it occurs after the pilot rather than before it. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Workflow iteration is driven by pilot observations, so it occurs after the pilot rather than before it. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Identifying decision points by their impact and reversibility establishes where human oversight is needed and where automated handling is acceptable. Defining the sampling strategy and escalation criteria then determines which cases reach reviewers and how higher-risk or uncertain cases are handled. The wording of option E matches the intended solution."
+      "A": "Correct — Sampling and escalation rules define which cases are reviewed and why.",
+      "B": "Not selected — Iteration based on pilot results necessarily follows the pilot.",
+      "C": "Not selected — Reviewer training is also important before real traffic, but it follows definition of the oversight design.",
+      "D": "Not selected — Documentation is useful preparation, but the keyed choices prioritize defining the actual oversight points and criteria.",
+      "E": "Correct — Impact and reversibility determine where human approval or validation is required."
     },
     "reference": "CCAR-P practice PDF, Q70 (third-party answer key)",
     "tags": [
@@ -3085,12 +3085,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Treating user-provided text as untrusted data prevents asserted admin authority from changing the assistant’s governing instructions or permissions. Runtime classifiers add detection for jailbreak and override language, while scoped tool permissions ensure that text alone cannot escalate access. Audit logging records attempted attacks for monitoring and improvement. Relying only on intrinsic model behavior leaves gaps, and self-declared authority must never substitute for verified authorization.\n\nStudy takeaway: Prompt-level instructions that treat user content as untrusted data, runtime classifiers that detect override attempts, scoped tool permissions that cannot be elevated by user content, and audit logging of attempts.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Privilege must come from authenticated authorization, never from instructions inside user content.",
     "optionExplanations": {
-      "A": "Not selected. Relying only on intrinsic model behavior leaves gaps, and self-declared authority must never substitute for verified authorization. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Treating user-provided text as untrusted data prevents asserted admin authority from changing the assistant’s governing instructions or permissions. Runtime classifiers add detection for jailbreak and override language, while scoped tool permissions ensure that text alone cannot escalate access. The wording of option B matches the intended solution.",
-      "C": "Not selected. Relying only on intrinsic model behavior leaves gaps, and self-declared authority must never substitute for verified authorization. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Relying only on intrinsic model behavior leaves gaps, and self-declared authority must never substitute for verified authorization. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Model behavior alone cannot reliably recognize every bypass attempt.",
+      "B": "Correct — Prompt guidance, detection, scoped permissions and auditing provide layered protection.",
+      "C": "Not selected — Removing restrictions makes the system unprotected rather than mitigating attacks.",
+      "D": "Not selected — Self-declared authority is untrusted and cannot grant privileges."
     },
     "reference": "CCAR-P practice PDF, Q71 (third-party answer key)",
     "tags": [
@@ -3133,13 +3133,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "E"
     ],
-    "explanation": "Per-role tool allow-lists enforce least-privilege access before an agent can invoke external systems, limiting the impact of prompt injection, misuse, or compromised workflows. Adversarial-input evaluation with regression tracking verifies that guardrails withstand known attack patterns and that changes do not weaken protections over time. Logging and feedback are useful operational practices, but they do not directly prevent unsafe tool execution or demonstrate guardrail resilience.\n\nStudy takeaway: Per-role tool allow-lists enforced at the orchestration layer before any tool call executes.; Adversarial-input coverage in the evaluation set with regression tracking on guardrail performance.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Robust guardrails combine enforced permissions with ongoing adversarial regression evidence.",
     "optionExplanations": {
-      "A": "Not selected. Logging and feedback are useful operational practices, but they do not directly prevent unsafe tool execution or demonstrate guardrail resilience. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Per-role tool allow-lists enforce least-privilege access before an agent can invoke external systems, limiting the impact of prompt injection, misuse, or compromised workflows. Adversarial-input evaluation with regression tracking verifies that guardrails withstand known attack patterns and that changes do not weaken protections over time. The wording of option B matches the intended solution.",
-      "C": "Not selected. Logging and feedback are useful operational practices, but they do not directly prevent unsafe tool execution or demonstrate guardrail resilience. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Logging and feedback are useful operational practices, but they do not directly prevent unsafe tool execution or demonstrate guardrail resilience. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Per-role tool allow-lists enforce least-privilege access before an agent can invoke external systems, limiting the impact of prompt injection, misuse, or compromised workflows. Adversarial-input evaluation with regression tracking verifies that guardrails withstand known attack patterns and that changes do not weaken protections over time. The wording of option E matches the intended solution."
+      "A": "Not selected — Centralized logs support investigation, but retrospective review alone is not enforcement or effectiveness testing.",
+      "B": "Correct — Role-scoped tool checks prevent unauthorized execution regardless of model behavior.",
+      "C": "Not selected — Feedback is useful for improving guardrails but does not itself prevent or measure attacks systematically.",
+      "D": "Not selected — Refusal wording helps clarity but is insufficient as a guardrail architecture.",
+      "E": "Correct — Adversarial regression tracking reveals whether guardrail effectiveness changes across releases."
     },
     "reference": "CCAR-P practice PDF, Q72 (third-party answer key)",
     "tags": [
@@ -3182,13 +3182,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "B"
     ],
-    "explanation": "Approval rate parity alone does not show whether the assistant makes false approvals or false denials at similar rates for each protected group. Fairness assessment should examine relevant error measures, not only the overall outcome rate. Likewise, a 94 percent match with human underwriters only demonstrates agreement with historical decisions; it can reproduce or amplify bias already present in those decisions. High accuracy against a biased reference process is therefore not proof of fairness.\n\nStudy takeaway: Approval rate parity does not by itself assess error rate parity across protected groups.; Match with human underwriters does not establish freedom from underwriter-introduced bias.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Fairness requires comparing errors and checking whether the reference decisions themselves contain bias.",
     "optionExplanations": {
-      "A": "Correct. Approval rate parity alone does not show whether the assistant makes false approvals or false denials at similar rates for each protected group. Fairness assessment should examine relevant error measures, not only the overall outcome rate. The wording of option A matches the intended solution.",
-      "B": "Correct. Approval rate parity alone does not show whether the assistant makes false approvals or false denials at similar rates for each protected group. Fairness assessment should examine relevant error measures, not only the overall outcome rate. The wording of option B matches the intended solution.",
-      "C": "Not selected. High accuracy against a biased reference process is therefore not proof of fairness. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. High accuracy against a biased reference process is therefore not proof of fairness. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. High accuracy against a biased reference process is therefore not proof of fairness. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Equal approval rates can hide unequal false-positive or false-negative rates.",
+      "B": "Correct — Agreement with humans can reproduce their existing biases.",
+      "C": "Not selected — A high agreement rate measures consistency with underwriters, not fairness.",
+      "D": "Not selected — No evidence establishes that the team omitted groups; the identified limitations are more concrete.",
+      "E": "Not selected — More data may improve statistical precision, but does not correct inadequate fairness metrics or biased labels."
     },
     "reference": "CCAR-P practice PDF, Q73 (third-party answer key)",
     "tags": [
@@ -3231,13 +3231,13 @@ window.COURSE_QUESTIONS = [
       "C",
       "D"
     ],
-    "explanation": "A threat model, residual-risk register, and control-mapping table are intended for security and compliance reviewers because they document identified risks, remaining exposure, and the controls used to meet governance requirements. These artifacts support risk acceptance, auditability, and regulatory assessment rather than feature planning. A capability list and feature-level roadmap dependencies are appropriate for the product manager who owns the roadmap, since they show delivered value and sequencing constraints. Executive sponsors may need a summary, but they do not typically require detailed roadmap dependency management.\n\nStudy takeaway: Package 1 # security and compliance reviewer; Package 2 # product manager owning the roadmap. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Match each communication package to the decision responsibilities of its audience.",
     "optionExplanations": {
-      "A": "Not selected. Executive sponsors may need a summary, but they do not typically require detailed roadmap dependency management. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Not selected. Executive sponsors may need a summary, but they do not typically require detailed roadmap dependency management. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. A threat model, residual-risk register, and control-mapping table are intended for security and compliance reviewers because they document identified risks, remaining exposure, and the controls used to meet governance requirements. These artifacts support risk acceptance, auditability, and regulatory assessment rather than feature planning. The wording of option C matches the intended solution.",
-      "D": "Correct. A threat model, residual-risk register, and control-mapping table are intended for security and compliance reviewers because they document identified risks, remaining exposure, and the controls used to meet governance requirements. These artifacts support risk acceptance, auditability, and regulatory assessment rather than feature planning. The wording of option D matches the intended solution.",
-      "E": "Not selected. Executive sponsors may need a summary, but they do not typically require detailed roadmap dependency management. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Implementation engineers need interfaces and technical execution details rather than primarily control evidence.",
+      "B": "Not selected — An executive typically needs outcomes, strategic trade-offs and major risks, not feature-level dependencies.",
+      "C": "Correct — Threats, residual risk and control mappings directly support security/compliance review.",
+      "D": "Correct — Capabilities and roadmap dependencies support the product manager's planning decisions.",
+      "E": "Not selected — A roadmap alone does not supply the evidence needed to assess security controls."
     },
     "reference": "CCAR-P practice PDF, Q74 (third-party answer key)",
     "tags": [
@@ -3275,12 +3275,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "The ADR should document the alternatives considered and the trade-offs accepted alongside the decision. This context explains why the chosen approach was selected, enables future maintainers to reassess it when conditions change, and supports effective reviews and audits. Recording only the technical decision loses the rationale needed to understand its consequences or evaluate other viable options.\n\nStudy takeaway: Ask the author to add the alternatives considered and the trade-offs accepted before publishing the ADR.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "An ADR should preserve why a decision was selected, including alternatives and accepted consequences.",
     "optionExplanations": {
-      "A": "Not selected. Recording only the technical decision loses the rationale needed to understand its consequences or evaluate other viable options. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. The ADR should document the alternatives considered and the trade-offs accepted alongside the decision. This context explains why the chosen approach was selected, enables future maintainers to reassess it when conditions change, and supports effective reviews and audits. The wording of option B matches the intended solution.",
-      "C": "Not selected. Recording only the technical decision loses the rationale needed to understand its consequences or evaluate other viable options. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Recording only the technical decision loses the rationale needed to understand its consequences or evaluate other viable options. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Deleting the record loses durable decision context.",
+      "B": "Correct — Adding alternatives and trade-offs lets future readers evaluate and revisit the rationale.",
+      "C": "Not selected — A decision without alternatives or trade-offs is incomplete for future review.",
+      "D": "Not selected — Replacing the decision does not address the missing rationale for the existing decision."
     },
     "reference": "CCAR-P practice PDF, Q75 (third-party answer key)",
     "tags": [
@@ -3318,12 +3318,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "An executive sponsor needs a summary framed around business outcomes achieved, trade-offs accepted, and high-level risks acknowledged. Sponsors own funding and strategic direction, so they need to know what value the retrieval architecture delivers, what was given up to get it, and what exposure the organization is carrying. Detail on technical alternatives and component-level consequences suits engineering reviewers and would obscure the decision for a non-technical decision-maker. Feature-level roadmap dependencies fit product managers, and threat models with control mappings fit security and audit stakeholders. Tailoring the framing to the audience's decision rights is a core architectural communication skill.\n\nStudy takeaway: business outcomes achieved, trade-offs accepted, and high-level risks acknowledge. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Executive sponsors need business value, strategic trade-offs and material risks rather than implementation detail.",
     "optionExplanations": {
-      "A": "Not selected. Tailoring the framing to the audience's decision rights is a core architectural communication skill. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. An executive sponsor needs a summary framed around business outcomes achieved, trade-offs accepted, and high-level risks acknowledged. Sponsors own funding and strategic direction, so they need to know what value the retrieval architecture delivers, what was given up to get it, and what exposure the organization is carrying. The wording of option B matches the intended solution.",
-      "C": "Not selected. Tailoring the framing to the audience's decision rights is a core architectural communication skill. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Tailoring the framing to the audience's decision rights is a core architectural communication skill. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Component-level consequences primarily serve engineering reviewers.",
+      "B": "Correct — Business outcomes and high-level risks support sponsor-level decisions.",
+      "C": "Not selected — Feature scope and dependencies primarily serve product roadmap owners.",
+      "D": "Not selected — Detailed controls and risk acceptance evidence primarily serve security/compliance reviewers."
     },
     "reference": "CCAR-P practice PDF, Q76 (third-party answer key)",
     "tags": [
@@ -3366,13 +3366,13 @@ window.COURSE_QUESTIONS = [
       "B",
       "E"
     ],
-    "explanation": "Capturing business goals, success criteria, and the in-scope user population establishes what the capability must achieve and who it is intended to serve. Identifying non-functional constraints such as latency, cost, auditability, data sensitivity, and regulatory obligations defines the operating boundaries for the solution. These inputs must be gathered before stakeholder validation so stakeholders can confirm that the requirements reflect both business outcomes and critical constraints. Architecture decisions, rollout planning, and consolidated traceability follow after requirements are validated.\n\nStudy takeaway: Capture the business goals, success criteria, and the in-scope user population for the engagement.; Identify the non-functional constraints covering latency, cost, audit, data sensitivity, and regulatory needs.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Discovery first establishes business goals and constraints that stakeholders can validate.",
     "optionExplanations": {
-      "A": "Not selected. Architecture decisions, rollout planning, and consolidated traceability follow after requirements are validated. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Capturing business goals, success criteria, and the in-scope user population establishes what the capability must achieve and who it is intended to serve. Identifying non-functional constraints such as latency, cost, auditability, data sensitivity, and regulatory obligations defines the operating boundaries for the solution. The wording of option B matches the intended solution.",
-      "C": "Not selected. Architecture decisions, rollout planning, and consolidated traceability follow after requirements are validated. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Architecture decisions, rollout planning, and consolidated traceability follow after requirements are validated. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Correct. Capturing business goals, success criteria, and the in-scope user population establishes what the capability must achieve and who it is intended to serve. Identifying non-functional constraints such as latency, cost, auditability, data sensitivity, and regulatory obligations defines the operating boundaries for the solution. The wording of option E matches the intended solution."
+      "A": "Not selected — ADRs capture design decisions after requirements are understood.",
+      "B": "Correct — Goals, success criteria and users define the business problem and scope.",
+      "C": "Not selected — Traceability is valuable before sign-off, but the keyed choices prioritize gathering the substantive requirements and constraints.",
+      "D": "Not selected — Rollout milestones depend on agreed requirements and a delivery plan.",
+      "E": "Correct — Latency, cost, data and regulatory constraints establish non-functional requirements before validation."
     },
     "reference": "CCAR-P practice PDF, Q77 (third-party answer key)",
     "tags": [
@@ -3410,12 +3410,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "A structured feedback session with a focused agenda, artifacts shared in advance, written capture of decisions and follow-ups, and confirmed action owners and dates gives stakeholders the best chance to contribute meaningfully to a deployment already underway. Sending artifacts ahead of time lets participants review the material and arrive with considered input, which keeps the limited meeting time on discussion instead of first reads. A focused agenda prevents drift into unrelated topics. Recording decisions in writing and assigning owners with dates turns feedback into accountable action. Open-ended meetings or relying on participants' memory tend to produce lost decisions and follow-ups that never happen.\n\nStudy takeaway: Define a focused agenda, share the artifacts in advance, capture decisions and follow-ups in writing, and confirm action owners and dates.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A productive feedback session gives participants preparation time and records decisions with accountable follow-up.",
     "optionExplanations": {
-      "A": "Not selected. Open-ended meetings or relying on participants' memory tend to produce lost decisions and follow-ups that never happen. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. A structured feedback session with a focused agenda, artifacts shared in advance, written capture of decisions and follow-ups, and confirmed action owners and dates gives stakeholders the best chance to contribute meaningfully to a deployment already underway. Sending artifacts ahead of time lets participants review the material and arrive with considered input, which keeps the limited meeting time on discussion instead of first reads. The wording of option B matches the intended solution.",
-      "C": "Not selected. Open-ended meetings or relying on participants' memory tend to produce lost decisions and follow-ups that never happen. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Open-ended meetings or relying on participants' memory tend to produce lost decisions and follow-ups that never happen. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Without an agenda or artifacts, feedback can be unfocused and commitments lost.",
+      "B": "Correct — Advance artifacts support informed discussion; recorded actions and dates create accountability.",
+      "C": "Not selected — Sharing artifacts only at the start reduces time for thoughtful review.",
+      "D": "Not selected — Unrecorded decisions and owners make follow-through difficult to verify."
     },
     "reference": "CCAR-P practice PDF, Q78 (third-party answer key)",
     "tags": [
@@ -3453,12 +3453,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "An operationally meaningful SLA defines a specific metric, a numeric threshold, an evaluation window, and a consequence for breach, as in \"p95 per-request latency under 800 ms over a 28-day window.\" Each element serves a purpose. The metric and threshold make compliance objectively measurable, and the window fixes the period over which performance is judged. The breach consequence ties a missed target to a documented response such as remediation or credits. A target that names a metric and threshold but omits the window and consequence cannot determine when a breach occurs or what follows. Qualitative or sentiment-based targets cannot be measured or enforced at all.\n\nStudy takeaway: A measurable target with a defined metric, threshold, evaluation window, and consequence for breach—for example, “p95 per-request latency under 800 ms over a 28-day window.”. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "A useful SLA defines an observable metric, threshold, measurement period and response to breach.",
     "optionExplanations": {
-      "A": "Not selected. Qualitative or sentiment-based targets cannot be measured or enforced at all. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. An operationally meaningful SLA defines a specific metric, a numeric threshold, an evaluation window, and a consequence for breach, as in \"p95 per-request latency under 800 ms over a 28-day window.\" Each element serves a purpose. The metric and threshold make compliance objectively measurable, and the window fixes the period over which performance is judged. The wording of option B matches the intended solution.",
-      "C": "Not selected. Qualitative or sentiment-based targets cannot be measured or enforced at all. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. Qualitative or sentiment-based targets cannot be measured or enforced at all. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Subjective satisfaction alone lacks a reliable measurement and breach trigger.",
+      "B": "Correct — The defined metric and window make compliance testable; the agreement should also specify breach consequences.",
+      "C": "Not selected — A qualitative promise cannot be evaluated consistently.",
+      "D": "Not selected — Without a window or breach consequence, enforcement remains ambiguous."
     },
     "reference": "CCAR-P practice PDF, Q79 (third-party answer key)",
     "tags": [
@@ -3501,13 +3501,13 @@ window.COURSE_QUESTIONS = [
       "A",
       "C"
     ],
-    "explanation": "Effective technical writing starts by identifying the audience and the specific questions the guide must answer for them, because that determines the depth, terminology, and emphasis of every section. Outlining the sections, covering overview, components, contracts, flows, runbooks, and limitations, then gives the guide a complete structure so each part has a clear purpose and nothing essential is missed. Both steps shape what gets written, so they belong before drafting begins. Translation, version control setup, and validation with the implementation team all act on content that already exists, which places them after or alongside drafting rather than ahead of it.\n\nStudy takeaway: Identify the audience and the questions the guide must answer for that audience.; Outline the sections of the guide covering overview, components, contracts, flows, runbooks, and limitations.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Define who will use the guide and its structure before writing individual sections.",
     "optionExplanations": {
-      "A": "Correct. Effective technical writing starts by identifying the audience and the specific questions the guide must answer for them, because that determines the depth, terminology, and emphasis of every section. Outlining the sections, covering overview, components, contracts, flows, runbooks, and limitations, then gives the guide a complete structure so each part has a clear purpose and nothing essential is missed. The wording of option A matches the intended solution.",
-      "B": "Not selected. Translation, version control setup, and validation with the implementation team all act on content that already exists, which places them after or alongside drafting rather than ahead of it. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Correct. Effective technical writing starts by identifying the audience and the specific questions the guide must answer for them, because that determines the depth, terminology, and emphasis of every section. Outlining the sections, covering overview, components, contracts, flows, runbooks, and limitations, then gives the guide a complete structure so each part has a clear purpose and nothing essential is missed. The wording of option C matches the intended solution.",
-      "D": "Not selected. Translation, version control setup, and validation with the implementation team all act on content that already exists, which places them after or alongside drafting rather than ahead of it. Review the full rationale for why this is less appropriate to the question.",
-      "E": "Not selected. Translation, version control setup, and validation with the implementation team all act on content that already exists, which places them after or alongside drafting rather than ahead of it. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — Audience needs determine which questions and level of detail the guide should address.",
+      "B": "Not selected — Translation requires draft or finalized source material.",
+      "C": "Correct — An outline establishes coverage and prevents fragmented documentation.",
+      "D": "Not selected — Version control is useful throughout authoring, but the question asks for the two content-planning prerequisites.",
+      "E": "Not selected — Implementation-team validation follows the creation of reviewable content."
     },
     "reference": "CCAR-P practice PDF, Q80 (third-party answer key)",
     "tags": [
@@ -3545,12 +3545,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "A"
     ],
-    "explanation": "A complete handoff package combines an architecture overview, architecture decision records (ADRs), component-level diagrams, runbooks for common operations, an on-call playbook, and a list of known limitations. Together these explain what the system is, why it was built that way, how to operate it day to day, how to respond to incidents, and where its boundaries lie. Scattered code comments, a single diagram, or a verbal walkthrough each cover only a fragment of this knowledge. None of them gives operators and future maintainers a durable, integrated reference after the original team moves on.\n\nStudy takeaway: architecture overview, ADRs, component-level diagrams, runbooks for common operations, on-call playbook, and a list of known limitations. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Handoff documentation must let maintainers understand decisions, operate the system and recognize limitations.",
     "optionExplanations": {
-      "A": "Correct. A complete handoff package combines an architecture overview, architecture decision records (ADRs), component-level diagrams, runbooks for common operations, an on-call playbook, and a list of known limitations. Together these explain what the system is, why it was built that way, how to operate it day to day, how to respond to incidents, and where its boundaries lie. The wording of option A matches the intended solution.",
-      "B": "Not selected. None of them gives operators and future maintainers a durable, integrated reference after the original team moves on. Review the full rationale for why this is less appropriate to the question.",
-      "C": "Not selected. None of them gives operators and future maintainers a durable, integrated reference after the original team moves on. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. None of them gives operators and future maintainers a durable, integrated reference after the original team moves on. Review the full rationale for why this is less appropriate to the question."
+      "A": "Correct — The overview, decisions, diagrams and operational playbooks cover design context and day-to-day support.",
+      "B": "Not selected — Code comments are local details and cannot replace integrated architecture and operational instructions.",
+      "C": "Not selected — A diagram alone omits rationale, troubleshooting and known constraints.",
+      "D": "Not selected — A verbal walkthrough is useful but leaves no reliable durable reference for later operators."
     },
     "reference": "CCAR-P practice PDF, Q81 (third-party answer key)",
     "tags": [
@@ -3588,12 +3588,12 @@ window.COURSE_QUESTIONS = [
     "correctAnswers": [
       "B"
     ],
-    "explanation": "Each observation maps to a distinct business value pillar. The drop in summarization time from 47 to 6 minutes is an efficiency gain, because the same task now consumes fewer resources. Productivity, however, measures whether saved time turns into more valuable output, and since associates show no change in billable work, that benefit has not yet been realized. The 22% rise in infrastructure spend from redundant retry logic is a solution cost issue, not an SLA degradation, since it affects what the system costs to run rather than how reliably it performs. The 8 minutes of attorney correction is an efficiency loss that offsets part of the time saved, leaving a real net gain of about 33 minutes per document.\n\nStudy takeaway: Observation 1 indicates an efficiency gain; Observation 2 indicates that productivity has not yet been realized; Observation 3 indicates a solution cost issue; Observation 4 indicates an efficiency loss that partially offsets the gain from Observation 1.. The question tests the distinction between the stated architecture requirement and alternatives that are not the best fit for that requirement.",
+    "explanation": "Distinguish reduced task time from increased business output, operating expense and rework.",
     "optionExplanations": {
-      "A": "Not selected. The 8 minutes of attorney correction is an efficiency loss that offsets part of the time saved, leaving a real net gain of about 33 minutes per document. Review the full rationale for why this is less appropriate to the question.",
-      "B": "Correct. Each observation maps to a distinct business value pillar. The drop in summarization time from 47 to 6 minutes is an efficiency gain, because the same task now consumes fewer resources. The wording of option B matches the intended solution.",
-      "C": "Not selected. The 8 minutes of attorney correction is an efficiency loss that offsets part of the time saved, leaving a real net gain of about 33 minutes per document. Review the full rationale for why this is less appropriate to the question.",
-      "D": "Not selected. The 8 minutes of attorney correction is an efficiency loss that offsets part of the time saved, leaving a real net gain of about 33 minutes per document. Review the full rationale for why this is less appropriate to the question."
+      "A": "Not selected — Faster summarization measures efficiency, not necessarily transformation; retry expense is solution cost.",
+      "B": "Correct — Faster work is efficiency, unchanged billable output means productivity gains are not yet demonstrated, retries increase cost, and review rework offsets time savings.",
+      "C": "Not selected — The observations do not primarily measure SLA compliance; extra retries directly increase cost.",
+      "D": "Not selected — Unchanged output despite saved time is not proof of productivity improvement; correction time is rework."
     },
     "reference": "CCAR-P practice PDF, Q82 (third-party answer key)",
     "tags": [
