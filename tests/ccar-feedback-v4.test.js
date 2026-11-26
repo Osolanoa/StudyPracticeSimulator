@@ -38,7 +38,7 @@ for(const q of bank){
 }
 assert.equal(optionCount,573);
 assert.equal(allReasons.size,573);
-const from=app.indexOf('function conciseOptionFeedback('),to=app.indexOf('function record(',from);
+const from=app.indexOf('function answerTexts('),to=app.indexOf('function record(',from);
 assert.ok(from>=0&&to>from,'Feedback renderer exists');
 const source=app.slice(from,to);
 const esc=s=>String(s).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
@@ -46,12 +46,20 @@ const build=cfg=>new Function('CFG','esc','visualHtml','S',source+';return {feed
 const q=bank.find(q=>q.id==='CCARP-002');
 const renderer=build(CFG);
 const practice=renderer.feedback({...q,displayOptions:[...q.options].reverse()},q.correctAnswers,true);
-assert.ok(practice.includes('Correct answer:</b> A, C'));
+assert.ok(practice.includes('Correct answer:</b> '+q.correctAnswers.map(id=>esc(q.options.find(o=>o.id===id).text)).join('; ')));
 for(const o of q.options){
   assert.ok(practice.includes(esc(q.optionExplanations[o.id])));
-  assert.ok(!practice.includes(esc(o.text)),'Do not repeat the full options already visible in practice');
+  assert.ok(practice.includes(esc(o.text)),'Text identifies each rationale without letter labels');
 }
 assert.ok(!practice.includes('Mental model')&&!practice.includes('Exam tip:')&&!practice.includes('Key clue'));
+const answerSource=app.slice(app.indexOf('function answerHtml('),app.indexOf('function session('));
+const renderAnswers=new Function('esc',answerSource+';return answerHtml;')(esc);
+const shuffled={...q,displayOptions:[...q.options].reverse()};
+const rendered=renderAnswers(shuffled,{kind:'practice',answers:{[q.id]:q.correctAnswers},checked:{[q.id]:true}});
+assert.ok(!/<kbd\b|<b>[A-Z]\.\s*<\/b>/.test(rendered),'No visible option letters or shortcut numbers');
+assert.ok(rendered.includes('class="option selected correct"'),'Preserve selection and grading classes');
+for(const o of q.options)assert.ok(rendered.includes('data-answer="'+o.id+'"')&&rendered.includes(esc(o.text)));
+assert.ok(app.includes('displayOptions[+e.key-1]'),'Keep keyboard shortcuts');
 const review=renderer.conciseOptionFeedback(q,true);
 for(const o of q.options){
   assert.ok(review.includes(esc(o.text))&&review.includes(esc(q.optionExplanations[o.id])),'Exam review includes the option and its rationale');
@@ -60,5 +68,5 @@ assert.ok(app.includes('CFG.conciseFeedback?conciseOptionFeedback(q,true)'),'Exa
 const other=build({}).feedback(q,q.correctAnswers,true);
 assert.ok(other.includes('Why the options are correct or incorrect')&&other.includes(esc(q.options[0].text)),'Other courses retain prior format');
 assert.ok(read('index.html').includes('polish-v29-20261126'));
-assert.ok(read('js/loader.js').includes('polish-v29-20261126'));
+assert.ok(read('js/loader.js').includes('clean-options-v31-20261126'));
 console.log('PASS: 126 clean questions, 573 distinct concise rationales, correct labels, compact practice and full exam review.');
