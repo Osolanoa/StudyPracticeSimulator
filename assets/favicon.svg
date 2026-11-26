@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="sky" cx="50%" cy="30%" r="80%"><stop offset="0" stop-color="#1d3366"/><stop offset="1" stop-color="#070b18"/></radialGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff6d6"/><stop offset=".4" stop-color="#ffd47a"/><stop offset="1" stop-color="#ff8a3d" stop-opacity="0"/></radialGradient>
+    <linearGradient id="planet" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fb4ff"/><stop offset=".25" stop-color="#3b5fb8"/><stop offset="1" stop-color="#0c1630"/></linearGradient>
+    <clipPath id="clip"><rect width="64" height="64" rx="16"/></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="64" height="64" fill="url(#sky)"/>
+    <circle cx="32" cy="38" r="22" fill="url(#sun)"/>
+    <circle cx="32" cy="35" r="8" fill="#fff4cf"/>
+    <circle cx="32" cy="86" r="46" fill="url(#planet)"/>
+    <path d="M-2 41.6a46 46 0 0 1 68 0" fill="none" stroke="#c9dcff" stroke-width="1.6" opacity=".9"/>
+    <circle cx="13" cy="13" r="1.2" fill="#fff"/><circle cx="50" cy="10" r="1" fill="#fff" opacity=".8"/><circle cx="54" cy="24" r=".8" fill="#fff" opacity=".7"/>
+  </g>
+  <rect x=".75" y=".75" width="62.5" height="62.5" rx="15.25" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1.5"/>
+</svg>
