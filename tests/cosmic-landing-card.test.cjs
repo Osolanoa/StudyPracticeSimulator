@@ -50,7 +50,7 @@ assert.ok(!html.includes("cosmos-course-go"), "Circular arrow element is still r
 assert.ok(!html.includes("data-cosmic-course"), "Old arrow button still rendered");
 assert.ok(!html.includes("<button"), "The card should not have nested circular action controls");
 assert.ok(!html.includes('M4 12h16'), "Old arrow icon SVG remains in HTML");
-assert.match(index, /cosmic-landing\.js\?v=course-cards-no-arrow-20261113/);
+assert.match(index, /cosmic-landing\.js\?v=refine-v28-20261126/);
 
 for (const card of cards) {
   const id = card.dataset.cosmicCard;

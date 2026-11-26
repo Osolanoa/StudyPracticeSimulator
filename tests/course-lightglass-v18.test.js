@@ -1,6 +1,7 @@
 /* Run: node tests/course-lightglass-v18.test.js
    Protect font, lightness and transparent navigation against legacy CSS. */
 'use strict';
+const cssBundle = require('fs').readFileSync(require('path').join(__dirname, '..', 'css', 'app.css'), 'utf8'); // V28: index.html loads one built stylesheet
 const assert=require('node:assert/strict');
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
@@ -9,8 +10,8 @@ const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
 const old=fs.readFileSync(path.join(root,'css/premium-controls-v14.css'),'utf8');
 const cosmic=fs.readFileSync(path.join(root,'css/cosmic.css'),'utf8');
 assert.ok(index.includes('family=Outfit:'),'V26: Outfit is the single loaded UI font');
-assert.ok(index.indexOf('course-lightglass-v18.css')>index.indexOf('liquid-glass-v17.css'));
-assert.ok(index.includes('cosmic-lite.css'),'Original wallpaper must stay loaded');
+assert.ok(cssBundle.indexOf('course-lightglass-v18.css')>cssBundle.indexOf('liquid-glass-v17.css'));
+assert.ok(cssBundle.includes('cosmic-lite.css'),'Original wallpaper must stay loaded');
 assert.ok(css.includes('.cosmos-course h3') && css.includes('font-family:"Inter"'),
  'Course cards must use Inter, not the previous serif');
 assert.ok(css.includes('.content h1') && css.includes('.content h2'),

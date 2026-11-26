@@ -85,10 +85,37 @@
     if (passed) setTimeout(confetti, 900);
   }
 
+  // Sidebar: one pill behind the active item that slides between items.
+  let pillPos = null;
+  function navPill() {
+    const nav = app.querySelector('.side .nav'), active = nav && nav.querySelector('button.active');
+    if (!nav || !active) return;
+    let pill = nav.querySelector(':scope > .pm-nav-pill');
+    if (!pill) { pill = document.createElement('span'); pill.className = 'pm-nav-pill'; pill.setAttribute('aria-hidden', 'true'); nav.prepend(pill); }
+    const to = { top: active.offsetTop, height: active.offsetHeight };
+    if (pillPos && !reduced() && (pillPos.top !== to.top)) {
+      pill.style.transition = 'none';
+      pill.style.top = pillPos.top + 'px'; pill.style.height = pillPos.height + 'px';
+      void pill.offsetWidth; pill.style.transition = '';
+    }
+    pill.style.top = to.top + 'px'; pill.style.height = to.height + 'px';
+    pillPos = to;
+  }
+
+  // Dashboard numbers count up when the screen opens.
+  function statCountUp() {
+    app.querySelectorAll('.card.stat strong').forEach(el => {
+      const m = el.textContent.trim().match(/^(\d+)(%?)$/);
+      if (m && +m[1] > 0) countUp(el, +m[1], v => v + m[2]);
+    });
+  }
+
   function enhance() {
     const key = screenKey();
+    navPill();
     if (key !== lastKey) {
       lastKey = key;
+      statCountUp();
       if (!reduced()) {
         app.classList.remove('pm-enter'); void app.offsetWidth; app.classList.add('pm-enter');
         clearTimeout(enhance.t); enhance.t = setTimeout(() => app.classList.remove('pm-enter'), 900);

@@ -2,6 +2,7 @@
  * Validate shared 1–10% speed settings without needing a real browser.
  */
 'use strict';
+const cssBundle = require('fs').readFileSync(require('path').join(__dirname, '..', 'css', 'app.css'), 'utf8'); // V28: index.html loads one built stylesheet
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
@@ -112,7 +113,7 @@ assert.ok(app.includes('skySlider.addEventListener(\'input\''));
 assert.ok(app.includes('setSpeedPercent?.(chosen)'));
 assert.ok(app.includes('skySpeedValue') && app.includes('skySpeedTime'));
 assert.ok(loader.includes("src === './js/app.js'"), 'Dynamically loaded app.js needs a cache-buster');
-assert.ok(html.includes('sky-speed-settings-v24.css'));
+assert.ok(cssBundle.includes('sky-speed-settings-v24.css'));
 assert.ok(html.includes('js/space-v27.js?v=space-v27-20261126'), 'V27 sky controller keeps the speed setting API');
 assert.ok(css.includes('::-webkit-slider-thumb') && css.includes('::-moz-range-thumb'));
 assert.ok(css.includes(':focus-visible'), 'Slider remains accessible with the keyboard');

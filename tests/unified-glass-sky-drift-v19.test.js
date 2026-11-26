@@ -2,6 +2,7 @@
  * Regression tests for unified glass and passive panoramic background motion.
  * Visual rendering should also be checked after GitHub Pages deploy. */
 'use strict';
+const cssBundle = require('fs').readFileSync(require('path').join(__dirname, '..', 'css', 'app.css'), 'utf8'); // V28: index.html loads one built stylesheet
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
@@ -13,7 +14,7 @@ const landing=read('js/cosmic-landing.js');
 const cosmos=read('js/cosmic.js');
 const background=read('css/cosmic-lite.css');
 
-assert.ok(html.indexOf('unified-glass-sky-drift-v19.css')>html.indexOf('course-lightglass-v18.css'),
+assert.ok(cssBundle.indexOf('unified-glass-sky-drift-v19.css')>cssBundle.indexOf('course-lightglass-v18.css'),
   'V19 must load after all previous glass styles');
 assert.ok(landing.includes('class="cosmos-course-visual"'),
   'Test must match the actual left-hand course card panel');

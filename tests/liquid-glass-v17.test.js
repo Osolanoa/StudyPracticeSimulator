@@ -2,6 +2,7 @@
  * Protect the CSS link fix and the requested design requirements.
  * Rendering must also be visually inspected in a browser. */
 'use strict';
+const cssBundle = require('fs').readFileSync(require('path').join(__dirname, '..', 'css', 'app.css'), 'utf8'); // V28: index.html loads one built stylesheet
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
@@ -16,8 +17,8 @@ for(const tag of completeLinkTags) {
   assert.equal((tag[0].match(/<link\b/gi)||[]).length,1,'No nested/malformed link tags');
 }
 assert.match(html,/family=Outfit:[^"\n]*" rel="stylesheet">/,'V26: Outfit font tag must be correctly closed');
-assert.ok(html.indexOf('liquid-glass-v17.css')>html.indexOf('clear-glass-v16.css'));
-assert.ok(html.includes('cosmic-lite.css'),'The original background asset is preserved');
+assert.ok(cssBundle.indexOf('liquid-glass-v17.css')>cssBundle.indexOf('clear-glass-v16.css'));
+assert.ok(cssBundle.includes('cosmic-lite.css'),'The original background asset is preserved');
 assert.ok(!/#cosmic-scene|\.cosmic-lite-photo|\.cosmic-mist|\.cosmic-sun|\.cosmic-body/.test(css),
   'The existing cosmic scene cannot be changed by this layer');
 assert.ok(css.includes('--glass-ui-font: "Inter"'),'Inter must drive the entire UI');

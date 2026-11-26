@@ -2,6 +2,7 @@
  * Regression coverage for the current V23 background controller.
  * Retains test filename to keep existing test runners working. */
 'use strict';
+const cssBundle = require('fs').readFileSync(require('path').join(__dirname, '..', 'css', 'app.css'), 'utf8'); // V28: index.html loads one built stylesheet
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
@@ -89,7 +90,7 @@ assert.equal(reduced.calls.length, 2);
 
 assert.ok(!cosmic.includes('pointermove'), 'Remove old fast mouse-driven parallax');
 assert.ok(!cosmic.includes('requestAnimationFrame'), 'Only one motion system drives the sky');
-assert.ok(html.indexOf('sky-motion-v23.css') > html.indexOf('sky-motion-v21.css'));
+assert.ok(cssBundle.indexOf('sky-motion-v23.css') > cssBundle.indexOf('sky-motion-v21.css'));
 // V27: the photo scene (cosmic.js + sky-motion-v23.js) is replaced by space-v27.js.
 assert.ok(!html.includes('js/cosmic.js') && !html.includes('js/sky-motion-v23.js'), 'V27 replaces the photo sky');
 assert.ok(html.indexOf('js/space-v27.js') > -1 && html.indexOf('js/space-v27.js') < html.indexOf('js/cosmic-landing.js'));

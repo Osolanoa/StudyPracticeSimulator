@@ -1,0 +1,82 @@
+/* V28 refinement: button hierarchy, course hues, dashboard, sidebar,
+   question view and finer edges. Uses the existing mint/blue palette. */
+:root{
+  --rf-mint:#afd9d5; --rf-blue:#8fb4ff;
+  --rf-azure:#7aa8ff; --rf-ccar:#ad8fff; --rf-math:#6fd6c4;
+  --rf-edge:rgba(214,228,245,.14); --rf-edge-hi:rgba(255,255,255,.10);
+  --rf-ease:cubic-bezier(.2,.8,.2,1);
+  /* Type and spacing scale */
+  --rf-h1:clamp(1.75rem,2.6vw,2.15rem); --rf-h2:1.2rem; --rf-label:.72rem;
+  --rf-s1:.5rem; --rf-s2:.75rem; --rf-s3:1rem; --rf-s4:1.5rem;
+}
+#app:not(#pm-a):not(#pm-b) .content h1{font-size:var(--rf-h1)!important;font-weight:600!important;line-height:1.15}
+#app:not(#pm-a):not(#pm-b) .content h2{font-size:var(--rf-h2)!important;font-weight:600!important}
+#app:not(#pm-a):not(#pm-b) .content .sub{margin-top:.35rem}
+
+/* 1. Button hierarchy: plain .btn is primary, .secondary stays outline. */
+#app:not(#pm-a):not(#pm-b) .btn:not(.secondary):not(.danger){
+  background:linear-gradient(135deg,rgba(175,217,213,.24),rgba(143,180,255,.20))!important;
+  border:1px solid rgba(175,217,213,.55)!important;color:#fff!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 8px 22px -10px rgba(143,180,255,.55)!important}
+#app:not(#pm-a):not(#pm-b) .btn:not(.secondary):not(.danger):hover:not(:disabled){
+  background:linear-gradient(135deg,rgba(175,217,213,.32),rgba(143,180,255,.28))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22),0 12px 28px -10px rgba(143,180,255,.7)!important}
+#app:not(#pm-a):not(#pm-b) .btn.secondary{background:transparent!important;border-color:var(--rf-edge)!important;color:#dbe5f2!important}
+#app:not(#pm-a):not(#pm-b) .btn.secondary:hover:not(:disabled){border-color:rgba(214,228,245,.32)!important;color:#fff!important;background:rgba(255,255,255,.04)!important}
+
+/* 2. Course cards: three columns on wide screens, one hue per course. */
+@media (min-width:1100px){#app .cosmos-landing .cosmos-course-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+#app .cosmos-course--az900{--rf-hue:var(--rf-azure)}
+#app .cosmos-course--ccar-p{--rf-hue:var(--rf-ccar)}
+#app .cosmos-course--matematicas-9-mep{--rf-hue:var(--rf-math)}
+#app:not(#pm-a):not(#pm-b) .cosmos-course .cosmos-course-symbol{color:var(--rf-hue,#fff)!important;
+  border-color:color-mix(in srgb,var(--rf-hue,#fff) 45%,transparent)!important;
+  background:color-mix(in srgb,var(--rf-hue,#fff) 12%,transparent)!important;
+  box-shadow:0 0 22px -6px color-mix(in srgb,var(--rf-hue,#fff) 60%,transparent)!important}
+#app:not(#pm-a):not(#pm-b) .cosmos-course .cosmos-label{color:var(--rf-hue)!important}
+#app:not(#pm-a):not(#pm-b) .cosmos-course .cosmos-track span{background:var(--rf-hue,#fff)!important}
+#app:not(#pm-a):not(#pm-b) .cosmos-course:hover{border-color:color-mix(in srgb,var(--rf-hue,#fff) 45%,transparent)!important}
+
+/* 3. Dashboard */
+#app .card.welcome{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--rf-s3);margin-bottom:var(--rf-s3);
+  background:linear-gradient(120deg,rgba(175,217,213,.10),rgba(143,180,255,.06) 60%,transparent)!important}
+#app .card.welcome h2{margin:.25rem 0 0}
+#app .card.welcome .sub{max-width:52ch;margin:.35rem 0 0}
+#app:not(#pm-a):not(#pm-b) .card.stat span{font-size:var(--rf-label)!important;letter-spacing:.14em!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#app:not(#pm-a):not(#pm-b) .card.stat strong{font-size:2.4rem!important;font-weight:300!important;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+#app:not(#pm-a):not(#pm-b) .bar,#app:not(#pm-a):not(#pm-b) .cosmos-track{background:rgba(214,228,245,.10)!important;box-shadow:inset 0 0 0 1px rgba(214,228,245,.06)}
+#app:not(#pm-a):not(#pm-b) .bar i{background:linear-gradient(90deg,var(--rf-mint),var(--rf-blue))!important}
+
+/* 4. Sidebar: groups, settings set apart, sliding active pill (from JS). */
+#app .side .nav{position:relative}
+#app .side .nav .nav-group{display:block;margin:1.1rem 0 .35rem .75rem;font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(214,228,245,.45)}
+#app .side .nav .nav-spacer{display:block;height:1px;margin:1rem .5rem .6rem;background:var(--rf-edge)}
+#app:not(#pm-a):not(#pm-b) .side .nav button{position:relative;z-index:1;background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+#app:not(#pm-a):not(#pm-b) .side .nav button.active{color:#fff!important}
+#app:not(#pm-a):not(#pm-b) .side .nav button:hover:not(.active){background:rgba(255,255,255,.03)!important}
+#app .pm-nav-pill{position:absolute;left:0;right:0;z-index:0;border-radius:12px;pointer-events:none;
+  background:linear-gradient(90deg,rgba(175,217,213,.14),rgba(143,180,255,.06));
+  box-shadow:inset 0 0 0 1px rgba(175,217,213,.28),inset 0 1px 0 rgba(255,255,255,.08),0 0 18px -6px rgba(175,217,213,.45);
+  transition:top .38s var(--rf-ease),height .38s var(--rf-ease)}
+@media (max-width:780px){#app .side .nav .nav-group,#app .side .nav .nav-spacer,#app .pm-nav-pill{display:none}
+  #app:not(#pm-a):not(#pm-b) .side .nav button.active{background:rgba(175,217,213,.12)!important;border-color:rgba(175,217,213,.3)!important}}
+
+/* 5. Question view */
+#app .qdots{display:flex;flex-wrap:wrap;gap:6px;margin:.6rem 0 .2rem}
+#app .qdots i{width:8px;height:8px;border-radius:50%;background:rgba(214,228,245,.16);transition:all .3s var(--rf-ease)}
+#app .qdots i.answered{background:rgba(175,217,213,.6)}
+#app .qdots i.current{width:22px;border-radius:99px;background:linear-gradient(90deg,var(--rf-mint),var(--rf-blue));box-shadow:0 0 10px rgba(143,180,255,.5)}
+#app .option{position:relative}
+#app .option .opt-key{margin-left:auto;flex:none;align-self:center;min-width:1.6em;padding:.1em .45em;border-radius:6px;font:600 .72rem/1.5 "Outfit",system-ui,sans-serif;text-align:center;
+  color:rgba(214,228,245,.6);background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px var(--rf-edge),inset 0 -2px 0 rgba(0,0,0,.25)}
+@media (hover:none){#app .option .opt-key{display:none}}
+#app .question-card .feedback{animation:rf-reveal .5s var(--rf-ease) both;transform-origin:top}
+@keyframes rf-reveal{from{opacity:.001;transform:translateY(-6px) scaleY(.97);clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+
+/* 6. Finer edges: hairline border with a light top highlight */
+#app:not(#pm-a):not(#pm-b) .card,#app:not(#pm-a):not(#pm-b) .cosmos-course{
+  border-color:var(--rf-edge)!important;
+  box-shadow:inset 0 1px 0 var(--rf-edge-hi),0 24px 48px -28px rgba(0,0,0,.7)!important}
+#app:not(#pm-a):not(#pm-b) .side{border-right-color:var(--rf-edge)!important}
+
+@media (prefers-reduced-motion:reduce){#app .pm-nav-pill,#app .qdots i{transition:none}#app .question-card .feedback{animation:none}}

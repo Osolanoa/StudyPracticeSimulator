@@ -3,6 +3,7 @@
  * Source answer keys remain THIRD-PARTY, not Anthropic-verified.
  */
 'use strict';
+const cssBundle = require('fs').readFileSync(require('path').join(__dirname, '..', 'css', 'app.css'), 'utf8'); // V28: index.html loads one built stylesheet
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
@@ -116,7 +117,7 @@ assert.ok(loader.includes("src === './courses/ccar-p/config.js'"));
 assert.ok(loader.includes("src === './courses/ccar-p/questions.js'"));
 assert.ok(loader.includes("src === './js/storage.js'"));
 assert.ok(app.includes("['practiceTestsV2','practiceTests']"));
-assert.ok(html.includes('js/loader.js?v=ccar-feedback-v4-20261126'));
-assert.ok(html.includes('css/cosmic-lite.css'),'Photographic background unchanged');
+assert.ok(html.includes('js/loader.js?v=refine-v28-20261126'));
+assert.ok(cssBundle.includes('css/cosmic-lite.css'),'Photographic background unchanged');
 assert.ok(loader.includes('questionCount: 200')&&loader.includes('questionCount: 170'),'Other courses unchanged');
 console.log('PASS: 126 unique CCAR-P questions; 37 removals; 13 practice tests; archived scores; bookmarks/history safe.');

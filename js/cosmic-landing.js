@@ -24,7 +24,7 @@
     const percent=progress=>progress.total ? Math.min(100,Math.round(progress.done/progress.total*100)):0;
     const cards=overview.map(({course,progress},i)=>{
       const p=percent(progress),math=course.id.includes('matematicas');
-      return '<article data-cosmic-card="'+esc(course.id)+'" role="button" tabindex="0" aria-label="Open '+esc(course.name)+'" class="cosmos-course '+(math?'cosmos-course--math':'cosmos-course--azure')+'">'+
+      return '<article data-cosmic-card="'+esc(course.id)+'" role="button" tabindex="0" aria-label="Open '+esc(course.name)+'" class="cosmos-course '+(math?'cosmos-course--math':'cosmos-course--azure')+' cosmos-course--'+esc(course.id)+'">'+
         '<div class="cosmos-course-visual" aria-hidden="true"><span class="cosmos-course-symbol">'+(math?icons.math:course.id==='ccar-p'?icons.exam:icons.cloud)+'</span><span class="cosmos-course-orb"></span></div>'+
         '<div class="cosmos-course-copy"><span class="cosmos-label">'+esc(course.shortName)+'</span><h3>'+esc(course.name)+'</h3><p>'+esc(course.description)+'</p>'+
         '<div class="cosmos-facts"><span>'+course.questionCount+' questions</span><span>'+progress.total+' practice tests</span></div>'+
@@ -37,7 +37,7 @@
       '<section class="cosmos-title-area cosmos-title-area--premium" aria-labelledby="cosmos-title"><h1 id="cosmos-title" aria-label="Study Practice Simulator"><span class="premium-title-line premium-title-line--top" data-echo="Study Practice">Study Practice</span> <span class="premium-title-line premium-title-line--bottom" data-echo="Simulator" data-reflection="Simulator">Simulator</span></h1></section>'+
       '<section class="cosmos-courses" id="cosmos-courses" aria-labelledby="cosmos-courses-title"><div class="cosmos-section-head"><h2 id="cosmos-courses-title">Your courses</h2></div><div class="cosmos-course-grid">'+cards+'</div></section>'+
 
-      '<footer class="cosmos-footer"><span>Space imagery: ESO / Digitized Sky Survey 2</span><span>Made for focused learning</span></footer></main>';
+      '<footer class="cosmos-footer"><span>Made for focused learning</span></footer></main>';
     app.querySelectorAll('[data-cosmic-card]').forEach(card=>{
       const openCourse=()=>loadCourse(card.dataset.cosmicCard,'dashboard');
       card.addEventListener('click',openCourse);
